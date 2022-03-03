@@ -25,100 +25,101 @@ class DynamicListControllerImpl @Inject constructor() : DynamicListController {
 
         try {
 
-            // Hardcoded data :D
-            val bodies = listOf(
+            val container = withContext(Dispatchers.IO) {
+                // Hardcoded data :D
+                val bodies = listOf(
 
-                ComponentItemModel(
-                    render = RenderType.TOBACCO_PREFERENCE.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 0,
-                    uniqueId = ""
-                ),
+                    ComponentItemModel(
+                        render = RenderType.TOBACCO_PREFERENCE.value,
+                        resource = "",
+                        name = "",
+                        resolver = "",
+                        index = 0,
+                        uniqueId = ""
+                    ),
 
-                ComponentItemModel(
-                    render = RenderType.BANNER_IMAGE.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 0,
-                    uniqueId = ""
-                ),
+                    ComponentItemModel(
+                        render = RenderType.BANNER_IMAGE.value,
+                        resource = "",
+                        name = "",
+                        resolver = "",
+                        index = 0,
+                        uniqueId = ""
+                    ),
 
-                ComponentItemModel(
-                    render = RenderType.ONE_CLICK_REORDER.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 0,
-                    uniqueId = ""
-                ),
+                    ComponentItemModel(
+                        render = RenderType.ONE_CLICK_REORDER.value,
+                        resource = "",
+                        name = "",
+                        resolver = "",
+                        index = 0,
+                        uniqueId = ""
+                    ),
 
-                ComponentItemModel(
-                    render = RenderType.TOBACCO_PREFERENCE.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 0,
-                    uniqueId = ""
-                ),
+                    ComponentItemModel(
+                        render = RenderType.TOBACCO_PREFERENCE.value,
+                        resource = "",
+                        name = "",
+                        resolver = "",
+                        index = 0,
+                        uniqueId = ""
+                    ),
 
-                ComponentItemModel(
-                    render = RenderType.BANNER_IMAGE.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 0,
-                    uniqueId = ""
-                ),
+                    ComponentItemModel(
+                        render = RenderType.BANNER_IMAGE.value,
+                        resource = "",
+                        name = "",
+                        resolver = "",
+                        index = 0,
+                        uniqueId = ""
+                    ),
 
-                ComponentItemModel(
-                    render = RenderType.ONE_CLICK_REORDER.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 0,
-                    uniqueId = ""
-                ),
+                    ComponentItemModel(
+                        render = RenderType.ONE_CLICK_REORDER.value,
+                        resource = "",
+                        name = "",
+                        resolver = "",
+                        index = 0,
+                        uniqueId = ""
+                    ),
 
-                ComponentItemModel(
-                    render = RenderType.TOBACCO_PREFERENCE.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 0,
-                    uniqueId = ""
-                ),
+                    ComponentItemModel(
+                        render = RenderType.TOBACCO_PREFERENCE.value,
+                        resource = "",
+                        name = "",
+                        resolver = "",
+                        index = 0,
+                        uniqueId = ""
+                    ),
 
-                ComponentItemModel(
-                    render = RenderType.BANNER_IMAGE.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 0,
-                    uniqueId = ""
-                ),
+                    ComponentItemModel(
+                        render = RenderType.BANNER_IMAGE.value,
+                        resource = "",
+                        name = "",
+                        resolver = "",
+                        index = 0,
+                        uniqueId = ""
+                    ),
 
-                ComponentItemModel(
-                    render = RenderType.ONE_CLICK_REORDER.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 0,
-                    uniqueId = ""
+                    ComponentItemModel(
+                        render = RenderType.ONE_CLICK_REORDER.value,
+                        resource = "",
+                        name = "",
+                        resolver = "",
+                        index = 0,
+                        uniqueId = ""
+                    )
                 )
-            )
 
-            // Response...
-            val container = DynamicListContainer(
-                headers = emptyList(),
-                bodies = bodies,
-                footers = emptyList()
-            )
+                // Response...
+                DynamicListContainer(
+                    headers = emptyList(),
+                    bodies = bodies,
+                    footers = emptyList()
+                )
+            }
 
             emit(DynamicListAction.SuccessAction(container))
-
         } catch (e: Exception) {
             emit(DynamicListAction.ErrorAction(e))
         }
