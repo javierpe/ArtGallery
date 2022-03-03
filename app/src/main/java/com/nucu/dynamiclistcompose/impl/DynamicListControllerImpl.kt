@@ -23,7 +23,7 @@ class DynamicListControllerImpl @Inject constructor() : DynamicListController {
         val bodies = listOf(
 
             ComponentItemModel(
-                render = RenderType.ONE_CLICK_REORDER.value,
+                render = RenderType.TOBACCO_PREFERENCE.value,
                 resource = "",
                 name = "",
                 resolver = "",
@@ -33,6 +33,69 @@ class DynamicListControllerImpl @Inject constructor() : DynamicListController {
 
             ComponentItemModel(
                 render = RenderType.BANNER_IMAGE.value,
+                resource = "",
+                name = "",
+                resolver = "",
+                index = 0,
+                uniqueId = ""
+            ),
+
+            ComponentItemModel(
+                render = RenderType.ONE_CLICK_REORDER.value,
+                resource = "",
+                name = "",
+                resolver = "",
+                index = 0,
+                uniqueId = ""
+            ),
+
+            ComponentItemModel(
+                render = RenderType.TOBACCO_PREFERENCE.value,
+                resource = "",
+                name = "",
+                resolver = "",
+                index = 0,
+                uniqueId = ""
+            ),
+
+            ComponentItemModel(
+                render = RenderType.BANNER_IMAGE.value,
+                resource = "",
+                name = "",
+                resolver = "",
+                index = 0,
+                uniqueId = ""
+            ),
+
+            ComponentItemModel(
+                render = RenderType.ONE_CLICK_REORDER.value,
+                resource = "",
+                name = "",
+                resolver = "",
+                index = 0,
+                uniqueId = ""
+            ),
+
+            ComponentItemModel(
+                render = RenderType.TOBACCO_PREFERENCE.value,
+                resource = "",
+                name = "",
+                resolver = "",
+                index = 0,
+                uniqueId = ""
+            ),
+
+            ComponentItemModel(
+                render = RenderType.BANNER_IMAGE.value,
+                resource = "",
+                name = "",
+                resolver = "",
+                index = 0,
+                uniqueId = ""
+            ),
+
+            ComponentItemModel(
+                render = RenderType.ONE_CLICK_REORDER.value,
                 resource = "",
                 name = "",
                 resolver = "",

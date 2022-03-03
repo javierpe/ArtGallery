@@ -1,6 +1,7 @@
 package com.nucu.dynamiclistcompose.hi
 
 import com.nucu.dynamiclistcompose.renders.OneClickRender
+import com.nucu.dynamiclistcompose.renders.TobaccoRender
 import com.nucu.dynamiclistcompose.renders.base.DynamicListRender
 import dagger.Binds
 import dagger.Module
@@ -29,5 +30,10 @@ abstract class DynamicListRendersModule {
     @Binds
     abstract fun bindBannerRender(
         render: OneClickRender
+    ): DynamicListRender<*>
+
+    @Binds
+    abstract fun bindTobaccoRender(
+        render: TobaccoRender
     ): DynamicListRender<*>
 }

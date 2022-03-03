@@ -3,6 +3,7 @@ package com.nucu.dynamiclistcompose.hi
 import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
 import com.nucu.dynamiclistcompose.factories.BannerFactory
 import com.nucu.dynamiclistcompose.factories.OneClickReorderFactory
+import com.nucu.dynamiclistcompose.factories.TobaccoFactory
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -31,5 +32,11 @@ abstract class DynamicListFactoriesModule {
     @IntoSet
     abstract fun bindBannerFactory(
         factory: BannerFactory
+    ): DynamicListAdapterFactory
+
+    @Binds
+    @IntoSet
+    abstract fun bindTobaccoFactory(
+        factory: TobaccoFactory
     ): DynamicListAdapterFactory
 }
