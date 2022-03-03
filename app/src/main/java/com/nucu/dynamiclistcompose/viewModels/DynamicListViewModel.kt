@@ -7,8 +7,10 @@ import com.nucu.dynamiclistcompose.models.DynamicListAction
 import com.nucu.dynamiclistcompose.models.DynamicListContainer
 import com.nucu.dynamiclistcompose.models.DynamicListRequestModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,19 +24,16 @@ class DynamicListViewModel @Inject constructor(
 
     fun load(requestModel: DynamicListRequestModel) {
         viewModelScope.launch {
-            _dynamicListAction.value = DynamicListAction.SuccessAction(getDynamicList(0, requestModel))
+             getDynamicList(0, requestModel).collect {
+                 _dynamicListAction.value = it
+             }
         }
-    }
-
-    fun retry(requestModel: DynamicListRequestModel) {
-        _dynamicListAction.value = DynamicListAction.LoadingAction
-        load(requestModel)
     }
 
     private suspend fun getDynamicList(
         page: Int,
         requestModel: DynamicListRequestModel
-    ): DynamicListContainer {
+    ): Flow<DynamicListAction> {
 
         return controller.get(
             page,

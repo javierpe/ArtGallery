@@ -46,7 +46,7 @@ class DynamicListCompose(requestModel: DynamicListRequestModel) : DynamicListCom
                 dynamicListViewModel.load(dynamicListRequestModel.value!!)
             }
             is DynamicListAction.ErrorAction -> ErrorView {
-                dynamicListViewModel.retry(dynamicListRequestModel.value!!)
+                dynamicListViewModel.load(dynamicListRequestModel.value!!)
             }
             is DynamicListAction.SuccessAction -> {
                 val container = (dynamicListState.value as DynamicListAction.SuccessAction).container
