@@ -5,39 +5,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.nucu.dynamiclistcompose.controllers.DynamicListComposeAction
+import com.nucu.dynamiclistcompose.controllers.DynamicListComposeLoader
 import com.nucu.dynamiclistcompose.controllers.DynamicListComposeController
+import com.nucu.dynamiclistcompose.models.DynamicListAction
 import com.nucu.dynamiclistcompose.models.DynamicListRequestModel
+import com.nucu.dynamiclistcompose.ui.components.ErrorView
+import com.nucu.dynamiclistcompose.ui.components.LoaderView
 import com.nucu.dynamiclistcompose.viewModels.DynamicListViewModel
 
-class DynamicListCompose : DynamicListComposeAction() {
+class DynamicListCompose(requestModel: DynamicListRequestModel) : DynamicListComposeLoader() {
 
     private var bodyComposeController: DynamicListComposeController? = null
     private var headerComposeController: DynamicListComposeController? = null
     private var footerComposeController: DynamicListComposeController? = null
 
-    private val errorViewState = mutableStateOf(false)
-    private val showBodyLoadingState = mutableStateOf(false)
-    private val dynamicListRequestModel = mutableStateOf<DynamicListRequestModel?>(null)
-
-    override fun setRequestModel(requestModel: DynamicListRequestModel) {
-        dynamicListRequestModel.value = requestModel
-    }
-
-    override fun removeErrorView() {
-        errorViewState.value = false
-    }
-
-    override fun hideBodyLoading() {
-        errorViewState.value = true
-    }
-
-    override fun showBodyLoading() {
-        showBodyLoadingState.value = true
-    }
+    private val dynamicListRequestModel = mutableStateOf<DynamicListRequestModel?>(requestModel)
 
     @Composable
-    override fun <T: DynamicListComposeController> Load(
+    override fun <T: DynamicListComposeController> DynamicListScreen(
         bodyAdapterController: T,
         headerAdapterController: T?,
         footerAdapterController: T?,
@@ -53,22 +38,29 @@ class DynamicListCompose : DynamicListComposeAction() {
     private fun DynamicListContent(
         dynamicListViewModel: DynamicListViewModel = hiltViewModel()
     ) {
-        dynamicListRequestModel.value?.let { dynamicListViewModel.load(it) }
+        val dynamicListState = dynamicListViewModel.dynamicListAction.collectAsState()
 
-        val dynamicListState = dynamicListViewModel.dynamicListContainer.collectAsState()
+        when (dynamicListState.value) {
+            is DynamicListAction.LoadingAction -> {
+                LoaderView()
+                dynamicListViewModel.load(dynamicListRequestModel.value!!)
+            }
+            is DynamicListAction.ErrorAction -> ErrorView {
+                dynamicListViewModel.retry(dynamicListRequestModel.value!!)
+            }
+            is DynamicListAction.SuccessAction -> {
+                val container = (dynamicListState.value as DynamicListAction.SuccessAction).container
+                // Add data to controllers.
+                bodyComposeController?.dispatch(container.bodies)
+                headerComposeController?.dispatch(container.headers)
+                footerComposeController?.dispatch(container.footers)
 
-        if (dynamicListState.value != null) {
-
-            // Add data to controllers
-            bodyComposeController?.dispatch(dynamicListState.value?.bodies.orEmpty())
-            headerComposeController?.dispatch(dynamicListState.value?.headers.orEmpty())
-            footerComposeController?.dispatch(dynamicListState.value?.footers.orEmpty())
-
-            // Show
-            Column {
-                headerComposeController?.DynamicListComposeComponent(dynamicListRequestModel.value!!)
-                bodyComposeController?.DynamicListComposeComponent(dynamicListRequestModel.value!!)
-                footerComposeController?.DynamicListComposeComponent(dynamicListRequestModel.value!!)
+                // Show elements.
+                Column {
+                    headerComposeController?.DynamicListComposeComponent(dynamicListRequestModel.value!!)
+                    bodyComposeController?.DynamicListComposeComponent(dynamicListRequestModel.value!!)
+                    footerComposeController?.DynamicListComposeComponent(dynamicListRequestModel.value!!)
+                }
             }
         }
     }

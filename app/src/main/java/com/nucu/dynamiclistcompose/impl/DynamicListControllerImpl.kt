@@ -6,6 +6,7 @@ import com.nucu.dynamiclistcompose.models.DynamicListContainer
 import com.nucu.dynamiclistcompose.models.DynamicListRequestModel
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -15,6 +16,10 @@ class DynamicListControllerImpl @Inject constructor() : DynamicListController {
         page: Int,
         requestModel: DynamicListRequestModel
     ): DynamicListContainer = withContext(Dispatchers.IO) {
+        // Emulate response delay
+        delay(2500)
+
+        // Hardcoded data :D
         val bodies = listOf(
 
             ComponentItemModel(
@@ -36,6 +41,7 @@ class DynamicListControllerImpl @Inject constructor() : DynamicListController {
             )
         )
 
+        // Response...
         DynamicListContainer(
             headers = emptyList(),
             bodies = bodies,

@@ -1,7 +1,6 @@
 package com.nucu.dynamiclistcompose.hi
 
 import com.nucu.dynamiclistcompose.controllers.DynamicListController
-import com.nucu.dynamiclistcompose.impl.DynamicListComposeLoaderImpl
 import com.nucu.dynamiclistcompose.impl.DynamicListControllerImpl
 import com.nucu.dynamiclistcompose.listeners.DynamicListComposeLoader
 import dagger.Binds
@@ -19,10 +18,4 @@ abstract class DynamicListWiringModule {
     abstract fun bindDynamicListController(
         impl: DynamicListControllerImpl
     ): DynamicListController
-
-    @Binds
-    @Singleton
-    abstract fun bindDynamicListFragmentLoader(
-        impl: DynamicListComposeLoaderImpl
-    ): DynamicListComposeLoader
 }
