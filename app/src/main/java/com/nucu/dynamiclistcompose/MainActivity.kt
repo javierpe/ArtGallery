@@ -21,6 +21,9 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var bodyAdapterController: DefaultAdapterController
 
+    @Inject
+    lateinit var headerAdapterController: DefaultAdapterController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -32,6 +35,7 @@ class MainActivity : ComponentActivity() {
                     // TODO: Request model could be an state.
                     ContextView(
                         bodyComposeController = bodyAdapterController,
+                        headerComposeController = headerAdapterController,
                         requestModel = DynamicListRequestModel(
                             context = "",
                             storeType = "",

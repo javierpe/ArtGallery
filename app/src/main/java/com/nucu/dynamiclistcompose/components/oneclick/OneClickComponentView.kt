@@ -39,7 +39,7 @@ fun OneClickReorderComponentView(
     Column(
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
-        Text(text = "Pídelo de nuevo", modifier = Modifier.padding(start = 16.dp))
+        Text(text = "Component header", modifier = Modifier.padding(start = 16.dp))
 
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(10.dp),

@@ -13,18 +13,18 @@ import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.fade
 import com.google.accompanist.placeholder.placeholder
 import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
-import com.nucu.dynamiclistcompose.components.banner.BannerComponentView
+import com.nucu.dynamiclistcompose.components.header.HeaderComponentView
 import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.models.DynamicListComponentAction
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import javax.inject.Inject
 
-class BannerFactory @Inject constructor(): DynamicListAdapterFactory {
+class HeaderFactory @Inject constructor(): DynamicListAdapterFactory {
 
     override val renders: List<RenderType>
         get() = listOf(
-            RenderType.BANNER_IMAGE
+            RenderType.HEADER
         )
 
     @Composable
@@ -35,7 +35,7 @@ class BannerFactory @Inject constructor(): DynamicListAdapterFactory {
         listener: DynamicListComponentListener?,
         componentAction: DynamicListComponentAction
     ) {
-        BannerComponentView()
+        HeaderComponentView("Dynamic List Compose")
     }
 
     @Composable

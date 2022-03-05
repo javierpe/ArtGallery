@@ -19,14 +19,37 @@ class DynamicListControllerImpl @Inject constructor() : DynamicListController {
         page: Int,
         requestModel: DynamicListRequestModel
     ): Flow<DynamicListAction> = flow {
+
+        // TODO: Load at this point some mocked data (skeleton) while request is running.
         emit(DynamicListAction.LoadingAction)
+
+        val skeletons = listOf(
+            RenderType.TOBACCO_PREFERENCE,
+            RenderType.BANNER_IMAGE,
+            RenderType.HEADER,
+            RenderType.ONE_CLICK_REORDER
+        )
+
+        emit(DynamicListAction.SkeletonAction(skeletons))
+
         // Emulate response delay
-        delay(2500)
+        delay(5500)
 
         try {
-
             val container = withContext(Dispatchers.IO) {
                 // Hardcoded data :D
+
+                val header = listOf(
+                    ComponentItemModel(
+                        render = RenderType.HEADER.value,
+                        resource = "",
+                        name = "",
+                        resolver = "",
+                        index = 0,
+                        uniqueId = ""
+                    )
+                )
+
                 val bodies = listOf(
 
                     ComponentItemModel(
@@ -43,7 +66,7 @@ class DynamicListControllerImpl @Inject constructor() : DynamicListController {
                         resource = "",
                         name = "",
                         resolver = "",
-                        index = 0,
+                        index = 1,
                         uniqueId = ""
                     ),
 
@@ -52,7 +75,7 @@ class DynamicListControllerImpl @Inject constructor() : DynamicListController {
                         resource = "",
                         name = "",
                         resolver = "",
-                        index = 0,
+                        index = 2,
                         uniqueId = ""
                     ),
 
@@ -61,7 +84,7 @@ class DynamicListControllerImpl @Inject constructor() : DynamicListController {
                         resource = "",
                         name = "",
                         resolver = "",
-                        index = 0,
+                        index = 3,
                         uniqueId = ""
                     ),
 
@@ -70,7 +93,7 @@ class DynamicListControllerImpl @Inject constructor() : DynamicListController {
                         resource = "",
                         name = "",
                         resolver = "",
-                        index = 0,
+                        index = 4,
                         uniqueId = ""
                     ),
 
@@ -79,7 +102,7 @@ class DynamicListControllerImpl @Inject constructor() : DynamicListController {
                         resource = "",
                         name = "",
                         resolver = "",
-                        index = 0,
+                        index = 5,
                         uniqueId = ""
                     ),
 
@@ -88,7 +111,7 @@ class DynamicListControllerImpl @Inject constructor() : DynamicListController {
                         resource = "",
                         name = "",
                         resolver = "",
-                        index = 0,
+                        index = 6,
                         uniqueId = ""
                     ),
 
@@ -97,7 +120,7 @@ class DynamicListControllerImpl @Inject constructor() : DynamicListController {
                         resource = "",
                         name = "",
                         resolver = "",
-                        index = 0,
+                        index = 7,
                         uniqueId = ""
                     ),
 
@@ -106,14 +129,40 @@ class DynamicListControllerImpl @Inject constructor() : DynamicListController {
                         resource = "",
                         name = "",
                         resolver = "",
-                        index = 0,
+                        index = 8,
+                        uniqueId = ""
+                    ),
+
+                    ComponentItemModel(
+                        render = RenderType.TOBACCO_PREFERENCE.value,
+                        resource = "",
+                        name = "",
+                        resolver = "",
+                        index = 9,
+                        uniqueId = ""
+                    ),
+                    ComponentItemModel(
+                        render = RenderType.BANNER_IMAGE.value,
+                        resource = "",
+                        name = "",
+                        resolver = "",
+                        index = 10,
+                        uniqueId = ""
+                    ),
+
+                    ComponentItemModel(
+                        render = RenderType.TOBACCO_PREFERENCE.value,
+                        resource = "",
+                        name = "",
+                        resolver = "",
+                        index = 11,
                         uniqueId = ""
                     )
                 )
 
                 // Response...
                 DynamicListContainer(
-                    headers = emptyList(),
+                    headers = header,
                     bodies = bodies,
                     footers = emptyList()
                 )
