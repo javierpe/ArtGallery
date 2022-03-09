@@ -5,25 +5,27 @@ import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.models.DynamicListComponentAction
 import com.nucu.dynamiclistcompose.renders.base.RenderType
-import dagger.Provides
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 interface DynamicListAdapterFactory {
 
+    /**
+     * List of compatible renders.
+     */
     val renders: List<RenderType>
 
+    /**
+     * Create composable view.
+     */
     @Composable
-    fun Create(
+    fun CreateComponent(
         component: ComponentItemModel,
-        storeType: String?,
-        source: String?,
         listener: DynamicListComponentListener?,
         componentAction: DynamicListComponentAction
     )
 
+    /**
+     * Create skeleton for current composable view.
+     */
     @Composable
     fun CreateSkeleton()
 }

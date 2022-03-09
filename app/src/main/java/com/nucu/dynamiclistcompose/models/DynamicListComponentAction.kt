@@ -1,8 +1,8 @@
 package com.nucu.dynamiclistcompose.models
 
-import com.nucu.dynamiclistcompose.renders.base.RenderType
+import com.nucu.dynamiclistcompose.ui.base.ScrollAction
 
 interface DynamicListComponentAction {
-    fun moveToFirstRender(renderType: RenderType)
-    fun addToolTip(message: String)
+
+    fun scrollAction(scrollAction: ScrollAction)
 }

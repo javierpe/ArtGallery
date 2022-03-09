@@ -5,5 +5,6 @@ enum class RenderType constructor(val value: String) {
     BANNER_IMAGE("banner_image"),
     TOBACCO_PREFERENCE("tobacco_preference"),
     HEADER("header"),
+    FILTERS("filters"),
     UNDEFINED("undefined")
 }
