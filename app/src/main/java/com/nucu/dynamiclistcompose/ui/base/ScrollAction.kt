@@ -3,6 +3,7 @@ package com.nucu.dynamiclistcompose.ui.base
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.nucu.dynamiclistcompose.models.tooltip.TooltipShowStrategy
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 
 sealed class ScrollAction {
@@ -20,7 +21,10 @@ sealed class ScrollAction {
     /**
      * Scroll to first known render.
      */
-    class ScrollRender(val renderType: RenderType) : ScrollAction()
+    class ScrollRender(
+        val renderType: RenderType,
+        val onScrolled: () -> Unit
+    ) : ScrollAction()
 
     /**
      * Scroll to index selected and show tooltip
@@ -29,6 +33,7 @@ sealed class ScrollAction {
         val renderType: RenderType,
         val message: String,
         val coordinates: LayoutCoordinates,
-        val shapeRadius: Dp = 10.dp
+        val shapeRadius: Dp = 10.dp,
+        val tooltipShowStrategy: TooltipShowStrategy = TooltipShowStrategy()
         ) : ScrollAction()
 }

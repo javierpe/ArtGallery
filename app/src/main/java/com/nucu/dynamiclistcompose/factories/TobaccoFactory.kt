@@ -20,7 +20,6 @@ import com.nucu.dynamiclistcompose.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.models.DynamicListComponentAction
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction
-import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class TobaccoFactory @Inject constructor(): DynamicListAdapterFactory {
@@ -42,14 +41,15 @@ class TobaccoFactory @Inject constructor(): DynamicListAdapterFactory {
         }
 
         TobaccoComponentView(false) {
-            if (component.index == 0) {
-                coordinatesState.value = it
+            if (component.index == 0 && it.isAttached) {
+                if (coordinatesState.value == null) {
+                    coordinatesState.value = it
+                }
             }
         }
 
         if (coordinatesState.value != null) {
             LaunchedEffect(Unit) {
-                delay(500)
                 componentAction.scrollAction(
                     ScrollAction.ScrollWithTooltip(
                         renderType = RenderType.BANNER_IMAGE,
@@ -59,13 +59,6 @@ class TobaccoFactory @Inject constructor(): DynamicListAdapterFactory {
                 )
             }
         }
-
-        /*
-        LaunchedEffect(true) {
-            componentAction.scrollAction(
-                ScrollAction.ScrollRender(RenderType.ONE_CLICK_REORDER)
-            )
-        }*/
     }
 
     @Composable

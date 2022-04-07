@@ -33,7 +33,7 @@ class DynamicListControllerImpl @Inject constructor() : DynamicListController {
         emit(DynamicListAction.SkeletonAction(skeletons))
 
         // Emulate response delay
-        delay(5500)
+        delay(2500)
 
         try {
             val container = withContext(Dispatchers.IO) {

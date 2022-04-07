@@ -78,7 +78,7 @@ class DynamicListCompose(
 
                 // Show elements.
                 Column {
-                    headerComposeController?.ComposeComponent()
+                    //headerComposeController?.ComposeComponent()
 
                     bodyComposeController?.ComposeComponent()
 
