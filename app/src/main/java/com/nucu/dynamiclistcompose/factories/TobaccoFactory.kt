@@ -53,7 +53,7 @@ class TobaccoFactory @Inject constructor(): DynamicListAdapterFactory {
                 componentAction.scrollAction(
                     ScrollAction.ScrollWithTooltip(
                         renderType = RenderType.BANNER_IMAGE,
-                        message = "Hola tooltip compose",
+                        message = "Esto es un tooltip desde un componente de DL Compose",
                         coordinates = coordinatesState.value!!
                     )
                 )
