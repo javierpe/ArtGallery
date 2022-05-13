@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose.hi
+package com.nucu.dynamiclistcompose.di
 
 import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
 import com.nucu.dynamiclistcompose.factories.BannerFactory

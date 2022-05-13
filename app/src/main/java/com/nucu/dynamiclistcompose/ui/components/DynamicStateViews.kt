@@ -33,6 +33,7 @@ fun LoaderView() {
 
 @Composable
 fun ErrorView(
+    exception: Throwable? = null,
     onRetry: () -> Unit
 ) {
     Box(
@@ -47,7 +48,7 @@ fun ErrorView(
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
             Text(
-                text = stringResource(id = R.string.label_error),
+                text = exception?.message ?: stringResource(id = R.string.label_error),
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
 

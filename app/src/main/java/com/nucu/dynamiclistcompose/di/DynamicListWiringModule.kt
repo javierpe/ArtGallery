@@ -1,8 +1,7 @@
-package com.nucu.dynamiclistcompose.hi
+package com.nucu.dynamiclistcompose.di
 
 import com.nucu.dynamiclistcompose.controllers.DynamicListController
 import com.nucu.dynamiclistcompose.impl.DynamicListControllerImpl
-import com.nucu.dynamiclistcompose.listeners.DynamicListComposeLoader
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

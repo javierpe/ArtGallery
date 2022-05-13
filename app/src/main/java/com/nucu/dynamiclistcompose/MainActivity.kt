@@ -32,8 +32,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    // TODO: Request model could be an state.
                     ContextView(
+                        "Screen title",
                         bodyComposeController = bodyAdapterController,
                         headerComposeController = headerAdapterController,
                         requestModel = DynamicListRequestModel(

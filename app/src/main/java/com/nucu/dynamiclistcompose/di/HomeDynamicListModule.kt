@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose.hi
+package com.nucu.dynamiclistcompose.di
 
 import com.nucu.dynamiclistcompose.adapters.DefaultAdapterController
 import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory

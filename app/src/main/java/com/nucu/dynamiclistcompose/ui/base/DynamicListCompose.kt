@@ -1,16 +1,10 @@
 package com.nucu.dynamiclistcompose.ui.base
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nucu.dynamiclistcompose.controllers.DynamicListComposeLoader
 import com.nucu.dynamiclistcompose.controllers.DynamicListComposeController
@@ -48,12 +42,12 @@ class DynamicListCompose(
     private fun DynamicListContent(
         dynamicListViewModel: DynamicListViewModel = hiltViewModel()
     ) {
-        val dynamicListState = dynamicListViewModel.dynamicListAction.collectAsState()
+        val dynamicListState by dynamicListViewModel.dynamicListAction.collectAsState()
 
-        when (dynamicListState.value) {
+        when (dynamicListState) {
 
             is DynamicListAction.SkeletonAction -> {
-                val skeletons = (dynamicListState.value as DynamicListAction.SkeletonAction).renderTypes
+                val skeletons = (dynamicListState as DynamicListAction.SkeletonAction).renderTypes
                 bodyComposeController?.dispatchSkeletons(skeletons)
                 Column {
                     bodyComposeController?.DynamicListSkeletons()
@@ -65,12 +59,12 @@ class DynamicListCompose(
                 dynamicListViewModel.load(dynamicListRequestModel.value!!)
             }
 
-            is DynamicListAction.ErrorAction -> ErrorView {
+            is DynamicListAction.ErrorAction -> ErrorView((dynamicListState as DynamicListAction.ErrorAction).exception) {
                 dynamicListViewModel.load(dynamicListRequestModel.value!!)
             }
 
             is DynamicListAction.SuccessAction -> {
-                val container = (dynamicListState.value as DynamicListAction.SuccessAction).container
+                val container = (dynamicListState as DynamicListAction.SuccessAction).container
                 // Add data to controllers.
                 bodyComposeController?.dispatch(container.bodies)
                 headerComposeController?.dispatch(container.headers)
@@ -78,7 +72,7 @@ class DynamicListCompose(
 
                 // Show elements.
                 Column {
-                    //headerComposeController?.ComposeComponent()
+                    headerComposeController?.ComposeComponent()
 
                     bodyComposeController?.ComposeComponent()
 

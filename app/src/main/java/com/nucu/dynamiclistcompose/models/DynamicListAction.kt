@@ -11,7 +11,7 @@ sealed class DynamicListAction {
     /**
      * Show error view
      */
-    class ErrorAction(val exception: Exception): DynamicListAction()
+    class ErrorAction(val exception: Throwable): DynamicListAction()
 
     /**
      * Show data from response

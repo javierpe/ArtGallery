@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose.hi
+package com.nucu.dynamiclistcompose.di
 
 import com.nucu.dynamiclistcompose.renders.FiltersRender
 import com.nucu.dynamiclistcompose.renders.HeaderRender
@@ -9,7 +9,6 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dagger.multibindings.IntoSet
 
 /**
  * TODO Maybe:

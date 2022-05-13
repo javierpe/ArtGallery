@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose.hi
+package com.nucu.dynamiclistcompose.di
 
 import com.nucu.dynamiclistcompose.impl.TooltipQueueImpl
 import com.nucu.dynamiclistcompose.listeners.TooltipQueue

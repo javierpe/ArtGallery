@@ -12,12 +12,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.ui.theme.Purple700
 
 @Composable
-fun BannerComponentView() {
+fun BannerComponentView(
+    coordinates: ((LayoutCoordinates) -> Unit)? = null
+) {
     Box(
         modifier = Modifier
             .padding(16.dp)
@@ -25,6 +29,7 @@ fun BannerComponentView() {
             .height(120.dp)
             .clip(RoundedCornerShape(16.dp))
             .background(Purple700)
+            .onGloballyPositioned { coordinates?.invoke(it) }
     ) {
         Text(
             text = "Esto es un banner", color = Color.White,
