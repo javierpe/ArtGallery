@@ -2,6 +2,7 @@ package com.nucu.dynamiclistcompose.components.filters
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
@@ -19,10 +20,9 @@ fun FiltersComponentView(
     onSelectItem: (RenderType) -> Unit
 ) {
     LazyRow(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(15.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 5.dp)
     ) {
         item {
             FilterItemComponent("Banner") {
@@ -46,7 +46,7 @@ fun FiltersComponentView(
 fun FilterItemComponent(text: String, onClick: () -> Unit) {
     Card(
         shape = RoundedCornerShape(5.dp),
-        elevation = 10.dp
+        elevation = 8.dp
     ) {
         Text(
             text = text,

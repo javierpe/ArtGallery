@@ -12,7 +12,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
 import com.nucu.dynamiclistcompose.components.filters.FiltersComponentView
@@ -21,6 +20,7 @@ import com.nucu.dynamiclistcompose.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.actions.DynamicListComponentAction
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction
+import com.nucu.dynamiclistcompose.ui.theme.Skeleton
 import javax.inject.Inject
 
 class FiltersFactory @Inject constructor(): DynamicListAdapterFactory {
@@ -46,7 +46,7 @@ class FiltersFactory @Inject constructor(): DynamicListAdapterFactory {
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight(),
-            horizontalArrangement = Arrangement.spacedBy(10.dp)
+            horizontalArrangement = Arrangement.spacedBy(15.dp)
         ) {
 
             val width = 60.dp
@@ -55,7 +55,7 @@ class FiltersFactory @Inject constructor(): DynamicListAdapterFactory {
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(5.dp))
-                    .background(Color.Gray)
+                    .background(Skeleton)
                     .width(width)
                     .height(height)
             )
@@ -63,7 +63,7 @@ class FiltersFactory @Inject constructor(): DynamicListAdapterFactory {
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(5.dp))
-                    .background(Color.Gray)
+                    .background(Skeleton)
                     .width(width)
                     .height(height)
             )
@@ -71,7 +71,7 @@ class FiltersFactory @Inject constructor(): DynamicListAdapterFactory {
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(5.dp))
-                    .background(Color.Gray)
+                    .background(Skeleton)
                     .width(width)
                     .height(height)
             )
