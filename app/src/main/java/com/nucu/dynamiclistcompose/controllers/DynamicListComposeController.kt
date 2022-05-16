@@ -13,6 +13,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.nucu.dynamiclistcompose.BlinkAnimation
 import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
 import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.models.ComponentItemModel
@@ -45,18 +46,20 @@ abstract class DynamicListComposeController {
 
     @Composable
     fun DynamicListSkeletons() {
-        Column(
-            modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            getMapSkeletons().forEach { render ->
-                delegates.filter { adapterFactory ->
-                    adapterFactory.renders.any { renderType ->
-                        renderType.value == render.value
+        BlinkAnimation {
+            Column(
+                modifier = Modifier
+                    .padding(start = 16.dp, end = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                getMapSkeletons().forEach { render ->
+                    delegates.filter { adapterFactory ->
+                        adapterFactory.renders.any { renderType ->
+                            renderType.value == render.value
+                        }
+                    }.forEach {
+                        it.CreateSkeleton()
                     }
-                }.forEach {
-                    it.CreateSkeleton()
                 }
             }
         }

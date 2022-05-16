@@ -56,9 +56,7 @@ class DynamicListCompose(
             is DynamicListAction.SkeletonAction -> {
                 val skeletons = (dynamicListState as DynamicListAction.SkeletonAction).renderTypes
                 bodyComposeController?.dispatchSkeletons(skeletons)
-                Column {
-                    bodyComposeController?.DynamicListSkeletons()
-                }
+                bodyComposeController?.DynamicListSkeletons()
             }
 
             is DynamicListAction.LoadingAction -> {

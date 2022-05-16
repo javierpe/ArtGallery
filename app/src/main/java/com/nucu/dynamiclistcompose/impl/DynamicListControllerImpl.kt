@@ -41,7 +41,7 @@ class DynamicListControllerImpl @Inject constructor() : DynamicListController {
         }
 
         // Emulate response delay
-        delay(2500)
+        delay(3000)
 
         val container = withContext(Dispatchers.IO) {
             // Hardcoded data :D
