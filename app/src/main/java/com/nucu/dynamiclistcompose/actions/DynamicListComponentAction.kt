@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose.models
+package com.nucu.dynamiclistcompose.actions
 
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction
 

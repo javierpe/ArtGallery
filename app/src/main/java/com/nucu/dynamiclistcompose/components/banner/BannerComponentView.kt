@@ -24,7 +24,7 @@ fun BannerComponentView(
 ) {
     Box(
         modifier = Modifier
-            .padding(16.dp)
+            .padding(start = 16.dp, end = 16.dp)
             .fillMaxWidth()
             .height(120.dp)
             .clip(RoundedCornerShape(16.dp))

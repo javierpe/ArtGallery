@@ -12,30 +12,31 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.nucu.dynamiclistcompose.renders.base.RenderType
 
 @Composable
 fun FiltersComponentView(
-    onSelectItem: (Int) -> Unit
+    onSelectItem: (RenderType) -> Unit
 ) {
     LazyRow(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(start = 16.dp, end = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         item {
             FilterItemComponent("Banner") {
-                onSelectItem.invoke(7)
+                onSelectItem.invoke(RenderType.BANNER_IMAGE)
             }
         }
         item {
-            FilterItemComponent("Text") {
-                onSelectItem.invoke(3)
+            FilterItemComponent("Header") {
+                onSelectItem.invoke(RenderType.HEADER)
             }
         }
         item {
-            FilterItemComponent("Header with elements") {
-                onSelectItem.invoke(8)
+            FilterItemComponent("Cards") {
+                onSelectItem.invoke(RenderType.ONE_CLICK_REORDER)
             }
         }
     }

@@ -1,7 +1,7 @@
 package com.nucu.dynamiclistcompose.useCases
 
 import com.nucu.dynamiclistcompose.controllers.DynamicListController
-import com.nucu.dynamiclistcompose.models.DynamicListAction
+import com.nucu.dynamiclistcompose.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.models.DynamicListRequestModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

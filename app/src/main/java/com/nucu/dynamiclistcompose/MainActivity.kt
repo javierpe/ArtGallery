@@ -6,23 +6,16 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.nucu.dynamiclistcompose.adapters.DefaultAdapterController
-import com.nucu.dynamiclistcompose.models.AnalyticSources
-import com.nucu.dynamiclistcompose.models.DynamicListRequestModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.nucu.dynamiclistcompose.ui.base.ContextView
 import com.nucu.dynamiclistcompose.ui.theme.DynamicListComposeTheme
+import com.nucu.dynamiclistcompose.viewModels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-    @Inject
-    lateinit var bodyAdapterController: DefaultAdapterController
-
-    @Inject
-    lateinit var headerAdapterController: DefaultAdapterController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,18 +25,19 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    ContextView(
-                        "Screen title",
-                        bodyComposeController = bodyAdapterController,
-                        headerComposeController = headerAdapterController,
-                        requestModel = DynamicListRequestModel(
-                            context = "",
-                            storeType = "",
-                            aSources = AnalyticSources.MARKET
-                        )
-                    )
+                    MainView()
                 }
             }
         }
     }
+}
+
+@Composable
+fun MainView(
+    viewModel: MainViewModel = hiltViewModel()
+) {
+    ContextView(
+        title = "Screen title",
+        viewModel = viewModel
+    )
 }

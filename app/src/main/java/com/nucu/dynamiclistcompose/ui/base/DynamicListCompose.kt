@@ -1,14 +1,17 @@
 package com.nucu.dynamiclistcompose.ui.base
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.nucu.dynamiclistcompose.actions.ContextViewAction
 import com.nucu.dynamiclistcompose.controllers.DynamicListComposeLoader
 import com.nucu.dynamiclistcompose.controllers.DynamicListComposeController
-import com.nucu.dynamiclistcompose.models.DynamicListAction
+import com.nucu.dynamiclistcompose.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.models.DynamicListRequestModel
 import com.nucu.dynamiclistcompose.ui.components.ErrorView
 import com.nucu.dynamiclistcompose.ui.components.LoaderView
@@ -20,29 +23,33 @@ class DynamicListCompose(
 
     private var bodyComposeController: DynamicListComposeController? = null
     private var headerComposeController: DynamicListComposeController? = null
-    private var footerComposeController: DynamicListComposeController? = null
 
     private val dynamicListRequestModel = mutableStateOf<DynamicListRequestModel?>(requestModel)
 
     @Composable
     override fun <T: DynamicListComposeController> DynamicListScreen(
         bodyAdapterController: T,
-        headerAdapterController: T?,
-        footerAdapterController: T?,
+        headerAdapterController: T,
+        action: ContextViewAction?
     ) {
         this.bodyComposeController = bodyAdapterController
         this.headerComposeController = headerAdapterController
-        this.footerComposeController = footerAdapterController
 
-
-        DynamicListContent()
+        DynamicListContent(action = action)
     }
 
     @Composable
     private fun DynamicListContent(
-        dynamicListViewModel: DynamicListViewModel = hiltViewModel()
+        dynamicListViewModel: DynamicListViewModel = hiltViewModel(),
+        action: ContextViewAction?
     ) {
         val dynamicListState by dynamicListViewModel.dynamicListAction.collectAsState()
+
+        action?.let {
+            when (it) {
+                is ContextViewAction.Reload -> dynamicListViewModel.load(dynamicListRequestModel.value!!)
+            }
+        }
 
         when (dynamicListState) {
 
@@ -68,15 +75,14 @@ class DynamicListCompose(
                 // Add data to controllers.
                 bodyComposeController?.dispatch(container.bodies)
                 headerComposeController?.dispatch(container.headers)
-                footerComposeController?.dispatch(container.footers)
 
                 // Show elements.
-                Column {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
                     headerComposeController?.ComposeComponent()
 
                     bodyComposeController?.ComposeComponent()
-
-                    footerComposeController?.ComposeComponent()
                 }
             }
         }

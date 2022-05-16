@@ -9,19 +9,12 @@ import com.nucu.dynamiclistcompose.factories.TobaccoFactory
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 
-/**
- * TODO Maybe:
- *
- * @BindsWith(DynamicListAdapterFactory::class)
- * class OneClickReorderFactory @Inject constructor(): DynamicListAdapterFactory {
- *     ...
- * }
- */
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(SingletonComponent::class)
 abstract class DynamicListFactoriesModule {
 
     @Binds
@@ -44,13 +37,13 @@ abstract class DynamicListFactoriesModule {
 
     @Binds
     @IntoSet
-    abstract fun bindHeaderFactory(
-        factory: HeaderFactory
+    abstract fun bindFiltersFactory(
+        factory: FiltersFactory
     ): DynamicListAdapterFactory
 
     @Binds
     @IntoSet
-    abstract fun bindFiltersFactory(
-        factory: FiltersFactory
+    abstract fun bindHeaderFactory(
+        factory: HeaderFactory
     ): DynamicListAdapterFactory
 }

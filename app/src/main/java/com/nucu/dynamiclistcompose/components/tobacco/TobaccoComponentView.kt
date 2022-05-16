@@ -23,7 +23,7 @@ fun TobaccoComponentView(
 ) {
     Box(
         modifier = Modifier
-            .padding(16.dp)
+            .padding(start = 16.dp, end = 16.dp)
             .clip(RoundedCornerShape(12.dp))
             .onGloballyPositioned { coordinates?.invoke(it) }
     ) {

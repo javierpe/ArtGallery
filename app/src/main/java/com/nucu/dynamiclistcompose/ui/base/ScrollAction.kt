@@ -23,7 +23,7 @@ sealed class ScrollAction {
      */
     class ScrollRender(
         val renderType: RenderType,
-        val onScrolled: () -> Unit
+        val onScrolled: (() -> Unit)? = null
     ) : ScrollAction()
 
     /**

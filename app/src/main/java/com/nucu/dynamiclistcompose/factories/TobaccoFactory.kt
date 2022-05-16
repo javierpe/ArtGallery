@@ -17,7 +17,7 @@ import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
 import com.nucu.dynamiclistcompose.components.tobacco.TobaccoComponentView
 import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.models.ComponentItemModel
-import com.nucu.dynamiclistcompose.models.DynamicListComponentAction
+import com.nucu.dynamiclistcompose.actions.DynamicListComponentAction
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.theme.Skeleton
 import javax.inject.Inject
@@ -53,11 +53,10 @@ class TobaccoFactory @Inject constructor(): DynamicListAdapterFactory {
     override fun CreateSkeleton() {
         Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(100.dp)
-                .padding(16.dp)
-                .background(Skeleton)
                 .clip(RoundedCornerShape(10.dp))
+                .fillMaxWidth()
+                .height(70.dp)
+                .background(Skeleton)
         )
     }
 }

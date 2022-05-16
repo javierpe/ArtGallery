@@ -1,5 +1,6 @@
-package com.nucu.dynamiclistcompose.models
+package com.nucu.dynamiclistcompose.actions
 
+import com.nucu.dynamiclistcompose.models.DynamicListContainer
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 
 sealed class DynamicListAction {

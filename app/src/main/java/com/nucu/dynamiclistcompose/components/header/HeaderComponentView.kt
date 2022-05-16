@@ -10,7 +10,12 @@ import com.nucu.dynamiclistcompose.ui.theme.Typography
 
 @Composable
 fun HeaderComponentView(text: String) {
-    Text(text = text, style = Typography.h5, modifier = Modifier.padding(16.dp))
+    Text(
+        text = text,
+        style = Typography.h5,
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
+    )
 }
 
 @Composable

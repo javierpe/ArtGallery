@@ -1,16 +1,24 @@
 package com.nucu.dynamiclistcompose.factories
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
-import com.nucu.dynamiclistcompose.components.filters.FilterItemComponent
 import com.nucu.dynamiclistcompose.components.filters.FiltersComponentView
 import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.models.ComponentItemModel
-import com.nucu.dynamiclistcompose.models.DynamicListComponentAction
+import com.nucu.dynamiclistcompose.actions.DynamicListComponentAction
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction
 import javax.inject.Inject
@@ -28,24 +36,45 @@ class FiltersFactory @Inject constructor(): DynamicListAdapterFactory {
         componentAction: DynamicListComponentAction
     ) {
         FiltersComponentView {
-            componentAction.scrollAction(ScrollAction.ScrollIndex(it))
+            componentAction.scrollAction(ScrollAction.ScrollRender(it))
         }
     }
 
     @Composable
     override fun CreateSkeleton() {
         Row(
-            modifier = Modifier.fillMaxWidth().wrapContentHeight()
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            FilterItemComponent("") { }
 
-            FilterItemComponent("") { }
+            val width = 60.dp
+            val height = 30.dp
 
-            FilterItemComponent("") { }
+            Box(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(5.dp))
+                    .background(Color.Gray)
+                    .width(width)
+                    .height(height)
+            )
 
-            FilterItemComponent("") { }
+            Box(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(5.dp))
+                    .background(Color.Gray)
+                    .width(width)
+                    .height(height)
+            )
 
-            FilterItemComponent("") { }
+            Box(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(5.dp))
+                    .background(Color.Gray)
+                    .width(width)
+                    .height(height)
+            )
         }
     }
 }
