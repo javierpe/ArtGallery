@@ -1,14 +1,23 @@
 package com.nucu.dynamiclistcompose.ui.components
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
+import com.nucu.dynamiclistcompose.R
+import com.nucu.dynamiclistcompose.models.ContextType
 import com.nucu.dynamiclistcompose.ui.theme.DynamicListComposeTheme
 import com.nucu.dynamiclistcompose.ui.theme.Typography
 
@@ -18,12 +27,85 @@ import com.nucu.dynamiclistcompose.ui.theme.Typography
 @Composable
 fun DynamicListHeaderComponentView(
     title: String,
+    contextType: ContextType,
+    onBackPressed: () -> Unit, // Remove this and set navigation compose here
+    content: @Composable () -> Unit
+) {
+    when (contextType) {
+
+        ContextType.HOME -> {
+            SimpleHeaderView(title = title, onBackPressed = onBackPressed) {
+                content()
+            }
+        }
+
+        ContextType.SCREEN_WITH_IMAGE -> {
+            HeaderWithImageView(title = title) {
+                content()
+            }
+        }
+    }
+}
+
+@Composable
+fun HeaderWithImageView(
+    title: String,
+    content: @Composable () -> Unit
+) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+
+        ConstraintLayout(
+            modifier = Modifier
+                .wrapContentHeight()
+        ) {
+            val (imageRef, titleRef) = createRefs()
+
+            Image(
+                modifier = Modifier
+                    .height(130.dp)
+                    .constrainAs(imageRef) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        bottom.linkTo(parent.bottom)
+                    },
+                painter = painterResource(id = R.drawable.wallpaper),
+                contentDescription = null,
+                contentScale = ContentScale.Crop
+            )
+
+            Text(
+                modifier = Modifier
+                    .constrainAs(titleRef) {
+                        bottom.linkTo(parent.bottom, 16.dp)
+                        start.linkTo(parent.start, 16.dp)
+                        end.linkTo(parent.end, 16.dp)
+
+                        width = Dimension.fillToConstraints
+                    },
+                text = title,
+                style = Typography.h5,
+                textAlign = TextAlign.Left
+            )
+        }
+
+        content()
+    }
+}
+
+@Composable
+fun SimpleHeaderView(
+    title: String,
     onBackPressed: () -> Unit, // Remove this and set navigation compose here
     content: @Composable () -> Unit
 ) {
     Column {
         ConstraintLayout(
-            modifier = Modifier.padding(16.dp).wrapContentHeight(),
+            modifier = Modifier
+                .padding(16.dp)
+                .wrapContentHeight(),
         ) {
             val (backRef, titleRef) = createRefs()
 
@@ -54,7 +136,11 @@ fun DynamicListHeaderComponentView(
 @Preview(showBackground = true)
 fun PreviewHeaderComponentView() {
     DynamicListComposeTheme {
-        DynamicListHeaderComponentView("Hello from the header view of DynamicList", { }) {
+        DynamicListHeaderComponentView(
+            title = "Hello from the header view of DynamicList",
+            contextType = ContextType.SCREEN_WITH_IMAGE,
+            { }
+        ) {
             Text(text = "This is a container")
         }
     }

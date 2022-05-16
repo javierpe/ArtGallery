@@ -3,7 +3,7 @@ package com.nucu.dynamiclistcompose.viewModels
 import androidx.lifecycle.ViewModel
 import com.nucu.dynamiclistcompose.actions.ContextViewAction
 import com.nucu.dynamiclistcompose.adapters.DefaultAdapterController
-import com.nucu.dynamiclistcompose.models.AnalyticSources
+import com.nucu.dynamiclistcompose.models.ContextType
 import com.nucu.dynamiclistcompose.models.DynamicListRequestModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,7 +20,7 @@ abstract class ContextViewModel: ViewModel() {
     private val _contextViewAction = MutableStateFlow<ContextViewAction?>(null)
     val contextViewAction: StateFlow<ContextViewAction?> = _contextViewAction
 
-    abstract val source: AnalyticSources
+    abstract val context: ContextType
 
     /**
      * Maybe this can be removed and create abstract properties

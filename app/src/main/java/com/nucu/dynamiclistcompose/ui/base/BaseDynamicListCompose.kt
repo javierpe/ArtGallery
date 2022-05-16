@@ -19,7 +19,11 @@ fun ContextView(
 
     val action by viewModel.contextViewAction.collectAsState()
 
-    DynamicListHeaderComponentView(title = title, onBackPressed = { }) {
+    DynamicListHeaderComponentView(
+        title = title,
+        contextType = viewModel.context,
+        onBackPressed = { }
+    ) {
         DynamicListCompose(viewModel.requestModel).DynamicListScreen(
             headerAdapterController = viewModel.headerAdapterController,
             bodyAdapterController = viewModel.bodyAdapterController,
