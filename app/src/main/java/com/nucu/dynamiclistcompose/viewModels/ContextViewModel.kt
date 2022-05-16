@@ -24,7 +24,8 @@ abstract class ContextViewModel: ViewModel() {
 
     /**
      * Maybe this can be removed and create abstract properties
-     * like state or other params for request model
+     * like state or other params for request model.
+     * The idea is only change properties and not all the model
       */
     abstract val requestModel: DynamicListRequestModel
 
