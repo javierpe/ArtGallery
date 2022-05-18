@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,7 +17,6 @@ import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.nucu.dynamiclistcompose.ui.theme.Purple700
 
 @Composable
 fun BannerComponentView(
@@ -28,7 +28,7 @@ fun BannerComponentView(
             .fillMaxWidth()
             .height(120.dp)
             .clip(RoundedCornerShape(16.dp))
-            .background(Purple700)
+            .background(MaterialTheme.colors.primary)
             .onGloballyPositioned { coordinates?.invoke(it) }
     ) {
         Text(

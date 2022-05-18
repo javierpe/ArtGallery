@@ -5,20 +5,21 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.nucu.dynamiclistcompose.actions.DynamicListComponentAction
 import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
 import com.nucu.dynamiclistcompose.components.oneclick.OneClickModel
 import com.nucu.dynamiclistcompose.components.oneclick.OneClickReorderComponentView
 import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.models.ComponentItemModel
-import com.nucu.dynamiclistcompose.actions.DynamicListComponentAction
 import com.nucu.dynamiclistcompose.renders.base.RenderType
+import com.nucu.dynamiclistcompose.ui.base.ScrollAction
 import com.nucu.dynamiclistcompose.ui.theme.Skeleton
 import javax.inject.Inject
 
@@ -33,12 +34,14 @@ class OneClickReorderFactory @Inject constructor(): DynamicListAdapterFactory {
     override fun CreateComponent(
         component: ComponentItemModel,
         listener: DynamicListComponentListener?,
-        componentAction: DynamicListComponentAction
+        componentAction: ((ScrollAction) -> Unit)?
     ) {
         OneClickReorderComponentView(
             listOf(
                 OneClickModel("Product 1"),
                 OneClickModel("Product 2"),
+                OneClickModel("Product 3"),
+                OneClickModel("Product 4")
             ), "Date"
         ) { }
     }

@@ -13,8 +13,9 @@ fun ContextView(
 ) {
 
     /**
-     * 1. Change context should be a compose state
-     * 2. Reload should be a compose state
+     * 1. Change context should be a compose state.
+     * 2. Reload should be a compose state.
+     * 3. Listen scroll progress to show header animation.
      */
 
     val action by viewModel.contextViewAction.collectAsState()

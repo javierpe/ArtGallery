@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nucu.dynamiclistcompose.listeners.TooltipQueue
 import com.nucu.dynamiclistcompose.actions.DynamicListComponentAction
+import com.nucu.dynamiclistcompose.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,12 +21,28 @@ class DynamicListComposeViewModel @Inject constructor(
     private val _scrollAction = MutableStateFlow<ScrollAction>(ScrollAction.None)
     val scrollAction: StateFlow<ScrollAction> = _scrollAction
 
+    var data: List<ComponentItemModel>? = null
+
     override fun scrollAction(scrollAction: ScrollAction) {
-        if (scrollAction is ScrollAction.ScrollWithTooltip) {
-            tooltipQueue.add(tooltipAction = scrollAction)
-        } else {
-            viewModelScope.launch {
-                _scrollAction.emit(scrollAction)
+        viewModelScope.launch {
+            when (scrollAction) {
+                is ScrollAction.ScrollWithTooltip -> {
+                    tooltipQueue.add(tooltipAction = scrollAction)
+                }
+                is ScrollAction.ScrollRender -> {
+                    val element = data?.firstOrNull {
+                        it.render == scrollAction.renderType.value
+                    }
+
+                    element?.let {
+                        data?.indexOf(element)?.let {
+                            _scrollAction.value = ScrollAction.ScrollIndex(it, scrollAction.target)
+                        }
+                    }
+                }
+                else -> {
+                    _scrollAction.value = scrollAction
+                }
             }
         }
     }

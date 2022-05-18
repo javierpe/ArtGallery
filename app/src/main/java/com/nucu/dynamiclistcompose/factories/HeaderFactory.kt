@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
@@ -16,6 +17,7 @@ import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.actions.DynamicListComponentAction
 import com.nucu.dynamiclistcompose.renders.base.RenderType
+import com.nucu.dynamiclistcompose.ui.base.ScrollAction
 import com.nucu.dynamiclistcompose.ui.theme.Skeleton
 import javax.inject.Inject
 
@@ -30,7 +32,7 @@ class HeaderFactory @Inject constructor(): DynamicListAdapterFactory {
     override fun CreateComponent(
         component: ComponentItemModel,
         listener: DynamicListComponentListener?,
-        componentAction: DynamicListComponentAction
+        componentAction: ((ScrollAction) -> Unit)?
     ) {
         HeaderComponentView("Dynamic List Compose")
     }

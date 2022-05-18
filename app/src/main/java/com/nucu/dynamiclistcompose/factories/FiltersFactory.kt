@@ -20,6 +20,7 @@ import com.nucu.dynamiclistcompose.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.actions.DynamicListComponentAction
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction
+import com.nucu.dynamiclistcompose.ui.base.TargetAction
 import com.nucu.dynamiclistcompose.ui.theme.Skeleton
 import javax.inject.Inject
 
@@ -33,10 +34,10 @@ class FiltersFactory @Inject constructor(): DynamicListAdapterFactory {
     override fun CreateComponent(
         component: ComponentItemModel,
         listener: DynamicListComponentListener?,
-        componentAction: DynamicListComponentAction
+        componentAction: ((ScrollAction) -> Unit)?
     ) {
         FiltersComponentView {
-            componentAction.scrollAction(ScrollAction.ScrollRender(it))
+            componentAction?.invoke(ScrollAction.ScrollRender(it, target = TargetAction.BODY))
         }
     }
 

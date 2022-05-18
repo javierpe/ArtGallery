@@ -2,10 +2,15 @@ package com.nucu.dynamiclistcompose.ui.base
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nucu.dynamiclistcompose.actions.ContextViewAction
@@ -16,6 +21,7 @@ import com.nucu.dynamiclistcompose.models.DynamicListRequestModel
 import com.nucu.dynamiclistcompose.ui.components.ErrorView
 import com.nucu.dynamiclistcompose.ui.components.LoaderView
 import com.nucu.dynamiclistcompose.viewModels.DynamicListViewModel
+import kotlinx.coroutines.launch
 
 class DynamicListCompose(
     requestModel: DynamicListRequestModel
@@ -70,17 +76,31 @@ class DynamicListCompose(
 
             is DynamicListAction.SuccessAction -> {
                 val container = (dynamicListState as DynamicListAction.SuccessAction).container
-                // Add data to controllers.
-                bodyComposeController?.dispatch(container.bodies)
-                headerComposeController?.dispatch(container.headers)
+                val coroutineScope = rememberCoroutineScope()
 
-                // Show elements.
+                LaunchedEffect(container) {
+                    coroutineScope.launch {
+                        headerComposeController?.dispatch(container.headers)
+                        bodyComposeController?.dispatch(container.bodies)
+                    }
+                }
+
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    modifier = Modifier.fillMaxSize()
                 ) {
-                    headerComposeController?.ComposeComponent()
 
-                    bodyComposeController?.ComposeComponent()
+                    val actionBody = remember {
+                        mutableStateOf<ScrollAction?>(null)
+                    }
+
+                    headerComposeController?.ComposeHeader {
+                        if (it.target == TargetAction.BODY) {
+                            actionBody.value = it
+                        }
+                    }
+
+                    bodyComposeController?.ComposeBody(actionBody.value)
                 }
             }
         }
