@@ -29,28 +29,22 @@ fun DynamicListHeaderComponentView(
     title: String,
     contextType: ContextType,
     onBackPressed: () -> Unit, // Remove this and set navigation compose here
-    content: @Composable () -> Unit
 ) {
     when (contextType) {
 
         ContextType.HOME -> {
-            SimpleHeaderView(title = title, onBackPressed = onBackPressed) {
-                content()
-            }
+            SimpleHeaderView(title = title, onBackPressed = onBackPressed)
         }
 
         ContextType.SCREEN_WITH_IMAGE -> {
-            HeaderWithImageView(title = title) {
-                content()
-            }
+            HeaderWithImageView(title = title)
         }
     }
 }
 
 @Composable
 fun HeaderWithImageView(
-    title: String,
-    content: @Composable () -> Unit
+    title: String
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -90,8 +84,6 @@ fun HeaderWithImageView(
                 textAlign = TextAlign.Left
             )
         }
-
-        content()
     }
 }
 
@@ -99,7 +91,6 @@ fun HeaderWithImageView(
 fun SimpleHeaderView(
     title: String,
     onBackPressed: () -> Unit, // Remove this and set navigation compose here
-    content: @Composable () -> Unit
 ) {
     Column {
         ConstraintLayout(
@@ -127,8 +118,6 @@ fun SimpleHeaderView(
                 style = Typography.h6
             )
         }
-
-        content()
     }
 }
 
@@ -138,10 +127,7 @@ fun PreviewHeaderComponentView() {
     DynamicListComposeTheme {
         DynamicListHeaderComponentView(
             title = "Hello from the header view of DynamicList",
-            contextType = ContextType.SCREEN_WITH_IMAGE,
-            { }
-        ) {
-            Text(text = "This is a container")
-        }
+            contextType = ContextType.SCREEN_WITH_IMAGE
+        ) { }
     }
 }

@@ -1,5 +1,6 @@
 package com.nucu.dynamiclistcompose.adapters
 
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
@@ -22,7 +23,8 @@ interface DynamicListAdapterFactory {
     fun CreateComponent(
         component: ComponentItemModel,
         listener: DynamicListComponentListener?,
-        componentAction: ((ScrollAction) -> Unit)?
+        componentAction: ((ScrollAction) -> Unit)?,
+        widthSizeClass: WindowWidthSizeClass,
     )
 
     /**

@@ -25,17 +25,17 @@ fun FiltersComponentView(
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 5.dp)
     ) {
         item {
-            FilterItemComponent("Banner") {
+            FilterItemComponent("Banner Component") {
                 onSelectItem.invoke(RenderType.BANNER_IMAGE)
             }
         }
         item {
-            FilterItemComponent("Header") {
+            FilterItemComponent("Header Component") {
                 onSelectItem.invoke(RenderType.HEADER)
             }
         }
         item {
-            FilterItemComponent("Cards") {
+            FilterItemComponent("Cards Component") {
                 onSelectItem.invoke(RenderType.ONE_CLICK_REORDER)
             }
         }

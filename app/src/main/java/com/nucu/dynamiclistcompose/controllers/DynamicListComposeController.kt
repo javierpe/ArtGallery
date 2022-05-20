@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
@@ -98,6 +99,7 @@ abstract class DynamicListComposeController {
 
     @Composable
     fun ComposeHeader(
+        widthSizeClass: WindowWidthSizeClass,
         onAction: (ScrollAction) -> Unit
     ) {
 
@@ -108,12 +110,14 @@ abstract class DynamicListComposeController {
         DynamicListScreen(
             content = elements,
             listState = listState,
+            widthSizeClass = widthSizeClass,
             onAction = onAction
         )
     }
 
     @Composable
     fun ComposeBody(
+        widthSizeClass: WindowWidthSizeClass,
         sharedAction: ScrollAction? = null
     ) {
 
@@ -144,8 +148,9 @@ abstract class DynamicListComposeController {
         }
 
         DynamicListScreen(
-            elements,
-            listState
+            content = elements,
+            listState = listState,
+            widthSizeClass = widthSizeClass,
         )
     }
 

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -34,7 +35,8 @@ class TobaccoFactory @Inject constructor(): DynamicListAdapterFactory {
     override fun CreateComponent(
         component: ComponentItemModel,
         listener: DynamicListComponentListener?,
-        componentAction: ((ScrollAction) -> Unit)?
+        componentAction: ((ScrollAction) -> Unit)?,
+        widthSizeClass: WindowWidthSizeClass,
     ) {
 
         val coordinatesState = remember {

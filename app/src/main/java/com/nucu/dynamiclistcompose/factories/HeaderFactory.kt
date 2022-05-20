@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
@@ -32,7 +33,8 @@ class HeaderFactory @Inject constructor(): DynamicListAdapterFactory {
     override fun CreateComponent(
         component: ComponentItemModel,
         listener: DynamicListComponentListener?,
-        componentAction: ((ScrollAction) -> Unit)?
+        componentAction: ((ScrollAction) -> Unit)?,
+        widthSizeClass: WindowWidthSizeClass,
     ) {
         HeaderComponentView("Dynamic List Compose")
     }

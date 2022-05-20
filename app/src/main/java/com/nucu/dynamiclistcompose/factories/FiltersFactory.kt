@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,7 +35,8 @@ class FiltersFactory @Inject constructor(): DynamicListAdapterFactory {
     override fun CreateComponent(
         component: ComponentItemModel,
         listener: DynamicListComponentListener?,
-        componentAction: ((ScrollAction) -> Unit)?
+        componentAction: ((ScrollAction) -> Unit)?,
+        widthSizeClass: WindowWidthSizeClass,
     ) {
         FiltersComponentView {
             componentAction?.invoke(ScrollAction.ScrollRender(it, target = TargetAction.BODY))

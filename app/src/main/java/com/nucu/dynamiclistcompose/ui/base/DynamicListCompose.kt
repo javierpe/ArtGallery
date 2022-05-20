@@ -3,6 +3,7 @@ package com.nucu.dynamiclistcompose.ui.base
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -36,18 +37,20 @@ class DynamicListCompose(
     override fun <T: DynamicListComposeController> DynamicListScreen(
         bodyAdapterController: T,
         headerAdapterController: T,
-        action: ContextViewAction?
+        action: ContextViewAction?,
+        widthSizeClass: WindowWidthSizeClass,
     ) {
         this.bodyComposeController = bodyAdapterController
         this.headerComposeController = headerAdapterController
 
-        DynamicListContent(action = action)
+        DynamicListContent(action = action, widthSizeClass = widthSizeClass)
     }
 
     @Composable
     private fun DynamicListContent(
-        dynamicListViewModel: DynamicListViewModel = hiltViewModel(),
-        action: ContextViewAction?
+        widthSizeClass: WindowWidthSizeClass,
+        action: ContextViewAction?,
+        dynamicListViewModel: DynamicListViewModel = hiltViewModel()
     ) {
         val dynamicListState by dynamicListViewModel.dynamicListAction.collectAsState()
 
@@ -94,13 +97,18 @@ class DynamicListCompose(
                         mutableStateOf<ScrollAction?>(null)
                     }
 
-                    headerComposeController?.ComposeHeader {
+                    headerComposeController?.ComposeHeader(
+                        widthSizeClass = widthSizeClass
+                    ) {
                         if (it.target == TargetAction.BODY) {
                             actionBody.value = it
                         }
                     }
 
-                    bodyComposeController?.ComposeBody(actionBody.value)
+                    bodyComposeController?.ComposeBody(
+                        widthSizeClass = widthSizeClass,
+                        sharedAction = actionBody.value
+                    )
                 }
             }
         }

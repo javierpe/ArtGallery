@@ -7,12 +7,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -35,21 +32,18 @@ fun OneClickReorderComponentView(
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(20.dp),
-        modifier = Modifier.wrapContentHeight().fillMaxWidth()
     ) {
         Text(text = "Component header", modifier = Modifier.padding(start = 16.dp))
 
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(10.dp),
-            contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
-            modifier = Modifier.wrapContentWidth()
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp),
         ) {
-            items(items = data, key = { it.text }) {
+            items(items = data, key = { it.hashCode() }) {
                 Card(
                     modifier = Modifier
-                        .width(200.dp)
-                        .wrapContentHeight(),
-                    shape = RoundedCornerShape(16.dp),
+                        .wrapContentSize(),
+                    shape = RoundedCornerShape(12.dp),
                     elevation = 5.dp
                 ) {
                     Column(
