@@ -1,20 +1,20 @@
 package com.nucu.dynamiclistcompose.di
 
-import com.nucu.dynamiclistcompose.controllers.DynamicListController
-import com.nucu.dynamiclistcompose.useCases.DynamicListUseCase
+import com.nucu.dynamiclistcompose.api.DynamicListUseCaseApi
+import com.nucu.dynamiclistcompose.impl.useCases.DynamicListUseCaseImpl
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DynamicLIstUseCasesModule {
+abstract class DynamicListUseCasesModule {
 
-    @Provides
+    @Binds
     @Singleton
-    fun provideDynamicListUseCase(
-        controller: DynamicListController
-    ): DynamicListUseCase = DynamicListUseCase(controller)
+    abstract fun bindUseCase(
+        impl: DynamicListUseCaseImpl
+    ): DynamicListUseCaseApi
 }

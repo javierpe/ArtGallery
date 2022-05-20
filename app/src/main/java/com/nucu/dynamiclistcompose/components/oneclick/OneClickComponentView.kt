@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -34,7 +35,7 @@ fun OneClickReorderComponentView(
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(20.dp),
-        modifier = Modifier.wrapContentHeight()
+        modifier = Modifier.wrapContentHeight().fillMaxWidth()
     ) {
         Text(text = "Component header", modifier = Modifier.padding(start = 16.dp))
 

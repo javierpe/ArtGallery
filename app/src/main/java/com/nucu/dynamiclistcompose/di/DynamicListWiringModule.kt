@@ -1,6 +1,6 @@
 package com.nucu.dynamiclistcompose.di
 
-import com.nucu.dynamiclistcompose.controllers.DynamicListController
+import com.nucu.dynamiclistcompose.api.DynamicListControllerApi
 import com.nucu.dynamiclistcompose.impl.DynamicListControllerImpl
 import dagger.Binds
 import dagger.Module
@@ -16,5 +16,5 @@ abstract class DynamicListWiringModule {
     @Singleton
     abstract fun bindDynamicListController(
         impl: DynamicListControllerImpl
-    ): DynamicListController
+    ): DynamicListControllerApi
 }

@@ -3,8 +3,8 @@ package com.nucu.dynamiclistcompose.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nucu.dynamiclistcompose.actions.DynamicListAction
+import com.nucu.dynamiclistcompose.api.DynamicListUseCaseApi
 import com.nucu.dynamiclistcompose.models.DynamicListRequestModel
-import com.nucu.dynamiclistcompose.useCases.DynamicListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DynamicListViewModel @Inject constructor(
-    private val useCase: DynamicListUseCase
+    private val useCase: DynamicListUseCaseApi
 ) : ViewModel() {
 
     private val _dynamicListAction = MutableStateFlow<DynamicListAction>(DynamicListAction.LoadingAction)

@@ -1,6 +1,6 @@
 package com.nucu.dynamiclistcompose.impl
 
-import com.nucu.dynamiclistcompose.controllers.DynamicListController
+import com.nucu.dynamiclistcompose.api.DynamicListControllerApi
 import com.nucu.dynamiclistcompose.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.models.DynamicListContainer
@@ -13,39 +13,18 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class DynamicListControllerImpl @Inject constructor() : DynamicListController {
+class DynamicListControllerImpl @Inject constructor() : DynamicListControllerApi {
 
     override suspend fun get(
         page: Int,
         requestModel: DynamicListRequestModel
     ): Flow<DynamicListAction> = flow {
 
-        // TODO: Load at this point some mocked data (skeleton) while request is running.
-        val skeletons = listOf(
-            RenderType.FILTERS,
-            RenderType.TOBACCO_PREFERENCE,
-            RenderType.TOBACCO_PREFERENCE,
-            RenderType.ONE_CLICK_REORDER,
-            RenderType.TOBACCO_PREFERENCE,
-            RenderType.TOBACCO_PREFERENCE,
-            RenderType.ONE_CLICK_REORDER,
-            RenderType.TOBACCO_PREFERENCE,
-            RenderType.ONE_CLICK_REORDER,
-            RenderType.BANNER_IMAGE
-        )
-
-        if (skeletons.isEmpty()) {
-            emit(DynamicListAction.LoadingAction)
-        } else {
-            emit(DynamicListAction.SkeletonAction(skeletons))
-        }
-
         // Emulate response delay
         delay(3000)
 
         val container = withContext(Dispatchers.IO) {
             // Hardcoded data :D
-
             val header = listOf(
                 ComponentItemModel(
                     render = RenderType.FILTERS.value,
