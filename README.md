@@ -8,6 +8,7 @@
  - [] Implement Macrobenchmark
  - [] Improve Tooltips visualization
  - [] Improve transitions animation with scrolling list
+ - [] Unit test
 
 # Compact UI
 <img src="https://user-images.githubusercontent.com/7097754/169329171-a83cac1f-c107-4706-954b-f033a7ec1b19.gif" width="310" height="640"/>
