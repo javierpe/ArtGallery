@@ -1,17 +1,9 @@
 package com.nucu.dynamiclistcompose.impl
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nucu.dynamiclistcompose.listeners.TooltipQueue
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction
-import com.nucu.dynamiclistcompose.ui.components.showCase.DarkSkinComponent
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -156,27 +148,6 @@ class TooltipQueueImpl @Inject constructor(
         }
     }
 
-    @OptIn(ExperimentalComposeUiApi::class)
-    @Composable
-    override fun Tooltip() {
-        val showState = show.collectAsState()
-
-        if (showState.value) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clickable { tooltipCallback.value?.invoke() }
-            ) {
-                currentTooltip?.let {
-                    DarkSkinComponent(
-                        layoutCoordinates = it.coordinates,
-                        it.shapeRadius,
-                        it.message
-                    )
-                }
-            }
-        }
-    }
 
     companion object {
         const val DEFAULT_EXTRA_DURATION = 100

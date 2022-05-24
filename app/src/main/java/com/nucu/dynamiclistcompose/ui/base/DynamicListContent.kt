@@ -1,7 +1,6 @@
 package com.nucu.dynamiclistcompose.ui.base
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -11,12 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.models.DynamicListElement
+import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseScope
 
 @Composable
 fun DynamicListScreen(
     content: List<DynamicListElement>,
     listState: LazyListState,
     widthSizeClass: WindowWidthSizeClass,
+    showCaseScope: ShowCaseScope,
     onAction: ((ScrollAction) -> Unit)? = null
 ) {
 
@@ -25,12 +26,13 @@ fun DynamicListScreen(
         modifier = Modifier.wrapContentHeight(),
         state = listState
     ) {
-        items(items = content) {
+        items(items = content, key = { it.componentItemModel.index }) {
             it.factory?.CreateComponent(
                 component = it.componentItemModel,
-                listener = it.listener,
+                listener = it.listener ,
                 componentAction = onAction,
-                widthSizeClass
+                widthSizeClass = widthSizeClass,
+                showCaseScope = showCaseScope,
             )
         }
     }

@@ -21,6 +21,7 @@ import com.nucu.dynamiclistcompose.models.DynamicListElement
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.base.DynamicListScreen
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction
+import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -100,6 +101,7 @@ abstract class DynamicListComposeController {
     @Composable
     fun ComposeHeader(
         widthSizeClass: WindowWidthSizeClass,
+        showCaseScope: ShowCaseScope,
         onAction: (ScrollAction) -> Unit
     ) {
 
@@ -111,14 +113,17 @@ abstract class DynamicListComposeController {
             content = elements,
             listState = listState,
             widthSizeClass = widthSizeClass,
-            onAction = onAction
+            onAction = onAction,
+            showCaseScope = showCaseScope
         )
     }
 
     @Composable
     fun ComposeBody(
         widthSizeClass: WindowWidthSizeClass,
-        sharedAction: ScrollAction? = null
+        sharedAction: ScrollAction? = null,
+        showCaseScope: ShowCaseScope,
+        onAction: (ScrollAction) -> Unit
     ) {
 
         val elements by elements.collectAsState()
@@ -151,6 +156,8 @@ abstract class DynamicListComposeController {
             content = elements,
             listState = listState,
             widthSizeClass = widthSizeClass,
+            showCaseScope = showCaseScope,
+            onAction = onAction,
         )
     }
 

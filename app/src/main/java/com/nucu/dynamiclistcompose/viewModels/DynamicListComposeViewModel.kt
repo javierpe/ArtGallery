@@ -1,6 +1,5 @@
 package com.nucu.dynamiclistcompose.viewModels
 
-import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nucu.dynamiclistcompose.listeners.TooltipQueue
@@ -45,10 +44,5 @@ class DynamicListComposeViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    @Composable
-    fun GetTooltip() {
-        tooltipQueue.Tooltip()
     }
 }

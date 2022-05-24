@@ -21,6 +21,8 @@ import com.nucu.dynamiclistcompose.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.models.DynamicListRequestModel
 import com.nucu.dynamiclistcompose.ui.components.ErrorView
 import com.nucu.dynamiclistcompose.ui.components.LoaderView
+import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseScope
+import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.viewModels.DynamicListViewModel
 import kotlinx.coroutines.launch
 
@@ -39,17 +41,26 @@ class DynamicListCompose(
         headerAdapterController: T,
         action: ContextViewAction?,
         widthSizeClass: WindowWidthSizeClass,
+        showCaseScope: ShowCaseScope,
+        showCaseState: ShowCaseState
     ) {
         this.bodyComposeController = bodyAdapterController
         this.headerComposeController = headerAdapterController
 
-        DynamicListContent(action = action, widthSizeClass = widthSizeClass)
+        DynamicListContent(
+            action = action,
+            widthSizeClass = widthSizeClass,
+            showCaseScope = showCaseScope,
+            showCaseState = showCaseState
+        )
     }
 
     @Composable
     private fun DynamicListContent(
         widthSizeClass: WindowWidthSizeClass,
         action: ContextViewAction?,
+        showCaseScope: ShowCaseScope,
+        showCaseState: ShowCaseState,
         dynamicListViewModel: DynamicListViewModel = hiltViewModel()
     ) {
         val dynamicListState by dynamicListViewModel.dynamicListAction.collectAsState()
@@ -97,8 +108,12 @@ class DynamicListCompose(
                         mutableStateOf<ScrollAction?>(null)
                     }
 
+                    val index = showCaseState.currentTargetIndex
+                    println("Index: $index")
+
                     headerComposeController?.ComposeHeader(
-                        widthSizeClass = widthSizeClass
+                        widthSizeClass = widthSizeClass,
+                        showCaseScope = showCaseScope
                     ) {
                         if (it.target == TargetAction.BODY) {
                             actionBody.value = it
@@ -107,8 +122,13 @@ class DynamicListCompose(
 
                     bodyComposeController?.ComposeBody(
                         widthSizeClass = widthSizeClass,
-                        sharedAction = actionBody.value
-                    )
+                        sharedAction = actionBody.value,
+                        showCaseScope = showCaseScope
+                    ) {
+                        if (it.target == TargetAction.BODY) {
+                            actionBody.value = it
+                        }
+                    }
                 }
             }
         }

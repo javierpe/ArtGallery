@@ -19,6 +19,7 @@ import com.nucu.dynamiclistcompose.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.actions.DynamicListComponentAction
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction
+import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseScope
 import com.nucu.dynamiclistcompose.ui.theme.Skeleton
 import javax.inject.Inject
 
@@ -35,6 +36,7 @@ class HeaderFactory @Inject constructor(): DynamicListAdapterFactory {
         listener: DynamicListComponentListener?,
         componentAction: ((ScrollAction) -> Unit)?,
         widthSizeClass: WindowWidthSizeClass,
+        showCaseScope: ShowCaseScope
     ) {
         HeaderComponentView("Dynamic List Compose")
     }

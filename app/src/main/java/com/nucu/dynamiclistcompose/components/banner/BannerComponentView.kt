@@ -15,17 +15,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseScope
+import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseStyle
+import com.nucu.dynamiclistcompose.ui.components.showCase.models.ShapeType
 import com.nucu.dynamiclistcompose.ui.theme.Typography
 
 @Composable
 fun BannerComponentView(
     widthSizeClass: WindowWidthSizeClass,
-    coordinates: ((LayoutCoordinates) -> Unit)? = null
+    componentIndex: Int,
+    showCaseScope: ShowCaseScope? = null
 ) {
 
     var modifier = Modifier
@@ -52,20 +55,30 @@ fun BannerComponentView(
         }
     }
 
-
-    Box(
-        modifier = modifier
-            .background(MaterialTheme.colors.primary)
-            .clip(RoundedCornerShape(16.dp))
-            .onGloballyPositioned { coordinates?.invoke(it) }
-    ) {
-        Text(
-            text = "Esto es un banner",
-            color = Color.White,
-            modifier = Modifier.align(Alignment.Center).padding(16.dp).fillMaxWidth(),
-            style = style,
-            textAlign = TextAlign.Center
-        )
+    showCaseScope?.run {
+        Box(
+            modifier = modifier
+                .background(MaterialTheme.colors.primary)
+                .clip(RoundedCornerShape(16.dp))
+                .asShowCaseTarget(
+                    index = componentIndex,
+                    style = ShowCaseStyle.Default.copy(
+                        shapeType = ShapeType.RECTANGLE,
+                        cornerRadius = 16.dp
+                    ),
+                    content = {
+                        Text(text = "Mensaje")
+                    }
+                )
+        ) {
+            Text(
+                text = "Esto es un banner",
+                color = Color.White,
+                modifier = Modifier.align(Alignment.Center).padding(16.dp).fillMaxWidth(),
+                style = style,
+                textAlign = TextAlign.Center
+            )
+        }
     }
 }
 
@@ -74,6 +87,7 @@ fun BannerComponentView(
 fun PreviewCompactBannerComponentView() {
     BannerComponentView(
         widthSizeClass = WindowWidthSizeClass.Compact,
+        componentIndex = 0
     )
 }
 
@@ -82,6 +96,7 @@ fun PreviewCompactBannerComponentView() {
 fun PreviewExpandedBannerComponentView() {
     BannerComponentView(
         widthSizeClass = WindowWidthSizeClass.Expanded,
+        componentIndex = 0
     )
 }
 
@@ -90,5 +105,6 @@ fun PreviewExpandedBannerComponentView() {
 fun PreviewMediumBannerComponentView() {
     BannerComponentView(
         widthSizeClass = WindowWidthSizeClass.Medium,
+        componentIndex = 0
     )
 }

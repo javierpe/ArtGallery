@@ -8,6 +8,7 @@ import com.nucu.dynamiclistcompose.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.actions.DynamicListComponentAction
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction
+import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseScope
 
 interface DynamicListAdapterFactory {
 
@@ -25,6 +26,7 @@ interface DynamicListAdapterFactory {
         listener: DynamicListComponentListener?,
         componentAction: ((ScrollAction) -> Unit)?,
         widthSizeClass: WindowWidthSizeClass,
+        showCaseScope: ShowCaseScope
     )
 
     /**

@@ -6,6 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.nucu.dynamiclistcompose.ui.components.DynamicListHeaderComponentView
+import com.nucu.dynamiclistcompose.ui.components.showCase.IntroShowCaseScaffold
+import com.nucu.dynamiclistcompose.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.viewModels.ContextViewModel
 
 @Composable
@@ -24,20 +26,31 @@ fun ContextView(
 
     val action by viewModel.contextViewAction.collectAsState()
 
-    Scaffold(
-        topBar = {
-            DynamicListHeaderComponentView(
-                title = title,
-                contextType = viewModel.context,
-                onBackPressed = { }
+    val showCaseState = rememberShowCaseState()
+
+    IntroShowCaseScaffold(
+        showIntroShowCase = true,
+        state = showCaseState,
+        onShowCaseCompleted = {
+        },
+    ) {
+        Scaffold(
+            topBar = {
+                DynamicListHeaderComponentView(
+                    title = title,
+                    contextType = viewModel.context,
+                    onBackPressed = { }
+                )
+            }
+        ) {
+            DynamicListCompose(viewModel.requestModel).DynamicListScreen(
+                headerAdapterController = viewModel.headerAdapterController,
+                bodyAdapterController = viewModel.bodyAdapterController,
+                action = action,
+                widthSizeClass = widthSizeClass,
+                showCaseScope = this,
+                showCaseState = showCaseState
             )
         }
-    ) {
-        DynamicListCompose(viewModel.requestModel).DynamicListScreen(
-            headerAdapterController = viewModel.headerAdapterController,
-            bodyAdapterController = viewModel.bodyAdapterController,
-            action = action,
-            widthSizeClass = widthSizeClass
-        )
     }
 }
