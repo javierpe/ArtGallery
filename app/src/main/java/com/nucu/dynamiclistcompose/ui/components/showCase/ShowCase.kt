@@ -14,10 +14,11 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.Stable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
@@ -36,11 +37,14 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.nucu.dynamiclistcompose.impl.TooltipQueueImpl
 import com.nucu.dynamiclistcompose.ui.components.showCase.models.ShapeType
 import com.nucu.dynamiclistcompose.ui.components.showCase.models.ShowCaseTargets
+import com.nucu.dynamiclistcompose.viewModels.ShowCaseViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlin.math.absoluteValue
 import kotlin.math.max
 import kotlin.math.min
@@ -50,23 +54,134 @@ import kotlin.math.sqrt
 @Composable
 fun ShowCase(
     state: ShowCaseState,
+    viewModel: ShowCaseViewModel = hiltViewModel(),
     onShowCaseCompleted: () -> Unit
 ) {
-    state.currentTarget?.let {
-        TargetContent(it) {
-            state.currentTargetIndex++
-            if (state.currentTarget == null) {
-                onShowCaseCompleted()
+    val scope = rememberCoroutineScope()
+
+    val isShowed by viewModel.isShowed.collectAsState()
+
+    var start by remember {
+        mutableStateOf(false)
+    }
+
+    if (state.hasTarget) {
+        LaunchedEffect(state) {
+            scope.launch {
+                delay(1000)
+                start = true
             }
         }
     }
+
+    if (start) {
+        if (isShowed.not()) {
+            state.currentTarget?.let {
+                viewModel.isShowed(it.key)
+
+                StartShowCase(target = it) {
+                    start = false
+                    viewModel.setShowed(it.key)
+                    onShowCaseCompleted()
+                }
+            }
+        } else {
+            state.currentTarget
+        }
+    }
 }
+
+@Composable
+fun StartShowCase(
+    target: ShowCaseTargets,
+    onShowCaseCompleted: () -> Unit
+) {
+    val strategy = target.tooltipShowStrategy
+
+    if (strategy.firstToHappen == true) {
+        ShowCaseFirstToHappen(
+            target = target,
+            onShowCaseCompleted = onShowCaseCompleted
+        )
+    } else {
+        if (strategy.untilUserInteraction == true) {
+            ShowCaseUntilUserInteraction(
+                target = target,
+                onShowCaseCompleted = onShowCaseCompleted
+            )
+        } else {
+            ShowCaseUntilExpirationTime(
+                target = target,
+                onShowCaseCompleted = onShowCaseCompleted
+            )
+        }
+    }
+}
+
+@Composable
+fun ShowCaseUntilUserInteraction(
+    target: ShowCaseTargets,
+    onShowCaseCompleted: () -> Unit
+) {
+    // Show tooltip
+    TargetContent(target) {
+        // Callback to finish
+        onShowCaseCompleted()
+    }
+}
+
+@Composable
+fun ShowCaseFirstToHappen(
+    target: ShowCaseTargets,
+    onShowCaseCompleted: () -> Unit
+) {
+    val scope = rememberCoroutineScope()
+
+    // Show tooltip
+    TargetContent(target) {
+        // Callback to finish
+        onShowCaseCompleted()
+    }
+
+    LaunchedEffect(target) {
+        scope.launch {
+            // Delay time to finish
+            delay((target.tooltipShowStrategy.expirationTime + TooltipQueueImpl.DEFAULT_EXTRA_DURATION).toLong())
+            onShowCaseCompleted()
+        }
+    }
+}
+
+
+@Composable
+fun ShowCaseUntilExpirationTime(
+    target: ShowCaseTargets,
+    onShowCaseCompleted: () -> Unit
+) {
+
+    val scope = rememberCoroutineScope()
+
+    // Show tooltip
+    TargetContent(target) { /* no-op */ }
+
+    LaunchedEffect(target) {
+        scope.launch {
+            // Delay time to finish
+            delay((target.tooltipShowStrategy.expirationTime + TooltipQueueImpl.DEFAULT_EXTRA_DURATION).toLong())
+
+            // Hide tooltip
+            onShowCaseCompleted()
+        }
+    }
+}
+
 
 @Composable
 fun TargetContent(
     target: ShowCaseTargets,
     onShowcaseCompleted: () -> Unit
 ) {
+
     val screenHeight = LocalConfiguration.current.screenHeightDp
     val targetCords = target.coordinates
     val gutterArea = 88.dp
@@ -124,6 +239,7 @@ fun TargetContent(
     }
 
     val dys = animatables.map { it.value }
+
     Box {
         Canvas(
             modifier = Modifier
@@ -287,40 +403,4 @@ fun getOuterRadius(outerRect: Rect): Float {
     ).toFloat()
 
     return (d / 2f)
-}
-
-class ShowCaseStyle(
-    val backgroundColor: Color = Color.Black,
-    val backgroundAlpha: Float = DEFAULT_BACKGROUND_RADIUS,
-    val targetCircleColor: Color = Color.White,
-    val shapeType: ShapeType = ShapeType.CIRCLE,
-    val cornerRadius: Dp = 10.dp
-) {
-
-    fun copy(
-        backgroundColor: Color = this.backgroundColor,
-        backgroundAlpha: Float = this.backgroundAlpha,
-        targetCircleColor: Color = this.targetCircleColor,
-        shapeType: ShapeType = this.shapeType,
-        cornerRadius: Dp = this.cornerRadius
-    ): ShowCaseStyle {
-
-        return ShowCaseStyle(
-            backgroundColor = backgroundColor,
-            backgroundAlpha = backgroundAlpha,
-            targetCircleColor = targetCircleColor,
-            shapeType = shapeType,
-            cornerRadius = cornerRadius
-        )
-    }
-
-    companion object {
-        private const val DEFAULT_BACKGROUND_RADIUS = 0.9f
-
-        /**
-         * Constant for default text style.
-         */
-        @Stable
-        val Default = ShowCaseStyle()
-    }
 }

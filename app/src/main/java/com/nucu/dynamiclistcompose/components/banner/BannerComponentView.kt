@@ -15,10 +15,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.nucu.dynamiclistcompose.models.tooltip.TooltipShowStrategy
+import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseScope
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseStyle
 import com.nucu.dynamiclistcompose.ui.components.showCase.models.ShapeType
@@ -55,30 +56,37 @@ fun BannerComponentView(
         }
     }
 
-    showCaseScope?.run {
-        Box(
-            modifier = modifier
-                .background(MaterialTheme.colors.primary)
-                .clip(RoundedCornerShape(16.dp))
-                .asShowCaseTarget(
-                    index = componentIndex,
-                    style = ShowCaseStyle.Default.copy(
-                        shapeType = ShapeType.RECTANGLE,
-                        cornerRadius = 16.dp
-                    ),
-                    content = {
-                        Text(text = "Mensaje")
-                    }
-                )
-        ) {
-            Text(
-                text = "Esto es un banner",
-                color = Color.White,
-                modifier = Modifier.align(Alignment.Center).padding(16.dp).fillMaxWidth(),
-                style = style,
-                textAlign = TextAlign.Center
+    modifier = modifier
+        .background(MaterialTheme.colors.primary)
+        .clip(RoundedCornerShape(16.dp))
+
+    if (componentIndex == 7) {
+        showCaseScope?.run {
+            modifier = modifier.asShowCaseTarget(
+                index = componentIndex,
+                style = ShowCaseStyle.Default.copy(
+                    shapeType = ShapeType.RECTANGLE,
+                    cornerRadius = 16.dp
+                ),
+                content = {
+                    Text(text = "Mensaje")
+                },
+                strategy = TooltipShowStrategy(untilUserInteraction = true),
+                key = RenderType.BANNER_IMAGE.value
             )
         }
+    }
+
+    Box(
+        modifier = modifier
+    ) {
+        Text(
+            text = "Esto es un banner",
+            color = Color.White,
+            modifier = Modifier.align(Alignment.Center).padding(16.dp).fillMaxWidth(),
+            style = style,
+            textAlign = TextAlign.Center
+        )
     }
 }
 

@@ -63,7 +63,7 @@ class TooltipQueueImpl @Inject constructor(
             if (tooltipShowStrategy.firstToHappen == true) {
                 showWhenFirstToHappen()
             } else {
-                if (tooltipShowStrategy.showUntilUserInteraction == true) {
+                if (tooltipShowStrategy.untilUserInteraction == true) {
                     showUntilUserInteraction()
                 } else {
                     showUntilExpiration()

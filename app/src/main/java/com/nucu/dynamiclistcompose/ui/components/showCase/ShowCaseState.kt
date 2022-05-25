@@ -3,31 +3,22 @@ package com.nucu.dynamiclistcompose.ui.components.showCase
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
+import com.nucu.dynamiclistcompose.models.tooltip.TooltipShowStrategy
 import com.nucu.dynamiclistcompose.ui.components.showCase.models.ShowCaseTargets
+import java.util.Stack
 
 /**
  * Creates a [ShowCaseState] that is remembered across compositions.
- *
- * Changes to the provided values for [initialIndex] will **not** result in the state being
- * recreated or changed in any way if it has already
- * been created.
- *
- * @param initialIndex the initial value for [ShowCaseState.currentTargetIndex]
  */
 @Composable
-fun rememberShowCaseState(
-    initialIndex: Int = 0,
-): ShowCaseState {
+fun rememberShowCaseState(): ShowCaseState {
     return remember {
-        ShowCaseState(
-            initialIndex = initialIndex,
-        )
+        ShowCaseState()
     }
 }
 
@@ -38,25 +29,32 @@ fun Modifier.asShowCaseTarget(
     state: ShowCaseState,
     index: Int,
     style: ShowCaseStyle = ShowCaseStyle.Default,
+    strategy: TooltipShowStrategy = TooltipShowStrategy(),
+    key: String,
     content: @Composable BoxScope.() -> Unit,
 ): Modifier = onGloballyPositioned { coordinates ->
-    state.targets[index] = ShowCaseTargets(
+
+    val target = ShowCaseTargets(
         index = index,
         coordinates = coordinates,
         style = style,
-        content = content
+        content = content,
+        tooltipShowStrategy = strategy,
+        key = key
     )
+
+    if (!state.targetsQueue.contains(target)) {
+        state.targetsQueue.push(target)
+        state.hasTarget = state.targetsQueue.isNotEmpty()
+    }
 }
 
-class ShowCaseState internal constructor(
-    initialIndex: Int,
-) {
+class ShowCaseState internal constructor() {
 
-    internal var targets = mutableStateMapOf<Int, ShowCaseTargets>()
+    internal val targetsQueue = Stack<ShowCaseTargets>()
 
-    var currentTargetIndex by mutableStateOf(initialIndex)
+    var hasTarget by mutableStateOf(false)
         internal set
 
-    val currentTarget: ShowCaseTargets?
-        get() = targets[currentTargetIndex]
+    val currentTarget: ShowCaseTargets? get() = if (targetsQueue.isNotEmpty()) targetsQueue.peek() else null
 }

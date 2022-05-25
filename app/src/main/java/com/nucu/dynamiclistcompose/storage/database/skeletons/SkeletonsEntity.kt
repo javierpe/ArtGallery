@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose.database.skeletons
+package com.nucu.dynamiclistcompose.storage.database.skeletons
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

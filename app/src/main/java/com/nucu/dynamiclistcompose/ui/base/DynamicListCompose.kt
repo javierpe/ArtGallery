@@ -108,9 +108,6 @@ class DynamicListCompose(
                         mutableStateOf<ScrollAction?>(null)
                     }
 
-                    val index = showCaseState.currentTargetIndex
-                    println("Index: $index")
-
                     headerComposeController?.ComposeHeader(
                         widthSizeClass = widthSizeClass,
                         showCaseScope = showCaseScope

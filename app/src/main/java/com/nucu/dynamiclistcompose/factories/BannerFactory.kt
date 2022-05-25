@@ -35,7 +35,11 @@ class BannerFactory @Inject constructor(): DynamicListAdapterFactory {
         widthSizeClass: WindowWidthSizeClass,
         showCaseScope: ShowCaseScope
     ) {
-        BannerComponentView(widthSizeClass, component.index, showCaseScope)
+        BannerComponentView(
+            widthSizeClass = widthSizeClass,
+            componentIndex = component.index,
+            showCaseScope = showCaseScope
+        )
     }
 
     @Composable

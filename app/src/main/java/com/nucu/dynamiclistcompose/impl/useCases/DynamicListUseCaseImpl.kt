@@ -3,8 +3,8 @@ package com.nucu.dynamiclistcompose.impl.useCases
 import com.nucu.dynamiclistcompose.api.DynamicListControllerApi
 import com.nucu.dynamiclistcompose.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.api.DynamicListUseCaseApi
-import com.nucu.dynamiclistcompose.database.AppDatabase
-import com.nucu.dynamiclistcompose.database.skeletons.SkeletonsEntity
+import com.nucu.dynamiclistcompose.storage.database.AppDatabase
+import com.nucu.dynamiclistcompose.storage.database.skeletons.SkeletonsEntity
 import com.nucu.dynamiclistcompose.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.models.ContextType
 import com.nucu.dynamiclistcompose.models.DynamicListRequestModel
