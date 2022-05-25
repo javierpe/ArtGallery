@@ -41,17 +41,23 @@ fun BannerComponentView(
     when (widthSizeClass) {
 
         WindowWidthSizeClass.Compact -> {
-            modifier = modifier.height(120.dp).fillMaxWidth()
+            modifier = modifier
+                .height(120.dp)
+                .fillMaxWidth()
             style = Typography.h6
         }
 
         WindowWidthSizeClass.Expanded -> {
-            modifier = modifier.height(140.dp).wrapContentWidth()
+            modifier = modifier
+                .height(140.dp)
+                .wrapContentWidth()
             style = Typography.h5
         }
 
         WindowWidthSizeClass.Medium -> {
-            modifier = modifier.height(130.dp).fillMaxWidth()
+            modifier = modifier
+                .height(130.dp)
+                .fillMaxWidth()
             style = Typography.h5
         }
     }
@@ -83,7 +89,10 @@ fun BannerComponentView(
         Text(
             text = "Esto es un banner",
             color = Color.White,
-            modifier = Modifier.align(Alignment.Center).padding(16.dp).fillMaxWidth(),
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(16.dp)
+                .fillMaxWidth(),
             style = style,
             textAlign = TextAlign.Center
         )

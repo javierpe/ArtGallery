@@ -39,7 +39,6 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.nucu.dynamiclistcompose.impl.TooltipQueueImpl
 import com.nucu.dynamiclistcompose.ui.components.showCase.models.ShapeType
 import com.nucu.dynamiclistcompose.ui.components.showCase.models.ShowCaseTargets
 import com.nucu.dynamiclistcompose.viewModels.ShowCaseViewModel
@@ -50,6 +49,9 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.pow
 import kotlin.math.sqrt
+
+private const val DEFAULT_EXTRA_DURATION = 100
+private const val DEFAULT_SHOW_DELAY: Long = 1000
 
 @Composable
 fun ShowCase(
@@ -68,25 +70,25 @@ fun ShowCase(
     if (state.hasTarget) {
         LaunchedEffect(state) {
             scope.launch {
-                delay(1000)
+                delay(DEFAULT_SHOW_DELAY)
                 start = true
             }
         }
     }
 
     if (start) {
+        state.currentTarget?.let {
+            viewModel.isShowed(it.key)
+        }
+
         if (isShowed.not()) {
             state.currentTarget?.let {
-                viewModel.isShowed(it.key)
-
                 StartShowCase(target = it) {
                     start = false
                     viewModel.setShowed(it.key)
                     onShowCaseCompleted()
                 }
             }
-        } else {
-            state.currentTarget
         }
     }
 }
@@ -146,7 +148,7 @@ fun ShowCaseFirstToHappen(
     LaunchedEffect(target) {
         scope.launch {
             // Delay time to finish
-            delay((target.tooltipShowStrategy.expirationTime + TooltipQueueImpl.DEFAULT_EXTRA_DURATION).toLong())
+            delay((target.tooltipShowStrategy.expirationTime + DEFAULT_EXTRA_DURATION).toLong())
             onShowCaseCompleted()
         }
     }
@@ -167,7 +169,7 @@ fun ShowCaseUntilExpirationTime(
     LaunchedEffect(target) {
         scope.launch {
             // Delay time to finish
-            delay((target.tooltipShowStrategy.expirationTime + TooltipQueueImpl.DEFAULT_EXTRA_DURATION).toLong())
+            delay((target.tooltipShowStrategy.expirationTime + DEFAULT_EXTRA_DURATION).toLong())
 
             // Hide tooltip
             onShowCaseCompleted()
