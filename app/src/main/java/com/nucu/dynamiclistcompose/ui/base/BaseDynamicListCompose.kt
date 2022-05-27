@@ -20,8 +20,7 @@ fun ContextView(
     /**
      * 1. Change context should be a compose state.
      * 2. Reload should be a compose state.
-     * 3. Listen scroll progress to show header animation.
-     * 4. Implement Scaffold component
+     * 3. Implement Scaffold component
      */
 
     val action by viewModel.contextViewAction.collectAsState()

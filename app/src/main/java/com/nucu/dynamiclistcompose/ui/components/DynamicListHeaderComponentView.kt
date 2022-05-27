@@ -18,6 +18,12 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.models.ContextType
+import com.nucu.dynamiclistcompose.models.tooltip.ShowCaseStrategy
+import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseStyle
+import com.nucu.dynamiclistcompose.ui.components.showCase.TooltipView
+import com.nucu.dynamiclistcompose.ui.components.showCase.asShowCaseTarget
+import com.nucu.dynamiclistcompose.ui.components.showCase.models.ShapeType
+import com.nucu.dynamiclistcompose.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.ui.theme.DynamicListComposeTheme
 import com.nucu.dynamiclistcompose.ui.theme.Typography
 
@@ -33,7 +39,10 @@ fun DynamicListHeaderComponentView(
     when (contextType) {
 
         ContextType.HOME -> {
-            SimpleHeaderView(title = title, onBackPressed = onBackPressed)
+            SimpleHeaderView(
+                title = title,
+                onBackPressed = onBackPressed
+            )
         }
 
         ContextType.SCREEN_WITH_IMAGE -> {
@@ -92,6 +101,8 @@ fun SimpleHeaderView(
     title: String,
     onBackPressed: () -> Unit, // Remove this and set navigation compose here
 ) {
+    val showCaseState = rememberShowCaseState()
+
     Column {
         ConstraintLayout(
             modifier = Modifier
@@ -101,10 +112,21 @@ fun SimpleHeaderView(
             val (backRef, titleRef) = createRefs()
 
             BackButtonComponentView(
-                modifier = Modifier.constrainAs(backRef) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
-                },
+                modifier = Modifier
+                    .constrainAs(backRef) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                    }
+                    .asShowCaseTarget(
+                        index = 0,
+                        style = ShowCaseStyle.Default.copy(shapeType = ShapeType.CIRCLE),
+                        content = {
+                            TooltipView(text = "Aquí puedes dar back")
+                        },
+                        strategy = ShowCaseStrategy(onlyUserInteraction = true),
+                        key = "back-button",
+                        state = showCaseState
+                    ),
                 onBackPressed
             )
 
