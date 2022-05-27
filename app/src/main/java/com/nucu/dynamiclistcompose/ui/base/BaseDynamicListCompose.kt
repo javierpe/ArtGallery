@@ -30,9 +30,7 @@ fun ContextView(
 
     IntroShowCaseScaffold(
         showIntroShowCase = true,
-        state = showCaseState,
-        onShowCaseCompleted = {
-        },
+        state = showCaseState
     ) {
         Scaffold(
             topBar = {

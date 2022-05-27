@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -52,13 +51,11 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 
 private const val DEFAULT_EXTRA_DURATION = 100
-private const val DEFAULT_SHOW_DELAY: Long = 1000
 
 @Composable
 fun ShowCase(
     state: ShowCaseState,
-    viewModel: ShowCaseViewModel = hiltViewModel(),
-    onShowCaseCompleted: () -> Unit
+    viewModel: ShowCaseViewModel = hiltViewModel()
 ) {
     val current by state.current.collectAsState()
 

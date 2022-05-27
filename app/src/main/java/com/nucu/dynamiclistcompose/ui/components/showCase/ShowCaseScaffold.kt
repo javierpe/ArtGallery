@@ -10,7 +10,6 @@ import com.nucu.dynamiclistcompose.models.tooltip.TooltipShowStrategy
 @Composable
 fun IntroShowCaseScaffold(
     showIntroShowCase: Boolean,
-    onShowCaseCompleted: () -> Unit,
     modifier: Modifier = Modifier,
     state: ShowCaseState = rememberShowCaseState(),
     content: @Composable ShowCaseScope.() -> Unit,
@@ -25,8 +24,7 @@ fun IntroShowCaseScaffold(
 
         if (showIntroShowCase) {
             ShowCase(
-                state = state,
-                onShowCaseCompleted = onShowCaseCompleted,
+                state = state
             )
         }
     }
