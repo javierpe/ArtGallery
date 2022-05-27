@@ -3,11 +3,10 @@ package com.nucu.dynamiclistcompose.components.header
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.nucu.dynamiclistcompose.models.tooltip.TooltipShowStrategy
+import com.nucu.dynamiclistcompose.models.tooltip.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseStyle
@@ -36,7 +35,7 @@ fun HeaderComponentView(
                 content = {
                     Text(text = "Un header!")
                 },
-                strategy = TooltipShowStrategy(untilUserInteraction = true),
+                strategy = ShowCaseStrategy(onlyUserInteraction = true),
                 key = RenderType.HEADER.value,
                 state = showCaseState
             )

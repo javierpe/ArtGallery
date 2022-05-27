@@ -81,7 +81,7 @@ fun StartShowCase(
             onShowCaseCompleted = onShowCaseCompleted
         )
     } else {
-        if (strategy.untilUserInteraction == true) {
+        if (strategy.onlyUserInteraction == true) {
             ShowCaseUntilUserInteraction(
                 target = target,
                 onShowCaseCompleted = onShowCaseCompleted

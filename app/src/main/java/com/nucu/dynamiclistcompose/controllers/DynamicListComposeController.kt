@@ -195,7 +195,7 @@ abstract class DynamicListComposeController {
         if (showCaseSequence.isNotEmpty() && showOnNextShowCase == -1) {
             SideEffect {
                 coroutineScope.launch {
-                    delay(500)
+                    delay(100)
                     val nextShowCase = showCaseSequence.pop()
                     showCaseState.setCurrentIndexFromDL(nextShowCase.index)
                     delay(500)

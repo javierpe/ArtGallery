@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
-import com.nucu.dynamiclistcompose.models.tooltip.TooltipShowStrategy
+import com.nucu.dynamiclistcompose.models.tooltip.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.ui.components.showCase.models.ShowCaseTargets
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -27,7 +27,7 @@ fun Modifier.asShowCaseTarget(
     state: ShowCaseState,
     index: Int,
     style: ShowCaseStyle = ShowCaseStyle.Default,
-    strategy: TooltipShowStrategy = TooltipShowStrategy(),
+    strategy: ShowCaseStrategy = ShowCaseStrategy(),
     key: String,
     content: @Composable BoxScope.() -> Unit,
 ): Modifier = onGloballyPositioned { coordinates ->

@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import com.nucu.dynamiclistcompose.models.tooltip.TooltipShowStrategy
+import com.nucu.dynamiclistcompose.models.tooltip.ShowCaseStrategy
 
 @Composable
 fun IntroShowCaseScaffold(
@@ -40,7 +40,7 @@ class ShowCaseScope(
     fun Modifier.asShowCaseTarget(
         index: Int,
         style: ShowCaseStyle = ShowCaseStyle.Default,
-        strategy: TooltipShowStrategy = TooltipShowStrategy(),
+        strategy: ShowCaseStrategy = ShowCaseStrategy(),
         key: String,
         content: @Composable BoxScope.() -> Unit,
     ): Modifier = asShowCaseTarget(

@@ -3,7 +3,7 @@ package com.nucu.dynamiclistcompose.ui.base
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.nucu.dynamiclistcompose.models.tooltip.TooltipShowStrategy
+import com.nucu.dynamiclistcompose.models.tooltip.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 
 sealed class ScrollAction(val target: TargetAction) {
@@ -37,7 +37,7 @@ sealed class ScrollAction(val target: TargetAction) {
         val message: String,
         val coordinates: LayoutCoordinates,
         val shapeRadius: Dp = 10.dp,
-        val tooltipShowStrategy: TooltipShowStrategy = TooltipShowStrategy(),
+        val tooltipShowStrategy: ShowCaseStrategy = ShowCaseStrategy(),
         target: TargetAction
         ) : ScrollAction(target)
 }

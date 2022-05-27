@@ -14,7 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.R
-import com.nucu.dynamiclistcompose.models.tooltip.TooltipShowStrategy
+import com.nucu.dynamiclistcompose.models.tooltip.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseStyle
@@ -42,7 +42,7 @@ fun TobaccoComponentView(
                 content = {
                     Text(text = "Mensaje del sistema")
                 },
-                strategy = TooltipShowStrategy(untilUserInteraction = true),
+                strategy = ShowCaseStrategy(onlyUserInteraction = true),
                 key = RenderType.TOBACCO_PREFERENCE.value,
                 state = showCaseState
             )
