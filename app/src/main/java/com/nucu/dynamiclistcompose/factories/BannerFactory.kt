@@ -36,7 +36,6 @@ class BannerFactory @Inject constructor(
         componentInfo: ComponentInfo
     ) {
         BannerComponentView(
-            widthSizeClass = componentInfo.windowWidthSizeClass,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState
         )

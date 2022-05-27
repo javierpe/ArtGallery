@@ -8,9 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,39 +27,9 @@ import com.nucu.dynamiclistcompose.ui.theme.Typography
 
 @Composable
 fun BannerComponentView(
-    widthSizeClass: WindowWidthSizeClass,
     componentIndex: Int,
     showCaseState: ShowCaseState
 ) {
-
-    /* var modifier = Modifier
-
-
-     var style = Typography.h1
-
-     when (widthSizeClass) {
-
-         WindowWidthSizeClass.Compact -> {
-             modifier = modifier
-                 .height(120.dp)
-                 .fillMaxWidth()
-             style = Typography.h6
-         }
-
-         WindowWidthSizeClass.Expanded -> {
-             modifier = modifier
-                 .height(140.dp)
-                 .wrapContentWidth()
-             style = Typography.h5
-         }
-
-         WindowWidthSizeClass.Medium -> {
-             modifier = modifier
-                 .height(130.dp)
-                 .fillMaxWidth()
-             style = Typography.h5
-         }
-     }*/
 
     Box(
         modifier = Modifier
@@ -102,29 +70,6 @@ fun BannerComponentView(
 fun PreviewCompactBannerComponentView() {
     val state = rememberShowCaseState()
     BannerComponentView(
-        widthSizeClass = WindowWidthSizeClass.Compact,
-        componentIndex = 0,
-        showCaseState = state
-    )
-}
-
-@Composable
-@Preview(showBackground = true)
-fun PreviewExpandedBannerComponentView() {
-    val state = rememberShowCaseState()
-    BannerComponentView(
-        widthSizeClass = WindowWidthSizeClass.Expanded,
-        componentIndex = 0,
-        showCaseState = state
-    )
-}
-
-@Composable
-@Preview(showBackground = true)
-fun PreviewMediumBannerComponentView() {
-    val state = rememberShowCaseState()
-    BannerComponentView(
-        widthSizeClass = WindowWidthSizeClass.Medium,
         componentIndex = 0,
         showCaseState = state
     )
