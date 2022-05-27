@@ -131,3 +131,14 @@ fun PreviewHeaderComponentView() {
         ) { }
     }
 }
+
+@Composable
+@Preview(showBackground = true)
+fun PreviewSimpleHeaderComponentView() {
+    DynamicListComposeTheme {
+        DynamicListHeaderComponentView(
+            title = "Hello from the header view of DynamicList",
+            contextType = ContextType.HOME
+        ) { }
+    }
+}
