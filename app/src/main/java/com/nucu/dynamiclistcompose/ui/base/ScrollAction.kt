@@ -16,7 +16,10 @@ sealed class ScrollAction(val target: TargetAction) {
     /**
      * Scroll to any index.
      */
-    class ScrollIndex(val index: Int, target: TargetAction) : ScrollAction(target)
+    class ScrollIndex(
+        val index: Int,
+        target: TargetAction = TargetAction.BODY
+    ) : ScrollAction(target)
 
     /**
      * Scroll to first known render.

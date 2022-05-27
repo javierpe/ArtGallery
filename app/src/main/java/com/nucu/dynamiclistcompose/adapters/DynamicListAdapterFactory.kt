@@ -9,6 +9,7 @@ import com.nucu.dynamiclistcompose.actions.DynamicListComponentAction
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseScope
+import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseState
 
 interface DynamicListAdapterFactory {
 
@@ -16,6 +17,12 @@ interface DynamicListAdapterFactory {
      * List of compatible renders.
      */
     val renders: List<RenderType>
+
+    /**
+     * This render should show a show case.
+     */
+    val hasShowCaseConfigured: Boolean
+        get() = false
 
     /**
      * Create composable view.
@@ -26,7 +33,7 @@ interface DynamicListAdapterFactory {
         listener: DynamicListComponentListener?,
         componentAction: ((ScrollAction) -> Unit)?,
         widthSizeClass: WindowWidthSizeClass,
-        showCaseScope: ShowCaseScope
+        showCaseState: ShowCaseState
     )
 
     /**

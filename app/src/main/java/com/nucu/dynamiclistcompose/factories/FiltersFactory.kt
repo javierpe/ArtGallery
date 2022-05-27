@@ -23,6 +23,7 @@ import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction
 import com.nucu.dynamiclistcompose.ui.base.TargetAction
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseScope
+import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.ui.theme.Skeleton
 import javax.inject.Inject
 
@@ -38,7 +39,7 @@ class FiltersFactory @Inject constructor(): DynamicListAdapterFactory {
         listener: DynamicListComponentListener?,
         componentAction: ((ScrollAction) -> Unit)?,
         widthSizeClass: WindowWidthSizeClass,
-        showCaseScope: ShowCaseScope
+        showCaseState: ShowCaseState
     ) {
         FiltersComponentView {
             componentAction?.invoke(ScrollAction.ScrollRender(it, target = TargetAction.BODY))

@@ -2,15 +2,13 @@ package com.nucu.dynamiclistcompose.ui.components.showCase
 
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import com.nucu.dynamiclistcompose.models.tooltip.TooltipShowStrategy
 import com.nucu.dynamiclistcompose.ui.components.showCase.models.ShowCaseTargets
-import java.util.Stack
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 /**
  * Creates a [ShowCaseState] that is remembered across compositions.
@@ -33,28 +31,41 @@ fun Modifier.asShowCaseTarget(
     key: String,
     content: @Composable BoxScope.() -> Unit,
 ): Modifier = onGloballyPositioned { coordinates ->
-
-    val target = ShowCaseTargets(
-        index = index,
-        coordinates = coordinates,
-        style = style,
-        content = content,
-        tooltipShowStrategy = strategy,
-        key = key
-    )
-
-    if (!state.targetsQueue.contains(target)) {
-        state.targetsQueue.push(target)
-        state.hasTarget = state.targetsQueue.isNotEmpty()
+    if (state.currentIndex.value == index) {
+        state.send(
+            ShowCaseTargets(
+                index = index,
+                coordinates = coordinates,
+                style = style,
+                content = content,
+                tooltipShowStrategy = strategy,
+                key = key,
+                onNext = {
+                    state.onNext()
+                }
+            )
+        )
     }
 }
 
 class ShowCaseState internal constructor() {
 
-    internal val targetsQueue = Stack<ShowCaseTargets>()
+    private val _current = MutableStateFlow<ShowCaseTargets?>(null)
+    val current: StateFlow<ShowCaseTargets?> = _current
 
-    var hasTarget by mutableStateOf(false)
-        internal set
+    private val _currentIndex = MutableStateFlow(-1)
+    val currentIndex: StateFlow<Int> = _currentIndex
 
-    val currentTarget: ShowCaseTargets? get() = if (targetsQueue.isNotEmpty()) targetsQueue.peek() else null
+    fun send(target: ShowCaseTargets?) {
+        _current.value = target
+    }
+
+    fun setCurrentIndexFromDL(index: Int) {
+        _currentIndex.value = index
+    }
+
+    fun onNext() {
+        _currentIndex.value = -1
+        _current.value = null
+    }
 }

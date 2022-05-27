@@ -10,14 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.models.DynamicListElement
-import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseScope
+import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseState
 
 @Composable
 fun DynamicListScreen(
     content: List<DynamicListElement>,
     listState: LazyListState,
     widthSizeClass: WindowWidthSizeClass,
-    showCaseScope: ShowCaseScope,
+    showCaseState: ShowCaseState,
     onAction: ((ScrollAction) -> Unit)? = null
 ) {
 
@@ -29,10 +29,10 @@ fun DynamicListScreen(
         items(items = content, key = { it.componentItemModel.index }) {
             it.factory?.CreateComponent(
                 component = it.componentItemModel,
-                listener = it.listener ,
+                listener = it.listener,
                 componentAction = onAction,
                 widthSizeClass = widthSizeClass,
-                showCaseScope = showCaseScope,
+                showCaseState = showCaseState
             )
         }
     }

@@ -12,5 +12,6 @@ data class ShowCaseTargets(
     val style: ShowCaseStyle = ShowCaseStyle.Default,
     val tooltipShowStrategy: TooltipShowStrategy = TooltipShowStrategy(),
     val key: String,
+    val onNext: () -> Unit,
     val content: @Composable BoxScope.() -> Unit
 )

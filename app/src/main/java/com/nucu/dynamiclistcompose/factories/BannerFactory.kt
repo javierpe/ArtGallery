@@ -17,15 +17,20 @@ import com.nucu.dynamiclistcompose.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseScope
+import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.ui.theme.Skeleton
 import javax.inject.Inject
 
-class BannerFactory @Inject constructor(): DynamicListAdapterFactory {
+class BannerFactory @Inject constructor(
+
+): DynamicListAdapterFactory {
 
     override val renders: List<RenderType>
         get() = listOf(
             RenderType.BANNER_IMAGE
         )
+
+    override val hasShowCaseConfigured = true
 
     @Composable
     override fun CreateComponent(
@@ -33,12 +38,12 @@ class BannerFactory @Inject constructor(): DynamicListAdapterFactory {
         listener: DynamicListComponentListener?,
         componentAction: ((ScrollAction) -> Unit)?,
         widthSizeClass: WindowWidthSizeClass,
-        showCaseScope: ShowCaseScope
+        showCaseState: ShowCaseState
     ) {
         BannerComponentView(
             widthSizeClass = widthSizeClass,
             componentIndex = component.index,
-            showCaseScope = showCaseScope
+            showCaseState = showCaseState
         )
     }
 

@@ -48,7 +48,6 @@ fun ContextView(
                 bodyAdapterController = viewModel.bodyAdapterController,
                 action = action,
                 widthSizeClass = widthSizeClass,
-                showCaseScope = this,
                 showCaseState = showCaseState
             )
         }

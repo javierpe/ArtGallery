@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -59,36 +60,13 @@ fun ShowCase(
     viewModel: ShowCaseViewModel = hiltViewModel(),
     onShowCaseCompleted: () -> Unit
 ) {
-    val scope = rememberCoroutineScope()
+    val current by state.current.collectAsState()
 
-    val isShowed by viewModel.isShowed.collectAsState()
-
-    var start by remember {
-        mutableStateOf(false)
-    }
-
-    if (state.hasTarget) {
-        LaunchedEffect(state) {
-            scope.launch {
-                delay(DEFAULT_SHOW_DELAY)
-                start = true
-            }
-        }
-    }
-
-    if (start) {
-        state.currentTarget?.let {
-            viewModel.isShowed(it.key)
-        }
-
-        if (isShowed.not()) {
-            state.currentTarget?.let {
-                StartShowCase(target = it) {
-                    start = false
-                    viewModel.setShowed(it.key)
-                    onShowCaseCompleted()
-                }
-            }
+    current?.let {
+        StartShowCase(target = it) {
+            viewModel.setShowed(it.key)
+            state.send(null)
+            it.onNext.invoke()
         }
     }
 }

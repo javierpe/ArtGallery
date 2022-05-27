@@ -14,7 +14,6 @@ abstract class DynamicListComposeLoader {
         headerAdapterController: T,
         action: ContextViewAction?,
         widthSizeClass: WindowWidthSizeClass,
-        showCaseScope: ShowCaseScope,
         showCaseState: ShowCaseState
     )
 }

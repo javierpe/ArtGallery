@@ -13,20 +13,26 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import com.nucu.dynamiclistcompose.BlinkAnimation
 import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
+import com.nucu.dynamiclistcompose.api.TooltipPreferencesApi
 import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.models.DynamicListElement
+import com.nucu.dynamiclistcompose.models.DynamicListShowCaseModel
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.base.DynamicListScreen
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction
-import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseScope
-import kotlinx.coroutines.Dispatchers
+import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseState
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Stack
 
 abstract class DynamicListComposeController {
 
@@ -34,14 +40,21 @@ abstract class DynamicListComposeController {
 
     abstract val listeners: Set<@JvmSuppressWildcards DynamicListComponentListener>
 
-    open fun getMapComponents(): List<ComponentItemModel> = data
+    abstract val defaultDispatcher: CoroutineDispatcher
 
-    private val dataElements = MutableStateFlow<List<DynamicListElement>>(emptyList())
-    private val elements: StateFlow<List<DynamicListElement>> = dataElements
+    abstract val tooltipPreferencesApi: TooltipPreferencesApi
+
+    open fun getMapComponents(): List<ComponentItemModel> = data
 
     open fun getMapSkeletons(): List<RenderType> = skeletons
 
+    private val _elements = MutableStateFlow<List<DynamicListElement>>(emptyList())
+    private val elements: StateFlow<List<DynamicListElement>> = _elements
+
+    var showCaseSequence = Stack<DynamicListShowCaseModel>()
+
     var data: List<ComponentItemModel> = listOf()
+
     var skeletons: List<RenderType> = listOf()
 
     suspend fun dispatch(components: List<ComponentItemModel>) {
@@ -54,8 +67,8 @@ abstract class DynamicListComposeController {
     }
 
     private suspend fun transform() {
-        withContext(Dispatchers.Default) {
-            dataElements.value = getMapComponents().map { component ->
+        withContext(defaultDispatcher) {
+            _elements.value = getMapComponents().map { component ->
                 val listener = listeners.firstOrNull {
                     it.render.value == component.render
                 }
@@ -63,6 +76,23 @@ abstract class DynamicListComposeController {
                 val adapter = delegates.firstOrNull { adapterFactory ->
                     adapterFactory.renders.any { renderType ->
                         renderType.value == component.render
+                    }
+                }
+
+                if (
+                    adapter?.hasShowCaseConfigured == true &&
+                    showCaseSequence.none { it.render == component.render }
+                ) {
+                    val alreadyShowed = tooltipPreferencesApi.getState(
+                        booleanPreferencesKey(component.render),
+                        false
+                    ).first()
+
+                    if (alreadyShowed.not()) {
+                        // Add to sequence
+                        showCaseSequence.push(
+                            DynamicListShowCaseModel(component.render, component.index)
+                        )
                     }
                 }
 
@@ -101,7 +131,7 @@ abstract class DynamicListComposeController {
     @Composable
     fun ComposeHeader(
         widthSizeClass: WindowWidthSizeClass,
-        showCaseScope: ShowCaseScope,
+        showCaseState: ShowCaseState,
         onAction: (ScrollAction) -> Unit
     ) {
 
@@ -114,7 +144,7 @@ abstract class DynamicListComposeController {
             listState = listState,
             widthSizeClass = widthSizeClass,
             onAction = onAction,
-            showCaseScope = showCaseScope
+            showCaseState = showCaseState
         )
     }
 
@@ -122,9 +152,11 @@ abstract class DynamicListComposeController {
     fun ComposeBody(
         widthSizeClass: WindowWidthSizeClass,
         sharedAction: ScrollAction? = null,
-        showCaseScope: ShowCaseScope,
+        showCaseState: ShowCaseState,
         onAction: (ScrollAction) -> Unit
     ) {
+
+        val showOnNextShowCase by showCaseState.currentIndex.collectAsState()
 
         val elements by elements.collectAsState()
 
@@ -156,9 +188,20 @@ abstract class DynamicListComposeController {
             content = elements,
             listState = listState,
             widthSizeClass = widthSizeClass,
-            showCaseScope = showCaseScope,
+            showCaseState = showCaseState,
             onAction = onAction,
         )
+
+        if (showCaseSequence.isNotEmpty() && showOnNextShowCase == -1) {
+            SideEffect {
+                coroutineScope.launch {
+                    delay(500)
+                    val nextShowCase = showCaseSequence.pop()
+                    showCaseState.setCurrentIndexFromDL(nextShowCase.index)
+                    listState.animateScrollToItem(nextShowCase.index)
+                }
+            }
+        }
     }
 
     private fun LazyListState.isToBottom(listSize: Int): Boolean {
