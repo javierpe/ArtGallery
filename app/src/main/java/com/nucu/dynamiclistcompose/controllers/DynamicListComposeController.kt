@@ -3,7 +3,6 @@ package com.nucu.dynamiclistcompose.controllers
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
@@ -14,7 +13,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.datastore.preferences.core.booleanPreferencesKey
-import com.nucu.dynamiclistcompose.BlinkAnimation
+import com.nucu.dynamiclistcompose.animations.BlinkAnimation
 import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
 import com.nucu.dynamiclistcompose.api.TooltipPreferencesApi
 import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
@@ -51,7 +50,7 @@ abstract class DynamicListComposeController {
     private val _elements = MutableStateFlow<List<DynamicListElement>>(emptyList())
     private val elements: StateFlow<List<DynamicListElement>> = _elements
 
-    var showCaseSequence = Stack<DynamicListShowCaseModel>()
+    private var showCaseSequence = Stack<DynamicListShowCaseModel>()
 
     var data: List<ComponentItemModel> = listOf()
 
@@ -203,9 +202,5 @@ abstract class DynamicListComposeController {
                 }
             }
         }
-    }
-
-    private fun LazyListState.isToBottom(listSize: Int): Boolean {
-        return (listSize - 1) - firstVisibleItemIndex == layoutInfo.visibleItemsInfo.size - 1
     }
 }

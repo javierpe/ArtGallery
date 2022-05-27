@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose
+package com.nucu.dynamiclistcompose.animations
 
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
