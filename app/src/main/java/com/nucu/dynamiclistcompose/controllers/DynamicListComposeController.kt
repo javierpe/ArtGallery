@@ -198,6 +198,7 @@ abstract class DynamicListComposeController {
                     delay(500)
                     val nextShowCase = showCaseSequence.pop()
                     showCaseState.setCurrentIndexFromDL(nextShowCase.index)
+                    delay(500)
                     listState.animateScrollToItem(nextShowCase.index)
                 }
             }
