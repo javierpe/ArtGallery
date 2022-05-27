@@ -18,6 +18,7 @@ import com.nucu.dynamiclistcompose.models.tooltip.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseStyle
+import com.nucu.dynamiclistcompose.ui.components.showCase.TooltipView
 import com.nucu.dynamiclistcompose.ui.components.showCase.asShowCaseTarget
 import com.nucu.dynamiclistcompose.ui.components.showCase.models.ShapeType
 import com.nucu.dynamiclistcompose.ui.components.showCase.rememberShowCaseState
@@ -40,7 +41,7 @@ fun TobaccoComponentView(
                     cornerRadius = 12.dp
                 ),
                 content = {
-                    Text(text = "Mensaje del sistema")
+                    TooltipView(text = "Esto es un componente Mensaje de Dynamic List con animación")
                 },
                 strategy = ShowCaseStrategy(onlyUserInteraction = true),
                 key = RenderType.TOBACCO_PREFERENCE.value,

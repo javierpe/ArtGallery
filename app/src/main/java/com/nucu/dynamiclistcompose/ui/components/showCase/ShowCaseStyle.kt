@@ -11,6 +11,7 @@ class ShowCaseStyle(
     val backgroundAlpha: Float = DEFAULT_BACKGROUND_RADIUS,
     val targetCircleColor: Color = Color.White,
     val shapeType: ShapeType = ShapeType.CIRCLE,
+    val withAnimation: Boolean = true,
     val cornerRadius: Dp = 10.dp
 ) {
 
@@ -19,6 +20,7 @@ class ShowCaseStyle(
         backgroundAlpha: Float = this.backgroundAlpha,
         targetCircleColor: Color = this.targetCircleColor,
         shapeType: ShapeType = this.shapeType,
+        withAnimation: Boolean = this.withAnimation,
         cornerRadius: Dp = this.cornerRadius
     ): ShowCaseStyle {
 
@@ -27,7 +29,8 @@ class ShowCaseStyle(
             backgroundAlpha = backgroundAlpha,
             targetCircleColor = targetCircleColor,
             shapeType = shapeType,
-            cornerRadius = cornerRadius
+            cornerRadius = cornerRadius,
+            withAnimation = withAnimation
         )
     }
 

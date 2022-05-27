@@ -20,6 +20,7 @@ import com.nucu.dynamiclistcompose.models.tooltip.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseStyle
+import com.nucu.dynamiclistcompose.ui.components.showCase.TooltipView
 import com.nucu.dynamiclistcompose.ui.components.showCase.asShowCaseTarget
 import com.nucu.dynamiclistcompose.ui.components.showCase.models.ShapeType
 import com.nucu.dynamiclistcompose.ui.components.showCase.rememberShowCaseState
@@ -42,10 +43,11 @@ fun BannerComponentView(
                 index = componentIndex,
                 style = ShowCaseStyle.Default.copy(
                     shapeType = ShapeType.RECTANGLE,
-                    cornerRadius = 16.dp
+                    cornerRadius = 16.dp,
+                    withAnimation = false
                 ),
                 content = {
-                    Text(text = "Mensaje")
+                    TooltipView(text = "Esto es un componente Banner de Dynamic List")
                 },
                 strategy = ShowCaseStrategy(onlyUserInteraction = true),
                 key = RenderType.BANNER_IMAGE.value,

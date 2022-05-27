@@ -129,7 +129,6 @@ fun ShowCaseFirstToHappen(
     }
 }
 
-
 @Composable
 fun ShowCaseUntilExpirationTime(
     target: ShowCaseTargets,
@@ -151,7 +150,6 @@ fun ShowCaseUntilExpirationTime(
         }
     }
 }
-
 
 @Composable
 fun TargetContent(
@@ -240,13 +238,15 @@ fun TargetContent(
                 )
             }
 
-            dys.forEach { dy ->
-                drawCircle(
-                    color = target.style.targetCircleColor,
-                    radius = maxDimension * dy * 2f,
-                    center = targetRect.center,
-                    alpha = 1 - dy
-                )
+            if (target.style.withAnimation) {
+                dys.forEach { dy ->
+                    drawCircle(
+                        color = target.style.targetCircleColor,
+                        radius = maxDimension * dy * 2f,
+                        center = targetRect.center,
+                        alpha = 1 - dy
+                    )
+                }
             }
 
             if (target.style.shapeType == ShapeType.RECTANGLE) {
@@ -279,8 +279,8 @@ fun TargetContent(
             }
         }
 
-        ShowCaseText(target, targetRect, targetRadius) { textCoords ->
-            val contentRect = textCoords.boundsInParent()
+        ShowCaseContent(target, targetRect, targetRadius) { coordinates ->
+            val contentRect = coordinates.boundsInParent()
             val outerRect = getOuterRect(contentRect, targetRect, isTargetInGutter)
             val possibleOffset = getOuterCircleCenter(targetRect, contentRect, targetRadius)
 
@@ -295,9 +295,8 @@ fun TargetContent(
     }
 }
 
-
 @Composable
-fun ShowCaseText(
+fun ShowCaseContent(
     currentTarget: ShowCaseTargets,
     boundsInParent: Rect,
     targetRadius: Float,
@@ -324,10 +323,10 @@ fun ShowCaseText(
                 contentOffsetY = if (possibleTop > 0) {
                     possibleTop
                 } else {
-                    boundsInParent.center.y + targetRadius
+                    boundsInParent.center.y + (currentTarget.coordinates.size.height / 2)
                 }
             }
-            .padding(16.dp)
+            .padding(start = 16.dp, end = 16.dp, top = 10.dp)
     )
 
 }
