@@ -6,6 +6,7 @@ import androidx.compose.runtime.MutableState
 import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.actions.DynamicListComponentAction
+import com.nucu.dynamiclistcompose.models.ComponentInfo
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseScope
@@ -31,9 +32,7 @@ interface DynamicListAdapterFactory {
     fun CreateComponent(
         component: ComponentItemModel,
         listener: DynamicListComponentListener?,
-        componentAction: ((ScrollAction) -> Unit)?,
-        widthSizeClass: WindowWidthSizeClass,
-        showCaseState: ShowCaseState
+        componentInfo: ComponentInfo
     )
 
     /**
