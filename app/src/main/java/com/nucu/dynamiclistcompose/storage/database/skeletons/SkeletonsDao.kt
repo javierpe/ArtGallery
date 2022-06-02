@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose.database.skeletons
+package com.nucu.dynamiclistcompose.storage.database.skeletons
 
 import androidx.room.Dao
 import androidx.room.Insert

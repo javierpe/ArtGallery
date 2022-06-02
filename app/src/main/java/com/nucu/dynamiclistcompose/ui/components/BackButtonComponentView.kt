@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.ui.theme.DynamicListComposeTheme
@@ -36,7 +37,7 @@ fun BackButtonComponentView(
     ) {
         Icon(
             imageVector = Icons.Default.ArrowBack,
-            tint = MaterialTheme.colors.primaryVariant,
+            tint = Color.White,
             contentDescription = null
         )
     }
@@ -44,8 +45,16 @@ fun BackButtonComponentView(
 
 @Composable
 @Preview
-fun PreviewBackButtonComponentView() {
+fun PreviewBackButtonDarkComponentView() {
     DynamicListComposeTheme(darkTheme = true) {
+        BackButtonComponentView()
+    }
+}
+
+@Composable
+@Preview
+fun PreviewBackButtonLightComponentView() {
+    DynamicListComposeTheme(darkTheme = false) {
         BackButtonComponentView()
     }
 }

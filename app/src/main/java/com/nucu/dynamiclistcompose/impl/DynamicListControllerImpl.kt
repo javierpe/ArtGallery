@@ -3,17 +3,20 @@ package com.nucu.dynamiclistcompose.impl
 import com.nucu.dynamiclistcompose.api.DynamicListControllerApi
 import com.nucu.dynamiclistcompose.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.actions.DynamicListAction
+import com.nucu.dynamiclistcompose.di.IODispatcher
 import com.nucu.dynamiclistcompose.models.DynamicListContainer
 import com.nucu.dynamiclistcompose.models.DynamicListRequestModel
 import com.nucu.dynamiclistcompose.renders.base.RenderType
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class DynamicListControllerImpl @Inject constructor() : DynamicListControllerApi {
+class DynamicListControllerImpl @Inject constructor(
+    @IODispatcher val ioDispatcher: CoroutineDispatcher
+) : DynamicListControllerApi {
 
     override suspend fun get(
         page: Int,
@@ -23,7 +26,7 @@ class DynamicListControllerImpl @Inject constructor() : DynamicListControllerApi
         // Emulate response delay
         delay(3000)
 
-        val container = withContext(Dispatchers.IO) {
+        val container = withContext(ioDispatcher) {
             // Hardcoded data :D
             val header = listOf(
                 ComponentItemModel(
