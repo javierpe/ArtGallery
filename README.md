@@ -17,4 +17,4 @@
 <img src="https://user-images.githubusercontent.com/7097754/169624940-c8d91a61-0b99-4df9-95de-73d03fc60d7e.png" width="640" height="420"/>
 
 # Tooltips
-<img src="https://user-images.githubusercontent.com/7097754/162116217-4be04d1e-6487-4ec9-9bbe-41f6bbea193a.png" width="310" height="640"/>
+<img src="https://user-images.githubusercontent.com/7097754/171674583-5a0a60f7-4b60-498b-a1ae-69fc4f1d5fa1.gif" width="310" height="640"/>
