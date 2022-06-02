@@ -8,6 +8,7 @@
  - [x] Improve Tooltips visualization
  - [ ] Improve transitions animation with scrolling list
  - [ ] Implement Macrobenchmark
+ - [ ] Add ETL mechanism
  - [ ] Add Unit test
 
 # Compact UI
