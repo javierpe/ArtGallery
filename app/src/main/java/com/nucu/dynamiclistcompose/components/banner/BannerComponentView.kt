@@ -1,6 +1,7 @@
 package com.nucu.dynamiclistcompose.components.banner
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.nucu.dynamiclistcompose.models.tooltip.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseState
@@ -25,13 +27,14 @@ import com.nucu.dynamiclistcompose.ui.components.showCase.asShowCaseTarget
 import com.nucu.dynamiclistcompose.ui.components.showCase.models.ShapeType
 import com.nucu.dynamiclistcompose.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.ui.theme.Typography
+import com.nucu.dynamiclistcompose.viewModels.BannerViewModel
 
 @Composable
 fun BannerComponentView(
     componentIndex: Int,
-    showCaseState: ShowCaseState
+    showCaseState: ShowCaseState,
+    viewModel: BannerViewModel = hiltViewModel()
 ) {
-
     Box(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp)
@@ -52,7 +55,12 @@ fun BannerComponentView(
                 strategy = ShowCaseStrategy(onlyUserInteraction = true),
                 key = RenderType.BANNER_IMAGE.value,
                 state = showCaseState
-            )
+            ).clickable {
+                viewModel.loadBanner(
+                    componentIndex,
+                    "Esto es un Banner"
+                )
+            }
     ) {
         Text(
             text = "Esto es un banner",

@@ -14,3 +14,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "DynamicListCompose"
 include ':app'
+include ':navigation'
+include ':navigation:api'
+include ':navigation:impl'
+include ':navigation:wiring'

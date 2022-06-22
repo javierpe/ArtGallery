@@ -28,8 +28,4 @@ abstract class ContextViewModel: ViewModel() {
      * The idea is only change properties and not all the model
       */
     abstract val requestModel: DynamicListRequestModel
-
-    fun reload() {
-        _contextViewAction.value = ContextViewAction.Reload
-    }
 }
