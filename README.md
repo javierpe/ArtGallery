@@ -6,6 +6,7 @@
  # To-do
  - [x] Support multiple screens
  - [x] Improve Tooltips visualization
+ - [x] Add navigation compose
  - [ ] Improve transitions animation with scrolling list
  - [ ] Implement Macrobenchmark
  - [ ] Add ETL mechanism
