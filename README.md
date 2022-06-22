@@ -6,7 +6,7 @@
  # To-do
  - [x] Support multiple screens
  - [x] Improve Tooltips visualization
- - [x] Add navigation compose
+ - [x] Add Compose Navigation
  - [ ] Improve transitions animation with scrolling list
  - [ ] Implement Macrobenchmark
  - [ ] Add ETL mechanism
@@ -20,3 +20,6 @@
 
 # Tooltips
 <img src="https://user-images.githubusercontent.com/7097754/171674583-5a0a60f7-4b60-498b-a1ae-69fc4f1d5fa1.gif" width="310" height="640"/>
+
+# Compose navigation
+<img src="https://user-images.githubusercontent.com/7097754/175155143-5bdd5833-4fb3-48c7-95c7-2ccbd1880366.gif" width="310" height="640"/>
