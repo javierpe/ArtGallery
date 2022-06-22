@@ -34,7 +34,7 @@ import com.nucu.dynamiclistcompose.ui.theme.Typography
 fun DynamicListHeaderComponentView(
     title: String,
     contextType: ContextType,
-    onBackPressed: () -> Unit, // Remove this and set navigation compose here
+    onBackPressed: () -> Unit // Remove this and set navigation compose here
 ) {
     when (contextType) {
 
@@ -46,14 +46,18 @@ fun DynamicListHeaderComponentView(
         }
 
         ContextType.SCREEN_WITH_IMAGE -> {
-            HeaderWithImageView(title = title)
+            HeaderWithImageView(
+                title = title,
+                onBackPressed = onBackPressed
+            )
         }
     }
 }
 
 @Composable
 fun HeaderWithImageView(
-    title: String
+    title: String,
+    onBackPressed: () -> Unit
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -63,7 +67,7 @@ fun HeaderWithImageView(
             modifier = Modifier
                 .wrapContentHeight()
         ) {
-            val (imageRef, titleRef) = createRefs()
+            val (imageRef, titleRef, backRef) = createRefs()
 
             Image(
                 modifier = Modifier
@@ -91,6 +95,15 @@ fun HeaderWithImageView(
                 text = title,
                 style = Typography.h5,
                 textAlign = TextAlign.Left
+            )
+
+            BackButtonComponentView(
+                modifier = Modifier
+                    .constrainAs(backRef) {
+                        top.linkTo(parent.top, 16.dp)
+                        start.linkTo(parent.start, 16.dp)
+                    },
+                onBackPressed
             )
         }
     }
