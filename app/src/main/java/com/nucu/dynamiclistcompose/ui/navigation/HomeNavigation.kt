@@ -12,7 +12,7 @@ import com.nucu.dynamiclistcompose.ui.examples.screens.BannerScreen
 /**
  * Navigate to MainScreen
  */
-fun NavGraphBuilder.HomeNav(widthSizeClass: WindowWidthSizeClass) {
+fun NavGraphBuilder.homeNav(widthSizeClass: WindowWidthSizeClass) {
     composable(Route.Main.name) {
         MainScreen(widthSizeClass)
     }
@@ -21,7 +21,7 @@ fun NavGraphBuilder.HomeNav(widthSizeClass: WindowWidthSizeClass) {
 /**
  * Navigation to BannerScreen
  */
-fun NavGraphBuilder.BannerScreenNav() {
+fun NavGraphBuilder.bannerScreenNav() {
     composable(
         route = Route.BannerScreen.name + "/{${Route.BannerScreen.ARG_INDEX}}/{${Route.BannerScreen.ARG_TEXT}}",
         arguments = listOf(

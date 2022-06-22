@@ -28,8 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.ui.base.ContextView
-import com.nucu.dynamiclistcompose.ui.navigation.BannerScreenNav
-import com.nucu.dynamiclistcompose.ui.navigation.HomeNav
+import com.nucu.dynamiclistcompose.ui.navigation.bannerScreenNav
+import com.nucu.dynamiclistcompose.ui.navigation.homeNav
 import com.nucu.dynamiclistcompose.ui.theme.DynamicListComposeTheme
 import com.nucu.dynamiclistcompose.ui.theme.Typography
 import com.nucu.dynamiclistcompose.viewModels.MainViewModel
@@ -57,10 +57,10 @@ class MainActivity : ComponentActivity() {
                     navigationController.NavHost {
 
                         // Main
-                        HomeNav(widthSizeClass)
+                        homeNav(widthSizeClass)
 
                         // Banner
-                        BannerScreenNav()
+                        bannerScreenNav()
                     }
                 }
             }
