@@ -7,7 +7,7 @@
  - [x] Support multiple screens
  - [x] Improve Tooltips visualization
  - [x] Add Compose Navigation
- - [ ] Improve transitions animation with scrolling list
+ - [x] Improve transitions animation with scrolling list
  - [ ] Implement Macrobenchmark
  - [ ] Add ETL mechanism
  - [ ] Add Unit test
