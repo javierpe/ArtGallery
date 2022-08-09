@@ -7,7 +7,7 @@
  - [x] Support multiple screens
  - [x] Improve Tooltips visualization
  - [x] Add Compose Navigation
- - [ ] Improve transitions animation with scrolling list
+ - [x] Improve transitions animation with scrolling list
  - [ ] Implement Macrobenchmark
  - [ ] Add ETL mechanism
  - [ ] Add Unit test
@@ -23,3 +23,6 @@
 
 # Compose navigation
 <img src="https://user-images.githubusercontent.com/7097754/175155143-5bdd5833-4fb3-48c7-95c7-2ccbd1880366.gif" width="310" height="640"/>
+
+# MotionLayout
+<img src="https://user-images.githubusercontent.com/7097754/183534417-cd2e1c85-fb1c-4691-b08d-cb9d13e0cde4.gif" width="310" height="640"/>
