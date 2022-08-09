@@ -3,7 +3,7 @@ package com.nucu.dynamiclistcompose.ui.components.showCase.models
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.layout.LayoutCoordinates
-import com.nucu.dynamiclistcompose.models.tooltip.ShowCaseStrategy
+import com.nucu.dynamiclistcompose.data.models.tooltip.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseStyle
 
 data class ShowCaseTargets(

@@ -1,12 +1,16 @@
 package com.nucu.dynamiclistcompose.ui.base
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Scaffold
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import com.nucu.dynamiclistcompose.ui.components.DynamicListHeaderComponentView
-import com.nucu.dynamiclistcompose.ui.components.showCase.IntroShowCaseScaffold
+import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCase
 import com.nucu.dynamiclistcompose.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.viewModels.ContextViewModel
 
@@ -27,7 +31,9 @@ fun ContextView(
 
     val showCaseState = rememberShowCaseState()
 
-    IntroShowCaseScaffold(
+    val bodyLazyListState = rememberLazyListState()
+
+    ShowCase(
         showIntroShowCase = true,
         state = showCaseState
     ) {
@@ -36,17 +42,23 @@ fun ContextView(
                 DynamicListHeaderComponentView(
                     title = title,
                     contextType = viewModel.context,
-                    onBackPressed = { }
+                    bodyLazyListState = bodyLazyListState,
+                    onBackPressed = { viewModel.onBackPressed() }
                 )
             }
-        ) {
-            DynamicListCompose(viewModel.requestModel).DynamicListScreen(
-                headerAdapterController = viewModel.headerAdapterController,
-                bodyAdapterController = viewModel.bodyAdapterController,
-                action = action,
-                widthSizeClass = widthSizeClass,
-                showCaseState = showCaseState
-            )
+        ) { padding ->
+            Box(
+                modifier = Modifier.padding(padding)
+            ) {
+                DynamicListCompose(viewModel.requestModel).DynamicListScreen(
+                    headerAdapterController = viewModel.headerAdapterController,
+                    bodyAdapterController = viewModel.bodyAdapterController,
+                    action = action,
+                    widthSizeClass = widthSizeClass,
+                    showCaseState = showCaseState,
+                    bodyListState = bodyLazyListState
+                )
+            }
         }
     }
 }

@@ -3,7 +3,7 @@ package com.nucu.dynamiclistcompose.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nucu.dynamiclistcompose.actions.DynamicListComponentAction
-import com.nucu.dynamiclistcompose.models.ComponentItemModel
+import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

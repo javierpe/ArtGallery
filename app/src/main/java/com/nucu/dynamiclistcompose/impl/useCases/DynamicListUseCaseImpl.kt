@@ -5,9 +5,9 @@ import com.nucu.dynamiclistcompose.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.api.DynamicListUseCaseApi
 import com.nucu.dynamiclistcompose.storage.database.AppDatabase
 import com.nucu.dynamiclistcompose.storage.database.skeletons.SkeletonsEntity
-import com.nucu.dynamiclistcompose.models.ComponentItemModel
-import com.nucu.dynamiclistcompose.models.ContextType
-import com.nucu.dynamiclistcompose.models.DynamicListRequestModel
+import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
+import com.nucu.dynamiclistcompose.data.models.ContextType
+import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

@@ -1,24 +1,19 @@
 package com.nucu.dynamiclistcompose.ui.components
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
-import com.nucu.dynamiclistcompose.R
-import com.nucu.dynamiclistcompose.models.ContextType
-import com.nucu.dynamiclistcompose.models.tooltip.ShowCaseStrategy
+import com.nucu.dynamiclistcompose.data.models.ContextType
+import com.nucu.dynamiclistcompose.data.models.tooltip.ShowCaseStrategy
+import com.nucu.dynamiclistcompose.ui.components.headers.HeaderWithImageView
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseStyle
 import com.nucu.dynamiclistcompose.ui.components.showCase.TooltipView
 import com.nucu.dynamiclistcompose.ui.components.showCase.asShowCaseTarget
@@ -34,6 +29,7 @@ import com.nucu.dynamiclistcompose.ui.theme.Typography
 fun DynamicListHeaderComponentView(
     title: String,
     contextType: ContextType,
+    bodyLazyListState: LazyListState,
     onBackPressed: () -> Unit // Remove this and set navigation compose here
 ) {
     when (contextType) {
@@ -48,62 +44,8 @@ fun DynamicListHeaderComponentView(
         ContextType.SCREEN_WITH_IMAGE -> {
             HeaderWithImageView(
                 title = title,
+                bodyLazyListState = bodyLazyListState,
                 onBackPressed = onBackPressed
-            )
-        }
-    }
-}
-
-@Composable
-fun HeaderWithImageView(
-    title: String,
-    onBackPressed: () -> Unit
-) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-
-        ConstraintLayout(
-            modifier = Modifier
-                .wrapContentHeight()
-        ) {
-            val (imageRef, titleRef, backRef) = createRefs()
-
-            Image(
-                modifier = Modifier
-                    .height(130.dp)
-                    .constrainAs(imageRef) {
-                        top.linkTo(parent.top)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                        bottom.linkTo(parent.bottom)
-                    },
-                painter = painterResource(id = R.drawable.wallpaper),
-                contentDescription = null,
-                contentScale = ContentScale.Crop
-            )
-
-            Text(
-                modifier = Modifier
-                    .constrainAs(titleRef) {
-                        bottom.linkTo(parent.bottom, 16.dp)
-                        start.linkTo(parent.start, 16.dp)
-                        end.linkTo(parent.end, 16.dp)
-
-                        width = Dimension.fillToConstraints
-                    },
-                text = title,
-                style = Typography.h5,
-                textAlign = TextAlign.Left
-            )
-
-            BackButtonComponentView(
-                modifier = Modifier
-                    .constrainAs(backRef) {
-                        top.linkTo(parent.top, 16.dp)
-                        start.linkTo(parent.start, 16.dp)
-                    },
-                onBackPressed
             )
         }
     }
@@ -162,7 +104,8 @@ fun PreviewHeaderComponentView() {
     DynamicListComposeTheme {
         DynamicListHeaderComponentView(
             title = "Hello from the header view of DynamicList",
-            contextType = ContextType.SCREEN_WITH_IMAGE
+            contextType = ContextType.SCREEN_WITH_IMAGE,
+            rememberLazyListState()
         ) { }
     }
 }
@@ -173,7 +116,8 @@ fun PreviewSimpleHeaderComponentView() {
     DynamicListComposeTheme {
         DynamicListHeaderComponentView(
             title = "Hello from the header view of DynamicList",
-            contextType = ContextType.HOME
+            contextType = ContextType.HOME,
+            rememberLazyListState()
         ) { }
     }
 }

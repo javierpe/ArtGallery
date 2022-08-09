@@ -9,8 +9,8 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.nucu.dynamiclistcompose.models.ComponentInfo
-import com.nucu.dynamiclistcompose.models.DynamicListElement
+import com.nucu.dynamiclistcompose.data.models.ComponentInfo
+import com.nucu.dynamiclistcompose.data.models.DynamicListElement
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseState
 
 @Composable

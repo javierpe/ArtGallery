@@ -1,11 +1,11 @@
 package com.nucu.dynamiclistcompose.impl
 
 import com.nucu.dynamiclistcompose.api.DynamicListControllerApi
-import com.nucu.dynamiclistcompose.models.ComponentItemModel
+import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.di.IODispatcher
-import com.nucu.dynamiclistcompose.models.DynamicListContainer
-import com.nucu.dynamiclistcompose.models.DynamicListRequestModel
+import com.nucu.dynamiclistcompose.data.models.DynamicListContainer
+import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay

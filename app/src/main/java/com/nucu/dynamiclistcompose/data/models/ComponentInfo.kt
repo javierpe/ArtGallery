@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose.models
+package com.nucu.dynamiclistcompose.data.models
 
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction

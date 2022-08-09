@@ -14,7 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.R
-import com.nucu.dynamiclistcompose.models.tooltip.ShowCaseStrategy
+import com.nucu.dynamiclistcompose.data.models.tooltip.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseStyle

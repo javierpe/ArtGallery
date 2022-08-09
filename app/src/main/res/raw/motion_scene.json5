@@ -1,0 +1,50 @@
+{
+  ConstraintSets: {
+    start: {
+      background: {
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        top: ['parent', 'top'],
+        height: 120,
+        custom: {
+          background: '#FF3700B3'
+        }
+      },
+      title: {
+        bottom: ['parent', 'bottom'],
+        start: ['parent', 'start', 16],
+        top: ['back_button', 'bottom'],
+        custom: {
+          textColor: '#000000'
+        }
+      },
+      back_button: {
+        start: ['parent', 'start', 16],
+        top: ['parent', 'top', 16],
+      }
+    },
+    end: {
+      background: {
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        top: ['parent', 'top'],
+        height: 65,
+        custom: {
+          background: '#FF6200EE'
+        }
+      },
+      title: {
+        bottom: ['back_button', 'bottom'],
+        start: ['back_button', 'end', 10],
+        top: ['back_button', 'top'],
+        custom: {
+          textColor: '#FFFFFF'
+        }
+      },
+      back_button: {
+        start: ['parent', 'start', 16],
+        top: ['parent', 'top', 16],
+      }
+    }
+  }
+}

@@ -3,6 +3,7 @@ package com.nucu.dynamiclistcompose.controllers
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
@@ -17,9 +18,9 @@ import com.nucu.dynamiclistcompose.animations.BlinkAnimation
 import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
 import com.nucu.dynamiclistcompose.api.TooltipPreferencesApi
 import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
-import com.nucu.dynamiclistcompose.models.ComponentItemModel
-import com.nucu.dynamiclistcompose.models.DynamicListElement
-import com.nucu.dynamiclistcompose.models.DynamicListShowCaseModel
+import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
+import com.nucu.dynamiclistcompose.data.models.DynamicListElement
+import com.nucu.dynamiclistcompose.data.models.DynamicListShowCaseModel
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.base.DynamicListScreen
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction
@@ -152,6 +153,7 @@ abstract class DynamicListComposeController {
         widthSizeClass: WindowWidthSizeClass,
         sharedAction: ScrollAction? = null,
         showCaseState: ShowCaseState,
+        bodyListState: LazyListState,
         onAction: (ScrollAction) -> Unit
     ) {
 
@@ -161,15 +163,13 @@ abstract class DynamicListComposeController {
 
         val coroutineScope = rememberCoroutineScope()
 
-        val listState = rememberLazyListState()
-
         if (sharedAction is ScrollAction.ScrollRender) {
             SideEffect {
                 coroutineScope.launch {
                     val item = elements.firstOrNull { it.componentItemModel.render == sharedAction.renderType.value }
 
                     item?.let {
-                        listState.animateScrollToItem(
+                        bodyListState.animateScrollToItem(
                             elements.indexOf(it)
                         )
                     }
@@ -178,14 +178,14 @@ abstract class DynamicListComposeController {
         } else if (sharedAction is ScrollAction.ScrollIndex) {
             SideEffect {
                 coroutineScope.launch {
-                    listState.animateScrollToItem(sharedAction.index)
+                    bodyListState.animateScrollToItem(sharedAction.index)
                 }
             }
         }
 
         DynamicListScreen(
             content = elements,
-            listState = listState,
+            listState = bodyListState,
             widthSizeClass = widthSizeClass,
             showCaseState = showCaseState,
             onAction = onAction,
@@ -198,7 +198,7 @@ abstract class DynamicListComposeController {
                     val nextShowCase = showCaseSequence.pop()
                     showCaseState.setCurrentIndexFromDL(nextShowCase.index)
                     delay(500)
-                    listState.animateScrollToItem(nextShowCase.index)
+                    bodyListState.animateScrollToItem(nextShowCase.index)
                 }
             }
         }

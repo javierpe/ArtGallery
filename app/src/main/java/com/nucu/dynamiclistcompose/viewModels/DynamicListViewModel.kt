@@ -4,12 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nucu.dynamiclistcompose.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.api.DynamicListUseCaseApi
-import com.nucu.dynamiclistcompose.models.DynamicListRequestModel
+import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

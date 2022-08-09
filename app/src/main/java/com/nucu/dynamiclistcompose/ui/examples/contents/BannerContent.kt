@@ -1,13 +1,15 @@
 package com.nucu.dynamiclistcompose.ui.examples.contents
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.nucu.dynamiclistcompose.models.ContextType
+import com.nucu.dynamiclistcompose.data.models.ContextType
 import com.nucu.dynamiclistcompose.ui.components.DynamicListHeaderComponentView
 import com.nucu.dynamiclistcompose.ui.theme.Typography
 
@@ -17,17 +19,21 @@ fun BannerContent(
     index: String,
     onBackPressed: () -> Unit
 ) {
+
+    val bodyLazyListState = rememberLazyListState()
+
     Scaffold(
         topBar = {
             DynamicListHeaderComponentView(
                 title = text,
                 contextType = ContextType.SCREEN_WITH_IMAGE,
-                onBackPressed = onBackPressed
+                onBackPressed = onBackPressed,
+                bodyLazyListState = bodyLazyListState
             )
         }
     ) {
         Text(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().padding(it),
             text = index,
             style = Typography.h1,
             textAlign = TextAlign.Center

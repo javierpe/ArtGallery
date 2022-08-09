@@ -5,10 +5,10 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import com.nucu.dynamiclistcompose.models.tooltip.ShowCaseStrategy
+import com.nucu.dynamiclistcompose.data.models.tooltip.ShowCaseStrategy
 
 @Composable
-fun IntroShowCaseScaffold(
+fun ShowCase(
     showIntroShowCase: Boolean,
     modifier: Modifier = Modifier,
     state: ShowCaseState = rememberShowCaseState(),

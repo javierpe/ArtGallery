@@ -75,7 +75,7 @@ fun MainScreen(
 ) {
     MainContent(widthSizeClass = widthSizeClass) {
         ContextView(
-            title = "Screen title",
+            title = "Home screen",
             widthSizeClass = widthSizeClass,
             viewModel = viewModel
         )

@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose.models
+package com.nucu.dynamiclistcompose.data.models
 
 data class ComponentItemModel(
     val name: String?,

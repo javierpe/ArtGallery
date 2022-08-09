@@ -3,11 +3,11 @@ package com.nucu.dynamiclistcompose.ui.base
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,14 +19,11 @@ import com.nucu.dynamiclistcompose.actions.ContextViewAction
 import com.nucu.dynamiclistcompose.controllers.DynamicListComposeLoader
 import com.nucu.dynamiclistcompose.controllers.DynamicListComposeController
 import com.nucu.dynamiclistcompose.actions.DynamicListAction
-import com.nucu.dynamiclistcompose.models.DynamicListRequestModel
+import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
 import com.nucu.dynamiclistcompose.ui.components.ErrorView
 import com.nucu.dynamiclistcompose.ui.components.LoaderView
-import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseScope
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseState
-import com.nucu.dynamiclistcompose.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.viewModels.DynamicListViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class DynamicListCompose(
@@ -44,7 +41,8 @@ class DynamicListCompose(
         headerAdapterController: T,
         action: ContextViewAction?,
         widthSizeClass: WindowWidthSizeClass,
-        showCaseState: ShowCaseState
+        showCaseState: ShowCaseState,
+        bodyListState: LazyListState,
     ) {
         this.bodyComposeController = bodyAdapterController
         this.headerComposeController = headerAdapterController
@@ -52,7 +50,8 @@ class DynamicListCompose(
         DynamicListContent(
             action = action,
             widthSizeClass = widthSizeClass,
-            showCaseState = showCaseState
+            showCaseState = showCaseState,
+            bodyListState = bodyListState
         )
     }
 
@@ -61,6 +60,7 @@ class DynamicListCompose(
         widthSizeClass: WindowWidthSizeClass,
         action: ContextViewAction?,
         showCaseState: ShowCaseState,
+        bodyListState: LazyListState,
         dynamicListViewModel: DynamicListViewModel = hiltViewModel()
     ) {
         val dynamicListState by dynamicListViewModel.dynamicListAction.collectAsState()
@@ -120,7 +120,8 @@ class DynamicListCompose(
                     bodyComposeController?.ComposeBody(
                         widthSizeClass = widthSizeClass,
                         sharedAction = actionBody.value,
-                        showCaseState = showCaseState
+                        showCaseState = showCaseState,
+                        bodyListState = bodyListState
                     ) {
                         if (it.target == TargetAction.BODY) {
                             actionBody.value = it

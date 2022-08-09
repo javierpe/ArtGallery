@@ -3,7 +3,7 @@ package com.nucu.dynamiclistcompose.adapters
 import com.nucu.dynamiclistcompose.api.TooltipPreferencesApi
 import com.nucu.dynamiclistcompose.controllers.DynamicListComposeController
 import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
-import com.nucu.dynamiclistcompose.models.ComponentItemModel
+import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose.models.tooltip
+package com.nucu.dynamiclistcompose.data.models.tooltip
 
 data class ShowCaseStrategy(
     val expirationTime: Int = 3000,

@@ -12,8 +12,8 @@ import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
 import com.nucu.dynamiclistcompose.components.header.HeaderComponentView
 import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
-import com.nucu.dynamiclistcompose.models.ComponentInfo
-import com.nucu.dynamiclistcompose.models.ComponentItemModel
+import com.nucu.dynamiclistcompose.data.models.ComponentInfo
+import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.theme.Skeleton
 import javax.inject.Inject
