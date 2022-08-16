@@ -8,8 +8,9 @@
  - [x] Improve Tooltips visualization
  - [x] Add Compose Navigation
  - [x] Improve transitions animation with scrolling list
+ - [x] Add ETL mechanism
+ - [ ] Android CI
  - [ ] Implement Macrobenchmark
- - [ ] Add ETL mechanism
  - [ ] Add Unit test
 
 # Compact UI
