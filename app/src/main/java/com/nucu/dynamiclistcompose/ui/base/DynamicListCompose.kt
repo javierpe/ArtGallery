@@ -84,7 +84,8 @@ class DynamicListCompose(
                 dynamicListViewModel.load(dynamicListRequestModel.value!!)
             }
 
-            is DynamicListAction.ErrorAction -> ErrorView((dynamicListState as DynamicListAction.ErrorAction).exception) {
+            is DynamicListAction.ErrorAction ->
+                ErrorView((dynamicListState as DynamicListAction.ErrorAction).exception) {
                 dynamicListViewModel.load(dynamicListRequestModel.value!!)
             }
 
