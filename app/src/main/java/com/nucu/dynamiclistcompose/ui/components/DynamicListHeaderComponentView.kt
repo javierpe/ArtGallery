@@ -34,14 +34,14 @@ fun DynamicListHeaderComponentView(
 ) {
     when (contextType) {
 
-        ContextType.HOME -> {
+        ContextType.BANNER_DETAIL -> {
             SimpleHeaderView(
                 title = title,
                 onBackPressed = onBackPressed
             )
         }
 
-        ContextType.SCREEN_WITH_IMAGE -> {
+        ContextType.HOME -> {
             HeaderWithImageView(
                 title = title,
                 bodyLazyListState = bodyLazyListState,
@@ -104,7 +104,7 @@ fun PreviewHeaderComponentView() {
     DynamicListComposeTheme {
         DynamicListHeaderComponentView(
             title = "Hello from the header view of DynamicList",
-            contextType = ContextType.SCREEN_WITH_IMAGE,
+            contextType = ContextType.HOME,
             rememberLazyListState()
         ) { }
     }

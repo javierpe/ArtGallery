@@ -71,6 +71,7 @@ fun BannerComponentView(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(imageURL)
                 .crossfade(true)
+                .diskCacheKey(imageURL)
                 .build(),
             contentDescription = componentIndex.toString(),
             contentScale = ContentScale.Crop

@@ -36,6 +36,7 @@ fun BannerContent(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(imageURL)
                 .crossfade(true)
+                .diskCacheKey(imageURL)
                 .build(),
             contentDescription = "",
             contentScale = ContentScale.Crop
@@ -57,7 +58,7 @@ fun BannerContent(
 
         DynamicListHeaderComponentView(
             title = "Esto es un banner",
-            contextType = ContextType.HOME,
+            contextType = ContextType.BANNER_DETAIL,
             onBackPressed = onBackPressed,
             bodyLazyListState = bodyLazyListState
         )

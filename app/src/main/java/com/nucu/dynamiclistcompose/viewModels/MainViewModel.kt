@@ -8,7 +8,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(): ContextViewModel() {
 
-    override val context = ContextType.SCREEN_WITH_IMAGE
+    override val context = ContextType.HOME
 
     override val requestModel = DynamicListRequestModel(
         contextType = context

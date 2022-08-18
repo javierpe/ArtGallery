@@ -57,7 +57,7 @@ class FiltersFactory @Inject constructor(): DynamicListAdapterFactory {
         ) {
 
             val width = 130.dp
-            val height = 30.dp
+            val height = 40.dp
 
             Box(
                 modifier = Modifier

@@ -5,20 +5,25 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ScrollableTabRow
-import androidx.compose.material.Tab
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
@@ -29,6 +34,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.renders.base.RenderType
+import kotlinx.coroutines.launch
+
 
 @Composable
 fun FiltersComponentView(
@@ -37,14 +44,20 @@ fun FiltersComponentView(
 ) {
     var state by remember { mutableStateOf(0) }
 
-    ScrollableTabRow(
-        selectedTabIndex = state,
-        indicator = {
+    val listState = rememberLazyListState()
+    val coroutineScope = rememberCoroutineScope()
 
-        },
-        backgroundColor = Color.Transparent,
-        divider = { },
+    if (state >= 0) {
+        SideEffect {
+            coroutineScope.launch {
+                listState.animateScrollToItem(state)
+            }
+        }
+    }
+
+    LazyRow(
         modifier = Modifier
+            .fillMaxWidth()
             .background(
                 brush = Brush.verticalGradient(
                     colors = listOf(
@@ -52,28 +65,27 @@ fun FiltersComponentView(
                         Color.Transparent,
                     )
                 )
-            ).clipToBounds()
+            )
+            .height(75.dp)
+            .clipToBounds(),
+        horizontalArrangement = Arrangement.spacedBy(15.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp),
+        state = listState
     ) {
-        data.forEachIndexed { index, item ->
-            Tab(
-                selected = false,
-                onClick = { },
-                modifier = Modifier
-                    .padding(horizontal = 10.dp)
-                    .height(55.dp)
+        itemsIndexed(
+            items = data,
+        ) {  index, item ->
+            FilterItemComponent(
+                text = item.text,
+                isSelected = state == index
             ) {
-                FilterItemComponent(
-                    text = item.text,
-                    isSelected = state == index
-                ) {
-                    RenderType
-                        .values()
-                        .firstOrNull { render -> render.value == item.goTo }
-                        ?.let {
-                            state = index
-                            onSelectItem.invoke(it)
-                        }
-                }
+                RenderType
+                    .values()
+                    .firstOrNull { render -> render.value == item.goTo }
+                    ?.let {
+                        state = index
+                        onSelectItem.invoke(it)
+                    }
             }
         }
     }
@@ -87,14 +99,15 @@ fun FilterItemComponent(
 ) {
 
     val elevationAnimation: Dp by animateDpAsState(
-        if (isSelected) 10.dp else 0.dp,
+        if (isSelected) 20.dp else 0.dp,
         spring(stiffness = Spring.StiffnessLow)
     )
 
     Card(
         shape = RoundedCornerShape(7.dp),
         elevation = elevationAnimation,
-        modifier = Modifier.defaultMinSize(minWidth = 100.dp)
+        modifier = Modifier
+            .defaultMinSize(minWidth = 100.dp)
     ) {
         Text(
             text = text,

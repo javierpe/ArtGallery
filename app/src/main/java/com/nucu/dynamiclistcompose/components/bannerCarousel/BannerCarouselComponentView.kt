@@ -62,6 +62,7 @@ fun BannerCarouselComponentView(
                     model = ImageRequest.Builder(LocalContext.current)
                         .data(it.imageURL)
                         .crossfade(true)
+                        .diskCacheKey(it.imageURL)
                         .build(),
                     contentDescription = "",
                     contentScale = ContentScale.Crop
