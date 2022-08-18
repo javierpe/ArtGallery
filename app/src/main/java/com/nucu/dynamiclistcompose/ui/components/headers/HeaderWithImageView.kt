@@ -36,7 +36,7 @@ const val MIN_HEIGHT = 65
 @Composable
 fun HeaderWithImageView(
     title: String,
-    bodyLazyListState: LazyListState,
+    bodyLazyListState: LazyListState? = null,
     onBackPressed: () -> Unit
 ) {
 
@@ -45,7 +45,7 @@ fun HeaderWithImageView(
     val backButtonLayoutId = "back_button"
 
     val firstVisibleItem by derivedStateOf {
-        bodyLazyListState.firstVisibleItemIndex
+        bodyLazyListState?.firstVisibleItemIndex ?: 0
     }
 
     val progress by animateFloatAsState(

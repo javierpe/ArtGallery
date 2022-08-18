@@ -2,8 +2,8 @@ package com.nucu.dynamiclistcompose.factories
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -41,12 +41,11 @@ class TextFactory @Inject constructor(): DynamicListAdapterFactory {
 
     @Composable
     override fun CreateSkeleton() {
-
         Box(
             modifier = Modifier
-                .clip(RoundedCornerShape(10.dp))
-                .width(200.dp)
-                .height(100.dp)
+                .clip(RoundedCornerShape(7.dp))
+                .fillMaxWidth()
+                .height(30.dp)
                 .background(MaterialTheme.colors.onPrimary)
         )
     }

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -29,7 +30,7 @@ import com.nucu.dynamiclistcompose.ui.theme.Typography
 fun DynamicListHeaderComponentView(
     title: String,
     contextType: ContextType,
-    bodyLazyListState: LazyListState,
+    bodyLazyListState: LazyListState? = null,
     onBackPressed: () -> Unit // Remove this and set navigation compose here
 ) {
     when (contextType) {
@@ -82,7 +83,8 @@ fun SimpleHeaderView(
                         key = "back-button",
                         state = showCaseState
                     ),
-                onClick = onBackPressed
+                onClick = onBackPressed,
+                iconColor = MaterialTheme.colors.secondary
             )
 
             Text(
@@ -92,7 +94,8 @@ fun SimpleHeaderView(
                     start.linkTo(backRef.end, 10.dp)
                 },
                 text = title,
-                style = Typography.h6
+                style = Typography.h6,
+                color = MaterialTheme.colors.primary
             )
         }
     }

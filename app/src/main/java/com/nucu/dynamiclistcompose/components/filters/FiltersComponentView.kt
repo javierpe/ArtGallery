@@ -36,7 +36,6 @@ import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import kotlinx.coroutines.launch
 
-
 @Composable
 fun FiltersComponentView(
     data: List<FilterItemModel>,

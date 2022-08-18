@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -26,9 +25,7 @@ fun BannerContent(
     onBackPressed: () -> Unit
 ) {
 
-    val bodyLazyListState = rememberLazyListState()
-
-    Box() {
+    Box {
         SubcomposeAsyncImage(
             modifier = Modifier
                 .fillMaxSize()
@@ -59,8 +56,7 @@ fun BannerContent(
         DynamicListHeaderComponentView(
             title = "Esto es un banner",
             contextType = ContextType.BANNER_DETAIL,
-            onBackPressed = onBackPressed,
-            bodyLazyListState = bodyLazyListState
+            onBackPressed = onBackPressed
         )
     }
 }
