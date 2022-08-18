@@ -2,6 +2,8 @@ package com.nucu.dynamiclistcompose.ui.components.showCase
 
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -31,7 +33,12 @@ fun Modifier.asShowCaseTarget(
     key: String,
     content: @Composable BoxScope.() -> Unit,
 ): Modifier = onGloballyPositioned { coordinates ->
-    if (state.currentIndex.value == index) {
+
+    val sendState by derivedStateOf {
+        state.currentIndex.value == index
+    }
+
+    if (sendState) {
         state.send(
             ShowCaseTargets(
                 index = index,

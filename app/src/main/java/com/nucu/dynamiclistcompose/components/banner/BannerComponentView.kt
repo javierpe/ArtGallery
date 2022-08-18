@@ -40,12 +40,12 @@ fun BannerComponentView(
     showCaseState: ShowCaseState,
     viewModel: BannerViewModel = hiltViewModel()
 ) {
-    Box(
+    SubcomposeAsyncImage(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp)
             .height(150.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .background(MaterialTheme.colors.primary)
+            .fillMaxSize()
+            .background(Color.White)
             .clip(RoundedCornerShape(16.dp))
             .asShowCaseTarget(
                 index = componentIndex,
@@ -60,34 +60,27 @@ fun BannerComponentView(
                 strategy = ShowCaseStrategy(onlyUserInteraction = true),
                 key = RenderType.BANNER.value,
                 state = showCaseState
-            ).clickable {
+            )
+            .clickable {
                 viewModel.loadBanner(imageURL)
-            }
+            },
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(imageURL)
+            .crossfade(true)
+            .diskCacheKey(imageURL)
+            .build(),
+        contentDescription = componentIndex.toString(),
+        contentScale = ContentScale.Crop
     ) {
-        SubcomposeAsyncImage(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.White),
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(imageURL)
-                .crossfade(true)
-                .diskCacheKey(imageURL)
-                .build(),
-            contentDescription = componentIndex.toString(),
-            contentScale = ContentScale.Crop
-        ) {
-            when (painter.state) {
-                is AsyncImagePainter.State.Loading -> {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(20.dp)
-                    )
-                }
-                is AsyncImagePainter.State.Error -> {
-
-                }
-                else -> {
-                    SubcomposeAsyncImageContent()
-                }
+        when (painter.state) {
+            is AsyncImagePainter.State.Loading -> {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(20.dp)
+                )
+            }
+            is AsyncImagePainter.State.Error -> {  }
+            else -> {
+                SubcomposeAsyncImageContent()
             }
         }
     }

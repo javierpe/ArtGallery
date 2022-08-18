@@ -20,6 +20,10 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,11 +36,15 @@ import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import coil.request.ImageRequest
 import com.nucu.dynamiclistcompose.ui.theme.Typography
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.forEach
 
 private const val MAX_ELEMENTS = 3
 
@@ -49,16 +57,32 @@ fun CardsComponentView(
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
 
+        val decoration by remember {
+            derivedStateOf {
+                TextDecoration.Underline
+            }
+        }
+
+        val letterSpacing by remember {
+            derivedStateOf {
+                TextUnit(40f, TextUnitType.Sp)
+            }
+        }
+
+        val titleUpperCase by remember {
+            derivedStateOf { data.title.uppercase() }
+        }
+
         Text(
-            text = data.title.uppercase(),
+            text = titleUpperCase,
             modifier = Modifier
                 .padding(start = 16.dp)
                 .fillMaxWidth(),
             style = Typography.h6,
             color = MaterialTheme.colors.secondary,
-            letterSpacing = TextUnit(40f, TextUnitType.Sp),
+            letterSpacing = letterSpacing,
             textAlign = TextAlign.Center,
-            textDecoration = TextDecoration.Underline
+            textDecoration = decoration
         )
 
         LazyRow(
@@ -66,6 +90,13 @@ fun CardsComponentView(
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp),
         ) {
             items(items = data.cardElements, key = { it.hashCode() }) {
+
+                val pictures by remember {
+                    derivedStateOf {
+                        it.images.take(MAX_ELEMENTS)
+                    }
+                }
+
                 Card(
                     modifier = Modifier
                         .wrapContentWidth()
@@ -76,7 +107,7 @@ fun CardsComponentView(
 
                     Column(
                         modifier = Modifier
-                            .clickable {  }
+                            .clickable { }
                             .padding(10.dp),
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
@@ -89,8 +120,9 @@ fun CardsComponentView(
                             horizontalArrangement = Arrangement.spacedBy(10.dp),
                             modifier = Modifier.fillMaxSize()
                         ) {
-                            it.images.take(MAX_ELEMENTS).forEach { cardImage ->
-                                SubcomposeAsyncImage(
+
+                            pictures.forEach { cardImage ->
+                                AsyncImage(
                                     modifier = Modifier
                                         .size(46.dp)
                                         .clip(RoundedCornerShape(5.dp)),
@@ -100,21 +132,7 @@ fun CardsComponentView(
                                         .build(),
                                     contentDescription = "",
                                     contentScale = ContentScale.Crop
-                                ) {
-                                    when (painter.state) {
-                                        is AsyncImagePainter.State.Loading -> {
-                                            CircularProgressIndicator(
-                                                modifier = Modifier.size(20.dp)
-                                            )
-                                        }
-                                        is AsyncImagePainter.State.Error -> {
-
-                                        }
-                                        else -> {
-                                            SubcomposeAsyncImageContent()
-                                        }
-                                    }
-                                }
+                                )
                             }
 
                             if (it.images.size > MAX_ELEMENTS) {

@@ -3,9 +3,7 @@ package com.nucu.dynamiclistcompose.components.bannerCarousel
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
@@ -18,7 +16,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -41,44 +38,33 @@ fun BannerCarouselComponentView(
         contentPadding = PaddingValues(start = 16.dp, end = 16.dp)
     ) {
         items(items = images, key = { it.hashCode() }) {
-            Box(
+            SubcomposeAsyncImage(
                 modifier = Modifier
                     .height(300.dp)
                     .width(350.dp)
                     .clip(RoundedCornerShape(16.dp))
-                    .background(MaterialTheme.colors.primary)
-                    .clip(RoundedCornerShape(16.dp))
                     .clickable {
+                        viewModel.loadBanner(it.imageURL)
+                    },
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(it.imageURL)
+                    .crossfade(true)
+                    .diskCacheKey(it.imageURL)
+                    .build(),
+                contentDescription = "",
+                contentScale = ContentScale.Crop
+            ) {
+                when (painter.state) {
+                    is AsyncImagePainter.State.Loading -> {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                    is AsyncImagePainter.State.Error -> {
 
                     }
-            ) {
-                SubcomposeAsyncImage(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(Color.White)
-                        .clickable {
-                            viewModel.loadBanner(it.imageURL)
-                        },
-                    model = ImageRequest.Builder(LocalContext.current)
-                        .data(it.imageURL)
-                        .crossfade(true)
-                        .diskCacheKey(it.imageURL)
-                        .build(),
-                    contentDescription = "",
-                    contentScale = ContentScale.Crop
-                ) {
-                    when (painter.state) {
-                        is AsyncImagePainter.State.Loading -> {
-                            CircularProgressIndicator(
-                                modifier = Modifier.size(20.dp)
-                            )
-                        }
-                        is AsyncImagePainter.State.Error -> {
-
-                        }
-                        else -> {
-                            SubcomposeAsyncImageContent()
-                        }
+                    else -> {
+                        SubcomposeAsyncImageContent()
                     }
                 }
             }
