@@ -1,5 +1,6 @@
 package com.nucu.dynamiclistcompose.components.filters
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
@@ -102,11 +103,22 @@ fun FilterItemComponent(
         spring(stiffness = Spring.StiffnessLow)
     )
 
+    val colorAnimation: Color by animateColorAsState(
+        targetValue = if (isSelected) MaterialTheme.colors.secondary else MaterialTheme.colors.primary,
+        spring(stiffness = Spring.StiffnessLow)
+    )
+
+    val textColorAnimation: Color by animateColorAsState(
+        targetValue = if (isSelected) MaterialTheme.colors.primary else MaterialTheme.colors.secondary,
+        spring(stiffness = Spring.StiffnessLow)
+    )
+
     Card(
         shape = RoundedCornerShape(7.dp),
         elevation = elevationAnimation,
         modifier = Modifier
-            .defaultMinSize(minWidth = 100.dp)
+            .defaultMinSize(minWidth = 100.dp),
+        backgroundColor = colorAnimation
     ) {
         Text(
             text = text,
@@ -114,7 +126,7 @@ fun FilterItemComponent(
                 .clickable { onClick.invoke() }
                 .padding(5.dp)
                 .fillMaxWidth(),
-            color = MaterialTheme.colors.secondary,
+            color = textColorAnimation,
             textAlign = TextAlign.Center
         )
     }
