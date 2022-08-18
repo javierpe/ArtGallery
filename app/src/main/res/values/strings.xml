@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DynamicListCompose</string>
+    <string name="app_name">Art Gallery</string>
     <string name="label_loading" translatable="false">Cargando</string>
     <string name="label_error" translatable="false">Error</string>
     <string name="label_retry" translatable="false">Reintentar</string>

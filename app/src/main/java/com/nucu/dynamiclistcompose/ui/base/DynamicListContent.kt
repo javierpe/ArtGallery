@@ -20,6 +20,7 @@ fun DynamicListScreen(
     listState: LazyListState,
     widthSizeClass: WindowWidthSizeClass,
     showCaseState: ShowCaseState,
+    withVerticalPadding: Boolean = true,
     onAction: ((ScrollAction) -> Unit)? = null
 ) {
 
@@ -28,8 +29,8 @@ fun DynamicListScreen(
         modifier = Modifier.wrapContentHeight(),
         state = listState,
         contentPadding = PaddingValues(
-            bottom = if (content.isNotEmpty()) 16.dp else 0.dp,
-            top = 16.dp
+            bottom = if (content.isNotEmpty() && withVerticalPadding) 16.dp else 0.dp,
+            top = if (withVerticalPadding) 16.dp else 0.dp
         )
     ) {
         items(items = content, key = { it.componentItemModel.index }) {
