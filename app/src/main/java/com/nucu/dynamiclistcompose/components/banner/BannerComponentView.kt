@@ -31,7 +31,6 @@ import com.nucu.dynamiclistcompose.ui.components.showCase.TooltipView
 import com.nucu.dynamiclistcompose.ui.components.showCase.asShowCaseTarget
 import com.nucu.dynamiclistcompose.ui.components.showCase.models.ShapeType
 import com.nucu.dynamiclistcompose.ui.components.showCase.rememberShowCaseState
-import com.nucu.dynamiclistcompose.ui.theme.Typography
 import com.nucu.dynamiclistcompose.viewModels.BannerViewModel
 
 @Composable
@@ -62,10 +61,7 @@ fun BannerComponentView(
                 key = RenderType.BANNER.value,
                 state = showCaseState
             ).clickable {
-                viewModel.loadBanner(
-                    componentIndex,
-                    "Esto es un Banner"
-                )
+                viewModel.loadBanner(imageURL)
             }
     ) {
         SubcomposeAsyncImage(

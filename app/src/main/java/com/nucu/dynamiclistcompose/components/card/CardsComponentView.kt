@@ -7,14 +7,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,7 +32,7 @@ import coil.compose.SubcomposeAsyncImageContent
 import coil.request.ImageRequest
 import com.nucu.dynamiclistcompose.ui.theme.Typography
 
-private const val MAX_ELEMENTS = 2
+private const val MAX_ELEMENTS = 3
 
 @Composable
 fun CardsComponentView(
@@ -42,7 +44,8 @@ fun CardsComponentView(
         Text(
             text = "Cards",
             modifier = Modifier.padding(start = 16.dp),
-            style = Typography.h6
+            style = Typography.h6,
+            color = MaterialTheme.colors.secondary
         )
 
         LazyRow(
@@ -52,7 +55,8 @@ fun CardsComponentView(
             items(items = data.cardElements, key = { it.hashCode() }) {
                 Card(
                     modifier = Modifier
-                        .wrapContentSize(),
+                        .wrapContentWidth()
+                        .height(100.dp),
                     shape = RoundedCornerShape(12.dp),
                     elevation = 5.dp
                 ) {
@@ -63,7 +67,10 @@ fun CardsComponentView(
                             .padding(10.dp),
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
-                        Text(text = it.title)
+                        Text(
+                            text = it.title,
+                            color = MaterialTheme.colors.secondary
+                        )
 
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -97,13 +104,16 @@ fun CardsComponentView(
                                 }
                             }
 
-                            if (data.cardElements.size > MAX_ELEMENTS) {
+                            if (it.images.size > MAX_ELEMENTS) {
                                 Box(
                                     modifier = Modifier
                                         .align(Alignment.CenterVertically)
                                         .clip(RoundedCornerShape(16.dp))
                                 ) {
-                                    Text(text = "+${data.cardElements.size - MAX_ELEMENTS}")
+                                    Text(
+                                        text = "+${it.images.size - MAX_ELEMENTS}",
+                                        style = Typography.button
+                                    )
                                 }
                             }
                         }

@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,7 +35,7 @@ fun MessageComponentView(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp)
             .clip(RoundedCornerShape(12.dp))
-            .background(MaterialTheme.colors.primaryVariant)
+            .background(MaterialTheme.colors.secondary)
             .asShowCaseTarget(
                 index = componentIndex,
                 style = ShowCaseStyle.Default.copy(
@@ -54,7 +55,7 @@ fun MessageComponentView(
                 .padding(10.dp),
             textAlign = TextAlign.Justify,
             text = message,
-            color = MaterialTheme.colors.secondary
+            color = MaterialTheme.colors.primary
         )
     }
 }

@@ -8,13 +8,11 @@ import com.nucu.dynamiclistcompose.ui.examples.viewModels.BannerScreenViewModel
 
 @Composable
 fun BannerScreen(
-    text: String,
-    index: String,
+    imageURL: String,
     viewModel: BannerScreenViewModel = hiltViewModel()
 ) {
     BannerContent(
-        text = text,
-        index = index
+        imageURL = imageURL,
     ) {
         viewModel.onBackPressed()
     }
@@ -24,7 +22,6 @@ fun BannerScreen(
 @Preview
 fun PreviewBannerScreen() {
     BannerScreen(
-        "Hello",
-        "1"
+        "Hello"
     )
 }

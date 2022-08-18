@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -18,7 +19,6 @@ import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.renders.base.RenderType
-import com.nucu.dynamiclistcompose.ui.theme.Skeleton
 import javax.inject.Inject
 
 class CardsFactory @Inject constructor(): DynamicListAdapterFactory {
@@ -48,7 +48,7 @@ class CardsFactory @Inject constructor(): DynamicListAdapterFactory {
                     .clip(RoundedCornerShape(10.dp))
                     .width(200.dp)
                     .height(100.dp)
-                    .background(Skeleton)
+                    .background(MaterialTheme.colors.onPrimary)
             )
 
             Box(
@@ -56,7 +56,7 @@ class CardsFactory @Inject constructor(): DynamicListAdapterFactory {
                     .clip(RoundedCornerShape(10.dp))
                     .width(200.dp)
                     .height(100.dp)
-                    .background(Skeleton)
+                    .background(MaterialTheme.colors.onPrimary)
             )
         }
     }

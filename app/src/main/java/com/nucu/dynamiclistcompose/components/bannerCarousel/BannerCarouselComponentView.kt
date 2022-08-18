@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
@@ -23,15 +22,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import coil.request.ImageRequest
 import com.nucu.dynamiclistcompose.components.banner.BannerModel
+import com.nucu.dynamiclistcompose.viewModels.BannerViewModel
 
 @Composable
 fun BannerCarouselComponentView(
-    images: List<BannerModel>
+    images: List<BannerModel>,
+    viewModel: BannerViewModel = hiltViewModel()
 ) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -41,8 +43,8 @@ fun BannerCarouselComponentView(
         items(items = images) {
             Box(
                 modifier = Modifier
-                    .height(150.dp)
-                    .width(300.dp)
+                    .height(300.dp)
+                    .width(350.dp)
                     .clip(RoundedCornerShape(16.dp))
                     .background(MaterialTheme.colors.primary)
                     .clip(RoundedCornerShape(16.dp))
@@ -53,7 +55,10 @@ fun BannerCarouselComponentView(
                 SubcomposeAsyncImage(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Color.White),
+                        .background(Color.White)
+                        .clickable {
+                            viewModel.loadBanner(it.imageURL)
+                        },
                     model = ImageRequest.Builder(LocalContext.current)
                         .data(it.imageURL)
                         .crossfade(true)

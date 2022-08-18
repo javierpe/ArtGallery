@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -16,7 +17,6 @@ import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.renders.base.RenderType
-import com.nucu.dynamiclistcompose.ui.theme.Skeleton
 import javax.inject.Inject
 
 class BannerFactory @Inject constructor(
@@ -50,7 +50,7 @@ class BannerFactory @Inject constructor(
                 .clip(RoundedCornerShape(16.dp))
                 .fillMaxWidth()
                 .height(150.dp)
-                .background(Skeleton)
+                .background(MaterialTheme.colors.onPrimary)
         )
     }
 }

@@ -23,15 +23,13 @@ fun NavGraphBuilder.homeNav(widthSizeClass: WindowWidthSizeClass) {
  */
 fun NavGraphBuilder.bannerScreenNav() {
     composable(
-        route = Route.BannerScreen.name + "/{${Route.BannerScreen.ARG_INDEX}}/{${Route.BannerScreen.ARG_TEXT}}",
+        route = Route.BannerScreen.name + "/{${Route.BannerScreen.IMAGE_URL}}",
         arguments = listOf(
-            navArgument(Route.BannerScreen.ARG_INDEX) { type = NavType.StringType },
-            navArgument(Route.BannerScreen.ARG_TEXT) { type = NavType.StringType }
+            navArgument(Route.BannerScreen.IMAGE_URL) { type = NavType.StringType }
         )
     ) {
         BannerScreen(
-            it.arguments?.getString(Route.BannerScreen.ARG_TEXT).orEmpty(),
-            it.arguments?.getString(Route.BannerScreen.ARG_INDEX).orEmpty()
+            it.arguments?.getString(Route.BannerScreen.IMAGE_URL).orEmpty(),
         )
     }
 }

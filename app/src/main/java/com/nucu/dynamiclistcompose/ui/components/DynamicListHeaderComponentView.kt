@@ -82,7 +82,7 @@ fun SimpleHeaderView(
                         key = "back-button",
                         state = showCaseState
                     ),
-                onBackPressed
+                onClick = onBackPressed
             )
 
             Text(

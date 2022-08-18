@@ -21,6 +21,8 @@ import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionLayoutDebugFlags
 import com.nucu.dynamiclistcompose.data.BACKGROUND
+import com.nucu.dynamiclistcompose.data.BACK_BUTTON_BACKGROUND
+import com.nucu.dynamiclistcompose.data.BACK_BUTTON_ICON_COLOR
 import com.nucu.dynamiclistcompose.data.TEXT_COLOR
 import com.nucu.dynamiclistcompose.ui.components.BackButtonComponentView
 import com.nucu.dynamiclistcompose.ui.theme.Typography
@@ -128,6 +130,7 @@ fun HeaderWithImageView(
 
         val backgroundProperties = motionProperties(backgroundLayoutId)
         val titleProperties = motionProperties(titleLayoutId)
+        val backButtonProperties = motionProperties(backButtonLayoutId)
 
         Box(
             modifier = Modifier
@@ -146,7 +149,9 @@ fun HeaderWithImageView(
 
         BackButtonComponentView(
             modifier = Modifier.layoutId(backButtonLayoutId),
-            onBackPressed
+            onClick = onBackPressed,
+            backgroundColor = backButtonProperties.value.color(BACK_BUTTON_BACKGROUND),
+            iconColor = backButtonProperties.value.color(BACK_BUTTON_ICON_COLOR)
         )
     }
 
@@ -159,7 +164,7 @@ private fun constraintSetStart() = ConstraintSet (""" {
 		top: ['parent', 'top'],
         height: $MAX_HEIGHT,
         custom: {
-          background: '#FF3700B3'
+          background: '#000000'
         }
 	},
 	title: {
@@ -167,12 +172,16 @@ private fun constraintSetStart() = ConstraintSet (""" {
 		start: ['parent', 'start', 16],
         top: ['back_button', 'bottom'],
         custom: {
-          textColor: '#FF03DAC5'
+          textColor: '#FFFFFF'
         }
 	},
 	back_button: {
 		start: ['parent', 'start', 16],
 		top: ['parent', 'top', 16],
+        custom: {
+          back_button_background: '#FFFFFF',
+          back_button_icon_color: '#000000'
+        }
 	}
 } """ )
 
@@ -183,7 +192,7 @@ private fun constraintSetEnd() = ConstraintSet (""" {
 		top: ['parent', 'top'],
         height: $MIN_HEIGHT,
         custom: {
-          background: '#FF642B73'
+          background: '#FFFFFF'
         }
 	},
 	title: {
@@ -191,11 +200,15 @@ private fun constraintSetEnd() = ConstraintSet (""" {
 		start: ['back_button', 'end', 10],
         top: ['back_button', 'top'],
         custom: {
-          textColor: '#FFDDDDDD'
+          textColor: '#000000'
         }
 	},
 	back_button: {
 		start: ['parent', 'start', 16],
 		top: ['parent', 'top', 16],
+        custom: {
+          back_button_background: '#000000',
+          back_button_icon_color: '#FFFFFF'
+        }
 	}
 } """ )

@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -48,7 +49,8 @@ fun FilterItemComponent(text: String, onClick: () -> Unit) {
             text = text,
             modifier = Modifier
                 .clickable { onClick.invoke() }
-                .padding(5.dp)
+                .padding(5.dp),
+            color = MaterialTheme.colors.secondary
         )
     }
 }
