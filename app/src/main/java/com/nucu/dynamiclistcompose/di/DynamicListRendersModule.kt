@@ -5,6 +5,7 @@ import com.nucu.dynamiclistcompose.renders.BannerRender
 import com.nucu.dynamiclistcompose.renders.FiltersRender
 import com.nucu.dynamiclistcompose.renders.TextRender
 import com.nucu.dynamiclistcompose.renders.CardsRender
+import com.nucu.dynamiclistcompose.renders.FacesRender
 import com.nucu.dynamiclistcompose.renders.MessageRender
 import com.nucu.dynamiclistcompose.renders.base.DynamicListRender
 import dagger.Binds
@@ -51,5 +52,11 @@ abstract class DynamicListRendersModule {
     @IntoSet
     abstract fun bindBannerCarouselRender(
         render: BannerCarouselRender
+    ): DynamicListRender<*>
+
+    @Binds
+    @IntoSet
+    abstract fun bindFacesRender(
+        render: FacesRender
     ): DynamicListRender<*>
 }

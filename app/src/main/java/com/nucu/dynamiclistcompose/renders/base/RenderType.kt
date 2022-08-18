@@ -6,5 +6,6 @@ enum class RenderType constructor(val value: String) {
     MESSAGE("message"),
     TEXT("text"),
     FILTERS("filters"),
-    BANNER_CAROUSEL("banner_carousel")
+    BANNER_CAROUSEL("banner_carousel"),
+    FACES("faces")
 }

@@ -40,7 +40,7 @@ fun BannerCarouselComponentView(
         modifier = Modifier.fillMaxWidth(),
         contentPadding = PaddingValues(start = 16.dp, end = 16.dp)
     ) {
-        items(items = images) {
+        items(items = images, key = { it.hashCode() }) {
             Box(
                 modifier = Modifier
                     .height(300.dp)

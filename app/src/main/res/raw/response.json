@@ -6,16 +6,24 @@
       "resource": {
         "items": [
           {
-            "text": "Go to Banner",
-            "go_to": "banner"
+            "text": "Abstract banner",
+            "go_to": "text"
           },
           {
-            "text": "Go to Cards",
+            "text": "Nature",
             "go_to": "cards"
           },
           {
-            "text": "Go to Message",
+            "text": "Classic message",
             "go_to": "message"
+          },
+          {
+            "text": "Abstract Landscapes",
+            "go_to": "banner_carousel"
+          },
+          {
+            "text": "Art Faces",
+            "go_to": "faces"
           }
         ]
       }
@@ -23,15 +31,51 @@
   ],
   "body": [
     {
-      "render": "message",
+      "render": "faces",
       "index": 0,
+      "resource": {
+        "items": [
+          {
+            "name": "Salvador Dalí",
+            "url": "https://i.pinimg.com/474x/d3/ba/44/d3ba44589354e6b2c2d317fb6a9d8d25.jpg"
+          },
+          {
+            "name": "Vincent Van Gogh",
+            "url": "https://i.pinimg.com/474x/1d/88/40/1d8840d608560b934a9fdf97c00e5095.jpg"
+          },
+          {
+            "name": "Diego Rivera",
+            "url": "https://i.pinimg.com/474x/b7/6c/55/b76c554d035f09fba14f7bfc1be25766.jpg"
+          },
+          {
+            "name": "Frida Kahlo",
+            "url": "https://i.pinimg.com/474x/eb/ff/a4/ebffa44a49aa527f13384676999b4485.jpg"
+          },
+          {
+            "name": "Leonardo Da Vinci",
+            "url": "https://i.pinimg.com/474x/35/d0/6d/35d06d7059953b35e2ce7adba29e6b2b.jpg"
+          },
+          {
+            "name": "Pablo Picasso",
+            "url": "https://i.pinimg.com/474x/39/c7/d4/39c7d46c34ac5bf705d609b89e00152d.jpg"
+          },
+          {
+            "name": "Fernando Botero",
+            "url": "https://i.pinimg.com/564x/18/41/16/184116622dfb20539fe0b4f5f54d0c1a.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "render": "message",
+      "index": 1,
       "resource": {
         "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
       }
     },
     {
       "render": "message",
-      "index": 1,
+      "index": 2,
       "resource": {
         "message": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
       }
@@ -94,21 +138,21 @@
     },
     {
       "render": "text",
-      "index": 5,
+      "index": 4,
       "resource": {
-        "text": "This is a text"
+        "text": "Abstract banner"
       }
     },
     {
       "render": "banner",
-      "index": 6,
+      "index": 5,
       "resource": {
         "url": "https://i.etsystatic.com/34487254/r/il/8c6d49/3759929882/il_1588xN.3759929882_dvhz.jpg"
       }
     },
     {
       "render": "banner_carousel",
-      "index": 7,
+      "index": 6,
       "resource": {
         "banners": [
           {
@@ -128,28 +172,28 @@
     },
     {
       "render": "message",
-      "index": 8,
+      "index": 7,
       "resource": {
         "message": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
       }
     },
     {
       "render": "message",
-      "index": 9,
+      "index": 8,
       "resource": {
         "message": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
       }
     },
     {
       "render": "banner",
-      "index": 10,
+      "index": 9,
       "resource": {
         "url": "https://i.pinimg.com/474x/e3/f2/e4/e3f2e41aff886c2e76289ef326544dc5.jpg"
       }
     },
     {
       "render": "banner_carousel",
-      "index": 11,
+      "index": 10,
       "resource": {
         "banners": [
           {

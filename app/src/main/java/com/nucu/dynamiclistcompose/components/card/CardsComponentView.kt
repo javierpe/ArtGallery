@@ -42,7 +42,7 @@ fun CardsComponentView(
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         Text(
-            text = "Cards",
+            text = "Nature",
             modifier = Modifier.padding(start = 16.dp),
             style = Typography.h6,
             color = MaterialTheme.colors.secondary

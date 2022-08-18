@@ -75,7 +75,7 @@ fun MainScreen(
 ) {
     MainContent(widthSizeClass = widthSizeClass) {
         ContextView(
-            title = "This is Dynamic List",
+            title = "Art Gallery",
             widthSizeClass = widthSizeClass,
             viewModel = viewModel
         )

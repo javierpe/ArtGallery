@@ -6,6 +6,7 @@ import com.nucu.dynamiclistcompose.factories.BannerFactory
 import com.nucu.dynamiclistcompose.factories.FiltersFactory
 import com.nucu.dynamiclistcompose.factories.TextFactory
 import com.nucu.dynamiclistcompose.factories.CardsFactory
+import com.nucu.dynamiclistcompose.factories.FacesFactory
 import com.nucu.dynamiclistcompose.factories.MessageFactory
 import dagger.Binds
 import dagger.Module
@@ -49,7 +50,13 @@ abstract class DynamicListFactoriesModule {
 
     @Binds
     @IntoSet
-    abstract fun bindBannerCarousel(
+    abstract fun bindBannerCarouselFactory(
         factory: BannerCarouselFactory
+    ): DynamicListAdapterFactory
+
+    @Binds
+    @IntoSet
+    abstract fun bindFacesFactory(
+        factory: FacesFactory
     ): DynamicListAdapterFactory
 }
