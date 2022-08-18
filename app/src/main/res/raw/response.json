@@ -84,6 +84,7 @@
       "render": "cards",
       "index": 3,
       "resource": {
+        "title": "Nature",
         "items": [
           {
             "title": "Animales",
@@ -140,7 +141,7 @@
       "render": "text",
       "index": 4,
       "resource": {
-        "text": "Abstract banner"
+        "text": "Paint of the day"
       }
     },
     {
@@ -151,49 +152,70 @@
       }
     },
     {
-      "render": "banner_carousel",
+      "render": "text",
       "index": 6,
       "resource": {
+        "text": "Landscapes"
+      }
+    },
+    {
+      "render": "banner_carousel",
+      "index": 7,
+      "resource": {
         "banners": [
-          {
-            "url": "https://i.etsystatic.com/7850851/r/il/84dfbd/3287461211/il_1588xN.3287461211_rngi.jpg"
-          },
-          {
-            "url": "https://i.etsystatic.com/7850851/r/il/313a3e/3432149065/il_1588xN.3432149065_js54.jpg"
-          },
           {
             "url": "https://i.etsystatic.com/28296516/r/il/54f5e3/3977297934/il_1588xN.3977297934_fjf5.jpg"
           },
           {
             "url": "https://i.pinimg.com/474x/16/90/d3/1690d3b796cd49dea064a9ea759f772e.jpg"
+          },
+          {
+            "url": "https://i.pinimg.com/474x/28/da/94/28da9471c34cc79667ea792b26162d57.jpg"
+          },
+          {
+            "url": "https://i.pinimg.com/474x/06/b7/a7/06b7a79c32049e32373e3efbcd78aed6.jpg"
           }
         ]
       }
     },
     {
       "render": "message",
-      "index": 7,
+      "index": 8,
       "resource": {
         "message": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
       }
     },
     {
       "render": "message",
-      "index": 8,
+      "index": 9,
       "resource": {
         "message": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
       }
     },
     {
+      "render": "text",
+      "index": 11,
+      "resource": {
+        "text": "Choice awards"
+      }
+    },
+    {
       "render": "banner",
-      "index": 9,
+      "index": 12,
       "resource": {
         "url": "https://i.pinimg.com/474x/e3/f2/e4/e3f2e41aff886c2e76289ef326544dc5.jpg"
       }
     },
     {
+      "render": "text",
+      "index": 13,
+      "resource": {
+        "text": "Ambient"
+      }
+    },
+    {
       "render": "banner_carousel",
-      "index": 10,
+      "index": 14,
       "resource": {
         "banners": [
           {

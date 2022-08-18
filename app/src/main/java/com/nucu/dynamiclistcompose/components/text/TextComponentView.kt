@@ -1,6 +1,7 @@
 package com.nucu.dynamiclistcompose.components.text
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -23,7 +24,8 @@ fun TextComponentView(
 ) {
     Text(
         text = text,
-        style = Typography.h5,
+        style = Typography.h6,
+        color = MaterialTheme.colors.secondary,
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp)
             .asShowCaseTarget(

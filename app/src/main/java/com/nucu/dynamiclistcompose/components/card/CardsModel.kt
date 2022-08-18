@@ -3,6 +3,7 @@ package com.nucu.dynamiclistcompose.components.card
 import com.google.gson.annotations.SerializedName
 
 data class CardsModel(
+    @SerializedName("title") val title: String,
     @SerializedName("items") val cardElements: List<CardElement>
 )
 

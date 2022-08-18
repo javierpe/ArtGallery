@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -24,7 +25,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.ExperimentalUnitApi
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
@@ -34,6 +40,7 @@ import com.nucu.dynamiclistcompose.ui.theme.Typography
 
 private const val MAX_ELEMENTS = 3
 
+@OptIn(ExperimentalUnitApi::class)
 @Composable
 fun CardsComponentView(
     data: CardsModel
@@ -41,11 +48,17 @@ fun CardsComponentView(
     Column(
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
+
         Text(
-            text = "Nature",
-            modifier = Modifier.padding(start = 16.dp),
+            text = data.title.uppercase(),
+            modifier = Modifier
+                .padding(start = 16.dp)
+                .fillMaxWidth(),
             style = Typography.h6,
-            color = MaterialTheme.colors.secondary
+            color = MaterialTheme.colors.secondary,
+            letterSpacing = TextUnit(40f, TextUnitType.Sp),
+            textAlign = TextAlign.Center,
+            textDecoration = TextDecoration.Underline
         )
 
         LazyRow(
@@ -131,7 +144,8 @@ fun PreviewCardsComponentView() {
         data = CardsModel(
             cardElements = listOf(
                 CardElement("Hola", images = emptyList())
-            )
+            ),
+            title = "Title"
         )
     )
 }
