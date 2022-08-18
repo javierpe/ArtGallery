@@ -3,21 +3,26 @@ package com.nucu.dynamiclistcompose.components.banner
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImagePainter
+import coil.compose.SubcomposeAsyncImage
+import coil.compose.SubcomposeAsyncImageContent
+import coil.request.ImageRequest
 import com.nucu.dynamiclistcompose.data.models.tooltip.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseState
@@ -31,6 +36,7 @@ import com.nucu.dynamiclistcompose.viewModels.BannerViewModel
 
 @Composable
 fun BannerComponentView(
+    imageURL: String,
     componentIndex: Int,
     showCaseState: ShowCaseState,
     viewModel: BannerViewModel = hiltViewModel()
@@ -53,7 +59,7 @@ fun BannerComponentView(
                     TooltipView(text = "Esto es un componente Banner de Dynamic List")
                 },
                 strategy = ShowCaseStrategy(onlyUserInteraction = true),
-                key = RenderType.BANNER_IMAGE.value,
+                key = RenderType.BANNER.value,
                 state = showCaseState
             ).clickable {
                 viewModel.loadBanner(
@@ -62,16 +68,31 @@ fun BannerComponentView(
                 )
             }
     ) {
-        Text(
-            text = "Esto es un banner",
-            color = Color.White,
+        SubcomposeAsyncImage(
             modifier = Modifier
-                .align(Alignment.Center)
-                .padding(16.dp)
-                .fillMaxWidth(),
-            style = Typography.h4,
-            textAlign = TextAlign.Center
-        )
+                .fillMaxSize()
+                .background(Color.White),
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(imageURL)
+                .crossfade(true)
+                .build(),
+            contentDescription = componentIndex.toString(),
+            contentScale = ContentScale.Crop
+        ) {
+            when (painter.state) {
+                is AsyncImagePainter.State.Loading -> {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(20.dp)
+                    )
+                }
+                is AsyncImagePainter.State.Error -> {
+
+                }
+                else -> {
+                    SubcomposeAsyncImageContent()
+                }
+            }
+        }
     }
 }
 
@@ -80,6 +101,7 @@ fun BannerComponentView(
 fun PreviewCompactBannerComponentView() {
     val state = rememberShowCaseState()
     BannerComponentView(
+        imageURL = "",
         componentIndex = 0,
         showCaseState = state
     )

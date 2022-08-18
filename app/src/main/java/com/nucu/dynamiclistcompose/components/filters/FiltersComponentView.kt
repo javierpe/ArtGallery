@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -17,26 +18,21 @@ import com.nucu.dynamiclistcompose.renders.base.RenderType
 
 @Composable
 fun FiltersComponentView(
+    data: List<FilterItemModel>,
     onSelectItem: (RenderType) -> Unit
 ) {
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(15.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 5.dp)
+        contentPadding = PaddingValues(horizontal = 16.dp)
     ) {
-        item {
-            FilterItemComponent("Banner Component") {
-                onSelectItem.invoke(RenderType.BANNER_IMAGE)
-            }
-        }
-        item {
-            FilterItemComponent("Header Component") {
-                onSelectItem.invoke(RenderType.HEADER)
-            }
-        }
-        item {
-            FilterItemComponent("Cards Component") {
-                onSelectItem.invoke(RenderType.ONE_CLICK_REORDER)
+
+        items(items = data) {
+            FilterItemComponent(it.text) {
+                RenderType
+                    .values()
+                    .firstOrNull { render -> render.value == it.goTo }
+                    ?.let(onSelectItem)
             }
         }
     }
@@ -60,5 +56,5 @@ fun FilterItemComponent(text: String, onClick: () -> Unit) {
 @Composable
 @Preview
 fun PreviewFiltersComponentView() {
-    FiltersComponentView { }
+    FiltersComponentView(emptyList()) { }
 }

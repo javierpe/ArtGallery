@@ -24,7 +24,6 @@ fun ContextView(
     /**
      * 1. Change context should be a compose state.
      * 2. Reload should be a compose state.
-     * 3. Implement Scaffold component
      */
 
     val action by viewModel.contextViewAction.collectAsState()

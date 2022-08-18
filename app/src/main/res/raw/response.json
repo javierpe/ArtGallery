@@ -1,0 +1,168 @@
+{
+  "header": [
+    {
+      "render": "filters",
+      "index": 0,
+      "resource": {
+        "items": [
+          {
+            "text": "Go to Banner",
+            "go_to": "banner"
+          },
+          {
+            "text": "Go to Cards",
+            "go_to": "cards"
+          },
+          {
+            "text": "Go to Message",
+            "go_to": "message"
+          }
+        ]
+      }
+    }
+  ],
+  "body": [
+    {
+      "render": "message",
+      "index": 0,
+      "resource": {
+        "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      }
+    },
+    {
+      "render": "message",
+      "index": 1,
+      "resource": {
+        "message": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    },
+    {
+      "render": "cards",
+      "index": 3,
+      "resource": {
+        "items": [
+          {
+            "title": "Animales",
+            "images": [
+              {
+                "image_url": "https://i.pinimg.com/474x/ef/15/a2/ef15a22ff154ba547c1c80b3e854bb98.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/bd/f1/29/bdf129d166ce094ac606a9ed0f3971c1.jpg"
+              }
+            ]
+          },
+          {
+            "title": "Macetas",
+            "images": [
+              {
+                "image_url": "https://i.pinimg.com/474x/ee/58/95/ee589568868f618a5a1823f287372664.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/61/0b/64/610b64d2ff840474909fb54f1b4e8044.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/7d/5d/97/7d5d97c6df899bf32de1b9da70fbb511.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/41/bb/80/41bb80df2c4aa694d2b44a4cb8356790.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/ba/bb/59/babb590b4d6efcd87788b7f7a2fda312.jpg"
+              }
+            ]
+          },
+          {
+            "title": "Comida",
+            "images": [
+              {
+                "image_url": "https://i.pinimg.com/474x/19/1d/2e/191d2e479f4dc7df19a0bacce769074c.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/564x/d8/cd/93/d8cd937548d61ec973e8e24a2c14e7e4.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/3e/5e/60/3e5e608c694af04cd78a25848c65ce67.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/9b/fa/6e/9bfa6eceef30b6a519c636b5da644eda.jpg"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "render": "text",
+      "index": 5,
+      "resource": {
+        "text": "This is a text"
+      }
+    },
+    {
+      "render": "banner",
+      "index": 6,
+      "resource": {
+        "url": "https://i.etsystatic.com/34487254/r/il/8c6d49/3759929882/il_1588xN.3759929882_dvhz.jpg"
+      }
+    },
+    {
+      "render": "banner_carousel",
+      "index": 7,
+      "resource": {
+        "banners": [
+          {
+            "url": "https://i.etsystatic.com/7850851/r/il/84dfbd/3287461211/il_1588xN.3287461211_rngi.jpg"
+          },
+          {
+            "url": "https://i.etsystatic.com/7850851/r/il/313a3e/3432149065/il_1588xN.3432149065_js54.jpg"
+          },
+          {
+            "url": "https://i.etsystatic.com/28296516/r/il/54f5e3/3977297934/il_1588xN.3977297934_fjf5.jpg"
+          },
+          {
+            "url": "https://i.pinimg.com/474x/16/90/d3/1690d3b796cd49dea064a9ea759f772e.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "render": "message",
+      "index": 8,
+      "resource": {
+        "message": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      }
+    },
+    {
+      "render": "message",
+      "index": 9,
+      "resource": {
+        "message": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      }
+    },
+    {
+      "render": "banner",
+      "index": 10,
+      "resource": {
+        "url": "https://i.pinimg.com/474x/e3/f2/e4/e3f2e41aff886c2e76289ef326544dc5.jpg"
+      }
+    },
+    {
+      "render": "banner_carousel",
+      "index": 11,
+      "resource": {
+        "banners": [
+          {
+            "url": "https://i.pinimg.com/474x/1f/73/25/1f7325bc264a816ab131d6d624fa792a.jpg"
+          },
+          {
+            "url": "https://i.pinimg.com/474x/af/be/b2/afbeb21abcf6d4c406376d462b3e8507.jpg"
+          },
+          {
+            "url": "https://i.pinimg.com/474x/2b/1b/ff/2b1bffa6d1afb00226a36f019ed07cc8.jpg"
+          }
+        ]
+      }
+    }
+  ]
+}

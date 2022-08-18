@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
 import com.nucu.dynamiclistcompose.components.filters.FiltersComponentView
+import com.nucu.dynamiclistcompose.components.filters.FiltersModel
 import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
@@ -36,7 +37,10 @@ class FiltersFactory @Inject constructor(): DynamicListAdapterFactory {
         listener: DynamicListComponentListener?,
         componentInfo: ComponentInfo
     ) {
-        FiltersComponentView {
+
+        FiltersComponentView(
+            (component.resource as FiltersModel).items
+        ) {
             componentInfo.scrollAction?.invoke(
                 ScrollAction.ScrollRender(it, target = TargetAction.BODY)
             )
@@ -52,7 +56,7 @@ class FiltersFactory @Inject constructor(): DynamicListAdapterFactory {
             horizontalArrangement = Arrangement.spacedBy(15.dp)
         ) {
 
-            val width = 60.dp
+            val width = 130.dp
             val height = 30.dp
 
             Box(

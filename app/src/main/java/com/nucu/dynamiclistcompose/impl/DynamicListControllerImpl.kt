@@ -1,21 +1,28 @@
 package com.nucu.dynamiclistcompose.impl
 
+import android.content.Context
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.api.DynamicListControllerApi
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.actions.DynamicListAction
-import com.nucu.dynamiclistcompose.di.IODispatcher
+import com.nucu.dynamiclistcompose.data.models.DataContentModel
 import com.nucu.dynamiclistcompose.data.models.DynamicListContainer
 import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
-import com.nucu.dynamiclistcompose.renders.base.RenderType
-import kotlinx.coroutines.CoroutineDispatcher
+import com.nucu.dynamiclistcompose.renders.base.DynamicListRender
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+private const val DEFAULT_DELAY: Long = 3000
+
 class DynamicListControllerImpl @Inject constructor(
-    @IODispatcher val ioDispatcher: CoroutineDispatcher
+    @ApplicationContext private val context: Context,
+    private val renders: MutableSet<@JvmSuppressWildcards DynamicListRender<*>>,
+    private val gson: Gson
 ) : DynamicListControllerApi {
 
     override suspend fun get(
@@ -24,174 +31,50 @@ class DynamicListControllerImpl @Inject constructor(
     ): Flow<DynamicListAction> = flow {
 
         // Emulate response delay
-        delay(3000)
+        delay(DEFAULT_DELAY)
 
-        val container = withContext(ioDispatcher) {
-            // Hardcoded data :D
-            val header = listOf(
+        val componentModel = gson.fromJson(getJsonDataFromAsset(), DataContentModel::class.java)
+
+        val header = componentModel.header.mapNotNull { component ->
+            getResourceByRender(component.render, component.resource)?.let {
                 ComponentItemModel(
-                    render = RenderType.FILTERS.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 0,
-                    uniqueId = ""
+                    render = component.render,
+                    index = component.index,
+                    resource = it
                 )
-            )
-
-            val bodies = listOf(
-
-                ComponentItemModel(
-                    render = RenderType.TOBACCO_PREFERENCE.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 0,
-                    uniqueId = ""
-                ),
-
-                ComponentItemModel(
-                    render = RenderType.TOBACCO_PREFERENCE.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 1,
-                    uniqueId = ""
-                ),
-
-                ComponentItemModel(
-                    render = RenderType.ONE_CLICK_REORDER.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 2,
-                    uniqueId = ""
-                ),
-
-                ComponentItemModel(
-                    render = RenderType.TOBACCO_PREFERENCE.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 3,
-                    uniqueId = ""
-                ),
-
-                ComponentItemModel(
-                    render = RenderType.TOBACCO_PREFERENCE.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 4,
-                    uniqueId = ""
-                ),
-
-                ComponentItemModel(
-                    render = RenderType.ONE_CLICK_REORDER.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 5,
-                    uniqueId = ""
-                ),
-
-                ComponentItemModel(
-                    render = RenderType.TOBACCO_PREFERENCE.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 6,
-                    uniqueId = ""
-                ),
-
-                ComponentItemModel(
-                    render = RenderType.BANNER_IMAGE.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 7,
-                    uniqueId = ""
-                ),
-
-                ComponentItemModel(
-                    render = RenderType.ONE_CLICK_REORDER.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 8,
-                    uniqueId = ""
-                ),
-
-                ComponentItemModel(
-                    render = RenderType.TOBACCO_PREFERENCE.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 9,
-                    uniqueId = ""
-                ),
-                ComponentItemModel(
-                    render = RenderType.HEADER.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 10,
-                    uniqueId = ""
-                ),
-
-                ComponentItemModel(
-                    render = RenderType.TOBACCO_PREFERENCE.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 11,
-                    uniqueId = ""
-                ),
-
-                ComponentItemModel(
-                    render = RenderType.ONE_CLICK_REORDER.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 12,
-                    uniqueId = ""
-                ),
-                ComponentItemModel(
-                    render = RenderType.BANNER_IMAGE.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 13,
-                    uniqueId = ""
-                ),
-
-                ComponentItemModel(
-                    render = RenderType.BANNER_IMAGE.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 14,
-                    uniqueId = ""
-                ),
-
-                ComponentItemModel(
-                    render = RenderType.TOBACCO_PREFERENCE.value,
-                    resource = "",
-                    name = "",
-                    resolver = "",
-                    index = 15,
-                    uniqueId = ""
-                )
-            )
-
-            // Response...
-            DynamicListContainer(
-                headers = header,
-                bodies = bodies
-            )
+            }
         }
+
+        val body = componentModel.body.mapNotNull { component ->
+            getResourceByRender(component.render, component.resource)?.let {
+                ComponentItemModel(
+                    render = component.render,
+                    index = component.index,
+                    resource = it
+                )
+            }
+        }
+
+        // Response...
+        val container = DynamicListContainer(
+            headers = header,
+            bodies = body
+        )
 
         emit(DynamicListAction.SuccessAction(container))
 
+    }
+
+    private suspend fun getResourceByRender(render: String, resource: JsonObject?): Any? {
+        return renders.firstOrNull() {
+            it.renders.any { renderValue -> renderValue.value == render }
+        }?.resolve(render, resource)
+    }
+
+    private fun getJsonDataFromAsset(): String {
+        return context.resources
+            .openRawResource(R.raw.response)
+            .bufferedReader()
+            .use { it.readText() }
     }
 }

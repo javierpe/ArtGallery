@@ -1,5 +1,6 @@
 package com.nucu.dynamiclistcompose.di
 
+import com.google.gson.Gson
 import com.nucu.dynamiclistcompose.adapters.DefaultAdapterController
 import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
 import com.nucu.dynamiclistcompose.api.TooltipPreferencesApi
@@ -26,4 +27,7 @@ object HomeDynamicListModule {
             tooltipPreferencesApi
         )
     }
+
+    @Provides
+    fun provideGson() = Gson()
 }

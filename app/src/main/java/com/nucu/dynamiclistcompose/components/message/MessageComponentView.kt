@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose.components.tobacco
+package com.nucu.dynamiclistcompose.components.message
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -24,7 +24,8 @@ import com.nucu.dynamiclistcompose.ui.components.showCase.models.ShapeType
 import com.nucu.dynamiclistcompose.ui.components.showCase.rememberShowCaseState
 
 @Composable
-fun TobaccoComponentView(
+fun MessageComponentView(
+    message: String,
     componentIndex: Int,
     showCaseState: ShowCaseState
 ) {
@@ -44,7 +45,7 @@ fun TobaccoComponentView(
                     TooltipView(text = "Esto es un componente Mensaje de Dynamic List con animación")
                 },
                 strategy = ShowCaseStrategy(onlyUserInteraction = true),
-                key = RenderType.TOBACCO_PREFERENCE.value,
+                key = RenderType.MESSAGE.value,
                 state = showCaseState
             )
     ) {
@@ -52,7 +53,7 @@ fun TobaccoComponentView(
             modifier = Modifier
                 .padding(10.dp),
             textAlign = TextAlign.Justify,
-            text = stringResource(R.string.label_lorem_ipsum),
+            text = message,
             color = MaterialTheme.colors.secondary
         )
     }
@@ -62,7 +63,8 @@ fun TobaccoComponentView(
 @Preview
 fun PreviewTobaccoComponentView() {
     val showCaseState = rememberShowCaseState()
-    TobaccoComponentView(
+    MessageComponentView(
+        message = "Hola a todos",
         0,
         showCaseState
     )

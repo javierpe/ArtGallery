@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose.components.header
+package com.nucu.dynamiclistcompose.components.text
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
@@ -16,7 +16,7 @@ import com.nucu.dynamiclistcompose.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.ui.theme.Typography
 
 @Composable
-fun HeaderComponentView(
+fun TextComponentView(
     componentIndex: Int,
     showCaseState: ShowCaseState,
     text: String
@@ -36,7 +36,7 @@ fun HeaderComponentView(
                     Text(text = "Un header!")
                 },
                 strategy = ShowCaseStrategy(onlyUserInteraction = true),
-                key = RenderType.HEADER.value,
+                key = RenderType.TEXT.value,
                 state = showCaseState
             )
     )
@@ -46,7 +46,7 @@ fun HeaderComponentView(
 @Preview(showBackground = true)
 fun PreviewHeaderComponentView() {
     val showCaseState = rememberShowCaseState()
-    HeaderComponentView(
+    TextComponentView(
         0,
         showCaseState,
         "Hola"

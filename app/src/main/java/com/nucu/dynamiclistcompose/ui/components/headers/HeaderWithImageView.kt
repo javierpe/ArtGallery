@@ -123,7 +123,7 @@ fun HeaderWithImageView(
         end = constraintSetEnd(),
         progress = progress,
         modifier = Modifier.height(motionHeight),
-        debug = EnumSet.of(MotionLayoutDebugFlags.SHOW_ALL)
+        debug = EnumSet.of(MotionLayoutDebugFlags.NONE)
     ) {
 
         val backgroundProperties = motionProperties(backgroundLayoutId)

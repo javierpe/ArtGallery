@@ -1,6 +1,7 @@
 package com.nucu.dynamiclistcompose.ui.base
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -25,7 +26,11 @@ fun DynamicListScreen(
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier.wrapContentHeight(),
-        state = listState
+        state = listState,
+        contentPadding = PaddingValues(
+            bottom = if (content.isNotEmpty()) 16.dp else 0.dp,
+            top = 16.dp
+        )
     ) {
         items(items = content, key = { it.componentItemModel.index }) {
             it.factory?.CreateComponent(

@@ -75,7 +75,7 @@ fun MainScreen(
 ) {
     MainContent(widthSizeClass = widthSizeClass) {
         ContextView(
-            title = "Home screen",
+            title = "This is Dynamic List",
             widthSizeClass = widthSizeClass,
             viewModel = viewModel
         )

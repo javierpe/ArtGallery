@@ -26,7 +26,7 @@ fun BannerContent(
         topBar = {
             DynamicListHeaderComponentView(
                 title = text,
-                contextType = ContextType.SCREEN_WITH_IMAGE,
+                contextType = ContextType.HOME,
                 onBackPressed = onBackPressed,
                 bodyLazyListState = bodyLazyListState
             )

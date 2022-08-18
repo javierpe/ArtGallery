@@ -3,5 +3,4 @@
     <string name="label_loading" translatable="false">Cargando</string>
     <string name="label_error" translatable="false">Error</string>
     <string name="label_retry" translatable="false">Reintentar</string>
-    <string name="label_lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
 </resources>

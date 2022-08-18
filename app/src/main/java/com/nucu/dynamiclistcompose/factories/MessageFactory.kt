@@ -10,7 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
-import com.nucu.dynamiclistcompose.components.tobacco.TobaccoComponentView
+import com.nucu.dynamiclistcompose.components.message.MessageComponentView
+import com.nucu.dynamiclistcompose.components.message.MessageModel
 import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
@@ -18,11 +19,11 @@ import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.theme.Skeleton
 import javax.inject.Inject
 
-class TobaccoFactory @Inject constructor(): DynamicListAdapterFactory {
+class MessageFactory @Inject constructor(): DynamicListAdapterFactory {
 
     override val renders: List<RenderType>
         get() = listOf(
-            RenderType.TOBACCO_PREFERENCE
+            RenderType.MESSAGE
         )
 
     override val hasShowCaseConfigured = true
@@ -33,7 +34,8 @@ class TobaccoFactory @Inject constructor(): DynamicListAdapterFactory {
         listener: DynamicListComponentListener?,
         componentInfo: ComponentInfo
     ) {
-        TobaccoComponentView(
+        MessageComponentView(
+            message = (component.resource as MessageModel).message,
             componentIndex = component.index,
             componentInfo.showCaseState
         )

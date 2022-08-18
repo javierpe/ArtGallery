@@ -2,16 +2,16 @@ package com.nucu.dynamiclistcompose.factories
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
-import com.nucu.dynamiclistcompose.components.banner.BannerComponentView
-import com.nucu.dynamiclistcompose.components.banner.BannerModel
+import com.nucu.dynamiclistcompose.components.text.TextComponentView
+import com.nucu.dynamiclistcompose.components.text.TextModel
 import com.nucu.dynamiclistcompose.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
@@ -19,16 +19,12 @@ import com.nucu.dynamiclistcompose.renders.base.RenderType
 import com.nucu.dynamiclistcompose.ui.theme.Skeleton
 import javax.inject.Inject
 
-class BannerFactory @Inject constructor(
-
-): DynamicListAdapterFactory {
+class TextFactory @Inject constructor(): DynamicListAdapterFactory {
 
     override val renders: List<RenderType>
         get() = listOf(
-            RenderType.BANNER
+            RenderType.TEXT
         )
-
-    override val hasShowCaseConfigured = true
 
     @Composable
     override fun CreateComponent(
@@ -36,20 +32,21 @@ class BannerFactory @Inject constructor(
         listener: DynamicListComponentListener?,
         componentInfo: ComponentInfo
     ) {
-        BannerComponentView(
-            imageURL = (component.resource as BannerModel).imageURL,
+        TextComponentView(
             componentIndex = component.index,
-            showCaseState = componentInfo.showCaseState
+            componentInfo.showCaseState,
+            text = (component.resource as TextModel).text
         )
     }
 
     @Composable
     override fun CreateSkeleton() {
+
         Box(
             modifier = Modifier
-                .clip(RoundedCornerShape(16.dp))
-                .fillMaxWidth()
-                .height(150.dp)
+                .clip(RoundedCornerShape(10.dp))
+                .width(200.dp)
+                .height(100.dp)
                 .background(Skeleton)
         )
     }

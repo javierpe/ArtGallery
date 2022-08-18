@@ -110,7 +110,7 @@ abstract class DynamicListComposeController {
         BlinkAnimation {
             Column(
                 modifier = Modifier
-                    .padding(start = 16.dp, end = 16.dp),
+                    .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 getMapSkeletons().forEach { render ->
