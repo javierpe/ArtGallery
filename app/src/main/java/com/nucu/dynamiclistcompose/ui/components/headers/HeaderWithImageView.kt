@@ -21,14 +21,12 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
-import androidx.constraintlayout.compose.MotionLayoutDebugFlags
 import com.nucu.dynamiclistcompose.data.BACKGROUND
 import com.nucu.dynamiclistcompose.data.BACK_BUTTON_BACKGROUND
 import com.nucu.dynamiclistcompose.data.BACK_BUTTON_ICON_COLOR
 import com.nucu.dynamiclistcompose.data.TEXT_COLOR
 import com.nucu.dynamiclistcompose.ui.components.BackButtonComponentView
 import com.nucu.dynamiclistcompose.ui.theme.Typography
-import java.util.*
 
 const val DURATION = 500
 const val MAX_HEIGHT = 120
