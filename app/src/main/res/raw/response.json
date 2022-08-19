@@ -1,0 +1,276 @@
+{
+  "header": [
+    {
+      "render": "filters",
+      "index": 0,
+      "resource": {
+        "items": [
+          {
+            "text": "Abstract banner",
+            "go_to": "text"
+          },
+          {
+            "text": "Nature",
+            "go_to": "cards"
+          },
+          {
+            "text": "Classic message",
+            "go_to": "message"
+          },
+          {
+            "text": "Abstract Landscapes",
+            "go_to": "banner_carousel"
+          },
+          {
+            "text": "Art Faces",
+            "go_to": "faces"
+          }
+        ]
+      }
+    }
+  ],
+  "body": [
+    {
+      "render": "faces",
+      "index": 0,
+      "resource": {
+        "items": [
+          {
+            "name": "Salvador Dalí",
+            "url": "https://i.pinimg.com/474x/d3/ba/44/d3ba44589354e6b2c2d317fb6a9d8d25.jpg"
+          },
+          {
+            "name": "Vincent Van Gogh",
+            "url": "https://i.pinimg.com/474x/1d/88/40/1d8840d608560b934a9fdf97c00e5095.jpg"
+          },
+          {
+            "name": "Diego Rivera",
+            "url": "https://i.pinimg.com/474x/b7/6c/55/b76c554d035f09fba14f7bfc1be25766.jpg"
+          },
+          {
+            "name": "Frida Kahlo",
+            "url": "https://i.pinimg.com/474x/eb/ff/a4/ebffa44a49aa527f13384676999b4485.jpg"
+          },
+          {
+            "name": "Leonardo Da Vinci",
+            "url": "https://i.pinimg.com/474x/35/d0/6d/35d06d7059953b35e2ce7adba29e6b2b.jpg"
+          },
+          {
+            "name": "Pablo Picasso",
+            "url": "https://i.pinimg.com/474x/39/c7/d4/39c7d46c34ac5bf705d609b89e00152d.jpg"
+          },
+          {
+            "name": "Fernando Botero",
+            "url": "https://i.pinimg.com/564x/18/41/16/184116622dfb20539fe0b4f5f54d0c1a.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "render": "message",
+      "index": 1,
+      "resource": {
+        "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      }
+    },
+    {
+      "render": "message",
+      "index": 2,
+      "resource": {
+        "message": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    },
+    {
+      "render": "cards",
+      "index": 3,
+      "resource": {
+        "title": "Nature",
+        "items": [
+          {
+            "title": "Pets",
+            "images": [
+              {
+                "image_url": "https://i.pinimg.com/474x/17/85/01/1785013f487a2a7ef3ef6ff763b07b8f.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/ff/72/06/ff720634a11754b0b84405e6554209d0.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/20/62/49/206249889366c2f716b43275a8b2b3b4.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/d1/57/04/d15704076c65c00af411ea2233e08bc1.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/e0/60/c3/e060c37e3c232ec7a0c849013e540adb.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/dc/67/d3/dc67d30839f70ceb31b794f744dd04ef.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/da/56/5a/da565a1ba44c547787d32f7ef643fbb0.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/d6/9f/8b/d69f8b207b2a999ef6f843cc62ebbc49.jpg"
+              }
+            ]
+          },
+          {
+            "title": "Cactus",
+            "images": [
+              {
+                "image_url": "https://i.pinimg.com/474x/44/29/ef/4429efee4e18c26ae7bb040014704163.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/a1/49/18/a149189f7843be642b3aedcea0ae5d27.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/5a/e1/40/5ae1404b52068eaea1e53adcfc5a0f1a.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/d9/bd/33/d9bd3308836c3176734fa7543a46e673.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/bf/69/9f/bf699f7500be95a3e8a0dea075b0ab3d.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/f8/1f/c5/f81fc5afcc0a078022d57290d5df0856.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/32/86/39/3286399cfd0db19a663046acc78d0508.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/e4/a3/6b/e4a36b124384e25badf980701a071672.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/82/61/4b/82614b5aed19ef4ec4fda777bde3e80a.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/40/bb/20/40bb200e57f7804671128ea3dcf73ab3.jpg"
+              }
+            ]
+          },
+          {
+            "title": "Fruits",
+            "images": [
+              {
+                "image_url": "https://i.pinimg.com/474x/19/1d/2e/191d2e479f4dc7df19a0bacce769074c.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/3d/f0/db/3df0dbdf6a3bd5b3d459d659b6d45d6f.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/48/3e/21/483e21786c35fb432560e5e9621b44f0.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/1a/3b/ab/1a3bab42e0a2f8b752f086602c8b70a4.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/35/98/83/35988345230b51ef9211beadb1e76ab7.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/80/9b/5d/809b5d22575607d8c840b2ca743c4317.jpg"
+              },
+              {
+                "image_url": "https://i.pinimg.com/474x/24/88/c2/2488c2ed4b45dc6d0a8b9345ce9b2069.jpg"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "render": "text",
+      "index": 4,
+      "resource": {
+        "text": "Paint of the day"
+      }
+    },
+    {
+      "render": "banner",
+      "index": 5,
+      "resource": {
+        "url": "https://i.etsystatic.com/34487254/r/il/8c6d49/3759929882/il_1588xN.3759929882_dvhz.jpg"
+      }
+    },
+    {
+      "render": "text",
+      "index": 6,
+      "resource": {
+        "text": "Landscapes"
+      }
+    },
+    {
+      "render": "banner_carousel",
+      "index": 7,
+      "resource": {
+        "banners": [
+          {
+            "url": "https://i.etsystatic.com/28296516/r/il/54f5e3/3977297934/il_1588xN.3977297934_fjf5.jpg"
+          },
+          {
+            "url": "https://i.pinimg.com/474x/c9/a4/c9/c9a4c9d499ab288f29bc65a4369a447f.jpg"
+          },
+          {
+            "url": "https://i.pinimg.com/474x/28/da/94/28da9471c34cc79667ea792b26162d57.jpg"
+          },
+          {
+            "url": "https://i.pinimg.com/474x/06/b7/a7/06b7a79c32049e32373e3efbcd78aed6.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "render": "message",
+      "index": 8,
+      "resource": {
+        "message": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      }
+    },
+    {
+      "render": "message",
+      "index": 9,
+      "resource": {
+        "message": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      }
+    },
+    {
+      "render": "text",
+      "index": 11,
+      "resource": {
+        "text": "Choice awards"
+      }
+    },
+    {
+      "render": "banner",
+      "index": 12,
+      "resource": {
+        "url": "https://i.pinimg.com/474x/30/9b/5b/309b5b18d162cec61be5403008a0f704.jpg"
+      }
+    },
+    {
+      "render": "text",
+      "index": 13,
+      "resource": {
+        "text": "Ambient"
+      }
+    },
+    {
+      "render": "banner_carousel",
+      "index": 14,
+      "resource": {
+        "banners": [
+          {
+            "url": "https://i.pinimg.com/474x/1f/73/25/1f7325bc264a816ab131d6d624fa792a.jpg"
+          },
+          {
+            "url": "https://i.pinimg.com/474x/96/07/52/9607523b8c71cb4895a3f87b30421900.jpg"
+          },
+          {
+            "url": "https://i.pinimg.com/474x/d8/f4/ac/d8f4ac2459333ae16a4b47914f33de94.jpg"
+          }
+        ]
+      }
+    }
+  ]
+}

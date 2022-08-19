@@ -1,6 +1,5 @@
 package com.nucu.dynamiclistcompose.ui.base
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyListState
@@ -13,7 +12,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nucu.dynamiclistcompose.actions.ContextViewAction
 import com.nucu.dynamiclistcompose.controllers.DynamicListComposeLoader
@@ -84,7 +82,8 @@ class DynamicListCompose(
                 dynamicListViewModel.load(dynamicListRequestModel.value!!)
             }
 
-            is DynamicListAction.ErrorAction -> ErrorView((dynamicListState as DynamicListAction.ErrorAction).exception) {
+            is DynamicListAction.ErrorAction ->
+                ErrorView((dynamicListState as DynamicListAction.ErrorAction).exception) {
                 dynamicListViewModel.load(dynamicListRequestModel.value!!)
             }
 
@@ -100,7 +99,6 @@ class DynamicListCompose(
                 }
 
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = Modifier.fillMaxSize()
                 ) {
 

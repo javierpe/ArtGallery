@@ -5,9 +5,11 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.google.gson.Gson
 import com.javier.api.models.Route
 import com.nucu.dynamiclistcompose.MainScreen
 import com.nucu.dynamiclistcompose.ui.examples.screens.BannerScreen
+import com.nucu.dynamiclistcompose.ui.examples.screens.CardScreen
 
 /**
  * Navigate to MainScreen
@@ -23,15 +25,35 @@ fun NavGraphBuilder.homeNav(widthSizeClass: WindowWidthSizeClass) {
  */
 fun NavGraphBuilder.bannerScreenNav() {
     composable(
-        route = Route.BannerScreen.name + "/{${Route.BannerScreen.ARG_INDEX}}/{${Route.BannerScreen.ARG_TEXT}}",
+        route = Route.BannerScreen.name + "/{${Route.BannerScreen.IMAGE_URL}}",
         arguments = listOf(
-            navArgument(Route.BannerScreen.ARG_INDEX) { type = NavType.StringType },
-            navArgument(Route.BannerScreen.ARG_TEXT) { type = NavType.StringType }
+            navArgument(Route.BannerScreen.IMAGE_URL) { type = NavType.StringType }
         )
     ) {
         BannerScreen(
-            it.arguments?.getString(Route.BannerScreen.ARG_TEXT).orEmpty(),
-            it.arguments?.getString(Route.BannerScreen.ARG_INDEX).orEmpty()
+            it.arguments?.getString(Route.BannerScreen.IMAGE_URL).orEmpty(),
+        )
+    }
+}
+
+fun NavGraphBuilder.cardScreenNav() {
+    composable(
+        route = Route.CardScreen.name + "/{${Route.CardScreen.CARD_TEXT}}/{${Route.CardScreen.IMAGE_URL}}",
+        arguments = listOf(
+            navArgument(Route.CardScreen.CARD_TEXT) { type = NavType.StringType },
+            navArgument(Route.CardScreen.IMAGE_URL) { type = NavType.StringType }
+        )
+    ) {
+        val cardText = it.arguments?.getString(Route.CardScreen.CARD_TEXT).orEmpty()
+        val data = Gson()
+            .fromJson(
+                it.arguments?.getString(Route.CardScreen.IMAGE_URL).orEmpty(),
+                List::class.java
+            ).map { url -> url.toString() }
+
+        CardScreen(
+            title = cardText,
+            images = data
         )
     }
 }

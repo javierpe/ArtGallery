@@ -8,10 +8,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.style.TextAlign
@@ -19,12 +21,12 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
-import androidx.constraintlayout.compose.MotionLayoutDebugFlags
 import com.nucu.dynamiclistcompose.data.BACKGROUND
+import com.nucu.dynamiclistcompose.data.BACK_BUTTON_BACKGROUND
+import com.nucu.dynamiclistcompose.data.BACK_BUTTON_ICON_COLOR
 import com.nucu.dynamiclistcompose.data.TEXT_COLOR
 import com.nucu.dynamiclistcompose.ui.components.BackButtonComponentView
 import com.nucu.dynamiclistcompose.ui.theme.Typography
-import java.util.*
 
 const val DURATION = 500
 const val MAX_HEIGHT = 120
@@ -34,7 +36,8 @@ const val MIN_HEIGHT = 65
 @Composable
 fun HeaderWithImageView(
     title: String,
-    bodyLazyListState: LazyListState,
+    bodyLazyListState: LazyListState? = null,
+    bodyLazyGridState: LazyGridState? = null,
     onBackPressed: () -> Unit
 ) {
 
@@ -42,8 +45,10 @@ fun HeaderWithImageView(
     val titleLayoutId = "title"
     val backButtonLayoutId = "back_button"
 
-    val firstVisibleItem by derivedStateOf {
-        bodyLazyListState.firstVisibleItemIndex
+    val firstVisibleItem by remember {
+        derivedStateOf {
+            bodyLazyListState?.firstVisibleItemIndex ?: bodyLazyGridState?.firstVisibleItemIndex ?: 0
+        }
     }
 
     val progress by animateFloatAsState(
@@ -122,12 +127,12 @@ fun HeaderWithImageView(
         start = constraintSetStart(),
         end = constraintSetEnd(),
         progress = progress,
-        modifier = Modifier.height(motionHeight),
-        debug = EnumSet.of(MotionLayoutDebugFlags.SHOW_ALL)
+        modifier = Modifier.height(motionHeight)
     ) {
 
         val backgroundProperties = motionProperties(backgroundLayoutId)
         val titleProperties = motionProperties(titleLayoutId)
+        val backButtonProperties = motionProperties(backButtonLayoutId)
 
         Box(
             modifier = Modifier
@@ -146,7 +151,9 @@ fun HeaderWithImageView(
 
         BackButtonComponentView(
             modifier = Modifier.layoutId(backButtonLayoutId),
-            onBackPressed
+            onClick = onBackPressed,
+            backgroundColor = backButtonProperties.value.color(BACK_BUTTON_BACKGROUND),
+            iconColor = backButtonProperties.value.color(BACK_BUTTON_ICON_COLOR)
         )
     }
 
@@ -159,7 +166,7 @@ private fun constraintSetStart() = ConstraintSet (""" {
 		top: ['parent', 'top'],
         height: $MAX_HEIGHT,
         custom: {
-          background: '#FF3700B3'
+          background: '#000000'
         }
 	},
 	title: {
@@ -167,12 +174,16 @@ private fun constraintSetStart() = ConstraintSet (""" {
 		start: ['parent', 'start', 16],
         top: ['back_button', 'bottom'],
         custom: {
-          textColor: '#FF03DAC5'
+          textColor: '#FFFFFF'
         }
 	},
 	back_button: {
 		start: ['parent', 'start', 16],
 		top: ['parent', 'top', 16],
+        custom: {
+          back_button_background: '#FFFFFF',
+          back_button_icon_color: '#000000'
+        }
 	}
 } """ )
 
@@ -183,7 +194,7 @@ private fun constraintSetEnd() = ConstraintSet (""" {
 		top: ['parent', 'top'],
         height: $MIN_HEIGHT,
         custom: {
-          background: '#FF642B73'
+          background: '#1A000000'
         }
 	},
 	title: {
@@ -191,11 +202,15 @@ private fun constraintSetEnd() = ConstraintSet (""" {
 		start: ['back_button', 'end', 10],
         top: ['back_button', 'top'],
         custom: {
-          textColor: '#FFDDDDDD'
+          textColor: '#000000'
         }
 	},
 	back_button: {
 		start: ['parent', 'start', 16],
 		top: ['parent', 'top', 16],
+        custom: {
+          back_button_background: '#000000',
+          back_button_icon_color: '#FFFFFF'
+        }
 	}
 } """ )

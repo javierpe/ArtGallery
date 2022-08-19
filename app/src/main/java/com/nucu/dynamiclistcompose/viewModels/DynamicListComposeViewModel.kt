@@ -6,6 +6,7 @@ import com.nucu.dynamiclistcompose.actions.DynamicListComponentAction
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.ui.base.ScrollAction
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -19,12 +20,14 @@ class DynamicListComposeViewModel @Inject constructor(
     private val _scrollAction = MutableStateFlow<ScrollAction>(ScrollAction.None)
     val scrollAction: StateFlow<ScrollAction> = _scrollAction
 
+    private var job: Job? = null
+
     var data: List<ComponentItemModel>? = null
 
     override fun scrollAction(scrollAction: ScrollAction) {
-        viewModelScope.launch {
+        job?.cancel()
+        job = viewModelScope.launch {
             when (scrollAction) {
-                is ScrollAction.ScrollWithTooltip -> { /* */ }
                 is ScrollAction.ScrollRender -> {
                     val element = data?.firstOrNull {
                         it.render == scrollAction.renderType.value

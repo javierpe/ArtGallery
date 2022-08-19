@@ -22,13 +22,15 @@ import com.nucu.dynamiclistcompose.ui.theme.DynamicListComposeTheme
 @Composable
 fun BackButtonComponentView(
     modifier: Modifier = Modifier,
+    backgroundColor: Color = MaterialTheme.colors.primary,
+    iconColor: Color = Color.White,
     onClick: (() -> Unit)? = null
 ) {
     Box(
         modifier = modifier
             .clip(CircleShape)
             .shadow(10.dp)
-            .background(MaterialTheme.colors.primary)
+            .background(backgroundColor)
             .size(30.dp)
             .clickable {
                 onClick?.invoke()
@@ -37,7 +39,7 @@ fun BackButtonComponentView(
     ) {
         Icon(
             imageVector = Icons.Default.ArrowBack,
-            tint = Color.White,
+            tint = iconColor,
             contentDescription = null
         )
     }

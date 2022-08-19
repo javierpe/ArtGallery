@@ -4,7 +4,10 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -21,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
@@ -51,6 +55,7 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 
 private const val DEFAULT_EXTRA_DURATION = 100
+private const val START_DELAY: Long = 900
 
 @Composable
 fun ShowCase(
@@ -59,11 +64,40 @@ fun ShowCase(
 ) {
     val current by state.current.collectAsState()
 
-    current?.let {
-        StartShowCase(target = it) {
-            viewModel.setShowed(it.key)
-            state.send(null)
-            it.onNext.invoke()
+    current?.let { target ->
+
+        val coroutineScope = rememberCoroutineScope()
+
+        var start by remember {
+            mutableStateOf(false)
+        }
+
+        val alphaAnimation by animateFloatAsState(
+            targetValue = if (start) 1f else 0f,
+            spring(stiffness = Spring.StiffnessLow)
+        )
+
+        if (!start) {
+            LaunchedEffect(key1 = start) {
+                coroutineScope.launch {
+                    delay(START_DELAY)
+                    start = true
+                }
+            }
+        }
+
+        Box(
+            modifier = Modifier.alpha(alphaAnimation)
+        ) {
+            StartShowCase(target = target) {
+                viewModel.setShowed(target.key)
+                start = false
+                coroutineScope.launch {
+                    delay(START_DELAY)
+                    state.send(null)
+                    target.onNext.invoke()
+                }
+            }
         }
     }
 }

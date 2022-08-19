@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose.components.tobacco
+package com.nucu.dynamiclistcompose.components.message
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,7 +25,8 @@ import com.nucu.dynamiclistcompose.ui.components.showCase.models.ShapeType
 import com.nucu.dynamiclistcompose.ui.components.showCase.rememberShowCaseState
 
 @Composable
-fun TobaccoComponentView(
+fun MessageComponentView(
+    message: String,
     componentIndex: Int,
     showCaseState: ShowCaseState
 ) {
@@ -33,7 +35,7 @@ fun TobaccoComponentView(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp)
             .clip(RoundedCornerShape(12.dp))
-            .background(MaterialTheme.colors.primaryVariant)
+            .background(MaterialTheme.colors.secondary)
             .asShowCaseTarget(
                 index = componentIndex,
                 style = ShowCaseStyle.Default.copy(
@@ -43,8 +45,8 @@ fun TobaccoComponentView(
                 content = {
                     TooltipView(text = "Esto es un componente Mensaje de Dynamic List con animación")
                 },
-                strategy = ShowCaseStrategy(onlyUserInteraction = true),
-                key = RenderType.TOBACCO_PREFERENCE.value,
+                strategy = ShowCaseStrategy(firstToHappen = true),
+                key = RenderType.MESSAGE.value,
                 state = showCaseState
             )
     ) {
@@ -52,8 +54,8 @@ fun TobaccoComponentView(
             modifier = Modifier
                 .padding(10.dp),
             textAlign = TextAlign.Justify,
-            text = stringResource(R.string.label_lorem_ipsum),
-            color = MaterialTheme.colors.secondary
+            text = message,
+            color = MaterialTheme.colors.primary
         )
     }
 }
@@ -62,7 +64,8 @@ fun TobaccoComponentView(
 @Preview
 fun PreviewTobaccoComponentView() {
     val showCaseState = rememberShowCaseState()
-    TobaccoComponentView(
+    MessageComponentView(
+        message = "Hola a todos",
         0,
         showCaseState
     )

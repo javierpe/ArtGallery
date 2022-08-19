@@ -4,7 +4,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -29,22 +31,24 @@ import com.nucu.dynamiclistcompose.ui.theme.Typography
 fun DynamicListHeaderComponentView(
     title: String,
     contextType: ContextType,
-    bodyLazyListState: LazyListState,
+    bodyLazyListState: LazyListState? = null,
+    bodyLazyGridState: LazyGridState? = null,
     onBackPressed: () -> Unit // Remove this and set navigation compose here
 ) {
     when (contextType) {
 
-        ContextType.HOME -> {
+        ContextType.BANNER_DETAIL -> {
             SimpleHeaderView(
                 title = title,
                 onBackPressed = onBackPressed
             )
         }
 
-        ContextType.SCREEN_WITH_IMAGE -> {
+        ContextType.HOME, ContextType.CARD_DETAIL -> {
             HeaderWithImageView(
                 title = title,
                 bodyLazyListState = bodyLazyListState,
+                bodyLazyGridState = bodyLazyGridState,
                 onBackPressed = onBackPressed
             )
         }
@@ -82,7 +86,8 @@ fun SimpleHeaderView(
                         key = "back-button",
                         state = showCaseState
                     ),
-                onBackPressed
+                onClick = onBackPressed,
+                iconColor = MaterialTheme.colors.secondary
             )
 
             Text(
@@ -92,7 +97,8 @@ fun SimpleHeaderView(
                     start.linkTo(backRef.end, 10.dp)
                 },
                 text = title,
-                style = Typography.h6
+                style = Typography.h6,
+                color = MaterialTheme.colors.primary
             )
         }
     }
@@ -104,7 +110,7 @@ fun PreviewHeaderComponentView() {
     DynamicListComposeTheme {
         DynamicListHeaderComponentView(
             title = "Hello from the header view of DynamicList",
-            contextType = ContextType.SCREEN_WITH_IMAGE,
+            contextType = ContextType.HOME,
             rememberLazyListState()
         ) { }
     }

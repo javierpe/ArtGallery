@@ -1,3 +1,7 @@
 package com.nucu.dynamiclistcompose.components.banner
 
-data class BannerModel(val image: String = "")
+import com.google.gson.annotations.SerializedName
+
+data class BannerModel(
+    @SerializedName("url") val imageURL: String = ""
+)

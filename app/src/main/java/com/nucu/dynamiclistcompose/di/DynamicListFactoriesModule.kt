@@ -1,15 +1,16 @@
 package com.nucu.dynamiclistcompose.di
 
 import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
+import com.nucu.dynamiclistcompose.factories.BannerCarouselFactory
 import com.nucu.dynamiclistcompose.factories.BannerFactory
 import com.nucu.dynamiclistcompose.factories.FiltersFactory
-import com.nucu.dynamiclistcompose.factories.HeaderFactory
-import com.nucu.dynamiclistcompose.factories.OneClickReorderFactory
-import com.nucu.dynamiclistcompose.factories.TobaccoFactory
+import com.nucu.dynamiclistcompose.factories.TextFactory
+import com.nucu.dynamiclistcompose.factories.CardsFactory
+import com.nucu.dynamiclistcompose.factories.FacesFactory
+import com.nucu.dynamiclistcompose.factories.MessageFactory
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 
@@ -19,8 +20,8 @@ abstract class DynamicListFactoriesModule {
 
     @Binds
     @IntoSet
-    abstract fun bindOneClickReorderFactory(
-        factory: OneClickReorderFactory
+    abstract fun bindCardsFactory(
+        factory: CardsFactory
     ): DynamicListAdapterFactory
 
     @Binds
@@ -31,8 +32,8 @@ abstract class DynamicListFactoriesModule {
 
     @Binds
     @IntoSet
-    abstract fun bindTobaccoFactory(
-        factory: TobaccoFactory
+    abstract fun bindMessageFactory(
+        factory: MessageFactory
     ): DynamicListAdapterFactory
 
     @Binds
@@ -43,7 +44,19 @@ abstract class DynamicListFactoriesModule {
 
     @Binds
     @IntoSet
-    abstract fun bindHeaderFactory(
-        factory: HeaderFactory
+    abstract fun bindTextFactory(
+        factory: TextFactory
+    ): DynamicListAdapterFactory
+
+    @Binds
+    @IntoSet
+    abstract fun bindBannerCarouselFactory(
+        factory: BannerCarouselFactory
+    ): DynamicListAdapterFactory
+
+    @Binds
+    @IntoSet
+    abstract fun bindFacesFactory(
+        factory: FacesFactory
     ): DynamicListAdapterFactory
 }

@@ -8,16 +8,20 @@ import com.nucu.dynamiclistcompose.storage.database.skeletons.SkeletonsEntity
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.models.ContextType
 import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
+import com.nucu.dynamiclistcompose.di.IODispatcher
 import com.nucu.dynamiclistcompose.renders.base.RenderType
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class DynamicListUseCaseImpl @Inject constructor(
+    @IODispatcher val ioDispatcher: CoroutineDispatcher,
     private val controller: DynamicListControllerApi,
     private val database: AppDatabase
 ): DynamicListUseCaseApi {
@@ -52,7 +56,7 @@ class DynamicListUseCaseImpl @Inject constructor(
             }
             .catch {
                 emit(DynamicListAction.ErrorAction(it))
-            }
+            }.flowOn(ioDispatcher)
     }
 
     private suspend fun makeSkeletons(data: List<ComponentItemModel>, contextType: ContextType) {

@@ -32,7 +32,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.Stack
+import java.util.Queue
+import java.util.LinkedList
 
 abstract class DynamicListComposeController {
 
@@ -51,7 +52,7 @@ abstract class DynamicListComposeController {
     private val _elements = MutableStateFlow<List<DynamicListElement>>(emptyList())
     private val elements: StateFlow<List<DynamicListElement>> = _elements
 
-    private var showCaseSequence = Stack<DynamicListShowCaseModel>()
+    private var showCaseSequence: Queue<DynamicListShowCaseModel> = LinkedList()
 
     var data: List<ComponentItemModel> = listOf()
 
@@ -90,7 +91,7 @@ abstract class DynamicListComposeController {
 
                     if (alreadyShowed.not()) {
                         // Add to sequence
-                        showCaseSequence.push(
+                        showCaseSequence.add(
                             DynamicListShowCaseModel(component.render, component.index)
                         )
                     }
@@ -102,6 +103,10 @@ abstract class DynamicListComposeController {
                     listener = listener
                 )
             }
+
+            showCaseSequence.add(
+                DynamicListShowCaseModel("", 0, true)
+            )
         }
     }
 
@@ -110,7 +115,7 @@ abstract class DynamicListComposeController {
         BlinkAnimation {
             Column(
                 modifier = Modifier
-                    .padding(start = 16.dp, end = 16.dp),
+                    .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 getMapSkeletons().forEach { render ->
@@ -144,6 +149,7 @@ abstract class DynamicListComposeController {
             listState = listState,
             widthSizeClass = widthSizeClass,
             onAction = onAction,
+            withVerticalPadding = false,
             showCaseState = showCaseState
         )
     }
@@ -194,13 +200,28 @@ abstract class DynamicListComposeController {
         if (showCaseSequence.isNotEmpty() && showOnNextShowCase == -1) {
             SideEffect {
                 coroutineScope.launch {
-                    delay(100)
-                    val nextShowCase = showCaseSequence.pop()
-                    showCaseState.setCurrentIndexFromDL(nextShowCase.index)
-                    delay(500)
-                    bodyListState.animateScrollToItem(nextShowCase.index)
+                    delay(SHOW_CASE_START_DELAY)
+                    showCaseSequence.poll()?.let {
+                        if (it.isFlagElement) {
+                            // Go to top when show case queue is finished
+                            showCaseSequence.poll()
+                            coroutineScope.launch {
+                                bodyListState.animateScrollToItem(0)
+                            }
+                        } else {
+                            // Show next showCase target
+                            showCaseState.setCurrentIndexFromDL(it.index)
+                            delay(SHOW_CASE_END_DELAY)
+                            bodyListState.animateScrollToItem(it.index)
+                        }
+                    }
                 }
             }
         }
+    }
+
+    companion object {
+        private const val SHOW_CASE_START_DELAY: Long = 100
+        private const val SHOW_CASE_END_DELAY: Long = 500
     }
 }
