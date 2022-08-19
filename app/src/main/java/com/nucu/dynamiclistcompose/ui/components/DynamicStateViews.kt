@@ -26,6 +26,7 @@ fun LoaderView() {
     ) {
         val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.loader))
         LottieAnimation(
+            modifier = Modifier.fillMaxSize(),
             composition = composition,
             iterations = LottieConstants.IterateForever
         )

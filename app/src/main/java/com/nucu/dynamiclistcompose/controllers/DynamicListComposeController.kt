@@ -102,6 +102,10 @@ abstract class DynamicListComposeController {
                     listener = listener
                 )
             }
+
+            showCaseSequence.add(
+                DynamicListShowCaseModel("", 0, true)
+            )
         }
     }
 
@@ -197,9 +201,17 @@ abstract class DynamicListComposeController {
                 coroutineScope.launch {
                     delay(SHOW_CASE_START_DELAY)
                     showCaseSequence.poll()?.let {
-                        showCaseState.setCurrentIndexFromDL(it.index)
-                        delay(SHOW_CASE_END_DELAY)
-                        bodyListState.animateScrollToItem(it.index)
+                        if (it.isFlagElement) {
+                            // Go to top when show case queue is finished
+                            coroutineScope.launch {
+                                bodyListState.animateScrollToItem(0)
+                            }
+                        } else {
+                            // Show next showCase target
+                            showCaseState.setCurrentIndexFromDL(it.index)
+                            delay(SHOW_CASE_END_DELAY)
+                            bodyListState.animateScrollToItem(it.index)
+                        }
                     }
                 }
             }
