@@ -66,7 +66,7 @@ To complete this magic, now we should register the component and follow the next
 
 ### Hilt
 
-Hilt helps us to inject these renders and factories when the back end responds, to show this component we need to add it to:
+Hilt helps us to inject these renders and factories when the back end responds, to show this component we need add it to:
 
 * ###### DynamicListFactoriesModule
     ```java
@@ -88,23 +88,17 @@ Hilt helps us to inject these renders and factories when the back end responds, 
 
 And thats it...
 
-### Skeletons
-<img src="https://user-images.githubusercontent.com/7097754/185690462-8ce16cc5-7437-4432-b160-be3414e7ad24.png" width="342.5" height="633.5"/>
+| Skeletons             |  Home screen |
+:------------------------:|:-------------------------:
+<img src="https://user-images.githubusercontent.com/7097754/185690462-8ce16cc5-7437-4432-b160-be3414e7ad24.png" width="342.5" height="633.5"/>  |  <img src="https://user-images.githubusercontent.com/7097754/185686746-88c7f7ac-e8f4-47e5-b464-c3408183cd96.png" width="342.5" height="633.5"/>
 
-### Home screen
-<img src="https://user-images.githubusercontent.com/7097754/185686746-88c7f7ac-e8f4-47e5-b464-c3408183cd96.png" width="342.5" height="633.5"/>
+| Tooltips             |  Tooltip sequence |
+:------------------------:|:-------------------------:
+<img src="https://user-images.githubusercontent.com/7097754/185691070-6f950308-a677-49cb-b8db-50751c8fe086.png" width="342.5" height="633.5"/>  |  <img src="https://user-images.githubusercontent.com/7097754/185699798-47430b25-2f9f-4a12-ae0f-29d59339afff.mp4" width="360" height="780"/>
 
-### Tooltips
-<img src="https://user-images.githubusercontent.com/7097754/185691070-6f950308-a677-49cb-b8db-50751c8fe086.png" width="342.5" height="633.5"/>
-
-### Tooltip sequence
-<img src="https://user-images.githubusercontent.com/7097754/185699798-47430b25-2f9f-4a12-ae0f-29d59339afff.mp4" width="360" height="780"/>
-
-### MotionLayout
-<img src="https://user-images.githubusercontent.com/7097754/185695027-092f14e5-0236-48e2-99c1-6877f418d1c7.mp4" width="360" height="780"/>
-
-### Navigation
-<img src="https://user-images.githubusercontent.com/7097754/185700856-c89c81a5-2880-4e3e-b75d-743c55291a8e.mp4" width="360" height="780"/>
+| Motion Layout             |  Navigation |
+:------------------------:|:-------------------------:
+<img src="https://user-images.githubusercontent.com/7097754/185695027-092f14e5-0236-48e2-99c1-6877f418d1c7.mp4" width="360" height="780"/>  |  <img src="https://user-images.githubusercontent.com/7097754/185700856-c89c81a5-2880-4e3e-b75d-743c55291a8e.mp4" width="360" height="780"/>
 
 ### Scroll actions
 <img src="https://user-images.githubusercontent.com/7097754/185701348-b80f92ae-01e7-4381-9c6b-7a7d30aa9617.mp4" width="360" height="780"/>
