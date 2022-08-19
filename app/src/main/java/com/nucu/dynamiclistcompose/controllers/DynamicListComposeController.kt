@@ -203,6 +203,7 @@ abstract class DynamicListComposeController {
                     showCaseSequence.poll()?.let {
                         if (it.isFlagElement) {
                             // Go to top when show case queue is finished
+                            showCaseSequence.poll()
                             coroutineScope.launch {
                                 bodyListState.animateScrollToItem(0)
                             }
