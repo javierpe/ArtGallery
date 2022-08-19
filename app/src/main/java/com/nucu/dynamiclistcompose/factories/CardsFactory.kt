@@ -28,13 +28,19 @@ class CardsFactory @Inject constructor(): DynamicListAdapterFactory {
             RenderType.CARDS
         )
 
+    override val hasShowCaseConfigured: Boolean = true
+
     @Composable
     override fun CreateComponent(
         component: ComponentItemModel,
         listener: DynamicListComponentListener?,
         componentInfo: ComponentInfo
     ) {
-        CardsComponentView(component.resource as CardsModel)
+        CardsComponentView(
+            component.resource as CardsModel,
+            componentIndex = component.index,
+            showCaseState = componentInfo.showCaseState
+        )
     }
 
     @Composable

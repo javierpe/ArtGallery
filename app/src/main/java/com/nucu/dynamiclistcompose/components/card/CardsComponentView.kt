@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -37,6 +37,14 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.nucu.dynamiclistcompose.data.models.tooltip.ShowCaseStrategy
+import com.nucu.dynamiclistcompose.renders.base.RenderType
+import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseState
+import com.nucu.dynamiclistcompose.ui.components.showCase.ShowCaseStyle
+import com.nucu.dynamiclistcompose.ui.components.showCase.TooltipView
+import com.nucu.dynamiclistcompose.ui.components.showCase.asShowCaseTarget
+import com.nucu.dynamiclistcompose.ui.components.showCase.models.ShapeType
+import com.nucu.dynamiclistcompose.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.viewModels.CardsViewModel
 import com.nucu.dynamiclistcompose.ui.theme.Typography
 
@@ -46,6 +54,8 @@ private const val MAX_ELEMENTS = 3
 @Composable
 fun CardsComponentView(
     data: CardsModel,
+    componentIndex: Int,
+    showCaseState: ShowCaseState,
     viewModel: CardsViewModel = hiltViewModel(),
 ) {
     Column(
@@ -86,20 +96,38 @@ fun CardsComponentView(
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp),
         ) {
-            items(items = data.cardElements, key = { it.hashCode() }) {
+            itemsIndexed(items = data.cardElements) { index, item ->
+
+                val modifier = if (index == 0) {
+                    Modifier.asShowCaseTarget(
+                        index = componentIndex,
+                        style = ShowCaseStyle.Default.copy(
+                            shapeType = ShapeType.RECTANGLE,
+                            cornerRadius = 16.dp,
+                            withAnimation = false
+                        ),
+                        content = {
+                            TooltipView(text = "Esto es un card dentro de un carrusel")
+                        },
+                        strategy = ShowCaseStrategy(firstToHappen = true),
+                        key = RenderType.CARDS.value,
+                        state = showCaseState
+                    )
+                } else Modifier
 
                 val pictures by remember {
                     derivedStateOf {
-                        it.images.take(MAX_ELEMENTS)
+                        item.images.take(MAX_ELEMENTS)
                     }
                 }
 
                 Card(
-                    modifier = Modifier
+                    modifier = modifier
                         .wrapContentWidth()
                         .height(100.dp)
                         .clickable {
-                            viewModel.navigateToCardsDetail(it.title, it.images.map { it.imageURL })
+                            viewModel.navigateToCardsDetail(item.title,
+                                item.images.map { it.imageURL })
                         },
                     shape = RoundedCornerShape(12.dp),
                     elevation = 5.dp
@@ -111,7 +139,7 @@ fun CardsComponentView(
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
                         Text(
-                            text = it.title,
+                            text = item.title,
                             color = MaterialTheme.colors.secondary,
                             style = Typography.button
                         )
@@ -135,14 +163,14 @@ fun CardsComponentView(
                                 )
                             }
 
-                            if (it.images.size > MAX_ELEMENTS) {
+                            if (item.images.size > MAX_ELEMENTS) {
                                 Box(
                                     modifier = Modifier
                                         .align(Alignment.CenterVertically)
                                         .clip(RoundedCornerShape(16.dp))
                                 ) {
                                     Text(
-                                        text = "+${it.images.size - MAX_ELEMENTS}",
+                                        text = "+${item.images.size - MAX_ELEMENTS}",
                                         style = Typography.button
                                     )
                                 }
@@ -163,7 +191,9 @@ fun PreviewCardsComponentView() {
             cardElements = listOf(
                 CardElement("Hola", images = emptyList())
             ),
-            title = "Title"
-        )
+            title = "Title",
+        ),
+        componentIndex = 0,
+        showCaseState = rememberShowCaseState()
     )
 }

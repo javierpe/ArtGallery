@@ -101,7 +101,7 @@ fun MainContent(
             Row {
                 Box(
                     modifier = Modifier
-                        .width(500.dp)
+                        .width(250.dp)
                         .fillMaxHeight()
                         .padding(16.dp)
                         .clip(RoundedCornerShape(16.dp))

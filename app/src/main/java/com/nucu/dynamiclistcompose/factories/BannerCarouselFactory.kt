@@ -30,6 +30,8 @@ class BannerCarouselFactory @Inject constructor(
             RenderType.BANNER_CAROUSEL
         )
 
+    override val hasShowCaseConfigured: Boolean = true
+
     @Composable
     override fun CreateComponent(
         component: ComponentItemModel,
@@ -37,7 +39,9 @@ class BannerCarouselFactory @Inject constructor(
         componentInfo: ComponentInfo,
     ) {
         BannerCarouselComponentView(
-            images = (component.resource as BannerCarouselModel).banners
+            images = (component.resource as BannerCarouselModel).banners,
+            componentIndex = component.index,
+            showCaseState = componentInfo.showCaseState
         )
     }
 

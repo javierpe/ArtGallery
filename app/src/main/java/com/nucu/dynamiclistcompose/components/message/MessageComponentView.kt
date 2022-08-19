@@ -45,7 +45,7 @@ fun MessageComponentView(
                 content = {
                     TooltipView(text = "Esto es un componente Mensaje de Dynamic List con animación")
                 },
-                strategy = ShowCaseStrategy(onlyUserInteraction = true),
+                strategy = ShowCaseStrategy(firstToHappen = true),
                 key = RenderType.MESSAGE.value,
                 state = showCaseState
             )

@@ -15,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
-import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.nucu.dynamiclistcompose.R
 
@@ -25,8 +25,10 @@ fun LoaderView() {
         modifier = Modifier.fillMaxSize()
     ) {
         val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.loader))
-        val progress by animateLottieCompositionAsState(composition)
-        LottieAnimation(composition, progress, modifier = Modifier.align(Alignment.Center))
+        LottieAnimation(
+            composition = composition,
+            iterations = LottieConstants.IterateForever
+        )
     }
 }
 
