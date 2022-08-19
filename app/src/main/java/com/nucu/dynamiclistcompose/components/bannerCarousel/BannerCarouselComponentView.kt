@@ -32,6 +32,8 @@ fun BannerCarouselComponentView(
     images: List<BannerModel>,
     viewModel: BannerViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
+
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         modifier = Modifier.fillMaxWidth(),
@@ -46,7 +48,7 @@ fun BannerCarouselComponentView(
                     .clickable {
                         viewModel.loadBanner(it.imageURL)
                     },
-                model = ImageRequest.Builder(LocalContext.current)
+                model = ImageRequest.Builder(context)
                     .data(it.imageURL)
                     .crossfade(true)
                     .diskCacheKey(it.imageURL)

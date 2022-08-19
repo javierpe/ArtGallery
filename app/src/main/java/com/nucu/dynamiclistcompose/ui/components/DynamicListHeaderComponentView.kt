@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -31,6 +32,7 @@ fun DynamicListHeaderComponentView(
     title: String,
     contextType: ContextType,
     bodyLazyListState: LazyListState? = null,
+    bodyLazyGridState: LazyGridState? = null,
     onBackPressed: () -> Unit // Remove this and set navigation compose here
 ) {
     when (contextType) {
@@ -42,10 +44,11 @@ fun DynamicListHeaderComponentView(
             )
         }
 
-        ContextType.HOME -> {
+        ContextType.HOME, ContextType.CARD_DETAIL -> {
             HeaderWithImageView(
                 title = title,
                 bodyLazyListState = bodyLazyListState,
+                bodyLazyGridState = bodyLazyGridState,
                 onBackPressed = onBackPressed
             )
         }

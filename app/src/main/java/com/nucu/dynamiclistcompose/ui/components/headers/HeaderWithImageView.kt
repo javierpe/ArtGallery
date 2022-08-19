@@ -8,10 +8,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.style.TextAlign
@@ -37,6 +39,7 @@ const val MIN_HEIGHT = 65
 fun HeaderWithImageView(
     title: String,
     bodyLazyListState: LazyListState? = null,
+    bodyLazyGridState: LazyGridState? = null,
     onBackPressed: () -> Unit
 ) {
 
@@ -44,8 +47,10 @@ fun HeaderWithImageView(
     val titleLayoutId = "title"
     val backButtonLayoutId = "back_button"
 
-    val firstVisibleItem by derivedStateOf {
-        bodyLazyListState?.firstVisibleItemIndex ?: 0
+    val firstVisibleItem by remember {
+        derivedStateOf {
+            bodyLazyListState?.firstVisibleItemIndex ?: bodyLazyGridState?.firstVisibleItemIndex ?: 0
+        }
     }
 
     val progress by animateFloatAsState(
@@ -124,8 +129,7 @@ fun HeaderWithImageView(
         start = constraintSetStart(),
         end = constraintSetEnd(),
         progress = progress,
-        modifier = Modifier.height(motionHeight),
-        debug = EnumSet.of(MotionLayoutDebugFlags.NONE)
+        modifier = Modifier.height(motionHeight)
     ) {
 
         val backgroundProperties = motionProperties(backgroundLayoutId)

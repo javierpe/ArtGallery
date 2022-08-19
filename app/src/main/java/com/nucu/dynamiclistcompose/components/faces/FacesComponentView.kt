@@ -44,6 +44,9 @@ fun FaceView(
     name: String,
     imageUrl: String
 ) {
+
+    val context = LocalContext.current
+
     Column(
         verticalArrangement = Arrangement.spacedBy(5.dp),
         modifier = Modifier.width(70.dp)
@@ -53,7 +56,7 @@ fun FaceView(
                 .size(70.dp)
                 .clip(CircleShape)
                 .align(Alignment.CenterHorizontally),
-            model = ImageRequest.Builder(LocalContext.current)
+            model = ImageRequest.Builder(context)
                 .data(imageUrl)
                 .crossfade(true)
                 .diskCacheKey(imageUrl)

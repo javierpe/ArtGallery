@@ -16,11 +16,9 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -36,26 +34,25 @@ import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import coil.compose.AsyncImagePainter
-import coil.compose.SubcomposeAsyncImage
-import coil.compose.SubcomposeAsyncImageContent
 import coil.request.ImageRequest
+import com.nucu.dynamiclistcompose.viewModels.CardsViewModel
 import com.nucu.dynamiclistcompose.ui.theme.Typography
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.forEach
 
 private const val MAX_ELEMENTS = 3
 
 @OptIn(ExperimentalUnitApi::class)
 @Composable
 fun CardsComponentView(
-    data: CardsModel
+    data: CardsModel,
+    viewModel: CardsViewModel = hiltViewModel(),
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
+
+        val context = LocalContext.current
 
         val decoration by remember {
             derivedStateOf {
@@ -100,20 +97,23 @@ fun CardsComponentView(
                 Card(
                     modifier = Modifier
                         .wrapContentWidth()
-                        .height(100.dp),
+                        .height(100.dp)
+                        .clickable {
+                            viewModel.navigateToCardsDetail(it.title, it.images.map { it.imageURL })
+                        },
                     shape = RoundedCornerShape(12.dp),
                     elevation = 5.dp
                 ) {
 
                     Column(
                         modifier = Modifier
-                            .clickable { }
                             .padding(10.dp),
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
                         Text(
                             text = it.title,
-                            color = MaterialTheme.colors.secondary
+                            color = MaterialTheme.colors.secondary,
+                            style = Typography.button
                         )
 
                         Row(
@@ -126,7 +126,7 @@ fun CardsComponentView(
                                     modifier = Modifier
                                         .size(46.dp)
                                         .clip(RoundedCornerShape(5.dp)),
-                                    model = ImageRequest.Builder(LocalContext.current)
+                                    model = ImageRequest.Builder(context)
                                         .data(cardImage.imageURL)
                                         .crossfade(true)
                                         .build(),

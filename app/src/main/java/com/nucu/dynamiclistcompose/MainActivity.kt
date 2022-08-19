@@ -29,6 +29,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.ui.base.ContextView
 import com.nucu.dynamiclistcompose.ui.navigation.bannerScreenNav
+import com.nucu.dynamiclistcompose.ui.navigation.cardScreenNav
 import com.nucu.dynamiclistcompose.ui.navigation.homeNav
 import com.nucu.dynamiclistcompose.ui.theme.DynamicListComposeTheme
 import com.nucu.dynamiclistcompose.ui.theme.Typography
@@ -59,8 +60,11 @@ class MainActivity : ComponentActivity() {
                         // Main
                         homeNav(widthSizeClass)
 
-                        // Banner
+                        // Banner screen
                         bannerScreenNav()
+
+                        // Card screen
+                        cardScreenNav()
                     }
                 }
             }
