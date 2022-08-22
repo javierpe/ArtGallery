@@ -11,6 +11,7 @@
  - [x] Render process mechanism
  - [ ] Package refactor and naming
  - [ ] Unit test
+ - [ ] Macrobenchmark test
  - [ ] Android CI
 
  Art Gallery is based on Server Driven UI, only provide a JSON with a UI definition.
