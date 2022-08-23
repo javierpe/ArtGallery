@@ -26,7 +26,7 @@ class BannerViewModelTest {
     }
 
     @Test
-    fun `navigateTo should be called when loadBanner is executed`() {
+    fun `navigateTo should be called when navigateToCardsDetail is executed`() {
         viewModel.loadBanner(String())
         verify(navigationController).navigateTo(Route.BannerScreen.name, listOf(String()))
     }
