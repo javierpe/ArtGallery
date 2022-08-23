@@ -1,7 +1,7 @@
 package com.nucu.dynamiclistcompose.di
 
-import com.nucu.dynamiclistcompose.api.DynamicListControllerApi
-import com.nucu.dynamiclistcompose.impl.DynamicListControllerImpl
+import com.nucu.dynamiclistcompose.data.api.DynamicListControllerApi
+import com.nucu.dynamiclistcompose.domain.impl.DynamicListControllerImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

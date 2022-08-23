@@ -1,13 +1,13 @@
 package com.nucu.dynamiclistcompose.di
 
-import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
-import com.nucu.dynamiclistcompose.factories.BannerCarouselFactory
-import com.nucu.dynamiclistcompose.factories.BannerFactory
-import com.nucu.dynamiclistcompose.factories.FiltersFactory
-import com.nucu.dynamiclistcompose.factories.TextFactory
-import com.nucu.dynamiclistcompose.factories.CardsFactory
-import com.nucu.dynamiclistcompose.factories.FacesFactory
-import com.nucu.dynamiclistcompose.factories.MessageFactory
+import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
+import com.nucu.dynamiclistcompose.data.factories.BannerCarouselFactory
+import com.nucu.dynamiclistcompose.data.factories.BannerFactory
+import com.nucu.dynamiclistcompose.data.factories.FiltersFactory
+import com.nucu.dynamiclistcompose.data.factories.TextFactory
+import com.nucu.dynamiclistcompose.data.factories.CardsFactory
+import com.nucu.dynamiclistcompose.data.factories.FacesFactory
+import com.nucu.dynamiclistcompose.data.factories.MessageFactory
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -22,41 +22,41 @@ abstract class DynamicListFactoriesModule {
     @IntoSet
     abstract fun bindCardsFactory(
         factory: CardsFactory
-    ): DynamicListAdapterFactory
+    ): DynamicListFactory
 
     @Binds
     @IntoSet
     abstract fun bindBannerFactory(
         factory: BannerFactory
-    ): DynamicListAdapterFactory
+    ): DynamicListFactory
 
     @Binds
     @IntoSet
     abstract fun bindMessageFactory(
         factory: MessageFactory
-    ): DynamicListAdapterFactory
+    ): DynamicListFactory
 
     @Binds
     @IntoSet
     abstract fun bindFiltersFactory(
         factory: FiltersFactory
-    ): DynamicListAdapterFactory
+    ): DynamicListFactory
 
     @Binds
     @IntoSet
     abstract fun bindTextFactory(
         factory: TextFactory
-    ): DynamicListAdapterFactory
+    ): DynamicListFactory
 
     @Binds
     @IntoSet
     abstract fun bindBannerCarouselFactory(
         factory: BannerCarouselFactory
-    ): DynamicListAdapterFactory
+    ): DynamicListFactory
 
     @Binds
     @IntoSet
     abstract fun bindFacesFactory(
         factory: FacesFactory
-    ): DynamicListAdapterFactory
+    ): DynamicListFactory
 }

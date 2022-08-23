@@ -1,7 +1,7 @@
 package com.nucu.dynamiclistcompose.di
 
-import com.nucu.dynamiclistcompose.api.TooltipPreferencesApi
-import com.nucu.dynamiclistcompose.impl.TooltipPreferencesImpl
+import com.nucu.dynamiclistcompose.data.api.TooltipPreferencesApi
+import com.nucu.dynamiclistcompose.domain.impl.TooltipPreferencesImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

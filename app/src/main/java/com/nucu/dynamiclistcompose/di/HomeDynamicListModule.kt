@@ -1,9 +1,9 @@
 package com.nucu.dynamiclistcompose.di
 
 import com.google.gson.Gson
-import com.nucu.dynamiclistcompose.adapters.DefaultAdapterController
-import com.nucu.dynamiclistcompose.adapters.DynamicListAdapterFactory
-import com.nucu.dynamiclistcompose.api.TooltipPreferencesApi
+import com.nucu.dynamiclistcompose.data.controllers.DefaultDynamicListController
+import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
+import com.nucu.dynamiclistcompose.data.api.TooltipPreferencesApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,11 +16,11 @@ object HomeDynamicListModule {
 
     @Provides
     fun provideDefaultAdapterController(
-        delegates: MutableSet<@JvmSuppressWildcards DynamicListAdapterFactory>,
+        delegates: MutableSet<@JvmSuppressWildcards DynamicListFactory>,
         @DefaultDispatcher defaultDispatcher: CoroutineDispatcher,
         tooltipPreferencesApi: TooltipPreferencesApi
-    ): DefaultAdapterController {
-        return DefaultAdapterController(
+    ): DefaultDynamicListController {
+        return DefaultDynamicListController(
             delegates,
             emptySet(),
             defaultDispatcher,
