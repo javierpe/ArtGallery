@@ -5,8 +5,6 @@ import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.data.api.DynamicListUseCaseApi
 import com.nucu.dynamiclistcompose.domain.database.AppDatabase
 import com.nucu.dynamiclistcompose.domain.database.skeletons.SkeletonsEntity
-import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
-import com.nucu.dynamiclistcompose.data.models.ContextType
 import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
 import com.nucu.dynamiclistcompose.di.IODispatcher
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
@@ -36,9 +34,13 @@ class DynamicListUseCaseImpl @Inject constructor(
             .onEach {
                 // Save skeletons
                 if (it is DynamicListAction.SuccessAction) {
-                    makeSkeletons(
-                        data = it.container.headers + it.container.bodies,
-                        contextType = requestModel.contextType
+                    database.skeletonsDao().saveSkeletonsByContext(
+                        SkeletonsEntity(
+                            context = requestModel.contextType.source,
+                            renders = (it.container.headers + it.container.bodies).map {
+                                    component -> RenderType.valueOf(component.render.uppercase())
+                            }
+                        )
                     )
                 }
             }
@@ -57,18 +59,5 @@ class DynamicListUseCaseImpl @Inject constructor(
             .catch {
                 emit(DynamicListAction.ErrorAction(it))
             }.flowOn(ioDispatcher)
-    }
-
-    private suspend fun makeSkeletons(data: List<ComponentItemModel>, contextType: ContextType) {
-        withContext(Dispatchers.IO) {
-            database.skeletonsDao().saveSkeletonsByContext(
-                SkeletonsEntity(
-                    context = contextType.source,
-                    renders = data.map {
-                            component -> RenderType.valueOf(component.render.uppercase())
-                    }
-                )
-            )
-        }
     }
 }

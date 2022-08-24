@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose
+package com.nucu.dynamiclistcompose.presentation.viewModels
 
 import com.google.gson.Gson
 import com.javier.api.NavigationController

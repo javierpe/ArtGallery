@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose
+package com.nucu.dynamiclistcompose.presentation.viewModels
 
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import com.nucu.dynamiclistcompose.data.api.TooltipPreferencesApi

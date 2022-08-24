@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose
+package com.nucu.dynamiclistcompose.presentation.viewModels
 
 import com.javier.api.NavigationController
 import com.javier.api.models.Route
