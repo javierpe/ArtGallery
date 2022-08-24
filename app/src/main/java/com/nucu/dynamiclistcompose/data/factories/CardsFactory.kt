@@ -14,11 +14,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.presentation.components.card.CardsModel
-import com.nucu.dynamiclistcompose.presentation.components.card.CardsComponentView
 import com.nucu.dynamiclistcompose.data.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.nucu.dynamiclistcompose.presentation.components.card.CardsComponentViewScreen
 import javax.inject.Inject
 
 class CardsFactory @Inject constructor(): DynamicListFactory {
@@ -37,7 +37,7 @@ class CardsFactory @Inject constructor(): DynamicListFactory {
         listener: DynamicListComponentListener?,
         componentInfo: ComponentInfo
     ) {
-        CardsComponentView(
+        CardsComponentViewScreen(
             modifier = modifier,
             component.resource as CardsModel,
             componentIndex = component.index,

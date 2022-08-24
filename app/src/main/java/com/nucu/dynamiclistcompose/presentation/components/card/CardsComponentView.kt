@@ -51,6 +51,27 @@ import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
 
 private const val MAX_ELEMENTS = 3
 
+const val CARD_COMPONENT_SCREEN_TAG = "card_component_screen"
+const val CARD_COMPONENT_TAG = "card_component"
+
+@Composable
+fun CardsComponentViewScreen(
+    modifier: Modifier,
+    data: CardsModel,
+    componentIndex: Int,
+    showCaseState: ShowCaseState,
+    viewModel: CardsViewModel = hiltViewModel(),
+) {
+    CardsComponentView(
+        modifier = modifier.testTag(CARD_COMPONENT_SCREEN_TAG),
+        data = data,
+        componentIndex = componentIndex,
+        showCaseState = showCaseState
+    ) { title, images ->
+        viewModel.navigateToCardsDetail(title, images)
+    }
+}
+
 @OptIn(ExperimentalUnitApi::class)
 @Composable
 fun CardsComponentView(
@@ -58,7 +79,7 @@ fun CardsComponentView(
     data: CardsModel,
     componentIndex: Int,
     showCaseState: ShowCaseState,
-    viewModel: CardsViewModel = hiltViewModel(),
+    onNavigateToDetail:(String, List<String>) -> Unit
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(10.dp),
@@ -134,7 +155,7 @@ fun CardsComponentView(
                         .wrapContentWidth()
                         .height(100.dp)
                         .clickable {
-                            viewModel.navigateToCardsDetail(item.title,
+                            onNavigateToDetail.invoke(item.title,
                                 item.images.map { it.imageURL })
                         },
                     shape = RoundedCornerShape(12.dp),
@@ -204,5 +225,5 @@ fun PreviewCardsComponentView() {
         componentIndex = 0,
         showCaseState = rememberShowCaseState(),
         modifier = Modifier
-    )
+    ) { _, _ -> }
 }

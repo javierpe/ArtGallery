@@ -47,7 +47,7 @@ class BannerCarouselComponentViewScreenTest {
     }
 
     @Test
-    fun bannerScreenShouldComponentView() {
+    fun bannerCarouselScreenShouldHaveComponentView() {
         composeTestRule
             .onNodeWithTag(BANNER_CAROUSEL_IMAGE_SCREEN_TEST_TAG)
             .assertExists("BannerCarouselComponentViewScreen does has not have a BannerCarouselComponentView!")

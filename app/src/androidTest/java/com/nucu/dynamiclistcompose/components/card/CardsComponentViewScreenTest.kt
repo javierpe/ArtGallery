@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose.components.banner
+package com.nucu.dynamiclistcompose.components.card
 
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -6,11 +6,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import com.nucu.dynamiclistcompose.MainActivity
-import com.nucu.dynamiclistcompose.presentation.components.banner.BANNER_IMAGE_SCREEN_TEST_TAG
-import com.nucu.dynamiclistcompose.presentation.components.banner.BannerComponentViewScreen
+import com.nucu.dynamiclistcompose.presentation.components.card.CARD_COMPONENT_SCREEN_TAG
+import com.nucu.dynamiclistcompose.presentation.components.card.CardsComponentViewScreen
+import com.nucu.dynamiclistcompose.presentation.components.card.CardsModel
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
-import com.nucu.dynamiclistcompose.presentation.viewModels.BannerViewModel
+import com.nucu.dynamiclistcompose.presentation.viewModels.CardsViewModel
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Before
@@ -18,7 +19,7 @@ import org.junit.Rule
 import org.junit.Test
 
 @HiltAndroidTest
-class BannerComponentViewScreenTest {
+class CardsComponentViewScreenTest {
 
     @get:Rule(order = 0)
     val hiltTestRule = HiltAndroidRule(this)
@@ -29,12 +30,12 @@ class BannerComponentViewScreenTest {
     @Before
     fun setUp() {
         hiltTestRule.inject()
-        val viewModel = composeTestRule.activity.viewModels<BannerViewModel>().value
+        val viewModel = composeTestRule.activity.viewModels<CardsViewModel>().value
         composeTestRule.activity.setContent {
             DynamicListComposeTheme {
-                BannerComponentViewScreen(
+                CardsComponentViewScreen(
                     modifier = Modifier,
-                    imageURL = String(),
+                    data = CardsModel(String(), emptyList()),
                     componentIndex = 0,
                     showCaseState = rememberShowCaseState(),
                     viewModel = viewModel
@@ -44,9 +45,9 @@ class BannerComponentViewScreenTest {
     }
 
     @Test
-    fun bannerScreenShouldHaveComponentView() {
+    fun cardsScreenShouldHaveComponentView() {
         composeTestRule
-            .onNodeWithTag(BANNER_IMAGE_SCREEN_TEST_TAG)
-            .assertExists("BannerComponentViewScreen does has not have a BannerComponentView!")
+            .onNodeWithTag(CARD_COMPONENT_SCREEN_TAG)
+            .assertExists("CardsComponentViewScreen does has not have a CardsComponentView!")
     }
 }
