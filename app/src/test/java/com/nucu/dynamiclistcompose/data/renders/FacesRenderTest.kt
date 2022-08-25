@@ -2,6 +2,7 @@ package com.nucu.dynamiclistcompose.data.renders
 
 import com.google.gson.Gson
 import com.google.gson.JsonParser
+import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.faces.FacesItemModel
 import com.nucu.dynamiclistcompose.presentation.components.faces.FacesModel
 import kotlinx.coroutines.Dispatchers
@@ -60,5 +61,10 @@ class FacesRenderTest {
     fun `resolve should convert JSON to FacesModel`() = runTest {
         val model = render.resolve(String(), JsonParser().parse(resource).asJsonObject)
         assert(model == sourceOfTrueModel)
+    }
+
+    @Test
+    fun `Render name should be FACES`() = runTest {
+        assert(render.renders.contains(RenderType.FACES))
     }
 }

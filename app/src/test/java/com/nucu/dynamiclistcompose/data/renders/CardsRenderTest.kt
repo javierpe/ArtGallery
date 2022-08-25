@@ -2,6 +2,7 @@ package com.nucu.dynamiclistcompose.data.renders
 
 import com.google.gson.Gson
 import com.google.gson.JsonParser
+import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.card.CardElement
 import com.nucu.dynamiclistcompose.presentation.components.card.CardImage
 import com.nucu.dynamiclistcompose.presentation.components.card.CardsModel
@@ -71,5 +72,10 @@ class CardsRenderTest {
     fun `resolve should convert JSON to CardsModel`() = runTest {
         val model = render.resolve(String(), JsonParser().parse(resource).asJsonObject)
         assert(model == sourceOfTrueModel)
+    }
+
+    @Test
+    fun `Render name should be CARDS`() = runTest {
+        assert(render.renders.contains(RenderType.CARDS))
     }
 }

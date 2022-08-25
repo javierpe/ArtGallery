@@ -2,6 +2,7 @@ package com.nucu.dynamiclistcompose.data.renders
 
 import com.google.gson.Gson
 import com.google.gson.JsonParser
+import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.text.TextModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -49,5 +50,10 @@ class TextRenderTest {
     fun `resolve should convert JSON to TextModel`() = runTest {
         val model = render.resolve(String(), JsonParser().parse(resource).asJsonObject)
         assert(model == sourceOfTrueModel)
+    }
+
+    @Test
+    fun `Render name should be TEXT`() = runTest {
+        assert(render.renders.contains(RenderType.TEXT))
     }
 }
