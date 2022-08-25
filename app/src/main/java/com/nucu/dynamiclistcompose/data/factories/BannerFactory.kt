@@ -35,7 +35,6 @@ class BannerFactory @Inject constructor(
     override fun CreateComponent(
         modifier: Modifier,
         component: ComponentItemModel,
-        listener: DynamicListComponentListener?,
         componentInfo: ComponentInfo
     ) {
         BannerComponentViewScreen(

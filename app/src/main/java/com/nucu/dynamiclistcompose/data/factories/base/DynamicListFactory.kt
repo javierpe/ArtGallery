@@ -27,7 +27,6 @@ interface DynamicListFactory {
     fun CreateComponent(
         modifier: Modifier,
         component: ComponentItemModel,
-        listener: DynamicListComponentListener?,
         componentInfo: ComponentInfo
     )
 

@@ -10,7 +10,6 @@ import javax.inject.Inject
 
 class DefaultDynamicListController @Inject constructor(
     override val delegates: MutableSet<@JvmSuppressWildcards DynamicListFactory>,
-    override val listeners: Set<@JvmSuppressWildcards DynamicListComponentListener>,
     override val defaultDispatcher: CoroutineDispatcher,
     override val tooltipPreferencesApi: TooltipPreferencesApi,
 ): DynamicListComposeController() {

@@ -46,7 +46,6 @@ fun DynamicListScreen(
             it.factory?.CreateComponent(
                 modifier = Modifier.animateItemPlacement(),
                 component = it.componentItemModel,
-                listener = it.listener,
                 componentInfo = ComponentInfo(
                     scrollAction = onAction,
                     windowWidthSizeClass = widthSizeClass,

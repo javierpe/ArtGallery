@@ -1,6 +1,5 @@
 package com.nucu.dynamiclistcompose.domain.database
 
-import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -21,9 +20,10 @@ class SkeletonsDaoTest {
 
     @Before
     fun setUp() {
-        val context = ApplicationProvider.getApplicationContext<Context>()
         db = Room.inMemoryDatabaseBuilder(
-            context, AppDatabase::class.java).build()
+            ApplicationProvider.getApplicationContext(),
+            AppDatabase::class.java
+        ).build()
         skeletonsDao = db.skeletonsDao()
     }
 

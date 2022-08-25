@@ -35,7 +35,6 @@ class CardsFactory @Inject constructor(): DynamicListFactory {
     override fun CreateComponent(
         modifier: Modifier,
         component: ComponentItemModel,
-        listener: DynamicListComponentListener?,
         componentInfo: ComponentInfo
     ) {
         CardsComponentViewScreen(

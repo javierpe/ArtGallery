@@ -53,7 +53,6 @@ class BannerFactoryTest {
             factory.CreateComponent(
                 modifier = Modifier,
                 component = componentItemModel,
-                listener = null,
                 componentInfo = ComponentInfo(
                     windowWidthSizeClass = calculateWindowSizeClass(composeTestRule.activity).widthSizeClass,
                     showCaseState = rememberShowCaseState()

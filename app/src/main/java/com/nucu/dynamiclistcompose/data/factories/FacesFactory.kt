@@ -40,7 +40,6 @@ class FacesFactory @Inject constructor(
     override fun CreateComponent(
         modifier: Modifier,
         component: ComponentItemModel,
-        listener: DynamicListComponentListener?,
         componentInfo: ComponentInfo,
     ) {
         FacesComponentView(

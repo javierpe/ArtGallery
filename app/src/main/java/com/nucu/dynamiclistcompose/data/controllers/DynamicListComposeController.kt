@@ -39,8 +39,6 @@ abstract class DynamicListComposeController {
 
     abstract val delegates: MutableSet<@JvmSuppressWildcards DynamicListFactory>
 
-    abstract val listeners: Set<@JvmSuppressWildcards DynamicListComponentListener>
-
     abstract val defaultDispatcher: CoroutineDispatcher
 
     abstract val tooltipPreferencesApi: TooltipPreferencesApi
@@ -70,10 +68,6 @@ abstract class DynamicListComposeController {
     private suspend fun transform() {
         withContext(defaultDispatcher) {
             _elements.value = getMapComponents().map { component ->
-                val listener = listeners.firstOrNull {
-                    it.render.value == component.render
-                }
-
                 val adapter = delegates.firstOrNull { adapterFactory ->
                     adapterFactory.renders.any { renderType ->
                         renderType.value == component.render
@@ -99,8 +93,7 @@ abstract class DynamicListComposeController {
 
                 DynamicListElement(
                     factory = adapter,
-                    componentItemModel = component,
-                    listener = listener
+                    componentItemModel = component
                 )
             }
 

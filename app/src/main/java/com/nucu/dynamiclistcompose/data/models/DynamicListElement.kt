@@ -5,6 +5,5 @@ import com.nucu.dynamiclistcompose.data.listeners.DynamicListComponentListener
 
 data class DynamicListElement(
     val factory: DynamicListFactory?,
-    val componentItemModel: ComponentItemModel,
-    val listener: DynamicListComponentListener?
+    val componentItemModel: ComponentItemModel
 )

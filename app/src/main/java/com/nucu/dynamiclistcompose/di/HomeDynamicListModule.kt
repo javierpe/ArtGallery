@@ -22,7 +22,6 @@ object HomeDynamicListModule {
     ): DefaultDynamicListController {
         return DefaultDynamicListController(
             delegates,
-            emptySet(),
             defaultDispatcher,
             tooltipPreferencesApi
         )
