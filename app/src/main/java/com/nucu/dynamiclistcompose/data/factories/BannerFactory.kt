@@ -9,6 +9,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
@@ -38,7 +39,7 @@ class BannerFactory @Inject constructor(
         componentInfo: ComponentInfo
     ) {
         BannerComponentViewScreen(
-            modifier = modifier,
+            modifier = modifier.testTag("banner_component"),
             imageURL = (component.resource as BannerModel).imageURL,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState
@@ -49,6 +50,7 @@ class BannerFactory @Inject constructor(
     override fun CreateSkeleton() {
         Box(
             modifier = Modifier
+                .testTag("skeleton")
                 .clip(RoundedCornerShape(16.dp))
                 .fillMaxWidth()
                 .height(150.dp)

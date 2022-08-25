@@ -11,6 +11,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.presentation.components.card.CardsModel
@@ -38,7 +39,7 @@ class CardsFactory @Inject constructor(): DynamicListFactory {
         componentInfo: ComponentInfo
     ) {
         CardsComponentViewScreen(
-            modifier = modifier,
+            modifier = modifier.testTag("cards_component"),
             component.resource as CardsModel,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState
@@ -48,6 +49,7 @@ class CardsFactory @Inject constructor(): DynamicListFactory {
     @Composable
     override fun CreateSkeleton() {
         Row(
+            modifier = Modifier.testTag("skeleton"),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
 

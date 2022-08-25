@@ -1,11 +1,10 @@
-package com.nucu.dynamiclistcompose.database
+package com.nucu.dynamiclistcompose.domain.database
 
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
-import com.nucu.dynamiclistcompose.domain.database.AppDatabase
 import com.nucu.dynamiclistcompose.domain.database.skeletons.SkeletonsDao
 import com.nucu.dynamiclistcompose.domain.database.skeletons.SkeletonsEntity
 import org.junit.After

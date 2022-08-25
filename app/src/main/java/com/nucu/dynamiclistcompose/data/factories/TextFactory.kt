@@ -9,6 +9,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.presentation.components.text.TextComponentView
@@ -34,7 +35,7 @@ class TextFactory @Inject constructor(): DynamicListFactory {
         componentInfo: ComponentInfo
     ) {
         TextComponentView(
-            modifier = modifier,
+            modifier = modifier.testTag("text_component"),
             componentIndex = component.index,
             componentInfo.showCaseState,
             text = (component.resource as TextModel).text
@@ -45,6 +46,7 @@ class TextFactory @Inject constructor(): DynamicListFactory {
     override fun CreateSkeleton() {
         Box(
             modifier = Modifier
+                .testTag("skeleton")
                 .clip(RoundedCornerShape(7.dp))
                 .fillMaxWidth()
                 .height(30.dp)

@@ -16,6 +16,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.presentation.components.faces.FacesComponentView
@@ -43,7 +44,7 @@ class FacesFactory @Inject constructor(
         componentInfo: ComponentInfo,
     ) {
         FacesComponentView(
-            modifier = modifier,
+            modifier = modifier.testTag("faces_component"),
             faces = (component.resource as FacesModel).items
         )
     }
@@ -55,7 +56,7 @@ class FacesFactory @Inject constructor(
         val heightText = 13.dp
 
         Row(
-            modifier = Modifier
+            modifier = Modifier.testTag("skeleton")
                 .padding(start = 16.dp, end = 16.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween

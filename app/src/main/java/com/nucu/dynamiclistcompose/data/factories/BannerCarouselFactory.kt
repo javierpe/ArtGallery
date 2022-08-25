@@ -11,6 +11,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.presentation.components.bannerCarousel.BannerCarouselModel
@@ -40,7 +41,7 @@ class BannerCarouselFactory @Inject constructor(
         componentInfo: ComponentInfo,
     ) {
         BannerCarouselComponentViewScreen(
-            modifier = modifier,
+            modifier = modifier.testTag("banner_carousel_component"),
             images = (component.resource as BannerCarouselModel).banners,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState
@@ -49,7 +50,10 @@ class BannerCarouselFactory @Inject constructor(
 
     @Composable
     override fun CreateSkeleton() {
-        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+        Row(
+            modifier = Modifier.testTag("skeleton"),
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(16.dp))

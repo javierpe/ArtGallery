@@ -13,6 +13,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.presentation.components.filters.FiltersComponentView
@@ -40,7 +41,7 @@ class FiltersFactory @Inject constructor(): DynamicListFactory {
     ) {
 
         FiltersComponentView(
-            modifier = modifier,
+            modifier = modifier.testTag("filters_component"),
             (component.resource as FiltersModel).items
         ) {
             componentInfo.scrollAction?.invoke(
@@ -53,6 +54,7 @@ class FiltersFactory @Inject constructor(): DynamicListFactory {
     override fun CreateSkeleton() {
         Row(
             modifier = Modifier
+                .testTag("skeleton")
                 .fillMaxWidth()
                 .wrapContentHeight(),
             horizontalArrangement = Arrangement.spacedBy(15.dp)
