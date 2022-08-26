@@ -1,5 +1,6 @@
 package com.nucu.dynamiclistcompose.presentation.components.card
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,6 +29,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
@@ -132,7 +135,7 @@ fun CardsComponentView(
                             withAnimation = false
                         ),
                         content = {
-                            TooltipView(text = "Esto es un card dentro de un carrusel")
+                            TooltipView(text = stringResource(R.string.tooltip_cards))
                         },
                         strategy = ShowCaseStrategy(firstToHappen = true),
                         key = RenderType.CARDS.value,
@@ -147,7 +150,7 @@ fun CardsComponentView(
                 }
 
                 if (index == 0) {
-                    modifierCard = modifier.testTag("card-item")
+                    modifierCard = modifierCard.testTag("card-item")
                 }
 
                 Card(

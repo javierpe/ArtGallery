@@ -17,7 +17,6 @@ import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.presentation.components.bannerCarousel.BannerCarouselModel
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
-import com.nucu.dynamiclistcompose.data.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.bannerCarousel.BannerCarouselComponentViewScreen
 import javax.inject.Inject

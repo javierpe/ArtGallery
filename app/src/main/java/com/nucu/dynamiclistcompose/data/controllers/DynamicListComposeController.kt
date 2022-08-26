@@ -1,5 +1,6 @@
 package com.nucu.dynamiclistcompose.data.controllers
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -17,7 +18,6 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import com.nucu.dynamiclistcompose.presentation.ui.animations.BlinkAnimation
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.api.TooltipPreferencesApi
-import com.nucu.dynamiclistcompose.data.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.models.DynamicListElement
 import com.nucu.dynamiclistcompose.data.models.DynamicListShowCaseModel
@@ -49,6 +49,8 @@ abstract class DynamicListComposeController {
 
     private val _elements = MutableStateFlow<List<DynamicListElement>>(emptyList())
     private val elements: StateFlow<List<DynamicListElement>> = _elements
+
+    private var showCaseFinished = false
 
     private var showCaseSequence: Queue<DynamicListShowCaseModel> = LinkedList()
 
@@ -84,6 +86,7 @@ abstract class DynamicListComposeController {
                     ).first()
 
                     if (alreadyShowed.not()) {
+                        Log.e("STATE", "Added: ${component.index}")
                         // Add to sequence
                         showCaseSequence.add(
                             DynamicListShowCaseModel(component.render, component.index)
@@ -190,7 +193,7 @@ abstract class DynamicListComposeController {
             onAction = onAction,
         )
 
-        if (showCaseSequence.isNotEmpty() && showOnNextShowCase == -1) {
+        if (showCaseSequence.isNotEmpty() && showOnNextShowCase == -1 && showCaseFinished.not()) {
             SideEffect {
                 coroutineScope.launch {
                     delay(SHOW_CASE_START_DELAY)
@@ -201,6 +204,7 @@ abstract class DynamicListComposeController {
                             coroutineScope.launch {
                                 bodyListState.animateScrollToItem(0)
                             }
+                            showCaseFinished = true
                         } else {
                             // Show next showCase target
                             showCaseState.setCurrentIndexFromDL(it.index)

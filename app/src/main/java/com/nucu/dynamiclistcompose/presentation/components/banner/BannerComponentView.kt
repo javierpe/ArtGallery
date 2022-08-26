@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -22,6 +23,7 @@ import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import coil.request.ImageRequest
+import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
@@ -77,7 +79,7 @@ fun BannerComponentView(
                     withAnimation = false
                 ),
                 content = {
-                    TooltipView(text = "Esto es un componente Banner de Dynamic List")
+                    TooltipView(text = stringResource(R.string.tooltip_banner))
                 },
                 strategy = ShowCaseStrategy(firstToHappen = true),
                 key = RenderType.BANNER.value,
@@ -111,11 +113,10 @@ fun BannerComponentView(
 @Composable
 @Preview(showBackground = true)
 fun PreviewCompactBannerComponentView() {
-    val state = rememberShowCaseState()
     BannerComponentView(
         modifier = Modifier,
         imageURL = "",
         componentIndex = 0,
-        showCaseState = state
+        showCaseState = rememberShowCaseState()
     ) { }
 }

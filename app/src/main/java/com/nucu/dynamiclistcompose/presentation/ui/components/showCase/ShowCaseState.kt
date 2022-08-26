@@ -2,10 +2,11 @@ package com.nucu.dynamiclistcompose.presentation.ui.components.showCase
 
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.layout.onGloballyPositioned
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseTargets
@@ -25,6 +26,7 @@ fun rememberShowCaseState(): ShowCaseState {
 /**
  * Modifier that marks Compose UI element as a target for [ShowCase]
  */
+@Suppress("LongParameterList")
 fun Modifier.asShowCaseTarget(
     state: ShowCaseState,
     index: Int,
@@ -32,27 +34,30 @@ fun Modifier.asShowCaseTarget(
     strategy: ShowCaseStrategy = ShowCaseStrategy(),
     key: String,
     content: @Composable BoxScope.() -> Unit,
-): Modifier = onGloballyPositioned { coordinates ->
+): Modifier = composed {
+    val sendState by state.currentIndex.collectAsState()
 
-    val sendState by derivedStateOf {
-        state.currentIndex.value == index
-    }
-
-    if (sendState) {
-        state.send(
-            ShowCaseTargets(
-                index = index,
-                coordinates = coordinates,
-                style = style,
-                content = content,
-                tooltipShowStrategy = strategy,
-                key = key,
-                onNext = {
-                    state.onNext()
-                }
-            )
+    if (sendState == index) {
+        return@composed this.then(
+            Modifier.onGloballyPositioned { coordinates ->
+                state.send(
+                    ShowCaseTargets(
+                        index = index,
+                        coordinates = coordinates,
+                        style = style,
+                        content = content,
+                        tooltipShowStrategy = strategy,
+                        key = key,
+                        onNext = {
+                            state.onNext()
+                        }
+                    )
+                )
+            }
         )
     }
+
+    this
 }
 
 class ShowCaseState internal constructor() {

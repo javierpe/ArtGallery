@@ -13,7 +13,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
-import com.nucu.dynamiclistcompose.data.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType

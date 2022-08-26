@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.presentation.components.text.TextComponentView
 import com.nucu.dynamiclistcompose.presentation.components.text.TextModel
-import com.nucu.dynamiclistcompose.data.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
@@ -26,6 +25,7 @@ class TextFactory @Inject constructor(): DynamicListFactory {
         get() = listOf(
             RenderType.TEXT
         )
+    override val hasShowCaseConfigured: Boolean = true
 
     @Composable
     override fun CreateComponent(

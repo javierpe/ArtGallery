@@ -9,9 +9,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
@@ -41,7 +43,7 @@ fun MessageComponentView(
                     cornerRadius = 12.dp
                 ),
                 content = {
-                    TooltipView(text = "Esto es un componente Mensaje de Dynamic List con animación")
+                    TooltipView(text = stringResource(R.string.tooltip_message))
                 },
                 strategy = ShowCaseStrategy(firstToHappen = true),
                 key = RenderType.MESSAGE.value,
@@ -61,11 +63,10 @@ fun MessageComponentView(
 @Composable
 @Preview
 fun PreviewTobaccoComponentView() {
-    val showCaseState = rememberShowCaseState()
     MessageComponentView(
         modifier = Modifier,
         message = "Hola a todos",
         0,
-        showCaseState
+        rememberShowCaseState()
     )
 }

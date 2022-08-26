@@ -17,12 +17,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import coil.request.ImageRequest
+import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
@@ -81,7 +83,7 @@ fun BannerCarouselComponentView(
                         withAnimation = false
                     ),
                     content = {
-                        TooltipView(text = "Esto es un banner dentro de un carrusel")
+                        TooltipView(text = stringResource(id = R.string.tooltip_baner_carousel))
                     },
                     strategy = ShowCaseStrategy(firstToHappen = true),
                     key = RenderType.BANNER_CAROUSEL.value,
