@@ -51,7 +51,7 @@ fun CardContent(
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            itemsIndexed(items = images) { index, item ->
+            itemsIndexed(items = images) { _, item ->
                 SubcomposeAsyncImage(
                     modifier = Modifier
                         .wrapContentHeight()

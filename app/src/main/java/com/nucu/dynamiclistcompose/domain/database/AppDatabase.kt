@@ -7,7 +7,7 @@ import com.nucu.dynamiclistcompose.domain.database.converters.SkeletonConverter
 import com.nucu.dynamiclistcompose.domain.database.skeletons.SkeletonsDao
 import com.nucu.dynamiclistcompose.domain.database.skeletons.SkeletonsEntity
 
-@Database(entities = [SkeletonsEntity::class], version = 1)
+@Database(entities = [SkeletonsEntity::class], version = 1, exportSchema = false)
 @TypeConverters(SkeletonConverter::class)
 abstract class AppDatabase: RoomDatabase() {
 

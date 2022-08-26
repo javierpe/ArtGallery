@@ -318,7 +318,7 @@ fun TargetContent(
 
         ShowCaseContent(target, targetRect, targetRadius) { coordinates ->
             val contentRect = coordinates.boundsInParent()
-            val outerRect = getOuterRect(contentRect, targetRect, isTargetInGutter)
+            val outerRect = getOuterRect(contentRect, targetRect)
             val possibleOffset = getOuterCircleCenter(targetRect, contentRect, targetRadius)
 
             outerOffset = if (isTargetInGutter) {
@@ -399,7 +399,7 @@ fun getOuterCircleCenter(
     return Offset(outerCenterX, outerCenterY)
 }
 
-fun getOuterRect(contentRect: Rect, targetRect: Rect, isTargetInGutter: Boolean): Rect {
+fun getOuterRect(contentRect: Rect, targetRect: Rect): Rect {
 
     val topLeftX = min(contentRect.topLeft.x, targetRect.topLeft.x)
     val topLeftY = min(contentRect.topLeft.y, targetRect.topLeft.y)
