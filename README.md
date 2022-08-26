@@ -9,9 +9,9 @@
  - [x] Improve tooltips visualization
  - [x] Compose navigation
  - [x] Render process mechanism
- - [ ] Package refactor and naming
- - [ ] Unit test
- - [ ] Macrobenchmark test
+ - [x] Package refactor and naming
+ - [x] Unit test
+ - [x] Macrobenchmark test
  - [ ] Android CI
 
  Art Gallery is based on Server Driven UI, only provide a JSON with a UI definition.
