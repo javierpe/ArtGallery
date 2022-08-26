@@ -1,7 +1,7 @@
 package com.nucu.dynamiclistcompose.presentation.components.banner
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -11,7 +11,6 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
@@ -27,6 +26,7 @@ import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.nucu.dynamiclistcompose.presentation.components.common.BannerInfoView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseStyle
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipView
@@ -40,14 +40,14 @@ const val BANNER_IMAGE_SCREEN_TEST_TAG = "banner-image-screen"
 @Composable
 fun BannerComponentViewScreen(
     modifier: Modifier,
-    imageURL: String,
+    model: BannerModel,
     componentIndex: Int,
     showCaseState: ShowCaseState,
     viewModel: BannerViewModel = hiltViewModel()
 ) {
     BannerComponentView(
         modifier = modifier.testTag(BANNER_IMAGE_SCREEN_TEST_TAG),
-        imageURL = imageURL,
+        model = model,
         componentIndex = componentIndex,
         showCaseState = showCaseState
     ) {
@@ -58,54 +58,64 @@ fun BannerComponentViewScreen(
 @Composable
 fun BannerComponentView(
     modifier: Modifier,
-    imageURL: String,
+    model: BannerModel,
     componentIndex: Int,
     showCaseState: ShowCaseState,
     onClickAction: (String) -> Unit
 ) {
-    SubcomposeAsyncImage(
-        modifier = modifier
+    Box(
+        modifier = Modifier
             .testTag("banner-image")
             .padding(start = 16.dp, end = 16.dp)
-            .height(150.dp)
-            .fillMaxSize()
-            .clip(RoundedCornerShape(16.dp))
-            .background(Color.White)
-            .asShowCaseTarget(
-                index = componentIndex,
-                style = ShowCaseStyle.Default.copy(
-                    shapeType = ShapeType.RECTANGLE,
-                    cornerRadius = 16.dp,
-                    withAnimation = false
-                ),
-                content = {
-                    TooltipView(text = stringResource(R.string.tooltip_banner))
-                },
-                strategy = ShowCaseStrategy(firstToHappen = true),
-                key = RenderType.BANNER.value,
-                state = showCaseState
-            )
-            .clickable {
-                onClickAction.invoke(imageURL)
-            },
-        model = ImageRequest.Builder(LocalContext.current)
-            .data(imageURL)
-            .crossfade(true)
-            .diskCacheKey(imageURL)
-            .build(),
-        contentDescription = componentIndex.toString(),
-        contentScale = ContentScale.Crop
     ) {
-        when (painter.state) {
-            is AsyncImagePainter.State.Loading -> {
-                CircularProgressIndicator(
-                    modifier = Modifier.size(20.dp)
+        SubcomposeAsyncImage(
+            modifier = modifier
+                .height(150.dp)
+                .fillMaxSize()
+                .clip(RoundedCornerShape(16.dp))
+                .asShowCaseTarget(
+                    index = componentIndex,
+                    style = ShowCaseStyle.Default.copy(
+                        shapeType = ShapeType.RECTANGLE,
+                        cornerRadius = 16.dp,
+                        withAnimation = false
+                    ),
+                    content = {
+                        TooltipView(text = stringResource(R.string.tooltip_banner))
+                    },
+                    strategy = ShowCaseStrategy(firstToHappen = true),
+                    key = RenderType.BANNER.value,
+                    state = showCaseState
                 )
+                .clickable {
+                    onClickAction.invoke(model.imageURL)
+                },
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(model.imageURL)
+                .crossfade(true)
+                .diskCacheKey(model.imageURL)
+                .build(),
+            contentDescription = componentIndex.toString(),
+            contentScale = ContentScale.Crop
+        ) {
+            when (painter.state) {
+                is AsyncImagePainter.State.Loading -> {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(20.dp)
+                    )
+                }
+                is AsyncImagePainter.State.Error -> {  }
+                else -> {
+                    SubcomposeAsyncImageContent()
+                }
             }
-            is AsyncImagePainter.State.Error -> {  }
-            else -> {
-                SubcomposeAsyncImageContent()
-            }
+        }
+
+        model.bannerInfo?.let {
+            BannerInfoView(
+                modifier = Modifier.height(150.dp),
+                bannerInfo = it
+            )
         }
     }
 }
@@ -115,7 +125,7 @@ fun BannerComponentView(
 fun PreviewCompactBannerComponentView() {
     BannerComponentView(
         modifier = Modifier,
-        imageURL = "",
+        model = BannerModel(""),
         componentIndex = 0,
         showCaseState = rememberShowCaseState()
     ) { }

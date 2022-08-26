@@ -197,7 +197,11 @@
       "render": "banner",
       "index": 5,
       "resource": {
-        "url": "https://i.etsystatic.com/34487254/r/il/8c6d49/3759929882/il_1588xN.3759929882_dvhz.jpg"
+        "url": "https://i.etsystatic.com/34487254/r/il/8c6d49/3759929882/il_1588xN.3759929882_dvhz.jpg",
+        "info": {
+          "title": "Emma",
+          "description": "Germany"
+        }
       }
     },
     {
@@ -213,16 +217,32 @@
       "resource": {
         "banners": [
           {
-            "url": "https://i.etsystatic.com/28296516/r/il/54f5e3/3977297934/il_1588xN.3977297934_fjf5.jpg"
+            "url": "https://i.etsystatic.com/28296516/r/il/54f5e3/3977297934/il_1588xN.3977297934_fjf5.jpg",
+            "info": {
+              "title": "John",
+              "description": "Italy"
+            }
           },
           {
-            "url": "https://i.pinimg.com/474x/c9/a4/c9/c9a4c9d499ab288f29bc65a4369a447f.jpg"
+            "url": "https://i.pinimg.com/474x/c9/a4/c9/c9a4c9d499ab288f29bc65a4369a447f.jpg",
+            "info": {
+              "title": "Hanna",
+              "description": "Germany"
+            }
           },
           {
-            "url": "https://i.pinimg.com/474x/28/da/94/28da9471c34cc79667ea792b26162d57.jpg"
+            "url": "https://i.pinimg.com/474x/28/da/94/28da9471c34cc79667ea792b26162d57.jpg",
+            "info": {
+              "title": "Jennifer",
+              "description": "Switzerland"
+            }
           },
           {
-            "url": "https://i.pinimg.com/474x/06/b7/a7/06b7a79c32049e32373e3efbcd78aed6.jpg"
+            "url": "https://i.pinimg.com/474x/06/b7/a7/06b7a79c32049e32373e3efbcd78aed6.jpg",
+            "info": {
+              "title": "Robert",
+              "description": "United Kingdom"
+            }
           }
         ]
       }
@@ -252,7 +272,11 @@
       "render": "banner",
       "index": 11,
       "resource": {
-        "url": "https://i.pinimg.com/474x/30/9b/5b/309b5b18d162cec61be5403008a0f704.jpg"
+        "url": "https://i.pinimg.com/474x/30/9b/5b/309b5b18d162cec61be5403008a0f704.jpg",
+        "info": {
+          "title": "Leonardo",
+          "description": "Italy"
+        }
       }
     },
     {
@@ -268,13 +292,25 @@
       "resource": {
         "banners": [
           {
-            "url": "https://i.pinimg.com/474x/1f/73/25/1f7325bc264a816ab131d6d624fa792a.jpg"
+            "url": "https://i.pinimg.com/474x/1f/73/25/1f7325bc264a816ab131d6d624fa792a.jpg",
+            "info": {
+              "title": "Alexandra",
+              "description": "France"
+            }
           },
           {
-            "url": "https://i.pinimg.com/474x/96/07/52/9607523b8c71cb4895a3f87b30421900.jpg"
+            "url": "https://i.pinimg.com/474x/96/07/52/9607523b8c71cb4895a3f87b30421900.jpg",
+            "info": {
+              "title": "Annelien",
+              "description": "Holland"
+            }
           },
           {
-            "url": "https://i.pinimg.com/474x/d8/f4/ac/d8f4ac2459333ae16a4b47914f33de94.jpg"
+            "url": "https://i.pinimg.com/474x/d8/f4/ac/d8f4ac2459333ae16a4b47914f33de94.jpg",
+            "info": {
+              "title": "Victor",
+              "description": "Portugal"
+            }
           }
         ]
       }

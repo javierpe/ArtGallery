@@ -2,6 +2,7 @@ package com.nucu.dynamiclistcompose.presentation.components.bannerCarousel
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,14 +26,15 @@ import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import coil.request.ImageRequest
 import com.nucu.dynamiclistcompose.R
-import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
+import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
+import com.nucu.dynamiclistcompose.presentation.components.common.BannerInfoView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseStyle
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.asShowCaseTarget
-import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.presentation.viewModels.BannerViewModel
 
 const val BANNER_CAROUSEL_IMAGE_TEST_TAG = "banner-image"
@@ -91,34 +93,46 @@ fun BannerCarouselComponentView(
                 )
             } else Modifier
 
-            SubcomposeAsyncImage(
-                modifier = modifierBanner
-                    .height(300.dp)
-                    .width(350.dp)
-                    .clip(RoundedCornerShape(16.dp))
-                    .clickable {
-                        onClickAction.invoke(item.imageURL)
-                    },
-                model = ImageRequest.Builder(context)
-                    .data(item.imageURL)
-                    .crossfade(true)
-                    .diskCacheKey(item.imageURL)
-                    .build(),
-                contentDescription = "",
-                contentScale = ContentScale.Crop
+            Box(
+                modifier = Modifier
+                    .testTag(BANNER_CAROUSEL_IMAGE_TEST_TAG)
             ) {
-                when (painter.state) {
-                    is AsyncImagePainter.State.Loading -> {
-                        CircularProgressIndicator(
-                            modifier = Modifier.size(20.dp)
-                        )
-                    }
-                    is AsyncImagePainter.State.Error -> {
+                SubcomposeAsyncImage(
+                    modifier = modifierBanner
+                        .height(300.dp)
+                        .width(350.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                        .clickable {
+                            onClickAction.invoke(item.imageURL)
+                        },
+                    model = ImageRequest.Builder(context)
+                        .data(item.imageURL)
+                        .crossfade(true)
+                        .diskCacheKey(item.imageURL)
+                        .build(),
+                    contentDescription = "",
+                    contentScale = ContentScale.Crop
+                ) {
+                    when (painter.state) {
+                        is AsyncImagePainter.State.Loading -> {
+                            CircularProgressIndicator(
+                                modifier = Modifier.size(20.dp)
+                            )
+                        }
+                        is AsyncImagePainter.State.Error -> {
 
+                        }
+                        else -> {
+                            SubcomposeAsyncImageContent()
+                        }
                     }
-                    else -> {
-                        SubcomposeAsyncImageContent()
-                    }
+                }
+
+                item.bannerInfo?.let {
+                    BannerInfoView(
+                        modifier = Modifier.height(300.dp).width(350.dp),
+                        bannerInfo = it
+                    )
                 }
             }
         }

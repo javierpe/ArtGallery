@@ -3,6 +3,7 @@ package com.nucu.dynamiclistcompose.data.renders
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.nucu.dynamiclistcompose.presentation.components.banner.BannerInfo
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -22,14 +23,19 @@ class BannerRenderTest {
     private val resource by lazy {
         """
           {
-            "url": "https://i.pinimg.com/474x/30/9b/5b/309b5b18d162cec61be5403008a0f704.jpg"
+            "url": "https://i.pinimg.com/474x/30/9b/5b/309b5b18d162cec61be5403008a0f704.jpg",
+           "info": {
+              "title": "John",
+              "description": "Italy"
+            }
           }
         """
     }
 
     private val sourceOfTrueModel by lazy {
         BannerModel(
-            imageURL = "https://i.pinimg.com/474x/30/9b/5b/309b5b18d162cec61be5403008a0f704.jpg"
+            imageURL = "https://i.pinimg.com/474x/30/9b/5b/309b5b18d162cec61be5403008a0f704.jpg",
+            bannerInfo = BannerInfo(title = "John", description = "Italy")
         )
     }
 

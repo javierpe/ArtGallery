@@ -12,11 +12,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
-import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerComponentViewScreen
+import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
 import javax.inject.Inject
 
 class BannerFactory @Inject constructor(
@@ -38,7 +38,7 @@ class BannerFactory @Inject constructor(
     ) {
         BannerComponentViewScreen(
             modifier = modifier.testTag("banner_component"),
-            imageURL = (component.resource as BannerModel).imageURL,
+            model = (component.resource as BannerModel),
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState
         )
