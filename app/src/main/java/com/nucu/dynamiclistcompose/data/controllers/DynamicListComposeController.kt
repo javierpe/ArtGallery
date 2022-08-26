@@ -1,6 +1,5 @@
 package com.nucu.dynamiclistcompose.data.controllers
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -86,7 +85,6 @@ abstract class DynamicListComposeController {
                     ).first()
 
                     if (alreadyShowed.not()) {
-                        Log.e("STATE", "Added: ${component.index}")
                         // Add to sequence
                         showCaseSequence.add(
                             DynamicListShowCaseModel(component.render, component.index)
