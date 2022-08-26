@@ -8,6 +8,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import com.nucu.dynamiclistcompose.presentation.components.banner.BANNER_IMAGE_TEST_TAG
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerComponentView
+import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
 import org.junit.Before
@@ -33,7 +34,7 @@ class BannerComponentViewTest {
             DynamicListComposeTheme {
                 BannerComponentView(
                     modifier = Modifier,
-                    imageURL = String(),
+                    model = BannerModel(String()),
                     componentIndex = 0,
                     showCaseState = rememberShowCaseState(),
                     onClickAction = onClick

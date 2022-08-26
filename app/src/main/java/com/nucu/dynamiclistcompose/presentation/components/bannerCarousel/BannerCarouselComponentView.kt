@@ -37,8 +37,8 @@ import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipVi
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.asShowCaseTarget
 import com.nucu.dynamiclistcompose.presentation.viewModels.BannerViewModel
 
-const val BANNER_CAROUSEL_IMAGE_TEST_TAG = "banner-image"
-const val BANNER_CAROUSEL_IMAGE_SCREEN_TEST_TAG = "banner-image-screen"
+const val BANNER_CAROUSEL_IMAGE_TEST_TAG = "banner-carousel-image"
+const val BANNER_CAROUSEL_IMAGE_SCREEN_TEST_TAG = "banner-carousel-image-screen"
 
 @Composable
 fun BannerCarouselComponentViewScreen(

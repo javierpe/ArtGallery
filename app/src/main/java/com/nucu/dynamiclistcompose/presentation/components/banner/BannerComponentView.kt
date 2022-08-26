@@ -65,8 +65,11 @@ fun BannerComponentView(
 ) {
     Box(
         modifier = Modifier
-            .testTag("banner-image")
+            .testTag(BANNER_IMAGE_TEST_TAG)
             .padding(start = 16.dp, end = 16.dp)
+            .clickable {
+                onClickAction.invoke(model.imageURL)
+            }
     ) {
         SubcomposeAsyncImage(
             modifier = modifier
@@ -86,10 +89,7 @@ fun BannerComponentView(
                     strategy = ShowCaseStrategy(firstToHappen = true),
                     key = RenderType.BANNER.value,
                     state = showCaseState
-                )
-                .clickable {
-                    onClickAction.invoke(model.imageURL)
-                },
+                ),
             model = ImageRequest.Builder(LocalContext.current)
                 .data(model.imageURL)
                 .crossfade(true)

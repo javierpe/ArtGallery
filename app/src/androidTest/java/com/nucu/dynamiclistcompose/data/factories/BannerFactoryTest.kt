@@ -61,7 +61,7 @@ class BannerFactoryTest {
         }
 
         composeTestRule
-            .onNodeWithTag("banner_component")
+            .onNodeWithTag("banner_component", useUnmergedTree = true)
             .assertExists()
     }
 
