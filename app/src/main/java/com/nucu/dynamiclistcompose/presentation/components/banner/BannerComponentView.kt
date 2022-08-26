@@ -24,13 +24,13 @@ import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import coil.request.ImageRequest
 import com.nucu.dynamiclistcompose.R
+import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseStyle
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.asShowCaseTarget
-import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.presentation.viewModels.BannerViewModel
 
@@ -69,8 +69,8 @@ fun BannerComponentView(
             .padding(start = 16.dp, end = 16.dp)
             .height(150.dp)
             .fillMaxSize()
-            .background(Color.White)
             .clip(RoundedCornerShape(16.dp))
+            .background(Color.White)
             .asShowCaseTarget(
                 index = componentIndex,
                 style = ShowCaseStyle.Default.copy(

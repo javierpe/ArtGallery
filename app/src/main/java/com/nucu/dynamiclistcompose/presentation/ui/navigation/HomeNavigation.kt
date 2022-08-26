@@ -36,7 +36,7 @@ fun NavGraphBuilder.bannerScreenNav() {
     }
 }
 
-fun NavGraphBuilder.cardScreenNav() {
+fun NavGraphBuilder.cardScreenNav(widthSizeClass: WindowWidthSizeClass) {
     composable(
         route = Route.CardScreen.name + "/{${Route.CardScreen.CARD_TEXT}}/{${Route.CardScreen.IMAGE_URL}}",
         arguments = listOf(
@@ -53,7 +53,8 @@ fun NavGraphBuilder.cardScreenNav() {
 
         CardScreen(
             title = cardText,
-            images = data
+            images = data,
+            widthSizeClass = widthSizeClass
         )
     }
 }

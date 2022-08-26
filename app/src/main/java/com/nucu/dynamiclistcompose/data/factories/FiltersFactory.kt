@@ -16,14 +16,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
-import com.nucu.dynamiclistcompose.presentation.components.filters.FiltersComponentView
 import com.nucu.dynamiclistcompose.presentation.components.filters.FiltersModel
-import com.nucu.dynamiclistcompose.data.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 import com.nucu.dynamiclistcompose.data.actions.ScrollAction
 import com.nucu.dynamiclistcompose.data.actions.TargetAction
+import com.nucu.dynamiclistcompose.presentation.components.filters.FiltersComponentViewScreen
 import javax.inject.Inject
 
 class FiltersFactory @Inject constructor(): DynamicListFactory {
@@ -39,9 +38,10 @@ class FiltersFactory @Inject constructor(): DynamicListFactory {
         componentInfo: ComponentInfo
     ) {
 
-        FiltersComponentView(
+        FiltersComponentViewScreen(
             modifier = modifier.testTag("filters_component"),
-            (component.resource as FiltersModel).items
+            data = (component.resource as FiltersModel).items,
+            windowWidthSizeClass = componentInfo.windowWidthSizeClass
         ) {
             componentInfo.scrollAction?.invoke(
                 ScrollAction.ScrollRender(it, target = TargetAction.BODY)

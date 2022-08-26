@@ -143,7 +143,6 @@ abstract class DynamicListComposeController {
             listState = listState,
             widthSizeClass = widthSizeClass,
             onAction = onAction,
-            withVerticalPadding = false,
             showCaseState = showCaseState
         )
     }

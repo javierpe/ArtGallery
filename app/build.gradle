@@ -103,8 +103,8 @@ dependencies {
 
     // Alpha
     implementation "androidx.compose.material3:material3-window-size-class:1.0.0-alpha16"
+    implementation "androidx.compose.material3:material3:1.0.0-alpha16"
     // Alpha: implementation "androidx.paging:paging-compose:1.0.0-alpha14"
-    // Alpha: implementation "androidx.compose.material3:material3:1.0.0-alpha10"
 
     // Room
     implementation "androidx.room:room-rxjava3:2.4.3"

@@ -2,6 +2,8 @@ package com.nucu.dynamiclistcompose.presentation.components.message
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
@@ -33,6 +35,7 @@ fun MessageComponentView(
 
     Box(
         modifier = modifier
+            .fillMaxWidth()
             .padding(start = 16.dp, end = 16.dp)
             .clip(RoundedCornerShape(12.dp))
             .background(MaterialTheme.colors.secondary)
@@ -52,7 +55,8 @@ fun MessageComponentView(
     ) {
         Text(
             modifier = Modifier
-                .padding(10.dp),
+                .padding(10.dp)
+                .fillMaxSize(),
             textAlign = TextAlign.Justify,
             text = message,
             color = MaterialTheme.colors.primary

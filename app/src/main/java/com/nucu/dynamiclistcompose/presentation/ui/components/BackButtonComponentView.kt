@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
@@ -24,6 +25,7 @@ fun BackButtonComponentView(
     modifier: Modifier = Modifier,
     backgroundColor: Color = MaterialTheme.colors.primary,
     iconColor: Color = Color.White,
+    icon: ImageVector = Icons.Default.ArrowBack,
     onClick: (() -> Unit)? = null
 ) {
     Box(
@@ -38,7 +40,7 @@ fun BackButtonComponentView(
             .padding(6.dp)
     ) {
         Icon(
-            imageVector = Icons.Default.ArrowBack,
+            imageVector = icon,
             tint = iconColor,
             contentDescription = null
         )

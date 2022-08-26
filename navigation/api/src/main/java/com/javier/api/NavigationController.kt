@@ -24,4 +24,8 @@ interface NavigationController {
     )
 
     fun popBackStack()
+
+    fun hasBackElement(): Boolean
+
+    fun isHome(): Boolean
 }

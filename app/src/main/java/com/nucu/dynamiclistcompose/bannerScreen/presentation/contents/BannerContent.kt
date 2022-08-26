@@ -17,12 +17,11 @@ import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import coil.request.ImageRequest
 import com.nucu.dynamiclistcompose.data.models.ContextType
-import com.nucu.dynamiclistcompose.ui.components.DynamicListHeaderComponentView
+import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DynamicListHeaderComponentView
 
 @Composable
 fun BannerContent(
-    imageURL: String,
-    onBackPressed: () -> Unit
+    imageURL: String
 ) {
 
     Box {
@@ -55,8 +54,7 @@ fun BannerContent(
 
         DynamicListHeaderComponentView(
             title = "Esto es un banner",
-            contextType = ContextType.BANNER_DETAIL,
-            onBackPressed = onBackPressed
+            contextType = ContextType.BANNER_DETAIL
         )
     }
 }
@@ -66,5 +64,5 @@ fun BannerContent(
 fun PreviewBannerContent() {
     BannerContent(
         "Hello",
-    ) { }
+    )
 }

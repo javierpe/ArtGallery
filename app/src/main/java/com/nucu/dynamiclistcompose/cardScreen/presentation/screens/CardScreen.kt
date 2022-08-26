@@ -1,17 +1,18 @@
 package com.nucu.dynamiclistcompose.cardScreen.presentation.screens
 
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.nucu.dynamiclistcompose.cardScreen.presentation.contents.CardContent
-import com.nucu.dynamiclistcompose.cardScreen.presentation.viewModels.CardScreenViewModel
 
 @Composable
 fun CardScreen(
     title: String,
     images: List<String>,
-    viewModel: CardScreenViewModel = hiltViewModel()
+    widthSizeClass: WindowWidthSizeClass
 ) {
-    CardContent(title = title, images = images) {
-        viewModel.goToBack()
-    }
+    CardContent(
+        title = title,
+        images = images,
+        widthSizeClass = widthSizeClass
+    )
 }

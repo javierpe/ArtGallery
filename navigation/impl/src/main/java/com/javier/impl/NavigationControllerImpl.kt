@@ -45,4 +45,12 @@ class NavigationControllerImpl @Inject constructor() : NavigationController {
     override fun popBackStack() {
         navHostController.popBackStack()
     }
+
+    override fun hasBackElement(): Boolean {
+        return navHostController.backQueue.isNotEmpty()
+    }
+
+    override fun isHome(): Boolean {
+        return navHostController.backQueue.size == 2
+    }
 }
