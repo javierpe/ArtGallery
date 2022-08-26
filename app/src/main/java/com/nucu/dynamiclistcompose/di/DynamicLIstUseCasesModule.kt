@@ -1,7 +1,7 @@
 package com.nucu.dynamiclistcompose.di
 
-import com.nucu.dynamiclistcompose.api.DynamicListUseCaseApi
-import com.nucu.dynamiclistcompose.impl.useCases.DynamicListUseCaseImpl
+import com.nucu.dynamiclistcompose.data.api.DynamicListUseCaseApi
+import com.nucu.dynamiclistcompose.domain.useCases.DynamicListUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

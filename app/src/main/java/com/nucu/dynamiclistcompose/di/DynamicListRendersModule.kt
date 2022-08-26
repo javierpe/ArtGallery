@@ -1,13 +1,13 @@
 package com.nucu.dynamiclistcompose.di
 
-import com.nucu.dynamiclistcompose.renders.BannerCarouselRender
-import com.nucu.dynamiclistcompose.renders.BannerRender
-import com.nucu.dynamiclistcompose.renders.FiltersRender
-import com.nucu.dynamiclistcompose.renders.TextRender
-import com.nucu.dynamiclistcompose.renders.CardsRender
-import com.nucu.dynamiclistcompose.renders.FacesRender
-import com.nucu.dynamiclistcompose.renders.MessageRender
-import com.nucu.dynamiclistcompose.renders.base.DynamicListRender
+import com.nucu.dynamiclistcompose.data.renders.BannerCarouselRender
+import com.nucu.dynamiclistcompose.data.renders.BannerRender
+import com.nucu.dynamiclistcompose.data.renders.FiltersRender
+import com.nucu.dynamiclistcompose.data.renders.TextRender
+import com.nucu.dynamiclistcompose.data.renders.CardsRender
+import com.nucu.dynamiclistcompose.data.renders.FacesRender
+import com.nucu.dynamiclistcompose.data.renders.MessageRender
+import com.nucu.dynamiclistcompose.data.renders.base.DynamicListRender
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

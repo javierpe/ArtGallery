@@ -20,20 +20,23 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.Center
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.javier.api.NavigationController
-import com.nucu.dynamiclistcompose.ui.base.ContextView
-import com.nucu.dynamiclistcompose.ui.navigation.bannerScreenNav
-import com.nucu.dynamiclistcompose.ui.navigation.cardScreenNav
-import com.nucu.dynamiclistcompose.ui.navigation.homeNav
-import com.nucu.dynamiclistcompose.ui.theme.DynamicListComposeTheme
-import com.nucu.dynamiclistcompose.ui.theme.Typography
-import com.nucu.dynamiclistcompose.viewModels.MainViewModel
+import com.nucu.dynamiclistcompose.presentation.ui.base.ContextView
+import com.nucu.dynamiclistcompose.presentation.ui.navigation.bannerScreenNav
+import com.nucu.dynamiclistcompose.presentation.ui.navigation.cardScreenNav
+import com.nucu.dynamiclistcompose.presentation.ui.navigation.homeNav
+import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
+import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
+import com.nucu.dynamiclistcompose.presentation.viewModels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -43,14 +46,16 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var navigationController: NavigationController
 
-    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class, ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             DynamicListComposeTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxSize().semantics {
+                        testTagsAsResourceId = true
+                    },
                     color = MaterialTheme.colors.background
                 ) {
                     val widthSizeClass = calculateWindowSizeClass(this).widthSizeClass

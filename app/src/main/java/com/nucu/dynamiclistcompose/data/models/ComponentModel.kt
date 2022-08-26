@@ -11,5 +11,5 @@ data class DataContentModel(
 data class ComponentModel(
     @SerializedName("render") val render: String,
     @SerializedName("index") val index: Int,
-    @SerializedName("resource") val resource: JsonObject?
+    @SerializedName("resource") val resource: JsonObject? = null
 )

@@ -2,7 +2,7 @@ package com.nucu.dynamiclistcompose.di
 
 import android.content.Context
 import androidx.room.Room
-import com.nucu.dynamiclistcompose.storage.database.AppDatabase
+import com.nucu.dynamiclistcompose.domain.database.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

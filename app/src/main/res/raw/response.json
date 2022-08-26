@@ -236,28 +236,28 @@
     },
     {
       "render": "text",
-      "index": 11,
+      "index": 10,
       "resource": {
         "text": "Choice awards"
       }
     },
     {
       "render": "banner",
-      "index": 12,
+      "index": 11,
       "resource": {
         "url": "https://i.pinimg.com/474x/30/9b/5b/309b5b18d162cec61be5403008a0f704.jpg"
       }
     },
     {
       "render": "text",
-      "index": 13,
+      "index": 12,
       "resource": {
         "text": "Ambient"
       }
     },
     {
       "render": "banner_carousel",
-      "index": 14,
+      "index": 13,
       "resource": {
         "banners": [
           {
@@ -270,6 +270,13 @@
             "url": "https://i.pinimg.com/474x/d8/f4/ac/d8f4ac2459333ae16a4b47914f33de94.jpg"
           }
         ]
+      }
+    },
+    {
+      "render": "message",
+      "index": 14,
+      "resource": {
+        "message": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
       }
     }
   ]
