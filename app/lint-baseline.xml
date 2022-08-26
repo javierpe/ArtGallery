@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 7.2.2" type="baseline" client="gradle" dependencies="false" name="AGP (7.2.2)" variant="all" version="7.2.2">
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.compose.material3:material3-window-size-class than 1.0.0-alpha16 is available: 1.0.0-beta01"
+        errorLine1="    implementation &quot;androidx.compose.material3:material3-window-size-class:1.0.0-alpha16&quot;"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="105"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="ConflictingOnColor"
+        message="Conflicting &apos;on&apos; color for a given background"
+        errorLine1="    onSurface = BackgroundLight,"
+        errorLine2="                ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/nucu/dynamiclistcompose/presentation/ui/theme/Theme.kt"
+            line="26"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="ConflictingOnColor"
+        message="Conflicting &apos;on&apos; color for a given background"
+        errorLine1="    onBackground = BackgroundLight,"
+        errorLine2="                   ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/nucu/dynamiclistcompose/presentation/ui/theme/Theme.kt"
+            line="27"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="ConflictingOnColor"
+        message="Conflicting &apos;on&apos; color for a given background"
+        errorLine1="    onPrimary = SkeletonLight"
+        errorLine2="                ~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/nucu/dynamiclistcompose/presentation/ui/theme/Theme.kt"
+            line="28"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="This folder configuration (`v24`) is unnecessary; `minSdkVersion` is 26. Merge all the resources in this folder into `drawable`.">
+        <location
+            file="src/main/res/drawable-v24"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="This folder configuration (`v26`) is unnecessary; `minSdkVersion` is 26. Merge all the resources in this folder into `mipmap-anydpi`.">
+        <location
+            file="src/main/res/mipmap-anydpi-v26"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.black` appears to be unused"
+        errorLine1="    &lt;color name=&quot;black&quot;>#FF000000&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="3"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.white` appears to be unused"
+        errorLine1="    &lt;color name=&quot;white&quot;>#FFFFFFFF&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="4"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.raw.motion_scene` appears to be unused">
+        <location
+            file="src/main/res/raw/motion_scene.json5"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.label_loading` appears to be unused"
+        errorLine1="    &lt;string name=&quot;label_loading&quot; translatable=&quot;false&quot;>Cargando&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="3"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.wallpaper` appears to be unused">
+        <location
+            file="src/main/res/drawable/wallpaper.jpg"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/wallpaper.jpg` in densityless folder">
+        <location
+            file="src/main/res/drawable/wallpaper.jpg"/>
+    </issue>
+
+</issues>

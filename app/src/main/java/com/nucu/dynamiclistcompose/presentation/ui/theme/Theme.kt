@@ -23,7 +23,6 @@ private val LightColorPalette = lightColors(
     secondary = SecondaryLight,
     background = BackgroundLight,
     surface = BackgroundLight,
-    onSurface = BackgroundLight,
     onBackground = BackgroundLight,
     onPrimary = SkeletonLight
 )
