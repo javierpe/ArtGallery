@@ -93,7 +93,7 @@ fun FilterGridComponentView(
     }
 
     val step by animateIntAsState(targetValue = if (isMediumScreen) 2 else 3, tween(DURATION))
-    val size by animateDpAsState(targetValue = if (isMediumScreen) 100.dp else 90.dp, tween(DURATION))
+    val size by animateDpAsState(targetValue = if (isMediumScreen) 110.dp else 100.dp, tween(DURATION))
 
     val chunkedData by remember {
         derivedStateOf {
@@ -170,7 +170,7 @@ fun FilterListComponentView(
             items = data,
         ) {  index, item ->
             FilterItemComponent(
-                modifier = Modifier.size(60.dp),
+                modifier = Modifier.size(75.dp),
                 text = item.text,
                 isSelected = state == index,
                 color = Color(android.graphics.Color.parseColor(item.color))

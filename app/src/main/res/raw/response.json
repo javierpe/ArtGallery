@@ -6,27 +6,27 @@
       "resource": {
         "items": [
           {
-            "text": "Paint of the day",
+            "text": "Text",
             "go_to": "text",
             "color": "#FF7E6354"
           },
           {
-            "text": "Nature",
+            "text": "Cards",
             "go_to": "cards",
             "color": "#FF765280"
           },
           {
-            "text": "Lorem ipsum",
+            "text": "Message",
             "go_to": "message",
             "color": "#FF687E54"
           },
           {
-            "text": "Landscapes",
+            "text": "Banners",
             "go_to": "banner_carousel",
             "color": "#FF54767E"
           },
           {
-            "text": "Art Faces",
+            "text": "Faces",
             "go_to": "faces",
             "color": "#FF73547E"
           }
