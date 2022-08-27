@@ -44,6 +44,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DURATION
 import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
@@ -91,7 +93,7 @@ fun FilterGridComponentView(
     }
 
     val step by animateIntAsState(targetValue = if (isMediumScreen) 2 else 3, tween(DURATION))
-    val size by animateDpAsState(targetValue = if (isMediumScreen) 70.dp else 60.dp, tween(DURATION))
+    val size by animateDpAsState(targetValue = if (isMediumScreen) 100.dp else 90.dp, tween(DURATION))
 
     val chunkedData by remember {
         derivedStateOf {
@@ -109,7 +111,7 @@ fun FilterGridComponentView(
         chunkedData.forEachIndexed { columnIndex, list ->
             Row(
                 modifier = Modifier.fillMaxSize(),
-                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                horizontalArrangement = Arrangement.spacedBy(20.dp)
             ) {
                 list.forEachIndexed { rowIndex, item ->
 
@@ -207,14 +209,19 @@ fun FilterItemComponent(
         spring(stiffness = Spring.StiffnessLow)
     )
 
-    Column(
-        verticalArrangement = Arrangement.spacedBy(2.dp)
-    ) {
+    ConstraintLayout {
+
+        val (cardRef, titleRef) = createRefs()
+
         Card(
             shape = RoundedCornerShape(cornerRadius),
             elevation = elevationAnimation,
             modifier = modifier
-                .align(Alignment.CenterHorizontally)
+                .constrainAs(cardRef) {
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    top.linkTo(parent.top)
+                }
         ) {
             Box(
                 modifier = Modifier
@@ -235,6 +242,12 @@ fun FilterItemComponent(
         Text(
             text = text.uppercase(),
             modifier = Modifier
+                .constrainAs(titleRef) {
+                    start.linkTo(cardRef.start)
+                    end.linkTo(cardRef.end)
+                    top.linkTo(cardRef.bottom, 5.dp)
+                    width = Dimension.fillToConstraints
+                }
                 .padding(5.dp),
             color = MaterialTheme.colors.secondary,
             textAlign = TextAlign.Center,

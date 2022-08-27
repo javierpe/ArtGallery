@@ -168,7 +168,7 @@ fun DynamicListView(
 
                 Box(
                     modifier = Modifier
-                        .weight(3f)
+                        .weight(3.3f)
                         .fillMaxHeight()
                 ) {
                     Box {
