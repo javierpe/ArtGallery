@@ -26,7 +26,8 @@ class FiltersRenderTest {
             "items": [
               {
                 "text": "Abstract banner",
-                "go_to": "text"
+                "go_to": "text",
+                "color": "#FFF"
               }
             ]
           }
@@ -38,7 +39,8 @@ class FiltersRenderTest {
             items = listOf(
                 FilterItemModel(
                     text = "Abstract banner",
-                    goTo = "text"
+                    goTo = "text",
+                    color = "#FFF"
                 )
             )
         )

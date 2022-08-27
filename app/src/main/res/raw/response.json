@@ -7,23 +7,28 @@
         "items": [
           {
             "text": "Paint of the day",
-            "go_to": "text"
+            "go_to": "text",
+            "color": "#FF7E6354"
           },
           {
             "text": "Nature",
-            "go_to": "cards"
+            "go_to": "cards",
+            "color": "#FF765280"
           },
           {
             "text": "Lorem ipsum",
-            "go_to": "message"
+            "go_to": "message",
+            "color": "#FF687E54"
           },
           {
             "text": "Landscapes",
-            "go_to": "banner_carousel"
+            "go_to": "banner_carousel",
+            "color": "#FF54767E"
           },
           {
             "text": "Art Faces",
-            "go_to": "faces"
+            "go_to": "faces",
+            "color": "#FF73547E"
           }
         ]
       }
@@ -190,7 +195,7 @@
       "render": "banner",
       "index": 5,
       "resource": {
-        "url": "https://i.etsystatic.com/34487254/r/il/8c6d49/3759929882/il_1588xN.3759929882_dvhz.jpg",
+        "url": "https://i.pinimg.com/564x/1f/9b/15/1f9b15a8a3684ef87410dd68b3e2d3e2.jpg",
         "info": {
           "title": "Emma",
           "description": "Germany"
@@ -285,7 +290,7 @@
       "resource": {
         "banners": [
           {
-            "url": "https://i.pinimg.com/474x/1f/73/25/1f7325bc264a816ab131d6d624fa792a.jpg",
+            "url": "https://i.pinimg.com/564x/2e/c0/f2/2ec0f2c68d8cc8e2fbb13a325c2d034e.jpg",
             "info": {
               "title": "Alexandra",
               "description": "France"

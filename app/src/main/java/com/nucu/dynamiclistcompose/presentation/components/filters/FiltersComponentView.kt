@@ -7,17 +7,14 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.border
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
@@ -25,8 +22,11 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -46,6 +46,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DURATION
+import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
 import kotlinx.coroutines.launch
 
 @Composable
@@ -89,8 +90,8 @@ fun FilterGridComponentView(
         mutableStateOf(mapOf(0 to 0))
     }
 
-    val step by animateIntAsState(targetValue = if (isMediumScreen) 2 else 4, tween(DURATION))
-    val size by animateDpAsState(targetValue = if (isMediumScreen) 110.dp else 90.dp, tween(DURATION))
+    val step by animateIntAsState(targetValue = if (isMediumScreen) 2 else 3, tween(DURATION))
+    val size by animateDpAsState(targetValue = if (isMediumScreen) 70.dp else 60.dp, tween(DURATION))
 
     val chunkedData by remember {
         derivedStateOf {
@@ -114,23 +115,13 @@ fun FilterGridComponentView(
 
                     val isSelected = state == mapOf(columnIndex to rowIndex)
 
-                    val colorAnimation: Color by animateColorAsState(
-                        targetValue = if (isSelected) MaterialTheme.colors.secondary
-                        else MaterialTheme.colors.primary,
-                        spring(stiffness = Spring.StiffnessLow)
-                    )
-
                     FilterItemComponent(
                         modifier = Modifier
-                            .size(size)
-                            .border(
-                                width = 1.dp,
-                                color = colorAnimation,
-                                shape = RoundedCornerShape(20.dp)
-                            ),
+                            .size(size),
                         text = item.text,
                         isSelected = isSelected,
-                        cornerRadius = 20.dp
+                        cornerRadius = 20.dp,
+                        color = Color(android.graphics.Color.parseColor(item.color))
                     ) {
                         RenderType
                             .values()
@@ -168,7 +159,6 @@ fun FilterListComponentView(
     LazyRow(
         modifier = modifier
             .fillMaxSize()
-            .height(70.dp)
             .clipToBounds(),
         horizontalArrangement = Arrangement.spacedBy(15.dp),
         state = listState,
@@ -178,11 +168,10 @@ fun FilterListComponentView(
             items = data,
         ) {  index, item ->
             FilterItemComponent(
-                modifier = Modifier
-                    .defaultMinSize(minWidth = 100.dp)
-                    .height(40.dp),
+                modifier = Modifier.size(60.dp),
                 text = item.text,
-                isSelected = state == index
+                isSelected = state == index,
+                color = Color(android.graphics.Color.parseColor(item.color))
             ) {
                 RenderType
                     .values()
@@ -197,12 +186,14 @@ fun FilterListComponentView(
 }
 
 
+@Suppress("LongParameterList")
 @Composable
 fun FilterItemComponent(
     modifier: Modifier = Modifier,
     text: String,
     isSelected: Boolean = false,
     cornerRadius: Dp = 7.dp,
+    color: Color,
     onClick: () -> Unit
 ) {
 
@@ -212,34 +203,43 @@ fun FilterItemComponent(
     )
 
     val colorAnimation: Color by animateColorAsState(
-        targetValue = if (isSelected) MaterialTheme.colors.secondary else MaterialTheme.colors.primary,
+        targetValue = if (isSelected) color else MaterialTheme.colors.onPrimary,
         spring(stiffness = Spring.StiffnessLow)
     )
 
-    val textColorAnimation: Color by animateColorAsState(
-        targetValue = if (isSelected) MaterialTheme.colors.primary else MaterialTheme.colors.secondary,
-        spring(stiffness = Spring.StiffnessLow)
-    )
-
-    Card(
-        shape = RoundedCornerShape(cornerRadius),
-        elevation = elevationAnimation,
-        modifier = modifier.clickable { onClick.invoke() },
-        backgroundColor = colorAnimation
+    Column(
+        verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
-        Box(
-            modifier = Modifier.fillMaxSize()
+        Card(
+            shape = RoundedCornerShape(cornerRadius),
+            elevation = elevationAnimation,
+            modifier = modifier
+                .align(Alignment.CenterHorizontally)
         ) {
-            Text(
-                text = text,
+            Box(
                 modifier = Modifier
-                    .align(Alignment.Center)
-                    .padding(5.dp)
-                    .fillMaxWidth(),
-                color = textColorAnimation,
-                textAlign = TextAlign.Center
-            )
+                    .fillMaxSize()
+                    .background(colorAnimation.copy(alpha = 0.4f))
+                    .clickable {onClick.invoke() },
+            ) {
+                Icon(
+                    modifier = Modifier.size(32.dp)
+                        .align(Alignment.Center),
+                    imageVector = Icons.Default.Star,
+                    contentDescription = text,
+                    tint = colorAnimation
+                )
+            }
         }
+
+        Text(
+            text = text.uppercase(),
+            modifier = Modifier
+                .padding(5.dp),
+            color = MaterialTheme.colors.secondary,
+            textAlign = TextAlign.Center,
+            style = Typography.subtitle2
+        )
     }
 }
 
