@@ -94,16 +94,14 @@ fun FilterGridComponentView(
 
     val chunkedData by remember {
         derivedStateOf {
-            data.chunked(
-                step
-            )
+            data.chunked(step)
         }
     }
 
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp),
+            .padding(start = 16.dp, end = 16.dp, top = 16.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -128,10 +126,11 @@ fun FilterGridComponentView(
                             .border(
                                 width = 1.dp,
                                 color = colorAnimation,
-                                shape = RoundedCornerShape(7.dp)
+                                shape = RoundedCornerShape(20.dp)
                             ),
                         text = item.text,
-                        isSelected = isSelected
+                        isSelected = isSelected,
+                        cornerRadius = 20.dp
                     ) {
                         RenderType
                             .values()
@@ -168,12 +167,12 @@ fun FilterListComponentView(
 
     LazyRow(
         modifier = modifier
-            .fillMaxWidth()
-            .height(75.dp)
+            .fillMaxSize()
+            .height(70.dp)
             .clipToBounds(),
         horizontalArrangement = Arrangement.spacedBy(15.dp),
         state = listState,
-        contentPadding = PaddingValues(horizontal = 16.dp)
+        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 16.dp)
     ) {
         itemsIndexed(
             items = data,
@@ -181,7 +180,7 @@ fun FilterListComponentView(
             FilterItemComponent(
                 modifier = Modifier
                     .defaultMinSize(minWidth = 100.dp)
-                    .height(50.dp),
+                    .height(40.dp),
                 text = item.text,
                 isSelected = state == index
             ) {
@@ -203,6 +202,7 @@ fun FilterItemComponent(
     modifier: Modifier = Modifier,
     text: String,
     isSelected: Boolean = false,
+    cornerRadius: Dp = 7.dp,
     onClick: () -> Unit
 ) {
 
@@ -222,10 +222,9 @@ fun FilterItemComponent(
     )
 
     Card(
-        shape = RoundedCornerShape(7.dp),
+        shape = RoundedCornerShape(cornerRadius),
         elevation = elevationAnimation,
-        modifier = modifier
-            .clickable { onClick.invoke() },
+        modifier = modifier.clickable { onClick.invoke() },
         backgroundColor = colorAnimation
     ) {
         Box(

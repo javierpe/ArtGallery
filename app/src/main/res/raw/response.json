@@ -6,7 +6,7 @@
       "resource": {
         "items": [
           {
-            "text": "Abstract banner",
+            "text": "Paint of the day",
             "go_to": "text"
           },
           {
@@ -14,11 +14,11 @@
             "go_to": "cards"
           },
           {
-            "text": "Classic message",
+            "text": "Lorem ipsum",
             "go_to": "message"
           },
           {
-            "text": "Abstract Landscapes",
+            "text": "Landscapes",
             "go_to": "banner_carousel"
           },
           {
@@ -26,13 +26,6 @@
             "go_to": "faces"
           }
         ]
-      }
-    },
-    {
-      "render": "message",
-      "index": 1,
-      "resource": {
-        "message": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
       }
     }
   ],
@@ -318,6 +311,13 @@
     {
       "render": "message",
       "index": 14,
+      "resource": {
+        "message": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
+      }
+    },
+    {
+      "render": "message",
+      "index": 15,
       "resource": {
         "message": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
       }

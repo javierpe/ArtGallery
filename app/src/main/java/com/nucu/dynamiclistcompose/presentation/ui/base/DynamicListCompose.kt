@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
@@ -16,7 +15,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nucu.dynamiclistcompose.data.actions.ContextViewAction
 import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
@@ -149,13 +147,7 @@ fun DynamicListView(
     when(widthSizeClass) {
         WindowWidthSizeClass.Compact -> {
             Column {
-                Box(
-                    modifier = Modifier
-                        .padding(bottom = 16.dp)
-                ) {
-                    contentHeader()
-                }
-
+                contentHeader()
                 contentBody()
             }
         }

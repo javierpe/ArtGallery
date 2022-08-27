@@ -1,7 +1,6 @@
 package com.nucu.dynamiclistcompose.presentation.components.common
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,8 +32,7 @@ fun BannerInfoView(
             modifier = Modifier
                 .align(Alignment.BottomStart)
                 .wrapContentHeight()
-                .padding(bottom = 16.dp, start = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(5.dp)
+                .padding(bottom = 16.dp, start = 16.dp)
         ) {
             Text(
                 text = bannerInfo.title,
