@@ -195,7 +195,7 @@
       "render": "banner",
       "index": 5,
       "resource": {
-        "url": "https://i.pinimg.com/564x/1f/9b/15/1f9b15a8a3684ef87410dd68b3e2d3e2.jpg",
+        "url": "https://i.pinimg.com/564x/02/45/db/0245db766623a9bb8933f2a446b6043a.jpg",
         "info": {
           "title": "Emma",
           "description": "Germany"
@@ -215,28 +215,28 @@
       "resource": {
         "banners": [
           {
-            "url": "https://i.etsystatic.com/28296516/r/il/54f5e3/3977297934/il_1588xN.3977297934_fjf5.jpg",
+            "url": "https://i.pinimg.com/564x/0b/fd/5e/0bfd5e418c3347ad333de3aafeb8b440.jpg",
             "info": {
               "title": "John",
               "description": "Italy"
             }
           },
           {
-            "url": "https://i.pinimg.com/474x/c9/a4/c9/c9a4c9d499ab288f29bc65a4369a447f.jpg",
+            "url": "https://i.pinimg.com/736x/6a/7d/0a/6a7d0aa73190902397a25b541b14831e.jpg",
             "info": {
               "title": "Hanna",
               "description": "Germany"
             }
           },
           {
-            "url": "https://i.pinimg.com/474x/28/da/94/28da9471c34cc79667ea792b26162d57.jpg",
+            "url": "https://i.pinimg.com/564x/41/e5/ab/41e5ab5144a057e3bc13eec5aee7d68e.jpg",
             "info": {
               "title": "Jennifer",
               "description": "Switzerland"
             }
           },
           {
-            "url": "https://i.pinimg.com/474x/06/b7/a7/06b7a79c32049e32373e3efbcd78aed6.jpg",
+            "url": "https://i.pinimg.com/564x/54/56/c6/5456c6aaf24216ca1d1da17c4a3b9ffd.jpg",
             "info": {
               "title": "Robert",
               "description": "United Kingdom"
@@ -270,7 +270,7 @@
       "render": "banner",
       "index": 11,
       "resource": {
-        "url": "https://i.pinimg.com/474x/30/9b/5b/309b5b18d162cec61be5403008a0f704.jpg",
+        "url": "https://i.pinimg.com/564x/b5/4c/9d/b54c9dd2f96cbc540c805e14057c58bc.jpg",
         "info": {
           "title": "Leonardo",
           "description": "Italy"
@@ -281,7 +281,7 @@
       "render": "text",
       "index": 12,
       "resource": {
-        "text": "Ambient"
+        "text": "Places"
       }
     },
     {
@@ -290,24 +290,38 @@
       "resource": {
         "banners": [
           {
-            "url": "https://i.pinimg.com/564x/2e/c0/f2/2ec0f2c68d8cc8e2fbb13a325c2d034e.jpg",
+            "url": "https://i.pinimg.com/564x/06/6e/a1/066ea1a756825ad682fc700242cd9eaf.jpg",
             "info": {
               "title": "Alexandra",
               "description": "France"
             }
           },
           {
-            "url": "https://i.pinimg.com/474x/96/07/52/9607523b8c71cb4895a3f87b30421900.jpg",
+            "url": "https://i.pinimg.com/474x/e3/3f/08/e33f082577a1761bca0dc3fa10743b27.jpg",
             "info": {
               "title": "Annelien",
               "description": "Holland"
             }
           },
           {
-            "url": "https://i.pinimg.com/474x/d8/f4/ac/d8f4ac2459333ae16a4b47914f33de94.jpg",
+            "url": "https://i.pinimg.com/564x/82/d8/c8/82d8c8e1ee15d730b6113442e948f0ea.jpg",
             "info": {
               "title": "Victor",
               "description": "Portugal"
+            }
+          },
+          {
+            "url": "https://i.pinimg.com/564x/61/e4/72/61e4729d2e98e19c74009768f9dfd68f.jpg",
+            "info": {
+              "title": "Peter",
+              "description": "Texas"
+            }
+          },
+          {
+            "url": "https://i.pinimg.com/564x/c0/0d/61/c00d616aaa230eac681f2fe1332ae5b3.jpg",
+            "info": {
+              "title": "Agus Bis",
+              "description": "New York"
             }
           }
         ]
