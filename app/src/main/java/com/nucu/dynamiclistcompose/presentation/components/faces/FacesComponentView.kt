@@ -1,5 +1,6 @@
 package com.nucu.dynamiclistcompose.presentation.components.faces
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -23,7 +25,8 @@ import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
 @Composable
 fun FacesComponentView(
     modifier: Modifier,
-    faces: List<FacesItemModel>
+    faces: List<FacesItemModel>,
+    onClick: (Int) -> Unit
 ) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -31,7 +34,9 @@ fun FacesComponentView(
         modifier = modifier
     ) {
         itemsIndexed(items = faces) { _, item ->
-            FaceView(name = item.name, imageUrl = item.url)
+            FaceView(name = item.name, imageUrl = item.url) {
+                onClick(item.goTo)
+            }
         }
     }
 }
@@ -39,19 +44,25 @@ fun FacesComponentView(
 @Composable
 fun FaceView(
     name: String,
-    imageUrl: String
+    imageUrl: String,
+    onClick: () -> Unit
 ) {
 
     Column(
         verticalArrangement = Arrangement.spacedBy(5.dp),
-        modifier = Modifier.width(70.dp)
+        modifier = Modifier
+            .width(70.dp)
+            .clip(RoundedCornerShape(5.dp))
     ) {
 
         ImageComponentView(
             modifier = Modifier
                 .size(70.dp)
                 .clip(CircleShape)
-                .align(Alignment.CenterHorizontally),
+                .align(Alignment.CenterHorizontally)
+                .clickable {
+                    onClick()
+                },
             imageURL = imageUrl
         )
 

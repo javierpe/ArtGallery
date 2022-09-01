@@ -8,5 +8,6 @@ data class FacesModel(
 
 data class FacesItemModel(
     @SerializedName("name") val name: String,
-    @SerializedName("url") val url: String
+    @SerializedName("url") val url: String,
+    @SerializedName("go_to") val goTo: Int
 )
