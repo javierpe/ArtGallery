@@ -359,6 +359,83 @@
       "resource": {
         "message": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
       }
+    },
+    {
+      "render": "profile",
+      "index": 16,
+      "resource": {
+        "name": "Pablo Ruiz Picasso",
+        "short_description": "Cubism",
+        "life_date": "1881 - 1973",
+        "country": "Malaga, Spain",
+        "color": "#CDB4A0"
+      }
+    },
+    {
+      "render": "profile",
+      "index": 17,
+      "resource": {
+        "name": "Salvador Dalí",
+        "short_description": "Surrealism",
+        "life_date": "1904 - 1989",
+        "country": "Figueras, Cataluña",
+        "color": "#CDA0A0"
+      }
+    },
+    {
+      "render": "profile",
+      "index": 18,
+      "resource": {
+        "name": "Vincent Van Gogh",
+        "short_description": "Post-impressionism",
+        "life_date": "1853 - 1890",
+        "country": "Zundert, Netherlands",
+        "color": "#A0CDAF"
+      }
+    },
+    {
+      "render": "profile",
+      "index": 19,
+      "resource": {
+        "name": "Diego Rivera",
+        "short_description": "Muralist",
+        "life_date": "1886 - 1957",
+        "country": "Guanajuato, Mexico",
+        "color": "#CDA0BB"
+      }
+    },
+    {
+      "render": "profile",
+      "index": 20,
+      "resource": {
+        "name": "Frida Kahlo",
+        "short_description": "Self portrait",
+        "life_date": "1907 - 1954",
+        "country": "Coyoacan, Mexico",
+        "color": "#A0B8CD"
+      }
+    },
+    {
+      "render": "profile",
+      "index": 21,
+      "resource": {
+        "name": "Leonardo Da Vinci",
+        "short_description": "Renaissance",
+        "life_date": "1452 - 1519",
+        "country": "Anchiano, Florencia",
+        "color": "#CDC6A0"
+      }
+    },
+    {
+      "render": "profile",
+      "index": 22,
+      "resource": {
+        "name": "Fernando Botero",
+        "short_description": "Boterism",
+        "life_date": "1932 -",
+        "country": "Medellín, Colombia",
+        "color": "#A0CDB4"
+      }
     }
   ]
 }

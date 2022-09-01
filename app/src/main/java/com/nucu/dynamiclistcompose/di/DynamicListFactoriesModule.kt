@@ -1,13 +1,14 @@
 package com.nucu.dynamiclistcompose.di
 
-import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.factories.BannerCarouselFactory
 import com.nucu.dynamiclistcompose.data.factories.BannerFactory
-import com.nucu.dynamiclistcompose.data.factories.FiltersFactory
-import com.nucu.dynamiclistcompose.data.factories.TextFactory
 import com.nucu.dynamiclistcompose.data.factories.CardsFactory
 import com.nucu.dynamiclistcompose.data.factories.FacesFactory
+import com.nucu.dynamiclistcompose.data.factories.FiltersFactory
 import com.nucu.dynamiclistcompose.data.factories.MessageFactory
+import com.nucu.dynamiclistcompose.data.factories.ProfileFactory
+import com.nucu.dynamiclistcompose.data.factories.TextFactory
+import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -58,5 +59,11 @@ abstract class DynamicListFactoriesModule {
     @IntoSet
     abstract fun bindFacesFactory(
         factory: FacesFactory
+    ): DynamicListFactory
+
+    @Binds
+    @IntoSet
+    abstract fun bindProfileFactory(
+        factory: ProfileFactory
     ): DynamicListFactory
 }
