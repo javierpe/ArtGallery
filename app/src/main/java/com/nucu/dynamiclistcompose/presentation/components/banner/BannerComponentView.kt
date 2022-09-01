@@ -5,28 +5,20 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.AsyncImagePainter
-import coil.compose.SubcomposeAsyncImage
-import coil.compose.SubcomposeAsyncImageContent
-import coil.request.ImageRequest
 import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
-import com.nucu.dynamiclistcompose.presentation.components.common.BannerInfoView
+import com.nucu.dynamiclistcompose.presentation.components.common.BannerImageView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseStyle
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipView
@@ -71,7 +63,8 @@ fun BannerComponentView(
                 onClickAction.invoke(model.imageURL)
             }
     ) {
-        SubcomposeAsyncImage(
+
+        BannerImageView(
             modifier = modifier
                 .height(150.dp)
                 .fillMaxSize()
@@ -90,33 +83,12 @@ fun BannerComponentView(
                     key = RenderType.BANNER.value,
                     state = showCaseState
                 ),
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(model.imageURL)
-                .crossfade(true)
-                .diskCacheKey(model.imageURL)
-                .build(),
-            contentDescription = componentIndex.toString(),
-            contentScale = ContentScale.Crop
-        ) {
-            when (painter.state) {
-                is AsyncImagePainter.State.Loading -> {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(20.dp)
-                    )
-                }
-                is AsyncImagePainter.State.Error -> {  }
-                else -> {
-                    SubcomposeAsyncImageContent()
-                }
-            }
-        }
-
-        model.bannerInfo?.let {
-            BannerInfoView(
-                modifier = Modifier.height(150.dp),
-                bannerInfo = it
-            )
-        }
+            imageURL = model.imageURL,
+            onClickAction = {
+                onClickAction(model.imageURL)
+            },
+            bannerInfo = model.bannerInfo
+        )
     }
 }
 

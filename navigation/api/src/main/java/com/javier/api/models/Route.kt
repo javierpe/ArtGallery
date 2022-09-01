@@ -9,7 +9,7 @@ sealed class Route(val name: String) {
     }
 
     object CardScreen: Route("card_screen") {
-        const val IMAGE_URL = "imageURL"
-        const val CARD_TEXT = "cardText"
+        const val IMAGE_URL = "images"
+        const val CARD_TEXT = "title"
     }
 }

@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
@@ -36,9 +38,14 @@ class BannerFactory @Inject constructor(
         component: ComponentItemModel,
         componentInfo: ComponentInfo
     ) {
+        val model = remember {
+            derivedStateOf {
+                component.resource as BannerModel
+            }
+        }
         BannerComponentViewScreen(
             modifier = modifier.testTag("banner_component"),
-            model = (component.resource as BannerModel),
+            model = model.value,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState
         )

@@ -7,17 +7,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.google.gson.Gson
 import com.javier.api.models.Route
-import com.nucu.dynamiclistcompose.MainScreen
 import com.nucu.dynamiclistcompose.bannerScreen.presentation.screens.BannerScreen
-import com.nucu.dynamiclistcompose.cardScreen.presentation.screens.CardScreen
 
 /**
  * Navigate to MainScreen
  */
 fun NavGraphBuilder.homeNav(widthSizeClass: WindowWidthSizeClass) {
-    composable(Route.Main.name) {
-        MainScreen(widthSizeClass)
-    }
+
 }
 
 /**
@@ -51,10 +47,6 @@ fun NavGraphBuilder.cardScreenNav(widthSizeClass: WindowWidthSizeClass) {
                 List::class.java
             ).map { url -> url.toString() }
 
-        CardScreen(
-            title = cardText,
-            images = data,
-            widthSizeClass = widthSizeClass
-        )
+
     }
 }

@@ -11,6 +11,8 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
@@ -18,6 +20,7 @@ import com.nucu.dynamiclistcompose.data.actions.ScrollAction
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.DynamicListElement
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
+import com.nucu.dynamiclistcompose.presentation.ui.utils.rememberMetricsStateHolder
 
 @Suppress("LongParameterList", "FunctionNaming")
 @Composable
@@ -30,9 +33,24 @@ fun DynamicListScreen(
     onAction: ((ScrollAction) -> Unit)? = null
 ) {
 
+    val metricsStateHolder = rememberMetricsStateHolder()
+
+    // Reporting scrolling state from compose should be done from side effect to prevent recomposition.
+    LaunchedEffect(metricsStateHolder, listState) {
+        snapshotFlow { listState.isScrollInProgress }.collect { isScrolling ->
+            if (isScrolling) {
+                metricsStateHolder.state?.putState("DynamicListScreen", "Scrolling")
+            } else {
+                metricsStateHolder.state?.putState("DynamicListScreen", "Scrolling stop")
+            }
+        }
+    }
+
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier.wrapContentHeight().testTag("dynamic-list-container"),
+        modifier = Modifier
+            .wrapContentHeight()
+            .testTag("dynamic-list-container"),
         state = listState,
         contentPadding = PaddingValues(
             bottom = if (content.isNotEmpty() && withVerticalPadding) 16.dp else 0.dp,
@@ -45,7 +63,8 @@ fun DynamicListScreen(
             contentType = { it.componentItemModel.render }
         ) {
             it.factory?.CreateComponent(
-                modifier = Modifier.animateItemPlacement(),
+                modifier = Modifier
+                    .animateItemPlacement(),
                 component = it.componentItemModel,
                 componentInfo = ComponentInfo(
                     scrollAction = onAction,

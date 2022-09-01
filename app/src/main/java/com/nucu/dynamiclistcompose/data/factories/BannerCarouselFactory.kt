@@ -9,16 +9,18 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
-import com.nucu.dynamiclistcompose.presentation.components.bannerCarousel.BannerCarouselModel
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.bannerCarousel.BannerCarouselComponentViewScreen
+import com.nucu.dynamiclistcompose.presentation.components.bannerCarousel.BannerCarouselModel
 import javax.inject.Inject
 
 class BannerCarouselFactory @Inject constructor(
@@ -38,9 +40,15 @@ class BannerCarouselFactory @Inject constructor(
         component: ComponentItemModel,
         componentInfo: ComponentInfo,
     ) {
+
+        val model = remember {
+            derivedStateOf {
+                (component.resource as BannerCarouselModel).banners
+            }
+        }
         BannerCarouselComponentViewScreen(
             modifier = modifier.testTag("banner_carousel_component"),
-            images = (component.resource as BannerCarouselModel).banners,
+            images = model.value,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState
         )

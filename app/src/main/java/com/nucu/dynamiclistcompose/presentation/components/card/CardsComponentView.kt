@@ -1,33 +1,19 @@
 package com.nucu.dynamiclistcompose.presentation.components.card
 
-import android.util.Log
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -38,21 +24,19 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import com.nucu.dynamiclistcompose.R
+import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.nucu.dynamiclistcompose.destinations.CardScreenDestination
+import com.nucu.dynamiclistcompose.presentation.components.common.CardItemVIew
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseStyle
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.asShowCaseTarget
-import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
-import com.nucu.dynamiclistcompose.presentation.viewModels.CardsViewModel
 import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
-
-private const val MAX_ELEMENTS = 3
+import com.nucu.dynamiclistcompose.presentation.viewModels.CardsViewModel
 
 const val CARD_COMPONENT_SCREEN_TAG = "card_component_screen"
 const val CARD_COMPONENT_TAG = "card_component"
@@ -71,7 +55,9 @@ fun CardsComponentViewScreen(
         componentIndex = componentIndex,
         showCaseState = showCaseState
     ) { title, images ->
-        viewModel.navigateToCardsDetail(title, images)
+        viewModel.navigateToCardsDetail(
+            CardScreenDestination(title, images.toTypedArray())
+        )
     }
 }
 
@@ -88,8 +74,6 @@ fun CardsComponentView(
         verticalArrangement = Arrangement.spacedBy(10.dp),
         modifier = modifier
     ) {
-
-        val context = LocalContext.current
 
         val decoration by remember {
             derivedStateOf {
@@ -120,13 +104,15 @@ fun CardsComponentView(
         )
 
         LazyRow(
-            modifier = Modifier.testTag("carousel-cards"),
+            modifier = Modifier.testTag(CARD_COMPONENT_TAG),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp),
         ) {
-            itemsIndexed(items = data.cardElements) { index, item ->
+            itemsIndexed(
+                items = data.cardElements
+            ) { index, item ->
 
-                var modifierCard = if (index == 0) {
+                val modifierCard = if (index == 0) {
                     Modifier.asShowCaseTarget(
                         index = componentIndex,
                         style = ShowCaseStyle.Default.copy(
@@ -143,72 +129,13 @@ fun CardsComponentView(
                     )
                 } else Modifier
 
-                val pictures by remember {
-                    derivedStateOf {
-                        item.images.take(MAX_ELEMENTS)
-                    }
-                }
-
-                if (index == 0) {
-                    modifierCard = modifierCard.testTag("card-item")
-                }
-
-                Card(
-                    modifier = modifierCard
-                        .wrapContentWidth()
-                        .height(100.dp)
-                        .clickable {
-                            onNavigateToDetail.invoke(item.title,
-                                item.images.map { it.imageURL })
-                        },
-                    shape = RoundedCornerShape(12.dp),
-                    elevation = 5.dp
+                CardItemVIew(
+                    modifier = modifierCard,
+                    title = item.title,
+                    images = item.images
                 ) {
-
-                    Column(
-                        modifier = Modifier
-                            .padding(10.dp),
-                        verticalArrangement = Arrangement.spacedBy(10.dp)
-                    ) {
-                        Text(
-                            text = item.title,
-                            color = MaterialTheme.colors.secondary,
-                            style = Typography.button
-                        )
-
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(10.dp),
-                            modifier = Modifier.fillMaxSize()
-                        ) {
-
-                            pictures.forEach { cardImage ->
-                                AsyncImage(
-                                    modifier = Modifier
-                                        .size(46.dp)
-                                        .clip(RoundedCornerShape(5.dp)),
-                                    model = ImageRequest.Builder(context)
-                                        .data(cardImage.imageURL)
-                                        .crossfade(true)
-                                        .build(),
-                                    contentDescription = "",
-                                    contentScale = ContentScale.Crop
-                                )
-                            }
-
-                            if (item.images.size > MAX_ELEMENTS) {
-                                Box(
-                                    modifier = Modifier
-                                        .align(Alignment.CenterVertically)
-                                        .clip(RoundedCornerShape(16.dp))
-                                ) {
-                                    Text(
-                                        text = "+${item.images.size - MAX_ELEMENTS}",
-                                        style = Typography.button
-                                    )
-                                }
-                            }
-                        }
-                    }
+                    onNavigateToDetail.invoke(item.title,
+                        item.images.map { it.imageURL })
                 }
             }
         }

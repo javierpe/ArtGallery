@@ -45,7 +45,7 @@ class DynamicListCompose(
         action: ContextViewAction?,
         widthSizeClass: WindowWidthSizeClass,
         showCaseState: ShowCaseState,
-        bodyListState: LazyListState,
+        bodyListState: LazyListState
     ) {
         this.bodyComposeController = bodyAdapterController
         this.headerComposeController = headerAdapterController

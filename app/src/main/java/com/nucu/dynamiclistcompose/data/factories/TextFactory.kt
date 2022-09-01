@@ -7,16 +7,18 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
-import com.nucu.dynamiclistcompose.presentation.components.text.TextComponentView
-import com.nucu.dynamiclistcompose.presentation.components.text.TextModel
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.nucu.dynamiclistcompose.presentation.components.text.TextComponentView
+import com.nucu.dynamiclistcompose.presentation.components.text.TextModel
 import javax.inject.Inject
 
 class TextFactory @Inject constructor(): DynamicListFactory {
@@ -33,11 +35,16 @@ class TextFactory @Inject constructor(): DynamicListFactory {
         component: ComponentItemModel,
         componentInfo: ComponentInfo
     ) {
+        val model = remember {
+            derivedStateOf {
+                (component.resource as TextModel).text
+            }
+        }
         TextComponentView(
             modifier = modifier.testTag("text_component"),
             componentIndex = component.index,
             componentInfo.showCaseState,
-            text = (component.resource as TextModel).text
+            text = model.value
         )
     }
 

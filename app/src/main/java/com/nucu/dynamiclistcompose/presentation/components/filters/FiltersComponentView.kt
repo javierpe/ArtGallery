@@ -1,36 +1,31 @@
 package com.nucu.dynamiclistcompose.presentation.components.filters
 
+import android.util.Size
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,15 +33,19 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.nucu.dynamiclistcompose.presentation.components.common.ImageComponentView
+import com.nucu.dynamiclistcompose.presentation.components.common.StaticGridList
+import com.nucu.dynamiclistcompose.presentation.components.common.toPx
 import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DURATION
 import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
 import kotlinx.coroutines.launch
@@ -92,49 +91,32 @@ fun FilterGridComponentView(
         mutableStateOf(mapOf(0 to 0))
     }
 
-    val step by animateIntAsState(targetValue = if (isMediumScreen) 2 else 3, tween(DURATION))
     val size by animateDpAsState(targetValue = if (isMediumScreen) 110.dp else 100.dp, tween(DURATION))
 
-    val chunkedData by remember {
-        derivedStateOf {
-            data.chunked(step)
-        }
-    }
-
-    Column(
+    StaticGridList(
         modifier = modifier
             .fillMaxSize()
             .padding(start = 16.dp, end = 16.dp, top = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        chunkedData.forEachIndexed { columnIndex, list ->
-            Row(
-                modifier = Modifier.fillMaxSize(),
-                horizontalArrangement = Arrangement.spacedBy(20.dp)
-            ) {
-                list.forEachIndexed { rowIndex, item ->
+        list = data
+    ) { columnIndex, rowIndex, item ->
 
-                    val isSelected = state == mapOf(columnIndex to rowIndex)
+        val isSelected = state == mapOf(columnIndex to rowIndex)
 
-                    FilterItemComponent(
-                        modifier = Modifier
-                            .size(size),
-                        text = item.text,
-                        isSelected = isSelected,
-                        cornerRadius = 20.dp,
-                        color = Color(android.graphics.Color.parseColor(item.color))
-                    ) {
-                        RenderType
-                            .values()
-                            .firstOrNull { render -> render.value == item.goTo }
-                            ?.let {
-                                state = mapOf(columnIndex to rowIndex)
-                                onSelectItem.invoke(it)
-                            }
-                    }
+        FilterItemComponent(
+            modifier = Modifier.size(size),
+            text = item.text,
+            isSelected = isSelected,
+            cornerRadius = 20.dp,
+            color = Color(android.graphics.Color.parseColor(item.color)),
+            iconUrl = item.icon
+        ) {
+            RenderType
+                .values()
+                .firstOrNull { render -> render.value == item.goTo }
+                ?.let {
+                    state = mapOf(columnIndex to rowIndex)
+                    onSelectItem.invoke(it)
                 }
-            }
         }
     }
 }
@@ -160,20 +142,20 @@ fun FilterListComponentView(
 
     LazyRow(
         modifier = modifier
-            .fillMaxSize()
-            .clipToBounds(),
+            .fillMaxSize(),
         horizontalArrangement = Arrangement.spacedBy(15.dp),
         state = listState,
-        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 16.dp)
+        contentPadding = PaddingValues(16.dp)
     ) {
         itemsIndexed(
             items = data,
         ) {  index, item ->
             FilterItemComponent(
-                modifier = Modifier.size(75.dp),
+                modifier = Modifier.wrapContentSize(),
                 text = item.text,
                 isSelected = state == index,
-                color = Color(android.graphics.Color.parseColor(item.color))
+                color = Color(android.graphics.Color.parseColor(item.color)),
+                iconUrl = item.icon
             ) {
                 RenderType
                     .values()
@@ -193,14 +175,17 @@ fun FilterListComponentView(
 fun FilterItemComponent(
     modifier: Modifier = Modifier,
     text: String,
+    iconUrl: String,
     isSelected: Boolean = false,
-    cornerRadius: Dp = 7.dp,
+    cornerRadius: Dp = 15.dp,
     color: Color,
     onClick: () -> Unit
 ) {
 
+    val context = LocalContext.current
+
     val elevationAnimation: Dp by animateDpAsState(
-        if (isSelected) 20.dp else 0.dp,
+        if (isSelected) 50.dp else 0.dp,
         spring(stiffness = Spring.StiffnessLow)
     )
 
@@ -209,50 +194,51 @@ fun FilterItemComponent(
         spring(stiffness = Spring.StiffnessLow)
     )
 
-    ConstraintLayout {
+    val colorTextAnimation: Color by animateColorAsState(
+        targetValue = if (isSelected) color else MaterialTheme.colors.secondary.copy(alpha = 0.5f),
+        spring(stiffness = Spring.StiffnessLow)
+    )
 
-        val (cardRef, titleRef) = createRefs()
-
-        Card(
-            shape = RoundedCornerShape(cornerRadius),
-            elevation = elevationAnimation,
-            modifier = modifier
-                .constrainAs(cardRef) {
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    top.linkTo(parent.top)
-                }
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(colorAnimation.copy(alpha = 0.4f))
-                    .clickable {onClick.invoke() },
-            ) {
-                Icon(
-                    modifier = Modifier.size(32.dp)
-                        .align(Alignment.Center),
-                    imageVector = Icons.Default.Star,
-                    contentDescription = text,
-                    tint = colorAnimation
-                )
-            }
-        }
-
-        Text(
-            text = text.uppercase(),
+    Box(
+        modifier = modifier
+            .shadow(
+                clip = false,
+                ambientColor = colorAnimation,
+                spotColor = colorAnimation,
+                elevation = elevationAnimation,
+                shape = RoundedCornerShape(cornerRadius)
+            )
+            .clip(RoundedCornerShape(cornerRadius))
+            .background(colorAnimation.copy(alpha = 0.5f))
+            .clickable { onClick.invoke() },
+    ) {
+        Row(
             modifier = Modifier
-                .constrainAs(titleRef) {
-                    start.linkTo(cardRef.start)
-                    end.linkTo(cardRef.end)
-                    top.linkTo(cardRef.bottom, 5.dp)
-                    width = Dimension.fillToConstraints
-                }
+                .align(Alignment.Center)
                 .padding(5.dp),
-            color = MaterialTheme.colors.secondary,
-            textAlign = TextAlign.Center,
-            style = Typography.subtitle2
-        )
+        ) {
+            ImageComponentView(
+                modifier = Modifier
+                    .size(18.dp)
+                    .align(Alignment.CenterVertically),
+                imageURL = iconUrl,
+                overrideSize = Size(
+                    24.dp.toPx(context).toInt(),
+                    24.dp.toPx(context).toInt()
+                ),
+                colorFilter = ColorFilter.tint(colorAnimation)
+            )
+
+            Text(
+                text = text,
+                modifier = Modifier
+                    .padding(5.dp)
+                    .align(Alignment.CenterVertically),
+                color = colorTextAnimation,
+                textAlign = TextAlign.Center,
+                style = Typography.subtitle2
+            )
+        }
     }
 }
 

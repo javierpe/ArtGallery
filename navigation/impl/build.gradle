@@ -44,8 +44,9 @@ dependencies {
     implementation(project(":navigation:api"))
 
     // Navigation compose
-    implementation "androidx.navigation:navigation-compose:$compose_navigation_version"
-    implementation "androidx.compose.compiler:compiler:$compose_compiler_version"
+
+    implementation 'io.github.raamcosta.compose-destinations:core:1.7.16-beta'
+    implementation 'io.github.raamcosta.compose-destinations:animations-core:1.7.16-beta'
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.43.2")

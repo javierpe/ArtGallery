@@ -9,10 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DynamicListHeaderComponentView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCase
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.presentation.viewModels.ContextViewModel
-import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DynamicListHeaderComponentView
 
 @Composable
 fun ContextView(

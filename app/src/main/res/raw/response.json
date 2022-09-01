@@ -8,27 +8,32 @@
           {
             "text": "Text",
             "go_to": "text",
-            "color": "#FF7E6354"
+            "color": "#D19600",
+            "icon": "https://img.icons8.com/small/96/000000/align-cell-content-center.png"
           },
           {
             "text": "Cards",
             "go_to": "cards",
-            "color": "#FF765280"
+            "color": "#D15400",
+            "icon": "https://img.icons8.com/small/96/000000/bank-card-front-side.png"
           },
           {
             "text": "Message",
             "go_to": "message",
-            "color": "#FF687E54"
+            "color": "#D10000",
+            "icon": "https://img.icons8.com/fluency-systems-regular/48/000000/multiline-text--v1.png"
           },
           {
             "text": "Banners",
             "go_to": "banner_carousel",
-            "color": "#FF54767E"
+            "color": "#00D18F",
+            "icon": "https://img.icons8.com/fluency-systems-regular/48/000000/ad-banner.png"
           },
           {
             "text": "Faces",
             "go_to": "faces",
-            "color": "#FF73547E"
+            "color": "#D1008B",
+            "icon": "https://img.icons8.com/ios-filled/50/000000/face.png"
           }
         ]
       }
@@ -318,10 +323,24 @@
             }
           },
           {
-            "url": "https://i.pinimg.com/564x/c0/0d/61/c00d616aaa230eac681f2fe1332ae5b3.jpg",
+            "url": "https://i.pinimg.com/564x/28/b3/7a/28b37aebdd6240f3587d303a35077dfa.jpg",
             "info": {
               "title": "Agus Bis",
               "description": "New York"
+            }
+          },
+          {
+            "url": "https://i.pinimg.com/564x/ca/b5/7e/cab57ed4da2ff1643a43aaec62a5ea1c.jpg",
+            "info": {
+              "title": "Annita",
+              "description": "Los Angeles"
+            }
+          },
+          {
+            "url": "https://i.pinimg.com/564x/4a/22/a0/4a22a002e14ca84772dd925804ebf1c5.jpg",
+            "info": {
+              "title": "Michael",
+              "description": "San Francisco"
             }
           }
         ]

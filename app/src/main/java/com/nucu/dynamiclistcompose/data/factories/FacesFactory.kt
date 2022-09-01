@@ -14,17 +14,18 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
-import com.nucu.dynamiclistcompose.presentation.components.faces.FacesComponentView
-import com.nucu.dynamiclistcompose.presentation.components.faces.FacesModel
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
-import com.nucu.dynamiclistcompose.data.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.nucu.dynamiclistcompose.presentation.components.faces.FacesComponentView
+import com.nucu.dynamiclistcompose.presentation.components.faces.FacesModel
 import javax.inject.Inject
 
 class FacesFactory @Inject constructor(
@@ -42,9 +43,14 @@ class FacesFactory @Inject constructor(
         component: ComponentItemModel,
         componentInfo: ComponentInfo,
     ) {
+        val model = remember {
+            derivedStateOf {
+                (component.resource as FacesModel).items
+            }
+        }
         FacesComponentView(
             modifier = modifier.testTag("faces_component"),
-            faces = (component.resource as FacesModel).items
+            faces = model.value
         )
     }
 
@@ -55,7 +61,8 @@ class FacesFactory @Inject constructor(
         val heightText = 13.dp
 
         Row(
-            modifier = Modifier.testTag("skeleton")
+            modifier = Modifier
+                .testTag("skeleton")
                 .padding(start = 16.dp, end = 16.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween

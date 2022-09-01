@@ -1,8 +1,7 @@
 package com.nucu.dynamiclistcompose.presentation.viewModels
 
 import com.javier.api.NavigationController
-import com.javier.api.models.Route
-import com.nucu.dynamiclistcompose.presentation.viewModels.BannerViewModel
+import com.nucu.dynamiclistcompose.destinations.BannerScreenDestination
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,6 +27,10 @@ class BannerViewModelTest {
     @Test
     fun `navigateTo should be called when navigateToCardsDetail is executed`() {
         viewModel.loadBanner(String())
-        verify(navigationController).navigateTo(Route.BannerScreen.name, listOf(String()))
+        verify(navigationController).navigateTo(
+            BannerScreenDestination(
+                String()
+            )
+        )
     }
 }

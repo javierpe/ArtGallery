@@ -9,5 +9,6 @@ data class FiltersModel(
 data class FilterItemModel(
     @SerializedName("text") val text: String,
     @SerializedName("go_to") val goTo: String,
-    @SerializedName("color") val color: String
+    @SerializedName("color") val color: String,
+    @SerializedName("icon") val icon: String
 )
