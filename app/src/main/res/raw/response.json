@@ -8,32 +8,27 @@
           {
             "text": "Text",
             "go_to": "text",
-            "color": "#D19600",
-            "icon": "https://img.icons8.com/small/96/000000/align-cell-content-center.png"
+            "color": "#D19600"
           },
           {
             "text": "Cards",
             "go_to": "cards",
-            "color": "#D15400",
-            "icon": "https://img.icons8.com/small/96/000000/bank-card-front-side.png"
+            "color": "#D15400"
           },
           {
             "text": "Message",
             "go_to": "message",
-            "color": "#D10000",
-            "icon": "https://img.icons8.com/fluency-systems-regular/48/000000/multiline-text--v1.png"
+            "color": "#D10000"
           },
           {
             "text": "Banners",
             "go_to": "banner_carousel",
-            "color": "#00D18F",
-            "icon": "https://img.icons8.com/fluency-systems-regular/48/000000/ad-banner.png"
+            "color": "#00D18F"
           },
           {
             "text": "Faces",
             "go_to": "faces",
-            "color": "#D1008B",
-            "icon": "https://img.icons8.com/ios-filled/50/000000/face.png"
+            "color": "#D1008B"
           }
         ]
       }

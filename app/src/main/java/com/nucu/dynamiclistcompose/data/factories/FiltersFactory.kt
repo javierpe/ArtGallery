@@ -18,7 +18,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.actions.ScrollAction
-import com.nucu.dynamiclistcompose.data.actions.TargetAction
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
@@ -51,7 +50,7 @@ class FiltersFactory @Inject constructor(): DynamicListFactory {
             windowWidthSizeClass = componentInfo.windowWidthSizeClass
         ) {
             componentInfo.scrollAction?.invoke(
-                ScrollAction.ScrollRender(it, target = TargetAction.BODY)
+                ScrollAction.ScrollRender(it)
             )
         }
     }

@@ -1,6 +1,5 @@
 package com.nucu.dynamiclistcompose.presentation.components.filters
 
-import android.util.Size
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
@@ -12,7 +11,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -36,16 +34,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
-import com.nucu.dynamiclistcompose.presentation.components.common.ImageComponentView
 import com.nucu.dynamiclistcompose.presentation.components.common.StaticGridList
-import com.nucu.dynamiclistcompose.presentation.components.common.toPx
 import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DURATION
 import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
 import kotlinx.coroutines.launch
@@ -107,8 +101,7 @@ fun FilterGridComponentView(
             text = item.text,
             isSelected = isSelected,
             cornerRadius = 20.dp,
-            color = Color(android.graphics.Color.parseColor(item.color)),
-            iconUrl = item.icon
+            color = Color(android.graphics.Color.parseColor(item.color))
         ) {
             RenderType
                 .values()
@@ -154,8 +147,7 @@ fun FilterListComponentView(
                 modifier = Modifier.wrapContentSize(),
                 text = item.text,
                 isSelected = state == index,
-                color = Color(android.graphics.Color.parseColor(item.color)),
-                iconUrl = item.icon
+                color = Color(android.graphics.Color.parseColor(item.color))
             ) {
                 RenderType
                     .values()
@@ -175,14 +167,11 @@ fun FilterListComponentView(
 fun FilterItemComponent(
     modifier: Modifier = Modifier,
     text: String,
-    iconUrl: String,
     isSelected: Boolean = false,
     cornerRadius: Dp = 15.dp,
     color: Color,
     onClick: () -> Unit
 ) {
-
-    val context = LocalContext.current
 
     val elevationAnimation: Dp by animateDpAsState(
         if (isSelected) 50.dp else 0.dp,
@@ -212,33 +201,15 @@ fun FilterItemComponent(
             .background(colorAnimation.copy(alpha = 0.5f))
             .clickable { onClick.invoke() },
     ) {
-        Row(
+        Text(
+            text = text,
             modifier = Modifier
                 .align(Alignment.Center)
-                .padding(5.dp),
-        ) {
-            ImageComponentView(
-                modifier = Modifier
-                    .size(18.dp)
-                    .align(Alignment.CenterVertically),
-                imageURL = iconUrl,
-                overrideSize = Size(
-                    24.dp.toPx(context).toInt(),
-                    24.dp.toPx(context).toInt()
-                ),
-                colorFilter = ColorFilter.tint(colorAnimation)
-            )
-
-            Text(
-                text = text,
-                modifier = Modifier
-                    .padding(5.dp)
-                    .align(Alignment.CenterVertically),
-                color = colorTextAnimation,
-                textAlign = TextAlign.Center,
-                style = Typography.subtitle2
-            )
-        }
+                .padding(10.dp),
+            color = colorTextAnimation,
+            textAlign = TextAlign.Center,
+            style = Typography.subtitle2
+        )
     }
 }
 
