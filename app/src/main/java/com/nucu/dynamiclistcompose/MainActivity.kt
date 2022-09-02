@@ -86,7 +86,12 @@ class MainActivity : ComponentActivity() {
                                     )
                                 }
                             },
-                            exitTransition = {
+                            popEnterTransition = {
+                                fadeIn(
+                                    tween(ANIMATION_DURATION)
+                                )
+                            },
+                            popExitTransition = {
                                 fadeOut(
                                     tween(ANIMATION_DURATION)
                                 )

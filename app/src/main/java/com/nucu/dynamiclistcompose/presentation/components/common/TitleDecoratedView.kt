@@ -30,7 +30,7 @@ fun TitleDecoratedView(
 
     val letterSpacing = remember {
         derivedStateOf {
-            TextUnit(40f, TextUnitType.Sp)
+            TextUnit(35f, TextUnitType.Sp)
         }
     }
 

@@ -446,8 +446,12 @@
         "title": "Vintage posters",
         "items": [
           {
-            "name": "México",
-            "url": "https://i.pinimg.com/564x/2e/c9/41/2ec9411e3404b30b5c8279e98ba3ffc8.jpg"
+            "name": "Philadelphia",
+            "url": "https://i.pinimg.com/564x/5c/21/aa/5c21aa00ae9f57feb2b8174a82078a0c.jpg"
+          },
+          {
+            "name": "Cabo San Lucas",
+            "url": "https://i.pinimg.com/564x/cb/01/ec/cb01ec1e48445553554a5764bef46e03.jpg"
           },
           {
             "name": "California",
@@ -480,10 +484,6 @@
           {
             "name": "Chicago",
             "url": "https://i.pinimg.com/564x/30/ac/67/30ac67dea07fa57319b3e32c19eefb7e.jpg"
-          },
-          {
-            "name": "Philadelphia",
-            "url": "https://i.pinimg.com/564x/5c/21/aa/5c21aa00ae9f57feb2b8174a82078a0c.jpg"
           },
           {
             "name": "Baltimore",

@@ -56,10 +56,11 @@ fun PosterComponentView(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
+
         TitleDecoratedView(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            text = title,
-            withDecoration = false
+            modifier = Modifier
+                .padding(horizontal = 16.dp),
+            text = title
         )
 
         HorizontalPager(
