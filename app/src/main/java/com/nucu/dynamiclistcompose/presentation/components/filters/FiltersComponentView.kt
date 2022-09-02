@@ -136,7 +136,7 @@ fun FilterListComponentView(
     LazyRow(
         modifier = modifier
             .fillMaxSize(),
-        horizontalArrangement = Arrangement.spacedBy(15.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
         state = listState,
         contentPadding = PaddingValues(16.dp)
     ) {

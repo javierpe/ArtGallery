@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -111,7 +112,8 @@ fun PosterComponentView(
                                 y = 0
                             )
                         },
-                    imageURL = list[page].url
+                    imageURL = list[page].url,
+                    contentScale = ContentScale.Fit
                 )
             }
         }

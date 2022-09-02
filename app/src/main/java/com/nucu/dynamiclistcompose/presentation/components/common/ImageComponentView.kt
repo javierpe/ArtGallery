@@ -14,7 +14,8 @@ fun ImageComponentView(
     modifier: Modifier = Modifier,
     imageURL: String,
     overrideSize: Size? = null,
-    colorFilter: ColorFilter? = null
+    colorFilter: ColorFilter? = null,
+    contentScale: ContentScale = ContentScale.Crop
 ) {
 
     var requestOptions = RequestOptions()
@@ -31,7 +32,7 @@ fun ImageComponentView(
     GlideImage(
         modifier = modifier,
         imageModel = imageURL,
-        contentScale = ContentScale.Crop,
+        contentScale = contentScale,
         requestOptions = { requestOptions },
         colorFilter = colorFilter
     )
