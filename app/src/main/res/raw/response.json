@@ -438,6 +438,47 @@
         "country": "Medellín, Colombia",
         "color": "#A0CDB4"
       }
+    },
+    {
+      "render": "poster",
+      "index": 23,
+      "resource": {
+        "title": "Vintage posters",
+        "items": [
+          {
+            "name": "México",
+            "url": "https://i.pinimg.com/564x/2e/c9/41/2ec9411e3404b30b5c8279e98ba3ffc8.jpg"
+          },
+          {
+            "name": "California",
+            "url": "https://i.pinimg.com/564x/e7/ee/84/e7ee840ef2855487de59e66667c2e55e.jpg"
+          },
+          {
+            "name": "Canada",
+            "url": "https://i.pinimg.com/564x/d3/5d/36/d35d36c5b48381fc2f3e677c30b37863.jpg"
+          },
+          {
+            "name": "Australia",
+            "url": "https://i.pinimg.com/564x/d7/3b/9e/d73b9e65e64f184b6d90e58add475dba.jpg"
+          },
+          {
+            "name": "South Korea",
+            "url": "https://i.pinimg.com/564x/b4/61/45/b4614571c7d04363f74e03a9f1fb691d.jpg"
+          },
+          {
+            "name": "Florence",
+            "url": "https://i.pinimg.com/564x/0f/5d/63/0f5d63baf5210bf5ca95b461678ae0a8.jpg"
+          },
+          {
+            "name": "Amalfi Coast",
+            "url": "https://i.pinimg.com/564x/df/66/54/df66541650efad456f1e1eb6183e60d8.jpg"
+          },
+          {
+            "name": "Venice",
+            "url": "https://i.pinimg.com/564x/e1/ae/70/e1ae702f15a36358294dd656a18beea4.jpg"
+          }
+        ]
+      }
     }
   ]
 }

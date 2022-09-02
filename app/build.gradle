@@ -93,8 +93,12 @@ dependencies {
     implementation(project(":navigation:impl"))
     implementation(project(":navigation:wiring"))
 
-    // Coil
-    implementation("io.coil-kt:coil-compose:2.2.0")
+    // Pager
+    implementation "com.google.accompanist:accompanist-pager:0.26.2-beta"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.19.0"
+
+    // Coil (Bad)
+    //implementation("io.coil-kt:coil-compose:2.2.0")
 
     implementation "com.github.skydoves:landscapist-glide:1.6.1"
 
@@ -120,7 +124,7 @@ dependencies {
     // Alpha
     implementation "androidx.compose.material3:material3-window-size-class:1.0.0-beta01"
     implementation "androidx.compose.material3:material3:1.0.0-beta01"
-    // Alpha: implementation "androidx.paging:paging-compose:1.0.0-alpha14"
+    // Pagination: implementation "androidx.paging:paging-compose:1.0.0-alpha14"
 
     // Room
     implementation "androidx.room:room-rxjava3:2.4.3"

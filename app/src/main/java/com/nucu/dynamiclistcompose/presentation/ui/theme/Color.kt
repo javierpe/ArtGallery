@@ -18,4 +18,3 @@ val backgroundDynamicListContainerColorLight  = Color(0xCBDAD2C5)
 
 val gradientColor1 = Color(0xFF642B73)
 val gradientColor2 = Color(0xFFC6426B)
-val aa = Color(0xFF73547E)
