@@ -1,7 +1,7 @@
 package com.nucu.dynamiclistcompose.presentation.viewModels
 
 import com.javier.api.NavigationController
-import com.nucu.dynamiclistcompose.destinations.BannerScreenDestination
+import com.ramcosta.composedestinations.spec.Direction
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -11,6 +11,9 @@ import org.mockito.kotlin.verify
 
 @RunWith(MockitoJUnitRunner::class)
 class BannerViewModelTest {
+
+    @Mock
+    lateinit var direction: Direction
 
     @Mock
     lateinit var navigationController: NavigationController
@@ -26,11 +29,7 @@ class BannerViewModelTest {
 
     @Test
     fun `navigateTo should be called when navigateToCardsDetail is executed`() {
-        viewModel.loadBanner(String())
-        verify(navigationController).navigateTo(
-            BannerScreenDestination(
-                String()
-            )
-        )
+        viewModel.loadBanner(direction)
+        verify(navigationController).navigateTo(direction)
     }
 }

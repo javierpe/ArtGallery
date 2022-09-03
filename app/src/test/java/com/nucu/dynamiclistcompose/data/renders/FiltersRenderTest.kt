@@ -27,8 +27,7 @@ class FiltersRenderTest {
               {
                 "text": "Abstract banner",
                 "go_to": "text",
-                "color": "#FFF",
-                "icon": ""
+                "color": "#FFF"
               }
             ]
           }
@@ -41,8 +40,7 @@ class FiltersRenderTest {
                 FilterItemModel(
                     text = "Abstract banner",
                     goTo = "text",
-                    color = "#FFF",
-                    icon = String()
+                    color = "#FFF"
                 )
             )
         )

@@ -2,7 +2,7 @@ package com.nucu.dynamiclistcompose.presentation.viewModels
 
 import androidx.lifecycle.ViewModel
 import com.javier.api.NavigationController
-import com.nucu.dynamiclistcompose.destinations.BannerScreenDestination
+import com.ramcosta.composedestinations.spec.Direction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -14,9 +14,9 @@ class BannerViewModel @Inject constructor(
     private val navigationController: NavigationController
 ) : ViewModel() {
 
-    fun loadBanner(bannerImageURL: String) {
+    fun loadBanner(direction: Direction) {
         navigationController.navigateTo(
-            BannerScreenDestination(bannerImageURL)
+            direction
         )
     }
 }
