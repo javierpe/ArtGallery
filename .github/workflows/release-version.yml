@@ -23,6 +23,9 @@ jobs:
     
     - name: Gradle permissions
       run: chmod +x ./gradlew
+      
+    - name: Create destinations
+      run: ./gradlew kspDebugKotlin 
     
     - name: Build with Gradle
       run: ./gradlew build
