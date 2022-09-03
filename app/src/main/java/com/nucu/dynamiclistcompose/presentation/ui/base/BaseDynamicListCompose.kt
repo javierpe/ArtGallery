@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.nucu.dynamiclistcompose.ui.components.DynamicListHeaderComponentView
+import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DynamicListHeaderComponentView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCase
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.presentation.viewModels.ContextViewModel
@@ -18,7 +18,7 @@ import com.nucu.dynamiclistcompose.presentation.viewModels.ContextViewModel
 fun ContextView(
     title: String,
     widthSizeClass: WindowWidthSizeClass,
-    viewModel: ContextViewModel,
+    viewModel: ContextViewModel
 ) {
 
     /**
@@ -41,8 +41,7 @@ fun ContextView(
                 DynamicListHeaderComponentView(
                     title = title,
                     contextType = viewModel.context,
-                    bodyLazyListState = bodyLazyListState,
-                    onBackPressed = { viewModel.onBackPressed() }
+                    bodyLazyListState = bodyLazyListState
                 )
             }
         ) { padding ->

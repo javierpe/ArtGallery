@@ -7,16 +7,18 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
-import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerComponentViewScreen
+import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
 import javax.inject.Inject
 
 class BannerFactory @Inject constructor(
@@ -36,9 +38,14 @@ class BannerFactory @Inject constructor(
         component: ComponentItemModel,
         componentInfo: ComponentInfo
     ) {
+        val model = remember {
+            derivedStateOf {
+                component.resource as BannerModel
+            }
+        }
         BannerComponentViewScreen(
             modifier = modifier.testTag("banner_component"),
-            imageURL = (component.resource as BannerModel).imageURL,
+            model = model.value,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState
         )

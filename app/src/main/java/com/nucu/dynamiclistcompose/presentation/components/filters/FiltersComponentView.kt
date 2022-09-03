@@ -1,24 +1,27 @@
 package com.nucu.dynamiclistcompose.presentation.components.filters
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
@@ -26,19 +29,93 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clipToBounds
-import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.nucu.dynamiclistcompose.presentation.components.common.StaticGridList
+import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DURATION
+import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
 import kotlinx.coroutines.launch
 
 @Composable
-fun FiltersComponentView(
+fun FiltersComponentViewScreen(
+    modifier: Modifier,
+    data: List<FilterItemModel>,
+    windowWidthSizeClass: WindowWidthSizeClass,
+    onSelectItem: (RenderType) -> Unit
+) {
+
+    AnimatedVisibility(visible = windowWidthSizeClass == WindowWidthSizeClass.Compact) {
+        FilterListComponentView(
+            modifier = modifier,
+            data = data,
+            onSelectItem = onSelectItem
+        )
+    }
+
+    AnimatedVisibility(
+        visible = windowWidthSizeClass == WindowWidthSizeClass.Medium
+                || windowWidthSizeClass == WindowWidthSizeClass.Expanded
+    ) {
+        FilterGridComponentView(
+            modifier = modifier,
+            data = data,
+            isMediumScreen = windowWidthSizeClass == WindowWidthSizeClass.Medium,
+            onSelectItem = onSelectItem
+        )
+    }
+}
+
+@Composable
+fun FilterGridComponentView(
+    modifier: Modifier,
+    data: List<FilterItemModel>,
+    isMediumScreen: Boolean = false,
+    onSelectItem: (RenderType) -> Unit
+) {
+
+    var state by remember {
+        mutableStateOf(mapOf(0 to 0))
+    }
+
+    val size by animateDpAsState(targetValue = if (isMediumScreen) 110.dp else 100.dp, tween(DURATION))
+
+    StaticGridList(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(start = 16.dp, end = 16.dp, top = 16.dp),
+        list = data
+    ) { columnIndex, rowIndex, item ->
+
+        val isSelected = state == mapOf(columnIndex to rowIndex)
+
+        FilterItemComponent(
+            modifier = Modifier.size(size),
+            text = item.text,
+            isSelected = isSelected,
+            cornerRadius = 20.dp,
+            color = Color(android.graphics.Color.parseColor(item.color))
+        ) {
+            RenderType
+                .values()
+                .firstOrNull { render -> render.value == item.goTo }
+                ?.let {
+                    state = mapOf(columnIndex to rowIndex)
+                    onSelectItem.invoke(it)
+                }
+        }
+    }
+}
+
+@Composable
+fun FilterListComponentView(
     modifier: Modifier,
     data: List<FilterItemModel>,
     onSelectItem: (RenderType) -> Unit
@@ -58,27 +135,19 @@ fun FiltersComponentView(
 
     LazyRow(
         modifier = modifier
-            .fillMaxWidth()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        Color.Black.copy(alpha = 0.1f),
-                        Color.Transparent,
-                    )
-                )
-            )
-            .height(75.dp)
-            .clipToBounds(),
-        horizontalArrangement = Arrangement.spacedBy(15.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp),
-        state = listState
+            .fillMaxSize(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        state = listState,
+        contentPadding = PaddingValues(16.dp)
     ) {
         itemsIndexed(
             items = data,
         ) {  index, item ->
             FilterItemComponent(
+                modifier = Modifier.wrapContentSize(),
                 text = item.text,
-                isSelected = state == index
+                isSelected = state == index,
+                color = Color(android.graphics.Color.parseColor(item.color))
             ) {
                 RenderType
                     .values()
@@ -92,52 +161,64 @@ fun FiltersComponentView(
     }
 }
 
+
+@Suppress("LongParameterList")
 @Composable
 fun FilterItemComponent(
+    modifier: Modifier = Modifier,
     text: String,
     isSelected: Boolean = false,
+    cornerRadius: Dp = 15.dp,
+    color: Color,
     onClick: () -> Unit
 ) {
 
     val elevationAnimation: Dp by animateDpAsState(
-        if (isSelected) 20.dp else 0.dp,
+        if (isSelected) 50.dp else 0.dp,
         spring(stiffness = Spring.StiffnessLow)
     )
 
     val colorAnimation: Color by animateColorAsState(
-        targetValue = if (isSelected) MaterialTheme.colors.secondary else MaterialTheme.colors.primary,
+        targetValue = if (isSelected) color else MaterialTheme.colors.onPrimary,
         spring(stiffness = Spring.StiffnessLow)
     )
 
-    val textColorAnimation: Color by animateColorAsState(
-        targetValue = if (isSelected) MaterialTheme.colors.primary else MaterialTheme.colors.secondary,
+    val colorTextAnimation: Color by animateColorAsState(
+        targetValue = if (isSelected) color else MaterialTheme.colors.secondary.copy(alpha = 0.5f),
         spring(stiffness = Spring.StiffnessLow)
     )
 
-    Card(
-        shape = RoundedCornerShape(7.dp),
-        elevation = elevationAnimation,
-        modifier = Modifier
-            .defaultMinSize(minWidth = 100.dp),
-        backgroundColor = colorAnimation
+    Box(
+        modifier = modifier
+            .shadow(
+                clip = false,
+                ambientColor = colorAnimation,
+                spotColor = colorAnimation,
+                elevation = elevationAnimation,
+                shape = RoundedCornerShape(cornerRadius)
+            )
+            .clip(RoundedCornerShape(cornerRadius))
+            .background(colorAnimation.copy(alpha = 0.5f))
+            .clickable { onClick.invoke() },
     ) {
         Text(
             text = text,
             modifier = Modifier
-                .clickable { onClick.invoke() }
-                .padding(5.dp)
-                .fillMaxWidth(),
-            color = textColorAnimation,
-            textAlign = TextAlign.Center
+                .align(Alignment.Center)
+                .padding(10.dp),
+            color = colorTextAnimation,
+            textAlign = TextAlign.Center,
+            style = Typography.subtitle2
         )
     }
 }
 
 @Composable
 @Preview
-fun PreviewFiltersComponentView() {
-    FiltersComponentView(
+fun PreviewFiltersComponentViewScreen() {
+    FiltersComponentViewScreen(
         modifier = Modifier,
-        emptyList()
+        data = emptyList(),
+        windowWidthSizeClass = WindowWidthSizeClass.Compact
     ) { }
 }

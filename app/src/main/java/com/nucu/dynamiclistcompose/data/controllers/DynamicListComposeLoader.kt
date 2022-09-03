@@ -8,6 +8,7 @@ import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseS
 
 abstract class DynamicListComposeLoader {
 
+    @Suppress("LongParameterList")
     @Composable
     abstract fun <T: DynamicListComposeController> DynamicListScreen(
         bodyAdapterController: T,

@@ -6,24 +6,29 @@
       "resource": {
         "items": [
           {
-            "text": "Abstract banner",
-            "go_to": "text"
+            "text": "Text",
+            "go_to": "text",
+            "color": "#D19600"
           },
           {
-            "text": "Nature",
-            "go_to": "cards"
+            "text": "Cards",
+            "go_to": "cards",
+            "color": "#D15400"
           },
           {
-            "text": "Classic message",
-            "go_to": "message"
+            "text": "Message",
+            "go_to": "message",
+            "color": "#D10000"
           },
           {
-            "text": "Abstract Landscapes",
-            "go_to": "banner_carousel"
+            "text": "Banners",
+            "go_to": "banner_carousel",
+            "color": "#00D18F"
           },
           {
-            "text": "Art Faces",
-            "go_to": "faces"
+            "text": "Faces",
+            "go_to": "faces",
+            "color": "#D1008B"
           }
         ]
       }
@@ -37,31 +42,38 @@
         "items": [
           {
             "name": "Salvador Dalí",
-            "url": "https://i.pinimg.com/474x/d3/ba/44/d3ba44589354e6b2c2d317fb6a9d8d25.jpg"
+            "url": "https://i.pinimg.com/474x/d3/ba/44/d3ba44589354e6b2c2d317fb6a9d8d25.jpg",
+            "go_to": 17
           },
           {
             "name": "Vincent Van Gogh",
-            "url": "https://i.pinimg.com/474x/1d/88/40/1d8840d608560b934a9fdf97c00e5095.jpg"
+            "url": "https://i.pinimg.com/474x/1d/88/40/1d8840d608560b934a9fdf97c00e5095.jpg",
+            "go_to": 18
           },
           {
             "name": "Diego Rivera",
-            "url": "https://i.pinimg.com/474x/b7/6c/55/b76c554d035f09fba14f7bfc1be25766.jpg"
+            "url": "https://i.pinimg.com/474x/b7/6c/55/b76c554d035f09fba14f7bfc1be25766.jpg",
+            "go_to": 19
           },
           {
             "name": "Frida Kahlo",
-            "url": "https://i.pinimg.com/474x/eb/ff/a4/ebffa44a49aa527f13384676999b4485.jpg"
+            "url": "https://i.pinimg.com/474x/eb/ff/a4/ebffa44a49aa527f13384676999b4485.jpg",
+            "go_to": 20
           },
           {
             "name": "Leonardo Da Vinci",
-            "url": "https://i.pinimg.com/474x/35/d0/6d/35d06d7059953b35e2ce7adba29e6b2b.jpg"
+            "url": "https://i.pinimg.com/474x/35/d0/6d/35d06d7059953b35e2ce7adba29e6b2b.jpg",
+            "go_to": 21
           },
           {
             "name": "Pablo Picasso",
-            "url": "https://i.pinimg.com/474x/39/c7/d4/39c7d46c34ac5bf705d609b89e00152d.jpg"
+            "url": "https://i.pinimg.com/474x/39/c7/d4/39c7d46c34ac5bf705d609b89e00152d.jpg",
+            "go_to": 16
           },
           {
             "name": "Fernando Botero",
-            "url": "https://i.pinimg.com/564x/18/41/16/184116622dfb20539fe0b4f5f54d0c1a.jpg"
+            "url": "https://i.pinimg.com/564x/18/41/16/184116622dfb20539fe0b4f5f54d0c1a.jpg",
+            "go_to": 22
           }
         ]
       }
@@ -190,7 +202,11 @@
       "render": "banner",
       "index": 5,
       "resource": {
-        "url": "https://i.etsystatic.com/34487254/r/il/8c6d49/3759929882/il_1588xN.3759929882_dvhz.jpg"
+        "url": "https://i.pinimg.com/564x/02/45/db/0245db766623a9bb8933f2a446b6043a.jpg",
+        "info": {
+          "title": "Emma",
+          "description": "Germany"
+        }
       }
     },
     {
@@ -206,16 +222,32 @@
       "resource": {
         "banners": [
           {
-            "url": "https://i.etsystatic.com/28296516/r/il/54f5e3/3977297934/il_1588xN.3977297934_fjf5.jpg"
+            "url": "https://i.pinimg.com/564x/0b/fd/5e/0bfd5e418c3347ad333de3aafeb8b440.jpg",
+            "info": {
+              "title": "John",
+              "description": "Italy"
+            }
           },
           {
-            "url": "https://i.pinimg.com/474x/c9/a4/c9/c9a4c9d499ab288f29bc65a4369a447f.jpg"
+            "url": "https://i.pinimg.com/736x/6a/7d/0a/6a7d0aa73190902397a25b541b14831e.jpg",
+            "info": {
+              "title": "Hanna",
+              "description": "Germany"
+            }
           },
           {
-            "url": "https://i.pinimg.com/474x/28/da/94/28da9471c34cc79667ea792b26162d57.jpg"
+            "url": "https://i.pinimg.com/564x/41/e5/ab/41e5ab5144a057e3bc13eec5aee7d68e.jpg",
+            "info": {
+              "title": "Jennifer",
+              "description": "Switzerland"
+            }
           },
           {
-            "url": "https://i.pinimg.com/474x/06/b7/a7/06b7a79c32049e32373e3efbcd78aed6.jpg"
+            "url": "https://i.pinimg.com/564x/54/56/c6/5456c6aaf24216ca1d1da17c4a3b9ffd.jpg",
+            "info": {
+              "title": "Robert",
+              "description": "United Kingdom"
+            }
           }
         ]
       }
@@ -245,14 +277,18 @@
       "render": "banner",
       "index": 11,
       "resource": {
-        "url": "https://i.pinimg.com/474x/30/9b/5b/309b5b18d162cec61be5403008a0f704.jpg"
+        "url": "https://i.pinimg.com/564x/b5/4c/9d/b54c9dd2f96cbc540c805e14057c58bc.jpg",
+        "info": {
+          "title": "Leonardo",
+          "description": "Italy"
+        }
       }
     },
     {
       "render": "text",
       "index": 12,
       "resource": {
-        "text": "Ambient"
+        "text": "Places"
       }
     },
     {
@@ -261,13 +297,53 @@
       "resource": {
         "banners": [
           {
-            "url": "https://i.pinimg.com/474x/1f/73/25/1f7325bc264a816ab131d6d624fa792a.jpg"
+            "url": "https://i.pinimg.com/564x/06/6e/a1/066ea1a756825ad682fc700242cd9eaf.jpg",
+            "info": {
+              "title": "Alexandra",
+              "description": "France"
+            }
           },
           {
-            "url": "https://i.pinimg.com/474x/96/07/52/9607523b8c71cb4895a3f87b30421900.jpg"
+            "url": "https://i.pinimg.com/474x/e3/3f/08/e33f082577a1761bca0dc3fa10743b27.jpg",
+            "info": {
+              "title": "Annelien",
+              "description": "Holland"
+            }
           },
           {
-            "url": "https://i.pinimg.com/474x/d8/f4/ac/d8f4ac2459333ae16a4b47914f33de94.jpg"
+            "url": "https://i.pinimg.com/564x/82/d8/c8/82d8c8e1ee15d730b6113442e948f0ea.jpg",
+            "info": {
+              "title": "Victor",
+              "description": "Portugal"
+            }
+          },
+          {
+            "url": "https://i.pinimg.com/564x/61/e4/72/61e4729d2e98e19c74009768f9dfd68f.jpg",
+            "info": {
+              "title": "Peter",
+              "description": "Texas"
+            }
+          },
+          {
+            "url": "https://i.pinimg.com/564x/28/b3/7a/28b37aebdd6240f3587d303a35077dfa.jpg",
+            "info": {
+              "title": "Agus Bis",
+              "description": "New York"
+            }
+          },
+          {
+            "url": "https://i.pinimg.com/564x/ca/b5/7e/cab57ed4da2ff1643a43aaec62a5ea1c.jpg",
+            "info": {
+              "title": "Annita",
+              "description": "Los Angeles"
+            }
+          },
+          {
+            "url": "https://i.pinimg.com/564x/4a/22/a0/4a22a002e14ca84772dd925804ebf1c5.jpg",
+            "info": {
+              "title": "Michael",
+              "description": "San Francisco"
+            }
           }
         ]
       }
@@ -277,6 +353,155 @@
       "index": 14,
       "resource": {
         "message": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
+      }
+    },
+    {
+      "render": "message",
+      "index": 15,
+      "resource": {
+        "message": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
+      }
+    },
+    {
+      "render": "profile",
+      "index": 16,
+      "resource": {
+        "name": "Pablo Ruiz Picasso",
+        "short_description": "Cubism",
+        "life_date": "1881 - 1973",
+        "country": "Malaga, Spain",
+        "color": "#CDB4A0"
+      }
+    },
+    {
+      "render": "profile",
+      "index": 17,
+      "resource": {
+        "name": "Salvador Dalí",
+        "short_description": "Surrealism",
+        "life_date": "1904 - 1989",
+        "country": "Figueras, Cataluña",
+        "color": "#CDA0A0"
+      }
+    },
+    {
+      "render": "profile",
+      "index": 18,
+      "resource": {
+        "name": "Vincent Van Gogh",
+        "short_description": "Post-impressionism",
+        "life_date": "1853 - 1890",
+        "country": "Zundert, Netherlands",
+        "color": "#A0CDAF"
+      }
+    },
+    {
+      "render": "profile",
+      "index": 19,
+      "resource": {
+        "name": "Diego Rivera",
+        "short_description": "Muralist",
+        "life_date": "1886 - 1957",
+        "country": "Guanajuato, Mexico",
+        "color": "#CDA0BB"
+      }
+    },
+    {
+      "render": "profile",
+      "index": 20,
+      "resource": {
+        "name": "Frida Kahlo",
+        "short_description": "Self portrait",
+        "life_date": "1907 - 1954",
+        "country": "Coyoacan, Mexico",
+        "color": "#A0B8CD"
+      }
+    },
+    {
+      "render": "profile",
+      "index": 21,
+      "resource": {
+        "name": "Leonardo Da Vinci",
+        "short_description": "Renaissance",
+        "life_date": "1452 - 1519",
+        "country": "Anchiano, Florencia",
+        "color": "#CDC6A0"
+      }
+    },
+    {
+      "render": "profile",
+      "index": 22,
+      "resource": {
+        "name": "Fernando Botero",
+        "short_description": "Boterism",
+        "life_date": "1932 -",
+        "country": "Medellín, Colombia",
+        "color": "#A0CDB4"
+      }
+    },
+    {
+      "render": "poster",
+      "index": 23,
+      "resource": {
+        "title": "Vintage posters",
+        "items": [
+          {
+            "name": "Philadelphia",
+            "url": "https://i.pinimg.com/564x/5c/21/aa/5c21aa00ae9f57feb2b8174a82078a0c.jpg"
+          },
+          {
+            "name": "Cabo San Lucas",
+            "url": "https://i.pinimg.com/564x/cb/01/ec/cb01ec1e48445553554a5764bef46e03.jpg"
+          },
+          {
+            "name": "California",
+            "url": "https://i.pinimg.com/564x/e7/ee/84/e7ee840ef2855487de59e66667c2e55e.jpg"
+          },
+          {
+            "name": "Canada",
+            "url": "https://i.pinimg.com/564x/d3/5d/36/d35d36c5b48381fc2f3e677c30b37863.jpg"
+          },
+          {
+            "name": "Australia",
+            "url": "https://i.pinimg.com/564x/d7/3b/9e/d73b9e65e64f184b6d90e58add475dba.jpg"
+          },
+          {
+            "name": "South Korea",
+            "url": "https://i.pinimg.com/564x/b4/61/45/b4614571c7d04363f74e03a9f1fb691d.jpg"
+          },
+          {
+            "name": "Florence",
+            "url": "https://i.pinimg.com/564x/0f/5d/63/0f5d63baf5210bf5ca95b461678ae0a8.jpg"
+          },
+          {
+            "name": "Amalfi Coast",
+            "url": "https://i.pinimg.com/564x/df/66/54/df66541650efad456f1e1eb6183e60d8.jpg"
+          },
+          {
+            "name": "Venice",
+            "url": "https://i.pinimg.com/564x/23/71/98/2371988275355d7b17557af00215ba78.jpg"
+          },
+          {
+            "name": "Chicago",
+            "url": "https://i.pinimg.com/564x/30/ac/67/30ac67dea07fa57319b3e32c19eefb7e.jpg"
+          },
+          {
+            "name": "Baltimore",
+            "url": "https://i.pinimg.com/564x/24/63/54/24635436d2845be688708edf05a617b9.jpg"
+          },
+          {
+            "name": "Birmingham",
+            "url": "https://i.pinimg.com/564x/df/c0/34/dfc03405c7522215018001c0f7856261.jpg"
+          },
+          {
+            "name": "Florida",
+            "url": "https://i.pinimg.com/564x/ae/76/da/ae76da7280a49cd4c077c5f927a7d5f5.jpg"
+          },
+          {
+            "name": "Vienna",
+            "url": "https://i.pinimg.com/564x/28/89/11/2889114bc04b42ca4c385a2e0854f536.jpg"
+          }
+        ]
       }
     }
   ]

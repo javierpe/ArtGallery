@@ -26,7 +26,8 @@ class FacesRenderTest {
             "items": [
               {
                 "name": "Salvador Dalí",
-                "url": "https://i.pinimg.com/474x/d3/ba/44/d3ba44589354e6b2c2d317fb6a9d8d25.jpg"
+                "url": "https://i.pinimg.com/474x/d3/ba/44/d3ba44589354e6b2c2d317fb6a9d8d25.jpg",
+                "go_to": 0
               }
             ]
           }
@@ -38,7 +39,8 @@ class FacesRenderTest {
             items = listOf(
                 FacesItemModel(
                     name = "Salvador Dalí",
-                    url = "https://i.pinimg.com/474x/d3/ba/44/d3ba44589354e6b2c2d317fb6a9d8d25.jpg"
+                    url = "https://i.pinimg.com/474x/d3/ba/44/d3ba44589354e6b2c2d317fb6a9d8d25.jpg",
+                    goTo = 0
                 )
             )
         )

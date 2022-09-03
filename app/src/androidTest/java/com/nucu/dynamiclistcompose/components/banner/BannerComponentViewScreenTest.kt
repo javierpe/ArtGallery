@@ -8,6 +8,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import com.nucu.dynamiclistcompose.MainActivity
 import com.nucu.dynamiclistcompose.presentation.components.banner.BANNER_IMAGE_SCREEN_TEST_TAG
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerComponentViewScreen
+import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
 import com.nucu.dynamiclistcompose.presentation.viewModels.BannerViewModel
@@ -34,7 +35,7 @@ class BannerComponentViewScreenTest {
             DynamicListComposeTheme {
                 BannerComponentViewScreen(
                     modifier = Modifier,
-                    imageURL = String(),
+                    model = BannerModel(String()),
                     componentIndex = 0,
                     showCaseState = rememberShowCaseState(),
                     viewModel = viewModel
@@ -46,7 +47,7 @@ class BannerComponentViewScreenTest {
     @Test
     fun bannerScreenShouldHaveComponentView() {
         composeTestRule
-            .onNodeWithTag(BANNER_IMAGE_SCREEN_TEST_TAG)
+            .onNodeWithTag(BANNER_IMAGE_SCREEN_TEST_TAG, useUnmergedTree = true)
             .assertExists("BannerComponentViewScreen does has not have a BannerComponentView!")
     }
 }

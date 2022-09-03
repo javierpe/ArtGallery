@@ -2,11 +2,13 @@ package com.nucu.dynamiclistcompose.di
 
 import com.nucu.dynamiclistcompose.data.renders.BannerCarouselRender
 import com.nucu.dynamiclistcompose.data.renders.BannerRender
-import com.nucu.dynamiclistcompose.data.renders.FiltersRender
-import com.nucu.dynamiclistcompose.data.renders.TextRender
 import com.nucu.dynamiclistcompose.data.renders.CardsRender
 import com.nucu.dynamiclistcompose.data.renders.FacesRender
+import com.nucu.dynamiclistcompose.data.renders.FiltersRender
 import com.nucu.dynamiclistcompose.data.renders.MessageRender
+import com.nucu.dynamiclistcompose.data.renders.PosterRender
+import com.nucu.dynamiclistcompose.data.renders.ProfileRender
+import com.nucu.dynamiclistcompose.data.renders.TextRender
 import com.nucu.dynamiclistcompose.data.renders.base.DynamicListRender
 import dagger.Binds
 import dagger.Module
@@ -58,5 +60,17 @@ abstract class DynamicListRendersModule {
     @IntoSet
     abstract fun bindFacesRender(
         render: FacesRender
+    ): DynamicListRender<*>
+
+    @Binds
+    @IntoSet
+    abstract fun bindProfileRender(
+        render: ProfileRender
+    ): DynamicListRender<*>
+
+    @Binds
+    @IntoSet
+    abstract fun bindPosterRender(
+        render: PosterRender
     ): DynamicListRender<*>
 }

@@ -3,6 +3,7 @@ package com.nucu.dynamiclistcompose.data.renders
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.nucu.dynamiclistcompose.presentation.components.banner.BannerInfo
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
 import com.nucu.dynamiclistcompose.presentation.components.bannerCarousel.BannerCarouselModel
 import kotlinx.coroutines.Dispatchers
@@ -25,10 +26,18 @@ class BannerCarouselRenderTest {
           {
             "banners": [
               {
-                "url": "https://i.pinimg.com/474x/1f/73/25/1f7325bc264a816ab131d6d624fa792a.jpg"
+                "url": "https://i.pinimg.com/474x/1f/73/25/1f7325bc264a816ab131d6d624fa792a.jpg",
+                "info": {
+                  "title": "John",
+                  "description": "Italy"
+                }
               },
               {
-                "url": "https://i.pinimg.com/474x/96/07/52/9607523b8c71cb4895a3f87b30421900.jpg"
+                "url": "https://i.pinimg.com/474x/96/07/52/9607523b8c71cb4895a3f87b30421900.jpg",
+                "info": {
+                  "title": "John",
+                  "description": "Italy"
+                }
               }
             ]
           }
@@ -38,8 +47,14 @@ class BannerCarouselRenderTest {
     private val sourceOfTrueModel by lazy {
         BannerCarouselModel(
             banners = listOf(
-                BannerModel(imageURL = "https://i.pinimg.com/474x/1f/73/25/1f7325bc264a816ab131d6d624fa792a.jpg"),
-                BannerModel(imageURL = "https://i.pinimg.com/474x/96/07/52/9607523b8c71cb4895a3f87b30421900.jpg")
+                BannerModel(
+                    imageURL = "https://i.pinimg.com/474x/1f/73/25/1f7325bc264a816ab131d6d624fa792a.jpg",
+                    bannerInfo = BannerInfo(title = "John", description = "Italy")
+                ),
+                BannerModel(
+                    imageURL = "https://i.pinimg.com/474x/96/07/52/9607523b8c71cb4895a3f87b30421900.jpg",
+                    bannerInfo = BannerInfo(title = "John", description = "Italy")
+                )
             )
         )
     }

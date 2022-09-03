@@ -14,16 +14,17 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.datastore.preferences.core.booleanPreferencesKey
-import com.nucu.dynamiclistcompose.presentation.ui.animations.BlinkAnimation
-import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
+import com.nucu.dynamiclistcompose.data.actions.ScrollAction
 import com.nucu.dynamiclistcompose.data.api.TooltipPreferencesApi
+import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.models.DynamicListElement
 import com.nucu.dynamiclistcompose.data.models.DynamicListShowCaseModel
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.nucu.dynamiclistcompose.presentation.ui.animations.BlinkAnimation
 import com.nucu.dynamiclistcompose.presentation.ui.base.DynamicListScreen
-import com.nucu.dynamiclistcompose.data.actions.ScrollAction
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,8 +32,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.Queue
-import java.util.LinkedList
+import java.util.*
 
 abstract class DynamicListComposeController {
 
@@ -143,8 +143,8 @@ abstract class DynamicListComposeController {
             listState = listState,
             widthSizeClass = widthSizeClass,
             onAction = onAction,
-            withVerticalPadding = false,
-            showCaseState = showCaseState
+            showCaseState = showCaseState,
+            withVerticalPadding = false
         )
     }
 

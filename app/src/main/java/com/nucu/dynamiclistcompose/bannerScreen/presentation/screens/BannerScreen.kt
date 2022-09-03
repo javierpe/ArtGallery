@@ -2,20 +2,20 @@ package com.nucu.dynamiclistcompose.bannerScreen.presentation.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
+import com.javier.api.models.Route
 import com.nucu.dynamiclistcompose.bannerScreen.presentation.contents.BannerContent
-import com.nucu.dynamiclistcompose.bannerScreen.presentation.viewModels.BannerScreenViewModel
+import com.ramcosta.composedestinations.annotation.Destination
 
+@Destination(
+    route = "banner_screen/{${Route.BannerScreen.IMAGE_URL}}"
+)
 @Composable
 fun BannerScreen(
-    imageURL: String,
-    viewModel: BannerScreenViewModel = hiltViewModel()
+    bannerImageURL: String,
 ) {
     BannerContent(
-        imageURL = imageURL,
-    ) {
-        viewModel.onBackPressed()
-    }
+        imageURL = bannerImageURL,
+    )
 }
 
 @Composable

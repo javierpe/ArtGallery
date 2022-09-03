@@ -9,17 +9,18 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
-import com.nucu.dynamiclistcompose.presentation.components.card.CardsModel
-import com.nucu.dynamiclistcompose.data.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.card.CardsComponentViewScreen
+import com.nucu.dynamiclistcompose.presentation.components.card.CardsModel
 import javax.inject.Inject
 
 class CardsFactory @Inject constructor(): DynamicListFactory {
@@ -37,9 +38,14 @@ class CardsFactory @Inject constructor(): DynamicListFactory {
         component: ComponentItemModel,
         componentInfo: ComponentInfo
     ) {
+        val model = remember {
+            derivedStateOf {
+                component.resource as CardsModel
+            }
+        }
         CardsComponentViewScreen(
             modifier = modifier.testTag("cards_component"),
-            component.resource as CardsModel,
+            data = model.value,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState
         )

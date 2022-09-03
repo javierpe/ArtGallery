@@ -1,7 +1,10 @@
 package com.nucu.dynamiclistcompose.presentation.ui.base
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
@@ -14,11 +17,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nucu.dynamiclistcompose.data.actions.ContextViewAction
-import com.nucu.dynamiclistcompose.data.controllers.DynamicListComposeLoader
-import com.nucu.dynamiclistcompose.data.controllers.DynamicListComposeController
 import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.data.actions.ScrollAction
 import com.nucu.dynamiclistcompose.data.actions.TargetAction
+import com.nucu.dynamiclistcompose.data.controllers.DynamicListComposeController
+import com.nucu.dynamiclistcompose.data.controllers.DynamicListComposeLoader
 import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
 import com.nucu.dynamiclistcompose.presentation.ui.components.ErrorView
 import com.nucu.dynamiclistcompose.presentation.ui.components.LoaderView
@@ -42,7 +45,7 @@ class DynamicListCompose(
         action: ContextViewAction?,
         widthSizeClass: WindowWidthSizeClass,
         showCaseState: ShowCaseState,
-        bodyListState: LazyListState,
+        bodyListState: LazyListState
     ) {
         this.bodyComposeController = bodyAdapterController
         this.headerComposeController = headerAdapterController
@@ -100,32 +103,75 @@ class DynamicListCompose(
                     }
                 }
 
-                Column(
-                    modifier = Modifier.fillMaxSize()
+                val actionBody = remember {
+                    mutableStateOf<ScrollAction?>(null)
+                }
+
+                DynamicListView(
+                    widthSizeClass = widthSizeClass,
+                    contentHeader = {
+                        headerComposeController?.ComposeHeader(
+                            widthSizeClass = widthSizeClass,
+                            showCaseState = showCaseState
+                        ) {
+                            if (it.target == TargetAction.BODY) {
+                                actionBody.value = it
+                            }
+                        }
+                    },
+                    contentBody = {
+                        bodyComposeController?.ComposeBody(
+                            widthSizeClass = widthSizeClass,
+                            sharedAction = actionBody.value,
+                            showCaseState = showCaseState,
+                            bodyListState = bodyListState
+                        ) {
+                            if (it.target == TargetAction.BODY) {
+                                actionBody.value = it
+                            }
+                        }
+                    }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun DynamicListView(
+    widthSizeClass: WindowWidthSizeClass,
+    contentHeader: @Composable () -> Unit,
+    contentBody: @Composable () -> Unit
+) {
+    when(widthSizeClass) {
+        WindowWidthSizeClass.Compact -> {
+            Column {
+                contentHeader()
+                contentBody()
+            }
+        }
+
+        WindowWidthSizeClass.Medium, WindowWidthSizeClass.Expanded -> {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                Box(
+                    modifier = Modifier
+                        .weight(2f)
+                        .fillMaxHeight()
                 ) {
-
-                    val actionBody = remember {
-                        mutableStateOf<ScrollAction?>(null)
+                    Box {
+                        contentHeader()
                     }
+                }
 
-                    headerComposeController?.ComposeHeader(
-                        widthSizeClass = widthSizeClass,
-                        showCaseState = showCaseState
-                    ) {
-                        if (it.target == TargetAction.BODY) {
-                            actionBody.value = it
-                        }
-                    }
-
-                    bodyComposeController?.ComposeBody(
-                        widthSizeClass = widthSizeClass,
-                        sharedAction = actionBody.value,
-                        showCaseState = showCaseState,
-                        bodyListState = bodyListState
-                    ) {
-                        if (it.target == TargetAction.BODY) {
-                            actionBody.value = it
-                        }
+                Box(
+                    modifier = Modifier
+                        .weight(3f)
+                        .fillMaxHeight()
+                ) {
+                    Box {
+                        contentBody()
                     }
                 }
             }

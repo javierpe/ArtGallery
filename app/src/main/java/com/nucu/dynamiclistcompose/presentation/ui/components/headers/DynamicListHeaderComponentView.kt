@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose.ui.components
+package com.nucu.dynamiclistcompose.presentation.ui.components.headers
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -8,22 +8,27 @@ import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.nucu.dynamiclistcompose.data.models.ContextType
+import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
-import com.nucu.dynamiclistcompose.presentation.ui.components.headers.HeaderWithImageView
+import com.nucu.dynamiclistcompose.presentation.ui.components.BackButtonComponentView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseStyle
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.asShowCaseTarget
-import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
-import com.nucu.dynamiclistcompose.presentation.ui.components.BackButtonComponentView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
 import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
+import com.nucu.dynamiclistcompose.presentation.viewModels.HeaderViewModel
 
 /**
  * Define header design by context
@@ -34,14 +39,20 @@ fun DynamicListHeaderComponentView(
     contextType: ContextType,
     bodyLazyListState: LazyListState? = null,
     bodyLazyGridState: LazyGridState? = null,
-    onBackPressed: () -> Unit // Remove this and set navigation compose here
+    viewModel: HeaderViewModel = hiltViewModel()
 ) {
+
+    val icon = if (viewModel.isHome()) Icons.Default.Star else Icons.Default.ArrowBack
+
     when (contextType) {
 
         ContextType.BANNER_DETAIL -> {
             SimpleHeaderView(
                 title = title,
-                onBackPressed = onBackPressed
+                icon = icon,
+                onIconClick = {
+                    viewModel.handleIconClick()
+                }
             )
         }
 
@@ -50,7 +61,10 @@ fun DynamicListHeaderComponentView(
                 title = title,
                 bodyLazyListState = bodyLazyListState,
                 bodyLazyGridState = bodyLazyGridState,
-                onBackPressed = onBackPressed
+                icon = icon,
+                onIconClick = {
+                    viewModel.handleIconClick()
+                }
             )
         }
     }
@@ -59,7 +73,8 @@ fun DynamicListHeaderComponentView(
 @Composable
 fun SimpleHeaderView(
     title: String,
-    onBackPressed: () -> Unit, // Remove this and set navigation compose here
+    icon: ImageVector,
+    onIconClick: () -> Unit
 ) {
     val showCaseState = rememberShowCaseState()
 
@@ -87,8 +102,9 @@ fun SimpleHeaderView(
                         key = "back-button",
                         state = showCaseState
                     ),
-                onClick = onBackPressed,
-                iconColor = MaterialTheme.colors.secondary
+                onClick = onIconClick,
+                iconColor = MaterialTheme.colors.secondary,
+                icon = icon
             )
 
             Text(
@@ -113,7 +129,7 @@ fun PreviewHeaderComponentView() {
             title = "Hello from the header view of DynamicList",
             contextType = ContextType.HOME,
             rememberLazyListState()
-        ) { }
+        )
     }
 }
 
@@ -125,6 +141,6 @@ fun PreviewSimpleHeaderComponentView() {
             title = "Hello from the header view of DynamicList",
             contextType = ContextType.HOME,
             rememberLazyListState()
-        ) { }
+        )
     }
 }

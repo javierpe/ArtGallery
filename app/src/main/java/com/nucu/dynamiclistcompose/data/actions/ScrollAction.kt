@@ -22,6 +22,6 @@ sealed class ScrollAction(val target: TargetAction) {
      */
     class ScrollRender(
         val renderType: RenderType,
-        target: TargetAction
+        target: TargetAction = TargetAction.BODY
     ) : ScrollAction(target)
 }

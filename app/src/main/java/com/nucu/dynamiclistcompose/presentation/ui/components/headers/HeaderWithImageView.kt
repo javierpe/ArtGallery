@@ -15,6 +15,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -36,9 +37,10 @@ const val MIN_HEIGHT = 65
 @Composable
 fun HeaderWithImageView(
     title: String,
+    icon: ImageVector,
     bodyLazyListState: LazyListState? = null,
     bodyLazyGridState: LazyGridState? = null,
-    onBackPressed: () -> Unit
+    onIconClick: () -> Unit
 ) {
 
     val backgroundLayoutId = "background"
@@ -151,9 +153,10 @@ fun HeaderWithImageView(
 
         BackButtonComponentView(
             modifier = Modifier.layoutId(backButtonLayoutId),
-            onClick = onBackPressed,
+            onClick = onIconClick,
             backgroundColor = backButtonProperties.value.color(BACK_BUTTON_BACKGROUND),
-            iconColor = backButtonProperties.value.color(BACK_BUTTON_ICON_COLOR)
+            iconColor = backButtonProperties.value.color(BACK_BUTTON_ICON_COLOR),
+            icon = icon
         )
     }
 
@@ -194,7 +197,7 @@ private fun constraintSetEnd() = ConstraintSet (""" {
 		top: ['parent', 'top'],
         height: $MIN_HEIGHT,
         custom: {
-          background: '#1A000000'
+          background: '#FFF6EFED'
         }
 	},
 	title: {
