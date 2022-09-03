@@ -103,7 +103,6 @@ class DynamicListCompose(
                     }
                 }
 
-
                 val actionBody = remember {
                     mutableStateOf<ScrollAction?>(null)
                 }

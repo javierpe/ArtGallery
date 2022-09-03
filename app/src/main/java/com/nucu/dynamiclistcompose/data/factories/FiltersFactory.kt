@@ -27,6 +27,7 @@ import com.nucu.dynamiclistcompose.presentation.components.filters.FiltersModel
 import javax.inject.Inject
 
 class FiltersFactory @Inject constructor(): DynamicListFactory {
+
     override val renders: List<RenderType>
         get() = listOf(
             RenderType.FILTERS
@@ -62,15 +63,15 @@ class FiltersFactory @Inject constructor(): DynamicListFactory {
                 .testTag("skeleton")
                 .fillMaxWidth()
                 .wrapContentHeight(),
-            horizontalArrangement = Arrangement.spacedBy(15.dp)
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
-            val width = 130.dp
-            val height = 40.dp
+            val width = 80.dp
+            val height = 35.dp
 
             Box(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(5.dp))
+                    .clip(RoundedCornerShape(15.dp))
                     .background(MaterialTheme.colors.onPrimary)
                     .width(width)
                     .height(height)
@@ -78,7 +79,7 @@ class FiltersFactory @Inject constructor(): DynamicListFactory {
 
             Box(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(5.dp))
+                    .clip(RoundedCornerShape(15.dp))
                     .background(MaterialTheme.colors.onPrimary)
                     .width(width)
                     .height(height)
@@ -86,7 +87,23 @@ class FiltersFactory @Inject constructor(): DynamicListFactory {
 
             Box(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(5.dp))
+                    .clip(RoundedCornerShape(15.dp))
+                    .background(MaterialTheme.colors.onPrimary)
+                    .width(width)
+                    .height(height)
+            )
+
+            Box(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(15.dp))
+                    .background(MaterialTheme.colors.onPrimary)
+                    .width(width)
+                    .height(height)
+            )
+
+            Box(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(15.dp))
                     .background(MaterialTheme.colors.onPrimary)
                     .width(width)
                     .height(height)
