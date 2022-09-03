@@ -40,6 +40,9 @@ jobs:
           cache: gradle
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+        
+      - name: Create destinations
+        run: ./gradlew kspDebugKotlin 
       
       - name: Unit Test
         run: ./gradlew testDebugUnitTest
