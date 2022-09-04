@@ -23,6 +23,9 @@ jobs:
     
     - name: Gradle permissions
       run: chmod +x ./gradlew
+      
+    - name: Create destinations
+      run: ./gradlew kspDebugKotlin 
     
     - name: Build with Gradle
       run: ./gradlew build
@@ -41,7 +44,7 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: "v{{ env.ANDROID_VERSION_NAME }}"
+        tag_name: v1.0.4
         asset_path: app/build/outputs/apk/debug/app-debug.apk
         asset_name: "ArtGallery_Build$_{{ env.ANDROID_VERSION_Code }}.apk"
         asset_content_type: application/zip
