@@ -2,8 +2,6 @@ name: Build & Publish Debug APK
 
 on:
  push:
-  branches:
-   - main
   tags:
    - '*'
    
@@ -40,10 +38,7 @@ jobs:
         expose-version-code: 'true'
         
     - name: Releasing using Hub
-      uses: ShaunLWM/action-release-debugapk@master
+      uses: kyze8439690/action-release-releaseapk@master
       env:
        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
        APP_FOLDER: app
-       RELEASE_TITLE: "v{{ env.ANDROID_VERSION_NAME }}"
-      
- 
