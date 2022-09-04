@@ -39,8 +39,12 @@ jobs:
         expose-version-name: 'true'
         expose-version-code: 'true'
         
-    - name: Releasing using Hub
-      uses: kyze8439690/action-release-releaseapk@master
+    - name: Create release version
+      uses: underwindfall/create-release-with-debugapk@v2.0.0
       env:
-       GITHUB_TOKEN: ${{ secrets.TOKEN }}
-       APP_FOLDER: app
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: "v${{ env.ANDROID_VERSION_NAME }}"
+        asset_path: app/build/outputs/apk/debug/app-debug.apk
+        asset_name: "SearchApp_Build$_{{ env.ANDROID_VERSION_Code }}.apk"
+        asset_content_type: application/zip
