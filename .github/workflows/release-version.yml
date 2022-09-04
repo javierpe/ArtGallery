@@ -26,9 +26,6 @@ jobs:
     
     - name: Build with Gradle
       run: ./gradlew build
-      
-    - name: Create destinations
-      run: ./gradlew kspDebugKotlin 
     
     - name: Build Debug APK
       run: ./gradlew assembleDebug
