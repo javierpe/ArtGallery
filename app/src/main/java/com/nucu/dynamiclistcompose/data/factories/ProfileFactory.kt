@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
@@ -34,7 +35,10 @@ class ProfileFactory @Inject constructor(
             derivedStateOf { component.resource as ProfileModel }
         }
 
-        ProfileComponentScreenView(model = model.value)
+        ProfileComponentScreenView(
+            model = model.value,
+            isExpandedScreen = componentInfo.windowWidthSizeClass == WindowWidthSizeClass.Expanded
+        )
     }
 
     @Composable

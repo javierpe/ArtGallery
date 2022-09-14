@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
@@ -50,7 +51,8 @@ class BannerCarouselFactory @Inject constructor(
             modifier = modifier.testTag("banner_carousel_component"),
             images = model.value,
             componentIndex = component.index,
-            showCaseState = componentInfo.showCaseState
+            showCaseState = componentInfo.showCaseState,
+            isExpandedScreen = componentInfo.windowWidthSizeClass == WindowWidthSizeClass.Expanded
         )
     }
 

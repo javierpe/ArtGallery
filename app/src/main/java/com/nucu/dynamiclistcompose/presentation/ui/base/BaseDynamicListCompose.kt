@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalLifecycleComposeApi::class)
+
 package com.nucu.dynamiclistcompose.presentation.ui.base
 
 import androidx.compose.foundation.layout.Box
@@ -6,9 +8,10 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Scaffold
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DynamicListHeaderComponentView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCase
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
@@ -26,7 +29,7 @@ fun ContextView(
      * 2. Reload should be a compose state.
      */
 
-    val action by viewModel.contextViewAction.collectAsState()
+    val action by viewModel.contextViewAction.collectAsStateWithLifecycle()
 
     val showCaseState = rememberShowCaseState()
 

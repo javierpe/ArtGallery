@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,7 +21,7 @@ class DynamicListViewModel @Inject constructor(
     private var job: Job? = null
 
     private val _dynamicListAction = MutableStateFlow<DynamicListAction>(DynamicListAction.LoadingAction)
-    val dynamicListAction: StateFlow<DynamicListAction> = _dynamicListAction
+    val dynamicListAction: StateFlow<DynamicListAction> = _dynamicListAction.asStateFlow()
 
     fun load(requestModel: DynamicListRequestModel) {
         job?.cancel()

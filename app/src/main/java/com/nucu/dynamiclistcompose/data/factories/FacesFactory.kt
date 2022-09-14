@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -65,6 +66,7 @@ class FacesFactory @Inject constructor(
             modifier = Modifier
                 .testTag("skeleton")
                 .padding(start = 16.dp, end = 16.dp)
+                .fillMaxWidth()
                 .wrapContentSize(unbounded = true),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {

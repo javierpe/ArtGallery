@@ -1,5 +1,6 @@
 package com.nucu.dynamiclistcompose.data.factories
 
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
@@ -26,7 +27,10 @@ class PosterFactory @Inject constructor(): DynamicListFactory {
             derivedStateOf { component.resource as PosterModel }
         }
 
-        PosterComponentScreenView(model = model.value)
+        PosterComponentScreenView(
+            model = model.value,
+            isExpandedScreen = componentInfo.windowWidthSizeClass == WindowWidthSizeClass.Expanded
+        )
     }
 
     @Composable

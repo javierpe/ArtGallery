@@ -7,6 +7,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('/Users/franciscojavierpenaramos/Downloads/release_app')
+            storePassword 'j35u5777'
+            keyAlias 'ArtGallery'
+            keyPassword 'j35u5777'
+        }
+    }
     compileSdk 33
 
     defaultConfig {
@@ -20,6 +28,7 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+        signingConfig signingConfigs.release
     }
 
     lint {
@@ -28,7 +37,9 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         benchmark {
@@ -98,22 +109,24 @@ dependencies {
     implementation "com.google.accompanist:accompanist-pager-indicators:0.19.0"
 
     // Coil (Bad performance)
-    //implementation("io.coil-kt:coil-compose:2.2.0")
-
-    implementation "com.github.skydoves:landscapist-glide:1.6.1"
+    implementation("io.coil-kt:coil-compose:2.2.0")
 
     // Gson
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.moshi:moshi-kotlin:1.14.0"
+    implementation "com.squareup.moshi:moshi-adapters:1.12.0"
+    ksp 'com.squareup.moshi:moshi-kotlin-codegen:1.14.0'
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.43.2")
+    implementation 'androidx.constraintlayout:constraintlayout-core:1.0.4'
     kapt("com.google.dagger:hilt-android-compiler:2.43.2")
 
     // Navigation
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
-    implementation 'io.github.raamcosta.compose-destinations:core:1.7.16-beta'
-    implementation 'io.github.raamcosta.compose-destinations:animations-core:1.7.16-beta'
-    ksp 'io.github.raamcosta.compose-destinations:ksp:1.7.16-beta'
+    implementation 'io.github.raamcosta.compose-destinations:core:1.7.17-beta'
+    implementation 'io.github.raamcosta.compose-destinations:animations-core:1.7.17-beta'
+    ksp 'io.github.raamcosta.compose-destinations:ksp:1.7.17-beta'
 
     // Lottie
     implementation "com.airbnb.android:lottie-compose:5.2.0"
@@ -124,7 +137,9 @@ dependencies {
     // Alpha
     implementation "androidx.compose.material3:material3-window-size-class:1.0.0-beta01"
     implementation "androidx.compose.material3:material3:1.0.0-beta01"
-    // Pagination: implementation "androidx.paging:paging-compose:1.0.0-alpha14"
+
+    // Pagination:
+    //implementation "androidx.paging:paging-compose:1.0.0-alpha16"
 
     // Room
     implementation "androidx.room:room-rxjava3:2.4.3"
@@ -137,8 +152,9 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation 'androidx.activity:activity-compose:1.5.1'
     implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
-
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$compose_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-compose:$compose_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$compose_lifecycle_version"
     implementation 'androidx.core:core-ktx:1.8.0'
 
     // Test

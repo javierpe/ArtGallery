@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalLifecycleComposeApi::class)
+
 package com.nucu.dynamiclistcompose.presentation.ui.components.showCase
 
 import androidx.compose.animation.core.Animatable
@@ -17,7 +19,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -44,6 +45,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseTargets
 import com.nucu.dynamiclistcompose.presentation.viewModels.ShowCaseViewModel
@@ -63,7 +66,7 @@ fun ShowCase(
     state: ShowCaseState,
     viewModel: ShowCaseViewModel = hiltViewModel()
 ) {
-    val current by state.current.collectAsState()
+    val current by state.current.collectAsStateWithLifecycle()
 
     current?.let { target ->
 
@@ -79,7 +82,7 @@ fun ShowCase(
         )
 
         if (!start) {
-            LaunchedEffect(key1 = start) {
+            LaunchedEffect(start, viewModel) {
                 coroutineScope.launch {
                     delay(START_DELAY)
                     start = true

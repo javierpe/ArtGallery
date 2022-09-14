@@ -8,12 +8,13 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nucu.dynamiclistcompose.data.actions.ScrollAction
 import com.nucu.dynamiclistcompose.data.api.TooltipPreferencesApi
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
@@ -24,16 +25,17 @@ import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 import com.nucu.dynamiclistcompose.presentation.ui.animations.BlinkAnimation
 import com.nucu.dynamiclistcompose.presentation.ui.base.DynamicListScreen
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 abstract class DynamicListComposeController {
 
     abstract val delegates: MutableSet<@JvmSuppressWildcards DynamicListFactory>
@@ -47,7 +49,7 @@ abstract class DynamicListComposeController {
     open fun getMapSkeletons(): List<RenderType> = skeletons
 
     private val _elements = MutableStateFlow<List<DynamicListElement>>(emptyList())
-    private val elements: StateFlow<List<DynamicListElement>> = _elements
+    private val elements: StateFlow<List<DynamicListElement>> = _elements.asStateFlow()
 
     private var showCaseFinished = false
 
@@ -134,7 +136,7 @@ abstract class DynamicListComposeController {
         onAction: (ScrollAction) -> Unit
     ) {
 
-        val elements by elements.collectAsState()
+        val elements by elements.collectAsStateWithLifecycle()
 
         val listState = rememberLazyListState()
 
@@ -157,18 +159,18 @@ abstract class DynamicListComposeController {
         onAction: (ScrollAction) -> Unit
     ) {
 
-        val showOnNextShowCase by showCaseState.currentIndex.collectAsState()
+        val showOnNextShowCase by showCaseState.currentIndex.collectAsStateWithLifecycle()
 
-        val elements by elements.collectAsState()
+        val elements by elements.collectAsStateWithLifecycle()
 
         val coroutineScope = rememberCoroutineScope()
 
         if (sharedAction is ScrollAction.ScrollRender) {
             SideEffect {
                 coroutineScope.launch {
-                    val item = elements.firstOrNull { it.componentItemModel.render == sharedAction.renderType.value }
-
-                    item?.let {
+                    elements.firstOrNull {
+                        it.componentItemModel.render == sharedAction.renderType.value
+                    }?.let {
                         bodyListState.animateScrollToItem(
                             elements.indexOf(it)
                         )

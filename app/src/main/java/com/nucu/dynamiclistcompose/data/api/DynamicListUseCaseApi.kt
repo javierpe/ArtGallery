@@ -8,6 +8,7 @@ interface DynamicListUseCaseApi {
 
     suspend fun get(
         page: Int,
-        requestModel: DynamicListRequestModel
+        requestModel: DynamicListRequestModel,
+        withSkeletons: Boolean = true
     ): Flow<DynamicListAction>
 }

@@ -85,7 +85,7 @@ fun FilterGridComponentView(
         mutableStateOf(mapOf(0 to 0))
     }
 
-    val size by animateDpAsState(targetValue = if (isMediumScreen) 110.dp else 100.dp, tween(DURATION))
+    val size by animateDpAsState(targetValue = if (isMediumScreen) 110.dp else 90.dp, tween(DURATION))
 
     StaticGridList(
         modifier = modifier

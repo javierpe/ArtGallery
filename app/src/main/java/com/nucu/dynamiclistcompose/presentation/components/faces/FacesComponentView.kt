@@ -16,9 +16,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import coil.size.Size
 import com.nucu.dynamiclistcompose.presentation.components.common.ImageComponentView
+import com.nucu.dynamiclistcompose.presentation.components.common.toPx
 import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
 
 @Composable
@@ -30,7 +33,7 @@ fun FacesComponentView(
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
-        modifier = modifier
+        modifier = modifier,
     ) {
         itemsIndexed(items = faces) { _, item ->
             FaceView(name = item.name, imageUrl = item.url) {
@@ -47,6 +50,9 @@ fun FaceView(
     onClick: () -> Unit
 ) {
 
+    val size = 70.dp
+    val context = LocalContext.current
+
     Column(
         verticalArrangement = Arrangement.spacedBy(5.dp),
         modifier = Modifier.width(70.dp)
@@ -54,13 +60,17 @@ fun FaceView(
 
         ImageComponentView(
             modifier = Modifier
-                .size(70.dp)
+                .size(size)
                 .clip(CircleShape)
                 .align(Alignment.CenterHorizontally)
                 .clickable {
                     onClick()
                 },
-            imageURL = imageUrl
+            imageURL = imageUrl,
+            overrideSize = Size(
+                size.toPx(context).toInt(),
+                size.toPx(context).toInt()
+            )
         )
 
         Text(
