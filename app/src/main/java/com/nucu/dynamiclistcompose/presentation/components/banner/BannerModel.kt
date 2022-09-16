@@ -1,13 +1,13 @@
 package com.nucu.dynamiclistcompose.presentation.components.banner
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class BannerModel(
-    @SerializedName("url") val imageURL: String = "",
-    @SerializedName("info") val bannerInfo: BannerInfo? = null
+    @Json(name = "url") val imageURL: String = "",
+    @Json(name = "info") val bannerInfo: BannerInfo? = null
 )
 
 data class BannerInfo(
-    @SerializedName("title") val title: String,
-    @SerializedName("description") val description: String
+    @Json(name = "title") val title: String,
+    @Json(name = "description") val description: String
 )

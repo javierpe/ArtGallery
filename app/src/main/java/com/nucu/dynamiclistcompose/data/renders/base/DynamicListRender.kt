@@ -1,11 +1,9 @@
 package com.nucu.dynamiclistcompose.data.renders.base
 
-import com.google.gson.JsonObject
-
-interface DynamicListRender<T> {
+interface DynamicListRender<out T> {
 
     val renders: List<RenderType>
         get() = listOf()
 
-    suspend fun resolve(render: String, resource: JsonObject?): T
+    suspend fun <T> resolve(render: String, resource: T?): Any?
 }

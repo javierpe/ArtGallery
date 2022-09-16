@@ -1,13 +1,13 @@
 package com.nucu.dynamiclistcompose.presentation.components.faces
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class FacesModel(
-    @SerializedName("items") val items: List<FacesItemModel>
+    @Json(name = "items") val items: List<FacesItemModel>
 )
 
 data class FacesItemModel(
-    @SerializedName("name") val name: String,
-    @SerializedName("url") val url: String,
-    @SerializedName("go_to") val goTo: Int
+    @Json(name = "name") val name: String,
+    @Json(name = "url") val url: String,
+    @Json(name = "go_to") val goTo: Int
 )

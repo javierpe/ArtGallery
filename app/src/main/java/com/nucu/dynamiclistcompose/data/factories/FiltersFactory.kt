@@ -22,8 +22,8 @@ import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.nucu.dynamiclistcompose.presentation.components.filters.Filters
 import com.nucu.dynamiclistcompose.presentation.components.filters.FiltersComponentViewScreen
-import com.nucu.dynamiclistcompose.presentation.components.filters.FiltersModel
 import javax.inject.Inject
 
 class FiltersFactory @Inject constructor(): DynamicListFactory {
@@ -42,7 +42,7 @@ class FiltersFactory @Inject constructor(): DynamicListFactory {
 
         val model = remember {
             derivedStateOf {
-                (component.resource as FiltersModel).items
+                (component.resource as Filters).items
             }
         }
         FiltersComponentViewScreen(

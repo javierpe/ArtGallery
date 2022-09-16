@@ -5,7 +5,7 @@ import java.io.IOException
 
 fun <T> JsonAdapter<T>.tryFromJson(string: String?): T? {
     return try {
-        lenient().fromJsonValue(string.orEmpty())
+        fromJson(string.orEmpty())
     } catch (ignore: IOException) {
         null
     }

@@ -36,6 +36,7 @@ android {
     }
 
     targetProjectPath = ":app"
+    namespace 'com.nucu.benchmark'
     experimentalProperties["android.experimental.self-instrumenting"] = true
 }
 

@@ -1,7 +1,7 @@
 package com.nucu.dynamiclistcompose.presentation.components.message
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class MessageModel(
-    @SerializedName("message") val message: String
+    @Json(name = "message") val message: String
 )
