@@ -2,7 +2,7 @@ package com.nucu.dynamiclistcompose.data.factories.base
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.javi.render.processor.RenderType
+import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 

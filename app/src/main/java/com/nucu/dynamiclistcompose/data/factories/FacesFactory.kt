@@ -25,7 +25,7 @@ import com.nucu.dynamiclistcompose.data.actions.ScrollAction
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
-import com.javi.render.processor.RenderType
+import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.faces.FacesComponentView
 import com.nucu.dynamiclistcompose.presentation.components.faces.FacesModel
 import javax.inject.Inject

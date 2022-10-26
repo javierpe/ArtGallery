@@ -1,4 +1,6 @@
-package com.javi.render.processor
+package com.javi.render.processor.annotations
+
+import com.javi.render.processor.data.enums.RenderType
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.SOURCE)

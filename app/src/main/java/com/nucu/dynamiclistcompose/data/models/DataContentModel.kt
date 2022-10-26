@@ -1,6 +1,6 @@
 package com.nucu.dynamiclistcompose.data.models
 
-import com.render.factory.ComponentModel
+import com.dynamic.factory.ComponentModel
 import com.squareup.moshi.Json
 
 data class DataContentModel(

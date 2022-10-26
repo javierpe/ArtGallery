@@ -1,6 +1,6 @@
 package com.nucu.dynamiclistcompose.data.actions
 
-import com.javi.render.processor.RenderType
+import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.models.DynamicListContainer
 
 sealed class DynamicListAction {

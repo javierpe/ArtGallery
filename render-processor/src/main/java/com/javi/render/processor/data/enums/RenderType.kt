@@ -1,4 +1,4 @@
-package com.javi.render.processor
+package com.javi.render.processor.data.enums
 
 enum class RenderType constructor(val value: String) {
     CARDS("cards"),

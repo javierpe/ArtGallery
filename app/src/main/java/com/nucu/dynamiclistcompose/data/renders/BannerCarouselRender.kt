@@ -1,10 +1,12 @@
 package com.nucu.dynamiclistcompose.data.renders
 
-import com.javi.render.processor.RenderType
+import com.javi.render.processor.annotations.RenderFactory
+import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.renders.base.DynamicListRender
 import com.nucu.dynamiclistcompose.presentation.components.bannerCarousel.BannerCarouselModel
 import javax.inject.Inject
 
+@RenderFactory
 class BannerCarouselRender @Inject constructor(
 ) : DynamicListRender<BannerCarouselModel> {
 

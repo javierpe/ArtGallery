@@ -1,6 +1,6 @@
 package com.nucu.dynamiclistcompose.domain.useCases
 
-import com.javi.render.processor.RenderType
+import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.data.api.DynamicListControllerApi
 import com.nucu.dynamiclistcompose.data.api.DynamicListUseCaseApi

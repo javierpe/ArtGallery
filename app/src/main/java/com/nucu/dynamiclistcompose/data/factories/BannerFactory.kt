@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
-import com.javi.render.processor.RenderType
+import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerComponentViewScreen
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
 import javax.inject.Inject

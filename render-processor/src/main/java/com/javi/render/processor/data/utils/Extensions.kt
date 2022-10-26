@@ -1,6 +1,8 @@
-package com.javi.render.processor
+package com.javi.render.processor.data.utils
 
+import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
+import com.google.devtools.ksp.validate
 
 fun KSClassDeclaration.semanticName(): String {
     return makeSemanticName(this.simpleName.asString())
@@ -8,6 +10,10 @@ fun KSClassDeclaration.semanticName(): String {
 
 fun KSClassDeclaration.isDataClass(): Boolean {
     return modifiers.any { it.name == "DATA" }
+}
+
+fun KSAnnotated.isValid(): Boolean {
+    return this is KSClassDeclaration && this.validate()
 }
 
 private fun makeSemanticName(name: String): String {

@@ -1,6 +1,6 @@
 package com.nucu.dynamiclistcompose.data.renders.base
 
-import com.javi.render.processor.RenderType
+import com.javi.render.processor.data.enums.RenderType
 
 interface DynamicListRender<out T> {
 

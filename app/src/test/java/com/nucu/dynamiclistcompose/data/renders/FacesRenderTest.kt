@@ -2,7 +2,7 @@ package com.nucu.dynamiclistcompose.data.renders
 
 import com.google.gson.Gson
 import com.google.gson.JsonParser
-import com.javi.render.processor.RenderType
+import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.faces.FacesItemModel
 import com.nucu.dynamiclistcompose.presentation.components.faces.FacesModel
 import kotlinx.coroutines.Dispatchers

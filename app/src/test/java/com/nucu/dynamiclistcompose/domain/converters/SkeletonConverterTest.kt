@@ -1,6 +1,6 @@
 package com.nucu.dynamiclistcompose.domain.converters
 
-import com.javi.render.processor.RenderType
+import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.domain.database.converters.SkeletonConverter
 import org.json.JSONObject
 import org.junit.Before

@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
-import com.javi.render.processor.RenderType
+import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.poster.PosterComponentScreenView
 import com.nucu.dynamiclistcompose.presentation.components.poster.PosterModel
 import javax.inject.Inject

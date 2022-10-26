@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.javi.render.processor.RenderType
+import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.actions.ScrollAction
 import com.nucu.dynamiclistcompose.data.api.TooltipPreferencesApi
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory

@@ -1,7 +1,7 @@
 package com.nucu.dynamiclistcompose.domain.database.converters
 
 import androidx.room.TypeConverter
-import com.javi.render.processor.RenderType
+import com.javi.render.processor.data.enums.RenderType
 import org.json.JSONArray
 import org.json.JSONObject
 
