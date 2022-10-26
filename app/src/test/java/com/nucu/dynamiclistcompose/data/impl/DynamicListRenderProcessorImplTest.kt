@@ -3,7 +3,7 @@ package com.nucu.dynamiclistcompose.data.impl
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.nucu.dynamiclistcompose.data.renders.base.DynamicListRender
-import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.javi.render.processor.RenderType
 import com.nucu.dynamiclistcompose.domain.impl.DynamicListRenderProcessorImpl
 import com.nucu.dynamiclistcompose.presentation.components.text.TextModel
 import kotlinx.coroutines.Dispatchers

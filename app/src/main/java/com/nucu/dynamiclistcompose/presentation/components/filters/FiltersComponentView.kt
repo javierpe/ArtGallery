@@ -38,7 +38,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.javi.render.processor.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.common.StaticGridList
 import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DURATION
 import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography

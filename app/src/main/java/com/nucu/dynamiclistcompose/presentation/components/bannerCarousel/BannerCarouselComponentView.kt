@@ -16,7 +16,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
-import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.javi.render.processor.RenderType
 import com.nucu.dynamiclistcompose.destinations.BannerScreenDestination
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
 import com.nucu.dynamiclistcompose.presentation.components.common.BannerImageView

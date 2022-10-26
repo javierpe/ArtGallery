@@ -2,7 +2,7 @@ package com.nucu.dynamiclistcompose.domain.database.skeletons
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.javi.render.processor.RenderType
 
 @Entity
 data class SkeletonsEntity(

@@ -1,5 +1,7 @@
 package com.nucu.dynamiclistcompose.data.renders.base
 
+import com.javi.render.processor.RenderType
+
 interface DynamicListRender<out T> {
 
     val renders: List<RenderType>

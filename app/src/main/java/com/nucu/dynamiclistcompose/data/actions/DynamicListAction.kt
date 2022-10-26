@@ -1,7 +1,7 @@
 package com.nucu.dynamiclistcompose.data.actions
 
+import com.javi.render.processor.RenderType
 import com.nucu.dynamiclistcompose.data.models.DynamicListContainer
-import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 
 sealed class DynamicListAction {
     /**

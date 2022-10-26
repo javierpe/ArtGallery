@@ -3,7 +3,7 @@ package com.nucu.dynamiclistcompose.domain.database
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.javi.render.processor.RenderType
 import com.nucu.dynamiclistcompose.domain.database.skeletons.SkeletonsDao
 import com.nucu.dynamiclistcompose.domain.database.skeletons.SkeletonsEntity
 import org.junit.After

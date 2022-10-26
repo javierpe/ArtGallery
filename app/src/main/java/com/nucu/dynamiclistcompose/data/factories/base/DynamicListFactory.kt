@@ -2,10 +2,9 @@ package com.nucu.dynamiclistcompose.data.factories.base
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.nucu.dynamiclistcompose.data.listeners.DynamicListComponentListener
-import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
+import com.javi.render.processor.RenderType
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
-import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 
 interface DynamicListFactory {
 

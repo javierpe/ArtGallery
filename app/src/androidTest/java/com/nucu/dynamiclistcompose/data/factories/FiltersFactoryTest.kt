@@ -9,8 +9,8 @@ import androidx.compose.ui.test.onNodeWithTag
 import com.nucu.dynamiclistcompose.MainActivity
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
-import com.nucu.dynamiclistcompose.data.renders.base.RenderType
-import com.nucu.dynamiclistcompose.presentation.components.filters.FiltersModel
+import com.javi.render.processor.RenderType
+import com.nucu.dynamiclistcompose.presentation.components.filters.Filters
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -34,7 +34,7 @@ class FiltersFactoryTest {
         ComponentItemModel(
             render = RenderType.FILTERS.name,
             index =  0,
-            resource = FiltersModel(
+            resource = Filters(
                 items = emptyList()
             )
         )

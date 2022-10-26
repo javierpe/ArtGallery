@@ -71,7 +71,7 @@ class DynamicListControllerImplTest {
         )
 
         whenever(
-            dynamicListRenderProcessorApi.getResourceByRender(String())
+            dynamicListRenderProcessorApi.processResource(String())
         ).thenReturn(
             ComponentItemModel(
                 render = String(),

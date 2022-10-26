@@ -1,4 +1,4 @@
-package com.nucu.dynamiclistcompose.data.renders.base
+package com.javi.render.processor
 
 enum class RenderType constructor(val value: String) {
     CARDS("cards"),

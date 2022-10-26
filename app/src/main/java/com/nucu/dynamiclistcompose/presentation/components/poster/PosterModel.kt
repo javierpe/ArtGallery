@@ -1,7 +1,10 @@
 package com.nucu.dynamiclistcompose.presentation.components.poster
 
+import com.javi.render.processor.RenderClass
+import com.javi.render.processor.RenderType
 import com.squareup.moshi.Json
 
+@RenderClass(type = RenderType.POSTER)
 data class PosterModel(
     @Json(name = "title") val title: String,
     @Json(name = "items") val elements: List<PosterModelItem>

@@ -1,10 +1,9 @@
 package com.nucu.dynamiclistcompose.data.controllers
 
 import com.nucu.dynamiclistcompose.data.api.TooltipPreferencesApi
-import com.nucu.dynamiclistcompose.data.listeners.DynamicListComponentListener
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
-import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.javi.render.processor.RenderType
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 

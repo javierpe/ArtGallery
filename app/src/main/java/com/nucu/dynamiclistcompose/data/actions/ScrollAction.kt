@@ -1,6 +1,6 @@
 package com.nucu.dynamiclistcompose.data.actions
 
-import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.javi.render.processor.RenderType
 
 sealed class ScrollAction(val target: TargetAction) {
 

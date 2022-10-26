@@ -1,10 +1,10 @@
 package com.nucu.dynamiclistcompose.domain.useCases
 
+import com.javi.render.processor.RenderType
 import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.data.api.DynamicListControllerApi
 import com.nucu.dynamiclistcompose.data.api.DynamicListUseCaseApi
 import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
-import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 import com.nucu.dynamiclistcompose.di.IODispatcher
 import com.nucu.dynamiclistcompose.domain.database.AppDatabase
 import com.nucu.dynamiclistcompose.domain.database.skeletons.SkeletonsEntity

@@ -2,7 +2,7 @@ package com.nucu.dynamiclistcompose.data.renders
 
 import com.google.gson.Gson
 import com.google.gson.JsonParser
-import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.javi.render.processor.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.message.MessageModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
