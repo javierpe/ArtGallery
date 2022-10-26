@@ -11,6 +11,7 @@ import com.javi.render.processor.data.utils.PACKAGE_HILT_SINGLETON_COMPONENT
 import com.javi.render.processor.data.utils.PACKAGE_MOSHI
 import com.javi.render.processor.data.utils.PACKAGE_PARENT_MODEL
 import com.javi.render.processor.data.utils.PARENT_MODEL_FILE_NAME
+import com.javi.render.processor.data.utils.PROP_PARENT_MODEL_RENDER_NAME
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
@@ -30,7 +31,7 @@ class MoshiModuleCreator(
         names: List<ModelClassProcessed>
     ) {
 
-        var subtypes = "PolymorphicJsonAdapterFactory.of($PARENT_MODEL_FILE_NAME::class.java, \"render\")"
+        var subtypes = "PolymorphicJsonAdapterFactory.of($PARENT_MODEL_FILE_NAME::class.java, \"$PROP_PARENT_MODEL_RENDER_NAME\")"
 
         names.forEach { model ->
             subtypes = subtypes.plus(
