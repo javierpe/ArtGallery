@@ -3,8 +3,8 @@ package com.javi.render.processor.creators
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.javi.render.processor.data.enums.RenderType
 import com.javi.render.processor.data.models.ModelClassProcessed
-import com.javi.render.processor.data.utils.DI_MODULE_COMMENT
-import com.javi.render.processor.data.utils.DI_MODULE_FILE_NAME
+import com.javi.render.processor.data.utils.DI_RENDER_MODULE_COMMENT
+import com.javi.render.processor.data.utils.DI_RENDER_MODULE_FILE_NAME
 import com.javi.render.processor.data.utils.MOSHI_SUBTYPE_FACTORY
 import com.javi.render.processor.data.utils.PACKAGE_DI
 import com.javi.render.processor.data.utils.PACKAGE_FACTORIES
@@ -40,7 +40,7 @@ class MoshiModuleCreator(
 
         val fileSpec = FileSpec.builder(
             packageName = PACKAGE_DI,
-            fileName = DI_MODULE_FILE_NAME
+            fileName = DI_RENDER_MODULE_FILE_NAME
         ).apply {
             addImport("", names = names.map { "${it.packageName}.${it.simpleName}" })
             addImport("", names = listOf("$PACKAGE_MOSHI.Moshi"))
@@ -52,7 +52,7 @@ class MoshiModuleCreator(
             addImport("", names = listOf(PACKAGE_HILT_SINGLETON_COMPONENT))
 
             addType(
-                TypeSpec.classBuilder(DI_MODULE_FILE_NAME)
+                TypeSpec.classBuilder(DI_RENDER_MODULE_FILE_NAME)
                     .addAnnotation(
                         AnnotationSpec.builder(ClassName("dagger", listOf("Module"))).build()
                     )
@@ -76,7 +76,7 @@ class MoshiModuleCreator(
                     )
                     .build()
             )
-        }.addFileComment(DI_MODULE_COMMENT).build()
+        }.addFileComment(DI_RENDER_MODULE_COMMENT).build()
 
         try {
             fileSpec.writeTo(codeGenerator = codeGenerator, aggregating = false)

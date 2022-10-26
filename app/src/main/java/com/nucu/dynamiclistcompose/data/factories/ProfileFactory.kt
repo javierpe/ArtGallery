@@ -10,15 +10,17 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import com.javi.render.processor.annotations.FactoryModule
+import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
-import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.profile.ProfileComponentScreenView
 import com.nucu.dynamiclistcompose.presentation.components.profile.ProfileModel
 import com.nucu.dynamiclistcompose.presentation.components.profile.profileHeight
 import javax.inject.Inject
 
+@FactoryModule
 class ProfileFactory @Inject constructor(
 
 ): DynamicListFactory {

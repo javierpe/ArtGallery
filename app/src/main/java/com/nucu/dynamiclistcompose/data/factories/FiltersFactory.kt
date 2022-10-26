@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.javi.render.processor.annotations.FactoryModule
 import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.actions.ScrollAction
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
@@ -26,6 +27,7 @@ import com.nucu.dynamiclistcompose.presentation.components.filters.Filters
 import com.nucu.dynamiclistcompose.presentation.components.filters.FiltersComponentViewScreen
 import javax.inject.Inject
 
+@FactoryModule
 class FiltersFactory @Inject constructor(): DynamicListFactory {
 
     override val renders: List<RenderType>
