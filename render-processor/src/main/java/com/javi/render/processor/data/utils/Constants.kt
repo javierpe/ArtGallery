@@ -24,5 +24,4 @@ const val PARENT_MODEL_COMMENT = "This class is a wrapper from a data class to a
         "response data structure like ComponentModel. Each ...ParentModel resolves the data type of the resource."
 const val DI_RENDER_MODULE_COMMENT = "This class is a Hilt module that provides" +
         "\nthe Moshi instance and settings for all parent models."
-const val DI_FACTORY_MODULE_COMMENT = "This class is a Hilt module that provides" +
-        "\nthe Moshi instance and settings for all parent models."
+const val DI_FACTORY_MODULE_COMMENT = "This class contains all factories bindings"
