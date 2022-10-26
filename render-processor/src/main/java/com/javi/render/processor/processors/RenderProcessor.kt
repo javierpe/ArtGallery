@@ -7,8 +7,8 @@ import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSNode
 import com.google.devtools.ksp.validate
-import com.javi.render.processor.annotations.FactoryModule
-import com.javi.render.processor.annotations.RenderClass
+import com.javi.render.processor.annotations.factory.FactoryParentImpl
+import com.javi.render.processor.annotations.render.RenderClass
 import com.javi.render.processor.creators.ComponentsCreator
 import com.javi.render.processor.creators.FactoryModuleCreator
 import com.javi.render.processor.creators.MoshiModuleCreator
@@ -58,9 +58,9 @@ internal class RenderProcessor(
     }
 
     private fun makeFactories(resolver: Resolver) {
-        FactoryModule::class.qualifiedName?.let {
+        FactoryParentImpl::class.qualifiedName?.let { module ->
             val resolved = resolver
-                .getSymbolsWithAnnotation(it)
+                .getSymbolsWithAnnotation(module)
                 .toList()
 
             factoryModuleCreator.make(

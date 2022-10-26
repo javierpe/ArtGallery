@@ -1,4 +1,4 @@
-package com.javi.render.processor.annotations
+package com.javi.render.processor.annotations.render
 
 import com.javi.render.processor.data.enums.RenderType
 

@@ -23,7 +23,7 @@ class FactoryModuleCreator(
 ) {
 
     fun make(
-        validatedSymbols: List<KSClassDeclaration>,
+        validatedSymbols: List<KSClassDeclaration>
     ) {
         logger.info("KSP Factories: ${validatedSymbols.toString()}")
         val fileSpec = FileSpec.builder(
@@ -61,7 +61,9 @@ class FactoryModuleCreator(
                             AnnotationSpec.builder(ClassName("dagger.multibindings", listOf("IntoSet"))).build()
                         )
                         .addModifiers(listOf(KModifier.ABSTRACT))
-                        .returns(ClassName("com.nucu.dynamiclistcompose.data.factories.base", listOf("DynamicListFactory")))
+                        .returns(
+                            returnType = ksClassDeclaration.superTypes.first().toTypeName()
+                        )
                         .build()
                 )
             }

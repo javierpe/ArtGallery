@@ -1,6 +1,6 @@
 package com.nucu.dynamiclistcompose.presentation.components.bannerCarousel
 
-import com.javi.render.processor.annotations.RenderClass
+import com.javi.render.processor.annotations.render.RenderClass
 import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
 import com.squareup.moshi.Json

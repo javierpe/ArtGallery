@@ -1,6 +1,6 @@
 package com.nucu.dynamiclistcompose.presentation.components.card
 
-import com.javi.render.processor.annotations.RenderClass
+import com.javi.render.processor.annotations.render.RenderClass
 import com.javi.render.processor.data.enums.RenderType
 import com.squareup.moshi.Json
 

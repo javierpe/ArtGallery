@@ -3,7 +3,7 @@ package com.javi.render.processor.creators
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSType
-import com.javi.render.processor.annotations.RenderClass
+import com.javi.render.processor.annotations.render.RenderClass
 import com.javi.render.processor.data.enums.RenderType
 import com.javi.render.processor.data.models.ModelClassProcessed
 import com.javi.render.processor.data.utils.PACKAGE_FACTORIES
