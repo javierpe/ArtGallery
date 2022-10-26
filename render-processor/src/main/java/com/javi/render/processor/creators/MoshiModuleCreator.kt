@@ -5,13 +5,12 @@ import com.javi.render.processor.data.enums.RenderType
 import com.javi.render.processor.data.models.ModelClassProcessed
 import com.javi.render.processor.data.utils.DI_MODULE_COMMENT
 import com.javi.render.processor.data.utils.DI_MODULE_FILE_NAME
+import com.javi.render.processor.data.utils.MOSHI_SUBTYPE_FACTORY
 import com.javi.render.processor.data.utils.PACKAGE_DI
 import com.javi.render.processor.data.utils.PACKAGE_FACTORIES
 import com.javi.render.processor.data.utils.PACKAGE_HILT_SINGLETON_COMPONENT
 import com.javi.render.processor.data.utils.PACKAGE_MOSHI
 import com.javi.render.processor.data.utils.PACKAGE_PARENT_MODEL
-import com.javi.render.processor.data.utils.PARENT_MODEL_FILE_NAME
-import com.javi.render.processor.data.utils.PROP_PARENT_MODEL_RENDER_NAME
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
@@ -31,7 +30,7 @@ class MoshiModuleCreator(
         names: List<ModelClassProcessed>
     ) {
 
-        var subtypes = "PolymorphicJsonAdapterFactory.of($PARENT_MODEL_FILE_NAME::class.java, \"$PROP_PARENT_MODEL_RENDER_NAME\")"
+        var subtypes = MOSHI_SUBTYPE_FACTORY
 
         names.forEach { model ->
             subtypes = subtypes.plus(
