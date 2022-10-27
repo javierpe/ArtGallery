@@ -5,10 +5,12 @@ const val PACKAGE_FACTORIES = "$PACKAGE_ROOT.factory"
 const val PACKAGE_DI = "$PACKAGE_ROOT.di"
 
 const val PACKAGE_HILT_SINGLETON_COMPONENT = "dagger.hilt.components.SingletonComponent"
+const val HILT_SINGLE_COMPONENT_CLASS_NAME = "SingletonComponent::class"
 
 const val PARENT_MODEL_FILE_NAME = "ComponentModel"
-const val DI_RENDER_MODULE_FILE_NAME = "RenderModule"
+const val DI_RENDER_MODULE_FILE_NAME = "RenderComponentsModule"
 const val DI_FACTORY_MODULE_FILE_NAME = "FactoryModule"
+const val DI_RENDER_FACTORY_MODULE_FILE_NAME = "RenderFactoryModule"
 
 const val PROP_PARENT_MODEL_RENDER_NAME = "render"
 const val PROP_PARENT_MODEL_INDEX_NAME = "index"

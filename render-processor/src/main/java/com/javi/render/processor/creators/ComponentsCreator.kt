@@ -1,6 +1,7 @@
 package com.javi.render.processor.creators
 
 import com.google.devtools.ksp.processing.CodeGenerator
+import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSType
 import com.javi.render.processor.annotations.render.RenderClass
@@ -32,14 +33,18 @@ import com.squareup.kotlinpoet.ksp.writeTo
  * for Moshi reader.
  */
 class ComponentsCreator(
-    private val codeGenerator: CodeGenerator
+    private val codeGenerator: CodeGenerator,
+    private val logger: KSPLogger
 ) {
 
     @Suppress("LongMethod")
-    fun makeComponentClass(
+    fun make(
         validatedSymbols: List<KSClassDeclaration>,
         names: MutableList<ModelClassProcessed>
     ) {
+
+        logger.info("KSP Render Component Module: ${names.toString()}")
+
         val fileSpec = FileSpec.builder(
             packageName = PACKAGE_FACTORIES,
             fileName = PARENT_MODEL_FILE_NAME

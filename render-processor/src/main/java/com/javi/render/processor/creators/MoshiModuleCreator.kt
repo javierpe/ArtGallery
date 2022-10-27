@@ -1,10 +1,12 @@
 package com.javi.render.processor.creators
 
 import com.google.devtools.ksp.processing.CodeGenerator
+import com.google.devtools.ksp.processing.KSPLogger
 import com.javi.render.processor.data.enums.RenderType
 import com.javi.render.processor.data.models.ModelClassProcessed
 import com.javi.render.processor.data.utils.DI_RENDER_MODULE_COMMENT
 import com.javi.render.processor.data.utils.DI_RENDER_MODULE_FILE_NAME
+import com.javi.render.processor.data.utils.HILT_SINGLE_COMPONENT_CLASS_NAME
 import com.javi.render.processor.data.utils.MOSHI_SUBTYPE_FACTORY
 import com.javi.render.processor.data.utils.PACKAGE_DI
 import com.javi.render.processor.data.utils.PACKAGE_FACTORIES
@@ -23,12 +25,15 @@ import com.squareup.kotlinpoet.ksp.writeTo
  * This class create a Hilt module that provides Moshi instance.
  */
 class MoshiModuleCreator(
-    private val codeGenerator: CodeGenerator
+    private val codeGenerator: CodeGenerator,
+    private val logger: KSPLogger
 ) {
 
-    fun makeModule(
+    fun make(
         names: List<ModelClassProcessed>
     ) {
+
+        logger.info("KSP Render Moshi Module: ${names.toString()}")
 
         var subtypes = MOSHI_SUBTYPE_FACTORY
 
@@ -58,7 +63,7 @@ class MoshiModuleCreator(
                     )
                     .addAnnotation(
                         AnnotationSpec.builder(ClassName("dagger.hilt", listOf("InstallIn")))
-                            .addMember("SingletonComponent::class")
+                            .addMember(HILT_SINGLE_COMPONENT_CLASS_NAME)
                             .build()
                     )
                     .addFunction(

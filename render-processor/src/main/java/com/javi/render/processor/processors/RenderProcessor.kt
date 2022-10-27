@@ -9,9 +9,11 @@ import com.google.devtools.ksp.symbol.KSNode
 import com.google.devtools.ksp.validate
 import com.javi.render.processor.annotations.factory.FactoryParentImpl
 import com.javi.render.processor.annotations.render.RenderClass
+import com.javi.render.processor.annotations.render.RenderFactory
 import com.javi.render.processor.creators.ComponentsCreator
 import com.javi.render.processor.creators.FactoryModuleCreator
 import com.javi.render.processor.creators.MoshiModuleCreator
+import com.javi.render.processor.creators.RenderModuleCreator
 import com.javi.render.processor.data.models.ModelClassProcessed
 import com.javi.render.processor.data.utils.isValid
 
@@ -23,7 +25,8 @@ internal class RenderProcessor(
     private val logger: KSPLogger,
     private val moshiModuleCreator: MoshiModuleCreator,
     private val componentsCreator: ComponentsCreator,
-    private val factoryModuleCreator: FactoryModuleCreator
+    private val factoryModuleCreator: FactoryModuleCreator,
+    private val renderModuleCreator: RenderModuleCreator
 ): SymbolProcessor {
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
@@ -33,11 +36,26 @@ internal class RenderProcessor(
         logger.info("KSP Render: Make renders...")
         makeRenders(resolver)
 
-        logger.info("KSP Render: Make factories...")
+        logger.info("KSP Render: Make FactoryModule...")
         makeFactories(resolver)
+
+        logger.info("KSP Render: Make RenderModule...")
+        makeRenderModule(resolver)
 
         logger.info("KSP Render: finished!")
         return emptyList()
+    }
+
+    private fun makeRenderModule(resolver: Resolver) {
+        RenderFactory::class.qualifiedName?.let { module ->
+            val resolved = resolver
+                .getSymbolsWithAnnotation(module)
+                .toList()
+
+            renderModuleCreator.make(
+                validatedSymbols = getValidSymbols(resolved)
+            )
+        }
     }
 
     private fun makeRenders(resolver: Resolver) {
@@ -48,13 +66,13 @@ internal class RenderProcessor(
                 .getSymbolsWithAnnotation(it)
                 .toList()
 
-            componentsCreator.makeComponentClass(
+            componentsCreator.make(
                 validatedSymbols = getValidSymbols(resolved),
                 names = names
             )
         }
 
-        moshiModuleCreator.makeModule(names)
+        moshiModuleCreator.make(names)
     }
 
     private fun makeFactories(resolver: Resolver) {
