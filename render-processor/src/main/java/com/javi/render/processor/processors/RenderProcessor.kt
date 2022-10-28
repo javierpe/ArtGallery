@@ -7,7 +7,7 @@ import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSNode
 import com.google.devtools.ksp.validate
-import com.javi.render.processor.annotations.factory.FactoryParentImpl
+import com.javi.render.processor.annotations.factory.AdapterFactory
 import com.javi.render.processor.annotations.render.RenderClass
 import com.javi.render.processor.annotations.render.RenderFactory
 import com.javi.render.processor.creators.ComponentsCreator
@@ -29,12 +29,18 @@ internal class RenderProcessor(
     private val renderModuleCreator: RenderModuleCreator
 ): SymbolProcessor {
 
+    private val names = mutableListOf<ModelClassProcessed>()
+    private val renders = mutableListOf<String>()
+
+    override fun finish() {
+        logger.info("KSP Render: finished!")
+        names.clear()
+        super.finish()
+    }
+
     override fun process(resolver: Resolver): List<KSAnnotated> {
 
-        logger.info("KSP Render: Start processing!")
-
-        logger.info("KSP Render: Make renders...")
-        makeRenders(resolver)
+        logger.info("KSP: Start processing!")
 
         logger.info("KSP Render: Make FactoryModule...")
         makeFactories(resolver)
@@ -42,7 +48,10 @@ internal class RenderProcessor(
         logger.info("KSP Render: Make RenderModule...")
         makeRenderModule(resolver)
 
-        logger.info("KSP Render: finished!")
+        logger.info("KSP Render: Make Components...")
+        makeComponents(resolver)
+
+        finish()
         return emptyList()
     }
 
@@ -52,15 +61,22 @@ internal class RenderProcessor(
                 .getSymbolsWithAnnotation(module)
                 .toList()
 
+            val symbols = getValidSymbols(resolved)
+
+            // Map arguments
+            symbols.map { it.annotations.firstOrNull()?.arguments?.first()?.value }.forEach { model ->
+                model?.let {
+                    renders.add(it.toString())
+                }
+            }
+
             renderModuleCreator.make(
-                validatedSymbols = getValidSymbols(resolved)
+                validatedSymbols = symbols
             )
         }
     }
 
-    private fun makeRenders(resolver: Resolver) {
-        val names = mutableListOf<ModelClassProcessed>()
-
+    private fun makeComponents(resolver: Resolver) {
         RenderClass::class.qualifiedName?.let {
             val resolved = resolver
                 .getSymbolsWithAnnotation(it)
@@ -76,7 +92,7 @@ internal class RenderProcessor(
     }
 
     private fun makeFactories(resolver: Resolver) {
-        FactoryParentImpl::class.qualifiedName?.let { module ->
+        AdapterFactory::class.qualifiedName?.let { module ->
             val resolved = resolver
                 .getSymbolsWithAnnotation(module)
                 .toList()

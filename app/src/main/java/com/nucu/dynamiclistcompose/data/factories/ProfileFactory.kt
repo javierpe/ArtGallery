@@ -10,7 +10,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import com.javi.render.processor.annotations.factory.FactoryParentImpl
+import com.javi.render.processor.annotations.factory.AdapterFactory
 import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
@@ -20,7 +20,7 @@ import com.nucu.dynamiclistcompose.presentation.components.profile.ProfileModel
 import com.nucu.dynamiclistcompose.presentation.components.profile.profileHeight
 import javax.inject.Inject
 
-@FactoryParentImpl
+@AdapterFactory
 class ProfileFactory @Inject constructor(
 
 ): DynamicListFactory {

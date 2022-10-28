@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.javi.render.processor.annotations.factory.FactoryParentImpl
+import com.javi.render.processor.annotations.factory.AdapterFactory
 import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
@@ -22,7 +22,7 @@ import com.nucu.dynamiclistcompose.presentation.components.text.TextComponentVie
 import com.nucu.dynamiclistcompose.presentation.components.text.TextModel
 import javax.inject.Inject
 
-@FactoryParentImpl
+@AdapterFactory
 class TextFactory @Inject constructor(): DynamicListFactory {
 
     override val renders: List<RenderType>

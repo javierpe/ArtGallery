@@ -6,9 +6,8 @@ import com.nucu.dynamiclistcompose.data.renders.base.DynamicListRender
 import com.nucu.dynamiclistcompose.presentation.components.bannerCarousel.BannerCarouselModel
 import javax.inject.Inject
 
-@RenderFactory
-class BannerCarouselRender @Inject constructor(
-) : DynamicListRender<BannerCarouselModel> {
+@RenderFactory(model = BannerCarouselModel::class)
+class BannerCarouselRender @Inject constructor() : DynamicListRender<BannerCarouselModel> {
 
     override val renders: List<RenderType>
         get() = listOf(
