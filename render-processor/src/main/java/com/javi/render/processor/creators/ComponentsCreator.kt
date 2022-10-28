@@ -15,6 +15,7 @@ import com.javi.render.processor.data.utils.PROP_PARENT_MODEL_INDEX_NAME
 import com.javi.render.processor.data.utils.PROP_PARENT_MODEL_RENDER_NAME
 import com.javi.render.processor.data.utils.PROP_PARENT_MODEL_RESOURCE_NAME
 import com.javi.render.processor.data.utils.isDataClass
+import com.javi.render.processor.data.utils.log
 import com.javi.render.processor.data.utils.semanticName
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
@@ -43,7 +44,7 @@ class ComponentsCreator(
         names: MutableList<ModelClassProcessed>
     ) {
 
-        logger.info("KSP Render Component Module: ${names.toString()}")
+        logger.log("Component Module: ${names.toString()}")
 
         val fileSpec = FileSpec.builder(
             packageName = PACKAGE_FACTORIES,

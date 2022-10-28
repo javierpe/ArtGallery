@@ -16,6 +16,10 @@ import com.javi.render.processor.creators.MoshiModuleCreator
 import com.javi.render.processor.creators.RenderModuleCreator
 import com.javi.render.processor.data.models.ModelClassProcessed
 import com.javi.render.processor.data.utils.isValid
+import com.javi.render.processor.data.utils.log
+import kotlin.time.ExperimentalTime
+import kotlin.time.measureTime
+import kotlin.time.toJavaDuration
 
 /**
  * This class detect all @RenderClass annotations and process it to new component and
@@ -33,26 +37,33 @@ internal class RenderProcessor(
     private val renders = mutableListOf<String>()
 
     override fun finish() {
-        logger.info("KSP Render: finished!")
         names.clear()
         super.finish()
     }
 
+    @OptIn(ExperimentalTime::class)
     override fun process(resolver: Resolver): List<KSAnnotated> {
 
-        logger.info("KSP: Start processing!")
+        val elapsedTime = measureTime {
+            make(resolver)
+        }
 
-        logger.info("KSP Render: Make FactoryModule...")
-        makeFactories(resolver)
-
-        logger.info("KSP Render: Make RenderModule...")
-        makeRenderModule(resolver)
-
-        logger.info("KSP Render: Make Components...")
-        makeComponents(resolver)
-
+        logger.log("Finished in ${elapsedTime.toJavaDuration().seconds}")
         finish()
         return emptyList()
+    }
+
+    private fun make(resolver: Resolver) {
+        logger.log("Start processing!")
+
+        logger.log("Make FactoryModule...")
+        makeFactories(resolver)
+
+        logger.log("Make RenderModule...")
+        makeRenderModule(resolver)
+
+        logger.log("Make Components...")
+        makeComponents(resolver)
     }
 
     private fun makeRenderModule(resolver: Resolver) {

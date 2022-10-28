@@ -8,6 +8,7 @@ import com.javi.render.processor.data.utils.DI_FACTORY_MODULE_FILE_NAME
 import com.javi.render.processor.data.utils.HILT_SINGLE_COMPONENT_CLASS_NAME
 import com.javi.render.processor.data.utils.PACKAGE_DI
 import com.javi.render.processor.data.utils.PACKAGE_HILT_SINGLETON_COMPONENT
+import com.javi.render.processor.data.utils.log
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
@@ -26,7 +27,7 @@ class FactoryModuleCreator(
     fun make(
         validatedSymbols: List<KSClassDeclaration>
     ) {
-        logger.info("KSP Adapter Factories: ${validatedSymbols.toString()}")
+        logger.log("Adapter Factories: ${validatedSymbols.toString()}")
         val fileSpec = FileSpec.builder(
             packageName = PACKAGE_DI,
             fileName = DI_FACTORY_MODULE_FILE_NAME
@@ -46,7 +47,7 @@ class FactoryModuleCreator(
 
             validatedSymbols.forEach { ksClassDeclaration ->
                 val classType = ksClassDeclaration.asType(emptyList())
-                logger.info("KSP Factories: ${classType.declaration}")
+                logger.log("Factory processed -> ${classType.declaration}")
                 type.addFunction(
                     FunSpec.builder("bind${classType.declaration}")
                         .addParameter(

@@ -8,6 +8,7 @@ import com.javi.render.processor.data.utils.DI_RENDER_FACTORY_MODULE_FILE_NAME
 import com.javi.render.processor.data.utils.HILT_SINGLE_COMPONENT_CLASS_NAME
 import com.javi.render.processor.data.utils.PACKAGE_DI
 import com.javi.render.processor.data.utils.PACKAGE_HILT_SINGLETON_COMPONENT
+import com.javi.render.processor.data.utils.log
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
@@ -16,7 +17,6 @@ import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.TypeVariableName
-import com.squareup.kotlinpoet.ksp.TypeParameterResolver
 import com.squareup.kotlinpoet.ksp.toTypeName
 import com.squareup.kotlinpoet.ksp.writeTo
 
@@ -28,7 +28,7 @@ class RenderModuleCreator(
     fun make(
         validatedSymbols: List<KSClassDeclaration>
     ) {
-        logger.info("KSP Render Factories: ${validatedSymbols.toString()}")
+        logger.log("Factories: ${validatedSymbols.toString()}")
 
         val fileSpec = FileSpec.builder(
             packageName = PACKAGE_DI,
@@ -50,7 +50,7 @@ class RenderModuleCreator(
             validatedSymbols.forEach { ksClassDeclaration ->
                 val classType = ksClassDeclaration.asType(emptyList())
                 val classDeclaration = ksClassDeclaration.superTypes.toList().first().resolve().declaration
-                logger.info("KSP Render Factories: ${classType.declaration}")
+                logger.log("Render factory -> ${classType.declaration}")
                 addImport("", classDeclaration.packageName.asString() + ".${classDeclaration.toString()}")
                 type.addFunction(
                     FunSpec.builder("bind${classType.declaration}")
@@ -85,13 +85,5 @@ class RenderModuleCreator(
         } catch (exception: FileAlreadyExistsException) {
             exception.run { printStackTrace() }
         }
-    }
-
-    val GENERIC: TypeParameterResolver = object : TypeParameterResolver {
-        override val parametersMap: Map<String, TypeVariableName> =
-            mapOf(pair = Pair("*", TypeVariableName.invoke("<*>")))
-
-        override fun get(index: String): TypeVariableName =
-            throw NoSuchElementException("No TypeParameter found for index $index")
     }
 }

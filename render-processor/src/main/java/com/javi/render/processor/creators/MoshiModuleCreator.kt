@@ -13,6 +13,7 @@ import com.javi.render.processor.data.utils.PACKAGE_FACTORIES
 import com.javi.render.processor.data.utils.PACKAGE_HILT_SINGLETON_COMPONENT
 import com.javi.render.processor.data.utils.PACKAGE_MOSHI
 import com.javi.render.processor.data.utils.PACKAGE_PARENT_MODEL
+import com.javi.render.processor.data.utils.log
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
@@ -33,7 +34,7 @@ class MoshiModuleCreator(
         names: List<ModelClassProcessed>
     ) {
 
-        logger.info("KSP Render Moshi Module: ${names.toString()}")
+        logger.log("Moshi Module: ${names.toString()}")
 
         var subtypes = MOSHI_SUBTYPE_FACTORY
 
