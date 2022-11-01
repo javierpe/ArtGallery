@@ -2,8 +2,9 @@ package com.nucu.dynamiclistcompose.data.impl
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.nucu.dynamiclistcompose.data.renders.base.DynamicListRender
 import com.javi.render.processor.data.enums.RenderType
+import com.nucu.dynamiclistcompose.data.renders.BannerCarouselRender
+import com.nucu.dynamiclistcompose.data.renders.base.DynamicListRender
 import com.nucu.dynamiclistcompose.domain.impl.DynamicListRenderProcessorImpl
 import com.nucu.dynamiclistcompose.presentation.components.text.TextModel
 import kotlinx.coroutines.Dispatchers
@@ -27,7 +28,7 @@ class DynamicListRenderProcessorImplTest {
     @Mock
     lateinit var gson: Gson
 
-    private lateinit var render: TextRender
+    private lateinit var render: BannerCarouselRender
 
     private lateinit var renders: MutableSet<DynamicListRender<*>>
 
@@ -40,13 +41,11 @@ class DynamicListRenderProcessorImplTest {
     @Before
     fun setUp() {
         Dispatchers.setMain(StandardTestDispatcher())
-        render = TextRender(gson)
+        render = BannerCarouselRender()
         renders = mutableSetOf(render)
         dynamicListRenderProcessorImpl = DynamicListRenderProcessorImpl(
             renders
         )
-
-        whenever(gson.fromJson(json, TextModel::class.java)).thenReturn(TextModel(String()))
     }
 
     @After
@@ -57,7 +56,7 @@ class DynamicListRenderProcessorImplTest {
     @Test
     fun `Render resource should match with some item in renders`() = runTest {
         assert(
-            dynamicListRenderProcessorImpl.getResourceByRender(
+            dynamicListRenderProcessorImpl.processResource(
                 RenderType.TEXT.value,
                 json
             ) != null

@@ -39,12 +39,7 @@ class DynamicListControllerImplTest {
     private val defaultDataContentModel by lazy {
         DataContentModel(
             header = emptyList(),
-            body = listOf(
-                ComponentModel(
-                    render = String(),
-                    index = 0
-                )
-            )
+            body = emptyList()
         )
     }
 
@@ -68,16 +63,6 @@ class DynamicListControllerImplTest {
             dynamicListMockResponseApi.getJsonDataFromAsset()
         ).thenReturn(
             defaultDataContentModel
-        )
-
-        whenever(
-            dynamicListRenderProcessorApi.processResource(String())
-        ).thenReturn(
-            ComponentItemModel(
-                render = String(),
-                index = 0,
-                resource = String()
-            )
         )
 
         dynamicListControllerImpl.get(0, dynamicListRequestModel).test {
