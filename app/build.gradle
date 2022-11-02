@@ -9,7 +9,7 @@ plugins {
 android {
     signingConfigs {
         release {
-            storeFile file('/release_app')
+            storeFile file('release_app')
             storePassword 'j35u5777'
             keyAlias 'ArtGallery'
             keyPassword 'j35u5777'
