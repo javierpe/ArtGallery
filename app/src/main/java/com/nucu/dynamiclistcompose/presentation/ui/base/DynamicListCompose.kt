@@ -160,7 +160,7 @@ fun DynamicListView(
                 }
 
                 Box(
-                    modifier = Modifier.weight(3f)
+                    modifier = Modifier.weight(1.5f)
                 ) {
                     contentBody()
                 }
