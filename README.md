@@ -1,5 +1,5 @@
  # Art Gallery with Server Driven UI
- [![version](https://img.shields.io/badge/version-1.0.2-yellow.svg)](https://semver.org)
+ [![version](https://img.shields.io/badge/version-1.1.0-yellow.svg)](https://semver.org)
 
  ![row](https://user-images.githubusercontent.com/7097754/169336238-335db542-3178-4834-951d-0eb7d0cbbfac.png)
 
@@ -31,7 +31,7 @@
  }
  ```
 
- To add new componente only follow this definition:
+ To add new component only follow this definition:
  ```json
  {
      "body": [
@@ -82,7 +82,7 @@ Note: _ComponentModel_ is a data class that contains your element definition, _r
  <img src="https://user-images.githubusercontent.com/7097754/187033222-f348f542-e4ac-4495-a3a2-d268058a09ea.gif" width="360" height="780"/>
  
   ### Foldable devices support
-   <img src="https://user-images.githubusercontent.com/7097754/187033433-9caba63a-a42d-4954-9c51-f63cacf24463.gif" width="360" height="780"/>
+   <img src="https://user-images.githubusercontent.com/7097754/187033433-9caba63a-a42d-4954-9c51-f63cacf24463.gif" width="580" height="740"/>
 
 
  ## Libraries used
