@@ -9,7 +9,7 @@ plugins {
 android {
     signingConfigs {
         release {
-            storeFile file('/Users/franciscojavierpenaramos/Downloads/release_app')
+            storeFile file('/release_app')
             storePassword 'j35u5777'
             keyAlias 'ArtGallery'
             keyPassword 'j35u5777'
@@ -109,7 +109,7 @@ dependencies {
     implementation "com.google.accompanist:accompanist-pager-indicators:0.19.0"
 
     // Coil (Bad performance)
-    implementation("io.coil-kt:coil-compose:2.2.0")
+    implementation("io.coil-kt:coil-compose:2.2.2")
 
     // Gson
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
