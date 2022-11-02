@@ -50,11 +50,11 @@
 
 With KSP we extend the functionality to annotations to avoid boilerplate code. Only follow this:
 
-1. Your data class should have @RenderClass annotation and provide it the render type like  RenderType.BANNER or whatever you need.
+1. Your data class should have _@RenderClass_ annotation and provide it the render type like _RenderType.BANNER_ or whatever you need.
 
-2. If you want transform that model when the resource is available you can add a render factory class that extends of DynamicListRender<BannerCarouselModel> and provide @RenderFactory annotation with a model class as parameter like BannerCarouselModel::class. This process transform your model before UI use it.
+2. If you want transform that model when the resource is available you can add a render factory class that extends of _DynamicListRender<BannerCarouselModel>_ and provide _@RenderFactory_ annotation with a model class as parameter like _BannerCarouselModel::class_. This process transform your model before UI use it.
 
-3. Finaly, you should have a factory that will be used to create the UI for that single component, should extends of DynamicListFactory and provide @AdapterFactory annotation.
+3. Finaly, you should have a factory that will be used to create the UI for that single component, should extends of _DynamicListFactory_ and provide _@AdapterFactory_ annotation.
 
 Note: _ComponentModel_ is a data class that contains your element definition, _render_, _index_ and _resource_
 
