@@ -13,6 +13,7 @@
  - [x] Unit test
  - [x] Macrobenchmark test
  - [x] Android CI
+ - [x] KSP processor to avoid boilerplate code
 
  Art Gallery is based on Server Driven UI, only provide a JSON with a UI definition.
 
@@ -44,48 +45,17 @@
  }
  ```
 
- To complete this magic, now we should register the component and follow the next steps:
+### Magic annotations
 
- ### DynamicListAdapterFactory
- 1. We need to add new component name to RenderType enum. 
- 2. We need to create a factory class that extends DynamicListAdapterFactory, this class must implement some functions:
-     * ###### ...renders: List<RenderType>
-         * This define what renders will be created in current factory
-     * ###### ...CreateComponent(...)
-         * This function will create a component, put compose view inside this.
-     * ###### ...CreateSkeleton()
-         * This is a copy of you compose component view, this allow show the component when screen is loading
+With KSP we extend the functionality to annotations to avoid boilerplate code. Only follow this:
 
- ### DynamicListRender
- 1. We need create a render class to extends DynamicListRender
- 2. This class is in charge of processing the JSON model and converting it into a Kotlin object, we need to pass it a generic type which it will return after processing it.
- 3. This class allows you to define data processing logic before the component is displayed.
-     * ###### ...renders: List<RenderType>
-         * This define what renders will be created in current render
-     * ###### ...resolve(...)
-         * This returns the previously defined model in the class
+1. Your data class should have @RenderClass annotation and provide it the render type like  RenderType.BANNER or whatever you need.
 
- ### Hilt
+2. If you want transform that model when the resource is available you can add a render factory class that extends of DynamicListRender<BannerCarouselModel> and provide @RenderFactory annotation with a model class as parameter like BannerCarouselModel::class. This process transform your model before UI use it.
 
- Hilt helps us to inject these renders and factories when the back end responds, to show this component we need add it to:
+3. Finaly, you should have a factory that will be used to create the UI for that single component, should extends of DynamicListFactory and provide @AdapterFactory annotation.
 
- * ###### DynamicListFactoriesModule
-     ```java
-         @Binds
-         @IntoSet
-         abstract fun bindFactory(
-             factory: MyCustomFactory
-         ): DynamicListAdapterFactory
-     ```
-
- * ###### DynamicListRendersModule
-     ```java
-         @Binds
-         @IntoSet
-         abstract fun bindRender(
-             render: MyCustomRender
-         ): DynamicListRender<*>
-     ```
+Note: _ComponentModel_ is a data class that contains your element definition, _render_, _index_ and _resource_
 
  And thats it...
 
