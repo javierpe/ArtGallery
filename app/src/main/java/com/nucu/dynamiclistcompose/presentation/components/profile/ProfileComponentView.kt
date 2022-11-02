@@ -25,15 +25,19 @@ import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
 const val PROFILE_COMPONENT_SCREEN_TAG = "profile-component-screen-tag"
 
 val profileHeight = 250.dp
+val profileHeightExpanded = 180.dp
 
 @Composable
 fun ProfileComponentScreenView(
-    model: ProfileModel
+    model: ProfileModel,
+    isExpandedScreen: Boolean = false
 ) {
     ProfileComponentView(
         modifier = Modifier
             .testTag(PROFILE_COMPONENT_SCREEN_TAG)
-            .height(profileHeight),
+            .height(
+                if (isExpandedScreen) profileHeightExpanded else profileHeight
+            ),
         model = model
     )
 }

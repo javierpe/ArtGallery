@@ -1,16 +1,17 @@
 package com.nucu.dynamiclistcompose.domain.impl
 
 import android.content.Context
-import com.google.gson.Gson
 import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.data.api.DynamicListMockResponseApi
+import com.nucu.dynamiclistcompose.data.extensions.tryFromJson
 import com.nucu.dynamiclistcompose.data.models.DataContentModel
+import com.squareup.moshi.Moshi
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 class DynamicListMockResponseImpl @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val gson: Gson
+    private val moshi: Moshi
 ): DynamicListMockResponseApi {
 
     override suspend fun getJsonDataFromAsset(): DataContentModel {
@@ -19,6 +20,6 @@ class DynamicListMockResponseImpl @Inject constructor(
             .bufferedReader()
             .use { it.readText() }
 
-        return gson.fromJson(data, DataContentModel::class.java)
+        return moshi.adapter(DataContentModel::class.java).tryFromJson(data)!!
     }
 }

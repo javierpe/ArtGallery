@@ -1,7 +1,10 @@
 package com.nucu.dynamiclistcompose.presentation.components.text
 
-import com.google.gson.annotations.SerializedName
+import com.javi.render.processor.annotations.render.RenderClass
+import com.javi.render.processor.data.enums.RenderType
+import com.squareup.moshi.Json
 
+@RenderClass(type = RenderType.TEXT)
 data class TextModel(
-    @SerializedName("text") val text: String
+    @Json(name = "text") val text: String
 )

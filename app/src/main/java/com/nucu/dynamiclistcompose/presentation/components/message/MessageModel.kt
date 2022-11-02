@@ -1,7 +1,10 @@
 package com.nucu.dynamiclistcompose.presentation.components.message
 
-import com.google.gson.annotations.SerializedName
+import com.javi.render.processor.annotations.render.RenderClass
+import com.javi.render.processor.data.enums.RenderType
+import com.squareup.moshi.Json
 
+@RenderClass(type = RenderType.MESSAGE)
 data class MessageModel(
-    @SerializedName("message") val message: String
+    @Json(name = "message") val message: String
 )

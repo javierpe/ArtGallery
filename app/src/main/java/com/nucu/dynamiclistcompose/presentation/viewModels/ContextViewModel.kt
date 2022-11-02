@@ -8,6 +8,7 @@ import com.nucu.dynamiclistcompose.data.models.ContextType
 import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 abstract class ContextViewModel: ViewModel() {
@@ -22,7 +23,7 @@ abstract class ContextViewModel: ViewModel() {
     lateinit var bodyAdapterController: DefaultDynamicListController
 
     private val _contextViewAction = MutableStateFlow<ContextViewAction?>(null)
-    val contextViewAction: StateFlow<ContextViewAction?> = _contextViewAction
+    val contextViewAction: StateFlow<ContextViewAction?> = _contextViewAction.asStateFlow()
 
     abstract val context: ContextType
 

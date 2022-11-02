@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -17,15 +17,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.javi.render.processor.annotations.factory.AdapterFactory
+import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.actions.ScrollAction
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
-import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.nucu.dynamiclistcompose.presentation.components.filters.Filters
 import com.nucu.dynamiclistcompose.presentation.components.filters.FiltersComponentViewScreen
-import com.nucu.dynamiclistcompose.presentation.components.filters.FiltersModel
 import javax.inject.Inject
 
+@AdapterFactory
 class FiltersFactory @Inject constructor(): DynamicListFactory {
 
     override val renders: List<RenderType>
@@ -42,7 +44,7 @@ class FiltersFactory @Inject constructor(): DynamicListFactory {
 
         val model = remember {
             derivedStateOf {
-                (component.resource as FiltersModel).items
+                (component.resource as Filters).items
             }
         }
         FiltersComponentViewScreen(
@@ -62,7 +64,7 @@ class FiltersFactory @Inject constructor(): DynamicListFactory {
             modifier = Modifier
                 .testTag("skeleton")
                 .fillMaxWidth()
-                .wrapContentHeight(),
+                .wrapContentSize(unbounded = true),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 

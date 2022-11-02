@@ -9,7 +9,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import com.nucu.dynamiclistcompose.MainActivity
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
-import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.faces.FacesModel
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
 import dagger.hilt.android.testing.HiltAndroidRule

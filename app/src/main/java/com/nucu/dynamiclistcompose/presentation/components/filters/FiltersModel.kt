@@ -1,13 +1,16 @@
 package com.nucu.dynamiclistcompose.presentation.components.filters
 
-import com.google.gson.annotations.SerializedName
+import com.javi.render.processor.annotations.render.RenderClass
+import com.javi.render.processor.data.enums.RenderType
+import com.squareup.moshi.Json
 
-data class FiltersModel(
-    @SerializedName("items") val items: List<FilterItemModel>
+@RenderClass(type = RenderType.FILTERS)
+data class Filters(
+    @Json(name = "items") val items: List<FilterItemModel>
 )
 
 data class FilterItemModel(
-    @SerializedName("text") val text: String,
-    @SerializedName("go_to") val goTo: String,
-    @SerializedName("color") val color: String
+    @Json(name = "text") val text: String,
+    @Json(name = "go_to") val goTo: String,
+    @Json(name = "color") val color: String
 )

@@ -1,21 +1,20 @@
 package com.nucu.dynamiclistcompose.presentation.ui.base
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nucu.dynamiclistcompose.data.actions.ContextViewAction
 import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.data.actions.ScrollAction
@@ -29,6 +28,7 @@ import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseS
 import com.nucu.dynamiclistcompose.presentation.viewModels.DynamicListViewModel
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 class DynamicListCompose(
     requestModel: DynamicListRequestModel
 ) : DynamicListComposeLoader() {
@@ -66,7 +66,7 @@ class DynamicListCompose(
         bodyListState: LazyListState,
         dynamicListViewModel: DynamicListViewModel = hiltViewModel()
     ) {
-        val dynamicListState by dynamicListViewModel.dynamicListAction.collectAsState()
+        val dynamicListState by dynamicListViewModel.dynamicListAction.collectAsStateWithLifecycle()
 
         action?.let {
             when (it) {
@@ -96,7 +96,7 @@ class DynamicListCompose(
                 val container = (dynamicListState as DynamicListAction.SuccessAction).container
                 val coroutineScope = rememberCoroutineScope()
 
-                LaunchedEffect(container) {
+                LaunchedEffect(container, dynamicListViewModel) {
                     coroutineScope.launch {
                         headerComposeController?.dispatch(container.headers)
                         bodyComposeController?.dispatch(container.bodies)
@@ -152,27 +152,17 @@ fun DynamicListView(
         }
 
         WindowWidthSizeClass.Medium, WindowWidthSizeClass.Expanded -> {
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
+            Row {
                 Box(
-                    modifier = Modifier
-                        .weight(2f)
-                        .fillMaxHeight()
+                    modifier = Modifier.weight(1f)
                 ) {
-                    Box {
-                        contentHeader()
-                    }
+                    contentHeader()
                 }
 
                 Box(
-                    modifier = Modifier
-                        .weight(3f)
-                        .fillMaxHeight()
+                    modifier = Modifier.weight(1.5f)
                 ) {
-                    Box {
-                        contentBody()
-                    }
+                    contentBody()
                 }
             }
         }

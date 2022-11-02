@@ -1,13 +1,16 @@
 package com.nucu.dynamiclistcompose.presentation.components.poster
 
-import com.google.gson.annotations.SerializedName
+import com.javi.render.processor.annotations.render.RenderClass
+import com.javi.render.processor.data.enums.RenderType
+import com.squareup.moshi.Json
 
+@RenderClass(type = RenderType.POSTER)
 data class PosterModel(
-    @SerializedName("title") val title: String,
-    @SerializedName("items") val elements: List<PosterModelItem>
+    @Json(name = "title") val title: String,
+    @Json(name = "items") val elements: List<PosterModelItem>
 )
 
 data class PosterModelItem(
-    @SerializedName("name") val name: String,
-    @SerializedName("url") val url: String
+    @Json(name = "name") val name: String,
+    @Json(name = "url") val url: String
 )

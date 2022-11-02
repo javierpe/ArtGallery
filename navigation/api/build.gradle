@@ -35,6 +35,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion compose_compiler_version
     }
+    namespace 'com.javier.api'
 }
 
 dependencies {

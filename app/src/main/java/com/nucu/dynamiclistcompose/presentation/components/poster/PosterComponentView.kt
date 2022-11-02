@@ -35,12 +35,14 @@ const val POSTER_COMPONENT_SCREEN_TAG = "poster_component_screen_tag"
 
 @Composable
 fun PosterComponentScreenView(
-    model: PosterModel
+    model: PosterModel,
+    isExpandedScreen: Boolean = false
 ) {
     PosterComponentView(
         modifier = Modifier.testTag(POSTER_COMPONENT_SCREEN_TAG),
         list = model.elements,
-        title = model.title
+        title = model.title,
+        isExpandedScreen = isExpandedScreen
     )
 }
 
@@ -48,9 +50,14 @@ fun PosterComponentScreenView(
 fun PosterComponentView(
     modifier: Modifier = Modifier,
     title: String,
-    list: List<PosterModelItem>
+    list: List<PosterModelItem>,
+    isExpandedScreen: Boolean = false
 ) {
     val pagerState = rememberPagerState()
+
+    val height = if (isExpandedScreen) {
+        200.dp
+    } else 450.dp
 
     Column(
         modifier = modifier,
@@ -65,7 +72,7 @@ fun PosterComponentView(
 
         HorizontalPager(
             modifier = Modifier
-                .height(450.dp),
+                .height(height),
             count = list.size,
             state = pagerState,
             contentPadding = PaddingValues(horizontal = 10.dp)
@@ -122,8 +129,7 @@ fun PosterComponentView(
         HorizontalPagerIndicator(
             pagerState = pagerState,
             modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(16.dp),
+                .align(Alignment.CenterHorizontally),
         )
     }
 }

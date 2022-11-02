@@ -1,9 +1,9 @@
 package com.nucu.dynamiclistcompose.di
 
 import com.google.gson.Gson
+import com.nucu.dynamiclistcompose.data.api.TooltipPreferencesApi
 import com.nucu.dynamiclistcompose.data.controllers.DefaultDynamicListController
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
-import com.nucu.dynamiclistcompose.data.api.TooltipPreferencesApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

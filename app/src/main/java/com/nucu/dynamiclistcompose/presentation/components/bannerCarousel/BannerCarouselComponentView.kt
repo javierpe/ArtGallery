@@ -16,7 +16,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
-import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.destinations.BannerScreenDestination
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
 import com.nucu.dynamiclistcompose.presentation.components.common.BannerImageView
@@ -29,19 +29,23 @@ import com.nucu.dynamiclistcompose.presentation.viewModels.BannerViewModel
 const val BANNER_CAROUSEL_IMAGE_TEST_TAG = "banner-carousel-image"
 const val BANNER_CAROUSEL_IMAGE_SCREEN_TEST_TAG = "banner-carousel-image-screen"
 
+@Suppress("LongParameterList")
 @Composable
 fun BannerCarouselComponentViewScreen(
     modifier: Modifier,
+    isExpandedScreen: Boolean = false,
     images: List<BannerModel>,
     componentIndex: Int,
     showCaseState: ShowCaseState,
     viewModel: BannerViewModel = hiltViewModel()
 ) {
     BannerCarouselComponentView(
-        modifier = modifier.testTag(BANNER_CAROUSEL_IMAGE_SCREEN_TEST_TAG),
+        modifier = modifier
+            .testTag(BANNER_CAROUSEL_IMAGE_SCREEN_TEST_TAG),
         images = images,
         componentIndex = componentIndex,
-        showCaseState = showCaseState
+        showCaseState = showCaseState,
+        isExpandedScreen = isExpandedScreen
     ) {
         viewModel.loadBanner(
             BannerScreenDestination(it)
@@ -49,14 +53,25 @@ fun BannerCarouselComponentViewScreen(
     }
 }
 
+@Suppress("LongParameterList")
 @Composable
 fun BannerCarouselComponentView(
     modifier: Modifier,
+    isExpandedScreen: Boolean = false,
     images: List<BannerModel>,
     componentIndex: Int,
     showCaseState: ShowCaseState,
     onClickAction: (String) -> Unit,
 ) {
+
+    val height = if (isExpandedScreen) {
+        200.dp
+    } else 300.dp
+
+    val width = if (isExpandedScreen) {
+        250.dp
+    } else 350.dp
+
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         modifier = modifier
@@ -92,8 +107,8 @@ fun BannerCarouselComponentView(
 
             BannerImageView(
                 modifier = modifierBanner
-                    .height(300.dp)
-                    .width(350.dp),
+                    .height(height)
+                    .width(width),
                 imageURL = item.imageURL,
                 onClickAction = {
                     onClickAction(item.imageURL)

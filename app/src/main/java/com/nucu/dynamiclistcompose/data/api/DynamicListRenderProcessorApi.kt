@@ -1,8 +1,6 @@
 package com.nucu.dynamiclistcompose.data.api
 
-import com.google.gson.JsonObject
-
 interface DynamicListRenderProcessorApi {
 
-    suspend fun getResourceByRender(render: String, resource: JsonObject? = null): Any?
+    suspend fun <T> processResource(render: String, resource: T? = null): Any?
 }

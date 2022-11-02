@@ -38,7 +38,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.common.StaticGridList
 import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DURATION
 import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
@@ -85,7 +85,7 @@ fun FilterGridComponentView(
         mutableStateOf(mapOf(0 to 0))
     }
 
-    val size by animateDpAsState(targetValue = if (isMediumScreen) 110.dp else 100.dp, tween(DURATION))
+    val size by animateDpAsState(targetValue = if (isMediumScreen) 110.dp else 90.dp, tween(DURATION))
 
     StaticGridList(
         modifier = modifier

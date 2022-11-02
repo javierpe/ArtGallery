@@ -10,6 +10,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,11 +24,20 @@ fun BannerInfoView(
     modifier: Modifier = Modifier,
     bannerInfo: BannerInfo
 ) {
+
+    val mainColor = MaterialTheme.colors.secondary
+
+    val color = remember {
+        derivedStateOf {
+            mainColor.copy(alpha = 0.35f)
+        }
+    }
+
     Box(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
-            .background(MaterialTheme.colors.secondary.copy(alpha = 0.35f))
+            .background(color.value)
     ) {
         Column(
             modifier = Modifier

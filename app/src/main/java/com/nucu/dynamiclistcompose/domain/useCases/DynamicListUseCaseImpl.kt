@@ -1,13 +1,13 @@
 package com.nucu.dynamiclistcompose.domain.useCases
 
-import com.nucu.dynamiclistcompose.data.api.DynamicListControllerApi
+import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
+import com.nucu.dynamiclistcompose.data.api.DynamicListControllerApi
 import com.nucu.dynamiclistcompose.data.api.DynamicListUseCaseApi
-import com.nucu.dynamiclistcompose.domain.database.AppDatabase
-import com.nucu.dynamiclistcompose.domain.database.skeletons.SkeletonsEntity
 import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
 import com.nucu.dynamiclistcompose.di.IODispatcher
-import com.nucu.dynamiclistcompose.data.renders.base.RenderType
+import com.nucu.dynamiclistcompose.domain.database.AppDatabase
+import com.nucu.dynamiclistcompose.domain.database.skeletons.SkeletonsEntity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -26,7 +26,8 @@ class DynamicListUseCaseImpl @Inject constructor(
 
     override suspend fun get(
         page: Int,
-        requestModel: DynamicListRequestModel
+        requestModel: DynamicListRequestModel,
+        withSkeletons: Boolean
     ): Flow<DynamicListAction> {
 
         return controller
@@ -46,17 +47,21 @@ class DynamicListUseCaseImpl @Inject constructor(
             }
             .onStart {
 
-                val skeletonContext = withContext(Dispatchers.IO) {
-                    database.skeletonsDao().provideSkeletonsByContext(requestModel.contextType.source)
-                }
+                if (withSkeletons) {
+                    val skeletonContext = withContext(Dispatchers.IO) {
+                        database.skeletonsDao()
+                            .provideSkeletonsByContext(requestModel.contextType.source)
+                    }
 
-                skeletonContext?.let {
-                    emit(DynamicListAction.SkeletonAction(it.renders))
-                } ?: kotlin.run {
-                    emit(DynamicListAction.LoadingAction)
+                    skeletonContext?.let {
+                        emit(DynamicListAction.SkeletonAction(it.renders))
+                    } ?: kotlin.run {
+                        emit(DynamicListAction.LoadingAction)
+                    }
                 }
             }
             .catch {
+                println(it)
                 emit(DynamicListAction.ErrorAction(it))
             }.flowOn(ioDispatcher)
     }

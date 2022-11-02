@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
@@ -15,14 +16,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.javi.render.processor.annotations.factory.AdapterFactory
+import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
-import com.nucu.dynamiclistcompose.data.renders.base.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.bannerCarousel.BannerCarouselComponentViewScreen
 import com.nucu.dynamiclistcompose.presentation.components.bannerCarousel.BannerCarouselModel
 import javax.inject.Inject
 
+@AdapterFactory
 class BannerCarouselFactory @Inject constructor(
 
 ): DynamicListFactory {
@@ -50,7 +53,8 @@ class BannerCarouselFactory @Inject constructor(
             modifier = modifier.testTag("banner_carousel_component"),
             images = model.value,
             componentIndex = component.index,
-            showCaseState = componentInfo.showCaseState
+            showCaseState = componentInfo.showCaseState,
+            isExpandedScreen = componentInfo.windowWidthSizeClass == WindowWidthSizeClass.Expanded
         )
     }
 

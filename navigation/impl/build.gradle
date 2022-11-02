@@ -37,6 +37,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion compose_compiler_version
     }
+    namespace 'com.javier.impl'
 }
 
 dependencies {
@@ -44,9 +45,8 @@ dependencies {
     implementation(project(":navigation:api"))
 
     // Navigation compose
-
-    implementation 'io.github.raamcosta.compose-destinations:core:1.7.16-beta'
-    implementation 'io.github.raamcosta.compose-destinations:animations-core:1.7.16-beta'
+    implementation 'io.github.raamcosta.compose-destinations:core:1.7.22-beta'
+    implementation 'io.github.raamcosta.compose-destinations:animations-core:1.7.22-beta'
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.43.2")

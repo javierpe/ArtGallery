@@ -1,17 +1,21 @@
+@file:OptIn(ExperimentalLifecycleComposeApi::class)
+
 package com.nucu.dynamiclistcompose.presentation.ui.components.showCase
 
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseTargets
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 /**
  * Creates a [ShowCaseState] that is remembered across compositions.
@@ -35,7 +39,7 @@ fun Modifier.asShowCaseTarget(
     key: String,
     content: @Composable BoxScope.() -> Unit,
 ): Modifier = composed {
-    val sendState by state.currentIndex.collectAsState()
+    val sendState by state.currentIndex.collectAsStateWithLifecycle()
 
     if (sendState == index) {
         return@composed this.then(
@@ -63,10 +67,10 @@ fun Modifier.asShowCaseTarget(
 class ShowCaseState internal constructor() {
 
     private val _current = MutableStateFlow<ShowCaseTargets?>(null)
-    val current: StateFlow<ShowCaseTargets?> = _current
+    val current: StateFlow<ShowCaseTargets?> = _current.asStateFlow()
 
     private val _currentIndex = MutableStateFlow(-1)
-    val currentIndex: StateFlow<Int> = _currentIndex
+    val currentIndex: StateFlow<Int> = _currentIndex.asStateFlow()
 
     fun send(target: ShowCaseTargets?) {
         _current.value = target

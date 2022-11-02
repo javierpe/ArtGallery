@@ -30,7 +30,8 @@ class DynamicListControllerImpl @Inject constructor(
         val componentModel = dynamicListMockResponseApi.getJsonDataFromAsset()
 
         val header = componentModel.header.mapNotNull { component ->
-            dynamicListRenderProcessorApi.getResourceByRender(
+
+            dynamicListRenderProcessorApi.processResource(
                 component.render,
                 component.resource
             )?.let {
@@ -43,7 +44,8 @@ class DynamicListControllerImpl @Inject constructor(
         }
 
         val body = componentModel.body.mapNotNull { component ->
-            dynamicListRenderProcessorApi.getResourceByRender(
+
+            dynamicListRenderProcessorApi.processResource(
                 component.render,
                 component.resource
             )?.let {
