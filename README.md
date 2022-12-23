@@ -81,11 +81,11 @@ Note: _ComponentModel_ is a data class that contains your element definition, _r
  ### Scroll actions
  <img src="https://user-images.githubusercontent.com/7097754/187033222-f348f542-e4ac-4495-a3a2-d268058a09ea.gif" width="360" height="780"/>
  
-  ### Foldable devices support
-   <img src="https://user-images.githubusercontent.com/7097754/187033433-9caba63a-a42d-4954-9c51-f63cacf24463.gif" width="580" height="740"/>
+ ### Foldable devices support
+ <img src="https://user-images.githubusercontent.com/7097754/187033433-9caba63a-a42d-4954-9c51-f63cacf24463.gif" width="580" height="740"/>
 
 
- ## Libraries used
+ ## Used libraries
 
  - [Compose navigation](https://developer.android.com/jetpack/compose/navigation?hl=es-419) - Recommended for Google to navigate between compose screens
  - [Hilt](https://developer.android.com/training/dependency-injection/hilt-android?hl=es-419) - Dependency injection
