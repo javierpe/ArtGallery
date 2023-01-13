@@ -41,7 +41,7 @@ fun ImageComponentView(
         .diskCacheKey(imageURL)
         .crossfade(FADE_DURATION)
         .allowHardware(true)
-        .dispatcher(Dispatchers.IO)
+        .dispatcher(Dispatchers.Main)
         .transformationDispatcher(Dispatchers.Default)
         .fetcherDispatcher(Dispatchers.IO)
 
