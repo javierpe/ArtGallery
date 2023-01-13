@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalLifecycleComposeApi::class)
-
 package com.nucu.dynamiclistcompose.presentation.ui.base
 
 import androidx.compose.foundation.layout.Box
@@ -10,7 +8,6 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DynamicListHeaderComponentView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCase

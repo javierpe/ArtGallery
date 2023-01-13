@@ -13,7 +13,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.actions.ScrollAction
@@ -35,7 +34,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 abstract class DynamicListComposeController {
 
     abstract val delegates: MutableSet<@JvmSuppressWildcards DynamicListFactory>

@@ -13,7 +13,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nucu.dynamiclistcompose.data.actions.ContextViewAction
 import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
@@ -28,7 +27,6 @@ import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseS
 import com.nucu.dynamiclistcompose.presentation.viewModels.DynamicListViewModel
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 class DynamicListCompose(
     requestModel: DynamicListRequestModel
 ) : DynamicListComposeLoader() {
