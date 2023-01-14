@@ -27,15 +27,6 @@ fun ImageComponentView(
     contentScale: ContentScale = ContentScale.Crop
 ) {
 
-    val isLoaded = rememberSaveable {
-        mutableStateOf(false)
-    }
-
-    val animatedAlpha = animateFloatAsState(
-        targetValue = if (isLoaded.value) 1f else 0f,
-        spring(stiffness = Spring.StiffnessLow)
-    )
-
     var requestBuilder = ImageRequest.Builder(LocalContext.current)
         .data(imageURL)
         .diskCacheKey(imageURL)
@@ -54,9 +45,34 @@ fun ImageComponentView(
         )
     }
 
+    ImageComponent(
+        modifier = modifier,
+        imageRequest = requestBuilder.build(),
+        contentScale = contentScale,
+        colorFilter = colorFilter
+    )
+}
+
+@Composable
+fun ImageComponent(
+    modifier: Modifier = Modifier,
+    colorFilter: ColorFilter? = null,
+    contentScale: ContentScale = ContentScale.Crop,
+    imageRequest: ImageRequest
+) {
+
+    val isLoaded = rememberSaveable {
+        mutableStateOf(false)
+    }
+
+    val animatedAlpha = animateFloatAsState(
+        targetValue = if (isLoaded.value) 1f else 0f,
+        spring(stiffness = Spring.StiffnessLow)
+    )
+
     AsyncImage(
         modifier = modifier,
-        model = requestBuilder.build(),
+        model = imageRequest,
         contentDescription = null,
         contentScale = contentScale,
         colorFilter = colorFilter,
