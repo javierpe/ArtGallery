@@ -69,7 +69,7 @@ class BannerCarouselFactory @Inject constructor(
                     .clip(RoundedCornerShape(16.dp))
                     .wrapContentWidth()
                     .height(100.dp)
-                    .background(MaterialTheme.colors.onPrimary)
+                    .background(MaterialTheme.colors.primary)
             )
 
             Box(
@@ -77,7 +77,7 @@ class BannerCarouselFactory @Inject constructor(
                     .clip(RoundedCornerShape(16.dp))
                     .wrapContentWidth()
                     .height(100.dp)
-                    .background(MaterialTheme.colors.onPrimary)
+                    .background(MaterialTheme.colors.primary)
             )
         }
     }

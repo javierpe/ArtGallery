@@ -58,7 +58,7 @@ class TextFactory @Inject constructor(): DynamicListFactory {
                 .clip(RoundedCornerShape(7.dp))
                 .fillMaxWidth()
                 .height(30.dp)
-                .background(MaterialTheme.colors.onPrimary)
+                .background(MaterialTheme.colors.primary)
         )
     }
 }

@@ -61,7 +61,7 @@ class BannerFactory @Inject constructor(
                 .clip(RoundedCornerShape(16.dp))
                 .fillMaxWidth()
                 .height(150.dp)
-                .background(MaterialTheme.colors.onPrimary)
+                .background(MaterialTheme.colors.primary)
         )
     }
 }

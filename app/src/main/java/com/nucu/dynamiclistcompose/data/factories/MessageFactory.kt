@@ -59,7 +59,7 @@ class MessageFactory @Inject constructor(): DynamicListFactory {
                 .clip(RoundedCornerShape(10.dp))
                 .fillMaxWidth()
                 .height(70.dp)
-                .background(MaterialTheme.colors.onPrimary)
+                .background(MaterialTheme.colors.primary)
         )
     }
 }

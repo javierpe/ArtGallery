@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalLifecycleComposeApi::class)
-
 package com.nucu.dynamiclistcompose.presentation.ui.components.showCase
 
 import androidx.compose.animation.core.Animatable
@@ -45,7 +43,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseTargets

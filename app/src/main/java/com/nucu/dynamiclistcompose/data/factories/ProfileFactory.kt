@@ -49,7 +49,7 @@ class ProfileFactory @Inject constructor(
           modifier = Modifier
               .testTag("skeleton")
               .height(profileHeight)
-              .background(MaterialTheme.colors.onPrimary)
+              .background(MaterialTheme.colors.primary)
         )
     }
 }

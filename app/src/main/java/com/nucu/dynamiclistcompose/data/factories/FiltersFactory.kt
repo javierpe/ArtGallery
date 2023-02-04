@@ -74,7 +74,7 @@ class FiltersFactory @Inject constructor(): DynamicListFactory {
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(15.dp))
-                    .background(MaterialTheme.colors.onPrimary)
+                    .background(MaterialTheme.colors.primary)
                     .width(width)
                     .height(height)
             )
@@ -82,7 +82,7 @@ class FiltersFactory @Inject constructor(): DynamicListFactory {
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(15.dp))
-                    .background(MaterialTheme.colors.onPrimary)
+                    .background(MaterialTheme.colors.primary)
                     .width(width)
                     .height(height)
             )
@@ -90,7 +90,7 @@ class FiltersFactory @Inject constructor(): DynamicListFactory {
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(15.dp))
-                    .background(MaterialTheme.colors.onPrimary)
+                    .background(MaterialTheme.colors.primary)
                     .width(width)
                     .height(height)
             )
@@ -98,7 +98,7 @@ class FiltersFactory @Inject constructor(): DynamicListFactory {
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(15.dp))
-                    .background(MaterialTheme.colors.onPrimary)
+                    .background(MaterialTheme.colors.primary)
                     .width(width)
                     .height(height)
             )
@@ -106,7 +106,7 @@ class FiltersFactory @Inject constructor(): DynamicListFactory {
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(15.dp))
-                    .background(MaterialTheme.colors.onPrimary)
+                    .background(MaterialTheme.colors.primary)
                     .width(width)
                     .height(height)
             )

@@ -1,9 +1,11 @@
 package com.nucu.dynamiclistcompose.presentation.ui.components.headers
 
+import android.graphics.Color
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -11,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -22,6 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
+import androidx.core.graphics.toColorLong
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.nucu.dynamiclistcompose.data.BACKGROUND
 import com.nucu.dynamiclistcompose.data.BACK_BUTTON_BACKGROUND
 import com.nucu.dynamiclistcompose.data.BACK_BUTTON_ICON_COLOR
@@ -46,6 +51,18 @@ fun HeaderWithImageView(
     val backgroundLayoutId = "background"
     val titleLayoutId = "title"
     val backButtonLayoutId = "back_button"
+
+    val systemUiController = rememberSystemUiController()
+    val useDarkIcons = !isSystemInDarkTheme()
+
+    DisposableEffect(systemUiController, useDarkIcons) {
+        systemUiController.setNavigationBarColor(
+            color = androidx.compose.ui.graphics.Color.Transparent,
+            darkIcons = useDarkIcons
+        )
+
+        onDispose {}
+    }
 
     val firstVisibleItem by remember {
         derivedStateOf {
@@ -141,6 +158,17 @@ fun HeaderWithImageView(
                 .fillMaxWidth()
                 .layoutId(backgroundLayoutId)
                 .background(backgroundProperties.value.color(BACKGROUND)),
+        )
+
+        val useDarkIcons by remember {
+            derivedStateOf {
+                backgroundProperties.value.color(BACKGROUND).value.toLong() == Color.BLACK.toColorLong()
+            }
+        }
+
+        systemUiController.setStatusBarColor(
+            color = backgroundProperties.value.color(BACKGROUND),
+            darkIcons = !useDarkIcons
         )
 
         Text(

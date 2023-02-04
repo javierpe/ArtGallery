@@ -65,7 +65,7 @@ class CardsFactory @Inject constructor(): DynamicListFactory {
                     .clip(RoundedCornerShape(10.dp))
                     .width(200.dp)
                     .height(100.dp)
-                    .background(MaterialTheme.colors.onPrimary)
+                    .background(MaterialTheme.colors.primary)
             )
 
             Box(
@@ -73,7 +73,7 @@ class CardsFactory @Inject constructor(): DynamicListFactory {
                     .clip(RoundedCornerShape(10.dp))
                     .width(200.dp)
                     .height(100.dp)
-                    .background(MaterialTheme.colors.onPrimary)
+                    .background(MaterialTheme.colors.primary)
             )
         }
     }

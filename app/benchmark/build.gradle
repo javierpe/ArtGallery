@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
     targetProjectPath = ":app"
     experimentalProperties["android.experimental.self-instrumenting"] = true
 
@@ -19,7 +19,7 @@ android {
 
     defaultConfig {
         minSdk 26
-        targetSdk 32
+        targetSdk 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -49,11 +49,11 @@ androidComponents {
 }
 
 dependencies {
-    implementation "androidx.profileinstaller:profileinstaller:1.2.0"
-    implementation 'androidx.test.ext:junit:1.1.3'
-    implementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation "androidx.profileinstaller:profileinstaller:1.2.2"
+    implementation 'androidx.test.ext:junit:1.1.5'
+    implementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'androidx.test.uiautomator:uiautomator:2.2.0'
-    implementation 'androidx.benchmark:benchmark-macro-junit4:1.1.0'
+    implementation 'androidx.benchmark:benchmark-macro-junit4:1.1.1'
 }
 
 androidComponents {

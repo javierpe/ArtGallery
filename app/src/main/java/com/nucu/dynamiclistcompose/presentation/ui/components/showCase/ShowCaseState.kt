@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalLifecycleComposeApi::class)
-
 package com.nucu.dynamiclistcompose.presentation.ui.components.showCase
 
 import androidx.compose.foundation.layout.BoxScope
@@ -9,7 +7,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseTargets
