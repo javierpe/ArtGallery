@@ -108,8 +108,11 @@ dependencies {
     implementation "com.google.accompanist:accompanist-pager:0.26.2-beta"
     implementation "com.google.accompanist:accompanist-pager-indicators:0.19.0"
 
-    // Coil (Bad performance)
-    implementation("io.coil-kt:coil-compose:2.2.2")
+    // Coil (Bad performance in debug mode)
+    implementation "io.coil-kt:coil-compose:2.2.2"
+
+    // Glide
+    //implementation "com.github.bumptech.glide:compose:1.0.0-alpha.1"
 
     // Gson
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
@@ -160,7 +163,7 @@ dependencies {
     // Test
     testImplementation 'app.cash.turbine:turbine:0.9.0'
     testImplementation 'org.mockito.kotlin:mockito-kotlin:4.1.0'
-    testImplementation 'org.mockito:mockito-inline:4.10.0'
+    testImplementation 'org.mockito:mockito-inline:4.11.0'
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.json:json:20210307'

@@ -37,20 +37,14 @@ fun ErrorView(
     exception: Throwable? = null,
     onRetry: () -> Unit
 ) {
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Column(
-            modifier = Modifier.align(Alignment.Center)
-        ) {
-            Text(
-                text = exception?.message ?: stringResource(id = R.string.label_error),
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            )
+    Column {
+        Text(
+            text = exception?.message ?: stringResource(id = R.string.label_error),
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
 
-            Button(onClick = { onRetry.invoke() }) {
-                Text(text = stringResource(id = R.string.label_retry))
-            }
+        Button(onClick = { onRetry.invoke() }) {
+            Text(text = stringResource(id = R.string.label_retry))
         }
     }
 }
