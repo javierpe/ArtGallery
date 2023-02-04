@@ -64,6 +64,7 @@ class FacesFactory @Inject constructor(
 
     @Composable
     override fun CreateSkeleton() {
+
         Row(
             modifier = Modifier
                 .testTag("skeleton")
@@ -95,7 +96,7 @@ fun FacesSkeletonItem() {
             modifier = Modifier
                 .size(size)
                 .clip(CircleShape)
-                .background(MaterialTheme.colors.onPrimary)
+                .background(MaterialTheme.colors.primary)
         )
 
         Box(
@@ -103,7 +104,7 @@ fun FacesSkeletonItem() {
                 .width(size)
                 .height(heightText)
                 .clip(RoundedCornerShape(roundedText))
-                .background(MaterialTheme.colors.onPrimary)
+                .background(MaterialTheme.colors.primary)
         )
     }
 }

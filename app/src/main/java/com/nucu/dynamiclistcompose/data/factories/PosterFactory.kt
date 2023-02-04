@@ -52,7 +52,7 @@ class PosterFactory @Inject constructor(): DynamicListFactory {
                 .fillMaxWidth()
                 .testTag("skeleton")
                 .clip(RoundedCornerShape(10.dp))
-                .background(MaterialTheme.colors.onPrimary)
+                .background(MaterialTheme.colors.primary)
         )
     }
 }

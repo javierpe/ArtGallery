@@ -144,6 +144,9 @@ dependencies {
     // Pagination:
     //implementation "androidx.paging:paging-compose:1.0.0-alpha16"
 
+    // System UI Controller
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.29.1-alpha"
+
     // Room
     implementation "androidx.room:room-rxjava3:2.5.0"
     implementation "androidx.room:room-ktx:2.5.0"
