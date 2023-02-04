@@ -1,7 +1,6 @@
- # Art Gallery with Server Driven UI
- [![version](https://img.shields.io/badge/version-1.1.0-yellow.svg)](https://semver.org)
-
- ![row](https://user-images.githubusercontent.com/7097754/169336238-335db542-3178-4834-951d-0eb7d0cbbfac.png)
+ # Server Driven UI with Jetpack Compose   [![version](https://img.shields.io/badge/version-1.1.0-yellow.svg)](https://semver.org)
+ 
+![Artboard](https://user-images.githubusercontent.com/7097754/216787352-2ab8fa54-62de-411c-84d5-765f9c87136f.png)
 
  ## Features
 
@@ -16,7 +15,7 @@
  - [x] KSP processor to avoid boilerplate code
  - [x] Unit test, Macrobenchmark and Android CI
  
- Art Gallery is based on Server Driven UI, only provide a JSON with a UI definition.
+ Art Gallery is based on Server Driven UI, only provide a JSON and UI definition.
 
  > The SDUI allows you send new features and create
  > reusable componentes as possible. 
@@ -57,33 +56,6 @@ With KSP we extend the functionality to annotations to avoid boilerplate code. O
 3. Finaly, you should have a factory that will be used to create the UI for that single component, should extends of _DynamicListFactory_ and provide _@AdapterFactory_ annotation.
 
 Note: _ComponentModel_ is a data class that contains your element definition, _render_, _index_ and _resource_
-
- And thats it...
-
- ### Skeletons
- <img src="https://user-images.githubusercontent.com/7097754/185690462-8ce16cc5-7437-4432-b160-be3414e7ad24.png" width="342.5" height="633.5"/>
-
- ### Home screen
- <img src="https://user-images.githubusercontent.com/7097754/187033316-38650794-5eeb-4306-a9ee-9787c5d18ac0.png" width="342.5" height="633.5"/>
-
- ### Tooltips
- <img src="https://user-images.githubusercontent.com/7097754/185691070-6f950308-a677-49cb-b8db-50751c8fe086.png" width="342.5" height="633.5"/>
-
- ### Tooltip sequence
- <img src="https://user-images.githubusercontent.com/7097754/185699798-47430b25-2f9f-4a12-ae0f-29d59339afff.mp4" width="360" height="780"/>
-
- ### MotionLayout
- <img src="https://user-images.githubusercontent.com/7097754/187033262-f0b018ae-1538-4a18-8419-95c06f5b19d8.gif" width="360" height="780"/>
- 
- ### Navigation
- <img src="https://user-images.githubusercontent.com/7097754/187033242-bcc0833b-51c6-4a2c-a06b-172701df023a.gif" width="360" height="780"/>
-
- ### Scroll actions
- <img src="https://user-images.githubusercontent.com/7097754/187033222-f348f542-e4ac-4495-a3a2-d268058a09ea.gif" width="360" height="780"/>
- 
- ### Foldable devices support
- <img src="https://user-images.githubusercontent.com/7097754/187033433-9caba63a-a42d-4954-9c51-f63cacf24463.gif" width="580" height="740"/>
-
 
  ## Used libraries
 
