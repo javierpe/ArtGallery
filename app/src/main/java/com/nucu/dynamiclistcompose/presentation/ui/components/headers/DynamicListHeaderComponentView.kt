@@ -51,7 +51,9 @@ fun DynamicListHeaderComponentView(
                 title = title,
                 icon = icon,
                 onIconClick = {
-                    viewModel.handleIconClick()
+                    if (!viewModel.isHome()) {
+                        viewModel.handleIconClick()
+                    }
                 }
             )
         }
@@ -63,7 +65,9 @@ fun DynamicListHeaderComponentView(
                 bodyLazyGridState = bodyLazyGridState,
                 icon = icon,
                 onIconClick = {
-                    viewModel.handleIconClick()
+                    if (!viewModel.isHome()) {
+                        viewModel.handleIconClick()
+                    }
                 }
             )
         }
