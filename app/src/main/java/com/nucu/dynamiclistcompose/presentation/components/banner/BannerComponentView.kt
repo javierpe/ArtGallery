@@ -18,7 +18,7 @@ import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.javi.render.processor.data.enums.RenderType
 import com.javier.api.NavigationController
-import com.nucu.dynamiclistcompose.destinations.BannerScreenDestination
+import com.nucu.dynamiclistcompose.destinations.ProductImageScreenDestination
 import com.nucu.dynamiclistcompose.presentation.components.common.BannerImageView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseStyle
@@ -45,7 +45,7 @@ fun BannerComponentViewScreen(
         showCaseState = showCaseState
     ) {
         navigationController.navigateTo(
-            BannerScreenDestination(it)
+            ProductImageScreenDestination(it)
         )
     }
 }

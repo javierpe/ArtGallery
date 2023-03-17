@@ -29,7 +29,7 @@ import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.google.accompanist.pager.rememberPagerState
 import com.javier.api.NavigationController
-import com.nucu.dynamiclistcompose.destinations.BannerScreenDestination
+import com.nucu.dynamiclistcompose.destinations.ProductImageScreenDestination
 import com.nucu.dynamiclistcompose.presentation.components.common.ImageComponentView
 import com.nucu.dynamiclistcompose.presentation.components.common.TitleDecoratedView
 import kotlin.math.absoluteValue
@@ -49,7 +49,7 @@ fun PosterComponentScreenView(
         isExpandedScreen = isExpandedScreen
     ) {
         navigationController.navigateTo(
-            BannerScreenDestination(it)
+            ProductImageScreenDestination(it)
         )
     }
 }

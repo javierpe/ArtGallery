@@ -116,7 +116,7 @@ fun SimpleHeaderView(
                 },
                 text = title,
                 style = Typography.h6,
-                color = MaterialTheme.colors.primary
+                color = MaterialTheme.colors.secondary
             )
         }
     }
