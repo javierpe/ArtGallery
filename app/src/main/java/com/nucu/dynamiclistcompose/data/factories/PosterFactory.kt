@@ -16,6 +16,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.javi.render.processor.annotations.factory.AdapterFactory
 import com.javi.render.processor.data.enums.RenderType
+import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
@@ -24,7 +25,9 @@ import com.nucu.dynamiclistcompose.presentation.components.poster.PosterModel
 import javax.inject.Inject
 
 @AdapterFactory
-class PosterFactory @Inject constructor(): DynamicListFactory {
+class PosterFactory @Inject constructor(
+    private val navigationController: NavigationController
+): DynamicListFactory {
 
     override val renders: List<RenderType> = listOf(RenderType.POSTER)
 
@@ -40,7 +43,8 @@ class PosterFactory @Inject constructor(): DynamicListFactory {
 
         PosterComponentScreenView(
             model = model.value,
-            isExpandedScreen = componentInfo.dynamicListObject.widthSizeClass == WindowWidthSizeClass.Expanded
+            isExpandedScreen = componentInfo.dynamicListObject.widthSizeClass == WindowWidthSizeClass.Expanded,
+            navigationController = navigationController
         )
     }
 

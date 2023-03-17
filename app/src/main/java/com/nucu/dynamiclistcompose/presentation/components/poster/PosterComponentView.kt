@@ -2,6 +2,7 @@
 
 package com.nucu.dynamiclistcompose.presentation.components.poster
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,6 +28,8 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.google.accompanist.pager.rememberPagerState
+import com.javier.api.NavigationController
+import com.nucu.dynamiclistcompose.destinations.BannerScreenDestination
 import com.nucu.dynamiclistcompose.presentation.components.common.ImageComponentView
 import com.nucu.dynamiclistcompose.presentation.components.common.TitleDecoratedView
 import kotlin.math.absoluteValue
@@ -36,14 +39,19 @@ const val POSTER_COMPONENT_SCREEN_TAG = "poster_component_screen_tag"
 @Composable
 fun PosterComponentScreenView(
     model: PosterModel,
-    isExpandedScreen: Boolean = false
+    isExpandedScreen: Boolean = false,
+    navigationController: NavigationController
 ) {
     PosterComponentView(
         modifier = Modifier.testTag(POSTER_COMPONENT_SCREEN_TAG),
         list = model.elements,
         title = model.title,
         isExpandedScreen = isExpandedScreen
-    )
+    ) {
+        navigationController.navigateTo(
+            BannerScreenDestination(it)
+        )
+    }
 }
 
 @Composable
@@ -51,7 +59,8 @@ fun PosterComponentView(
     modifier: Modifier = Modifier,
     title: String,
     list: List<PosterModelItem>,
-    isExpandedScreen: Boolean = false
+    isExpandedScreen: Boolean = false,
+    onClick: (String) -> Unit
 ) {
     val pagerState = rememberPagerState()
 
@@ -119,7 +128,7 @@ fun PosterComponentView(
                                 x = (100.dp * pageOffset).roundToPx(),
                                 y = 0
                             )
-                        },
+                        }.clickable { onClick(list[page].url) },
                     imageURL = list[page].url,
                     contentScale = ContentScale.Fit
                 )
