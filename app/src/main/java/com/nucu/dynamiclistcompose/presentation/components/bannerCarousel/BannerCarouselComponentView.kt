@@ -84,7 +84,7 @@ fun BannerCarouselComponentView(
                 model.javaClass.name
             },
             key = { _, model ->
-                model.imageURL
+                model.product.id
             }
         ) { index, item ->
 
@@ -109,9 +109,9 @@ fun BannerCarouselComponentView(
                 modifier = modifierBanner
                     .height(height)
                     .width(width),
-                imageURL = item.imageURL,
+                imageURL = item.product.imageURL,
                 onClickAction = {
-                    onClickAction(item.imageURL)
+                    onClickAction(item.product.imageURL)
                 },
                 bannerInfo = item.bannerInfo
             )

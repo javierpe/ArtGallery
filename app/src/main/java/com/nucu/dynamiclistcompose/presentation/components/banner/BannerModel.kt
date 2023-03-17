@@ -2,11 +2,12 @@ package com.nucu.dynamiclistcompose.presentation.components.banner
 
 import com.javi.render.processor.annotations.render.RenderClass
 import com.javi.render.processor.data.enums.RenderType
+import com.nucu.dynamiclistcompose.presentation.components.prodcut.ProductImageModel
 import com.squareup.moshi.Json
 
 @RenderClass(type = RenderType.BANNER)
 data class BannerModel(
-    @Json(name = "url") val imageURL: String = "",
+    @Json(name = "image") val product: ProductImageModel,
     @Json(name = "info") val bannerInfo: BannerInfo? = null
 )
 

@@ -20,6 +20,7 @@ import com.javi.render.processor.data.enums.RenderType
 import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.destinations.ProductImageScreenDestination
 import com.nucu.dynamiclistcompose.presentation.components.common.BannerImageView
+import com.nucu.dynamiclistcompose.presentation.components.prodcut.ProductImageModel
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseStyle
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipView
@@ -63,7 +64,7 @@ fun BannerComponentView(
             .testTag(BANNER_IMAGE_TEST_TAG)
             .padding(start = 16.dp, end = 16.dp)
             .clickable {
-                onClickAction.invoke(model.imageURL)
+                onClickAction.invoke(model.product.imageURL)
             }
     ) {
 
@@ -86,9 +87,9 @@ fun BannerComponentView(
                     key = RenderType.BANNER.value,
                     state = showCaseState
                 ),
-            imageURL = model.imageURL,
+            imageURL = model.product.imageURL,
             onClickAction = {
-                onClickAction(model.imageURL)
+                onClickAction(model.product.imageURL)
             },
             bannerInfo = model.bannerInfo
         )
@@ -101,7 +102,7 @@ fun PreviewCompactBannerComponentView() {
     DynamicListComposeTheme {
         BannerComponentView(
             modifier = Modifier,
-            model = BannerModel(""),
+            model = BannerModel(ProductImageModel()),
             componentIndex = 0,
             showCaseState = rememberShowCaseState()
         ) { }

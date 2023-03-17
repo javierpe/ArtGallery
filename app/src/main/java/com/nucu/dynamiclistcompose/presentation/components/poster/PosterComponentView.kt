@@ -128,8 +128,8 @@ fun PosterComponentView(
                                 x = (100.dp * pageOffset).roundToPx(),
                                 y = 0
                             )
-                        }.clickable { onClick(list[page].url) },
-                    imageURL = list[page].url,
+                        }.clickable { onClick(list[page].productImage.imageURL) },
+                    imageURL = list[page].productImage.imageURL,
                     contentScale = ContentScale.Fit
                 )
             }

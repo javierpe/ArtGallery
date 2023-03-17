@@ -11,13 +11,13 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.destinations.ProductImageScreenDestination
-import com.nucu.dynamiclistcompose.presentation.components.card.CardImage
 import com.nucu.dynamiclistcompose.presentation.components.common.ImageComponentView
+import com.nucu.dynamiclistcompose.presentation.components.prodcut.ProductImageModel
 import com.nucu.dynamiclistcompose.presentation.ui.components.VerticalGrid
 
 @Composable
 fun CardsGridComponentViewScreen(
-    images: List<CardImage>,
+    images: List<ProductImageModel>,
     navigationController: NavigationController
 ) {
     CardsGridComponentView(
@@ -31,7 +31,7 @@ fun CardsGridComponentViewScreen(
 
 @Composable
 fun CardsGridComponentView(
-    data: List<CardImage>,
+    data: List<ProductImageModel>,
     onClick: (String) -> Unit
 ) {
 

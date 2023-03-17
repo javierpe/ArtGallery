@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.nucu.dynamiclistcompose.presentation.components.card.CardImage
+import com.nucu.dynamiclistcompose.presentation.components.prodcut.ProductImageModel
 import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
 
 private const val MAX_ELEMENTS = 3
@@ -30,7 +30,7 @@ private const val MAX_ELEMENTS = 3
 fun CardItemVIew(
     modifier: Modifier = Modifier,
     title: String,
-    images: List<CardImage>,
+    images: List<ProductImageModel>,
     onClick: () -> Unit
 ) {
     val pictures = remember {
