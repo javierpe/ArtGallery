@@ -57,7 +57,7 @@ fun PosterComponentView(
 
     val height = if (isExpandedScreen) {
         200.dp
-    } else 450.dp
+    } else 350.dp
 
     Column(
         modifier = modifier,
@@ -66,7 +66,7 @@ fun PosterComponentView(
 
         TitleDecoratedView(
             modifier = Modifier
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = 16.dp, vertical = 25.dp),
             text = title
         )
 

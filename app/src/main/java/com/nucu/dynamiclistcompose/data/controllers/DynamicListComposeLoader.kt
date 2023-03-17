@@ -1,9 +1,9 @@
 package com.nucu.dynamiclistcompose.data.controllers
 
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import com.nucu.dynamiclistcompose.data.actions.ContextViewAction
+import com.nucu.dynamiclistcompose.data.models.DynamicListObject
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
 
 abstract class DynamicListComposeLoader {
@@ -14,7 +14,7 @@ abstract class DynamicListComposeLoader {
         bodyAdapterController: T,
         headerAdapterController: T,
         action: ContextViewAction?,
-        widthSizeClass: WindowWidthSizeClass,
+        dynamicListObject: DynamicListObject,
         showCaseState: ShowCaseState,
         bodyListState: LazyListState
     )

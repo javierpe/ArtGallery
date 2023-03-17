@@ -7,16 +7,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.javi.render.processor.data.enums.RenderType
+import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.destinations.BannerScreenDestination
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
 import com.nucu.dynamiclistcompose.presentation.components.common.BannerImageView
@@ -24,7 +25,6 @@ import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseS
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseStyle
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.asShowCaseTarget
-import com.nucu.dynamiclistcompose.presentation.viewModels.BannerViewModel
 
 const val BANNER_CAROUSEL_IMAGE_TEST_TAG = "banner-carousel-image"
 const val BANNER_CAROUSEL_IMAGE_SCREEN_TEST_TAG = "banner-carousel-image-screen"
@@ -33,11 +33,11 @@ const val BANNER_CAROUSEL_IMAGE_SCREEN_TEST_TAG = "banner-carousel-image-screen"
 @Composable
 fun BannerCarouselComponentViewScreen(
     modifier: Modifier,
-    isExpandedScreen: Boolean = false,
     images: List<BannerModel>,
     componentIndex: Int,
     showCaseState: ShowCaseState,
-    viewModel: BannerViewModel = hiltViewModel()
+    widthSizeClass: WindowWidthSizeClass,
+    navigationController: NavigationController
 ) {
     BannerCarouselComponentView(
         modifier = modifier
@@ -45,9 +45,9 @@ fun BannerCarouselComponentViewScreen(
         images = images,
         componentIndex = componentIndex,
         showCaseState = showCaseState,
-        isExpandedScreen = isExpandedScreen
+        isExpandedScreen = widthSizeClass == WindowWidthSizeClass.Expanded,
     ) {
-        viewModel.loadBanner(
+        navigationController.navigateTo(
             BannerScreenDestination(it)
         )
     }

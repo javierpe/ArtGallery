@@ -1,0 +1,53 @@
+{
+  "header": [ ],
+  "body": [
+    {
+      "render": "message",
+      "index": 0,
+      "resource": {
+        "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      }
+    },
+    {
+      "render": "message",
+      "index": 1,
+      "resource": {
+        "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      }
+    },
+    {
+      "render": "cards_grid",
+      "index": 2,
+      "resource": {
+        "id": 0,
+        "title": "Pets",
+        "images": [
+          {
+            "image_url": "https://i.pinimg.com/474x/17/85/01/1785013f487a2a7ef3ef6ff763b07b8f.jpg"
+          },
+          {
+            "image_url": "https://i.pinimg.com/474x/ff/72/06/ff720634a11754b0b84405e6554209d0.jpg"
+          },
+          {
+            "image_url": "https://i.pinimg.com/474x/20/62/49/206249889366c2f716b43275a8b2b3b4.jpg"
+          },
+          {
+            "image_url": "https://i.pinimg.com/474x/d1/57/04/d15704076c65c00af411ea2233e08bc1.jpg"
+          },
+          {
+            "image_url": "https://i.pinimg.com/474x/e0/60/c3/e060c37e3c232ec7a0c849013e540adb.jpg"
+          },
+          {
+            "image_url": "https://i.pinimg.com/474x/dc/67/d3/dc67d30839f70ceb31b794f744dd04ef.jpg"
+          },
+          {
+            "image_url": "https://i.pinimg.com/474x/da/56/5a/da565a1ba44c547787d32f7ef643fbb0.jpg"
+          },
+          {
+            "image_url": "https://i.pinimg.com/474x/d6/9f/8b/d69f8b207b2a999ef6f843cc62ebbc49.jpg"
+          }
+        ]
+      }
+    }
+  ]
+}

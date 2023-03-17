@@ -11,7 +11,6 @@ import com.nucu.dynamiclistcompose.presentation.components.card.CardsComponentVi
 import com.nucu.dynamiclistcompose.presentation.components.card.CardsModel
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
-import com.nucu.dynamiclistcompose.presentation.viewModels.CardsViewModel
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Before

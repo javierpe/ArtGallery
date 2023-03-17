@@ -11,11 +11,11 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.javi.render.processor.data.enums.RenderType
+import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.destinations.CardScreenDestination
 import com.nucu.dynamiclistcompose.presentation.components.common.CardItemVIew
 import com.nucu.dynamiclistcompose.presentation.components.common.TitleDecoratedView
@@ -24,7 +24,7 @@ import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseS
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.asShowCaseTarget
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
-import com.nucu.dynamiclistcompose.presentation.viewModels.CardsViewModel
+import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
 
 const val CARD_COMPONENT_SCREEN_TAG = "card_component_screen"
 const val CARD_COMPONENT_TAG = "card_component"
@@ -35,16 +35,19 @@ fun CardsComponentViewScreen(
     data: CardsModel,
     componentIndex: Int,
     showCaseState: ShowCaseState,
-    viewModel: CardsViewModel = hiltViewModel(),
+    navigationController: NavigationController
 ) {
     CardsComponentView(
         modifier = modifier.testTag(CARD_COMPONENT_SCREEN_TAG),
         data = data,
         componentIndex = componentIndex,
         showCaseState = showCaseState
-    ) { title, images ->
-        viewModel.navigateToCardsDetail(
-            CardScreenDestination(title, images.toTypedArray())
+    ) { id, title ->
+        navigationController.navigateTo(
+            CardScreenDestination(
+                id = id,
+                title = title
+            )
         )
     }
 }
@@ -55,7 +58,7 @@ fun CardsComponentView(
     data: CardsModel,
     componentIndex: Int,
     showCaseState: ShowCaseState,
-    onNavigateToDetail:(String, List<String>) -> Unit
+    onNavigateToDetail:(Int, String) -> Unit
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(10.dp),
@@ -97,8 +100,10 @@ fun CardsComponentView(
                     title = item.title,
                     images = item.images
                 ) {
-                    onNavigateToDetail.invoke(item.title,
-                        item.images.map { it.imageURL })
+                    onNavigateToDetail.invoke(
+                        item.id,
+                        item.title
+                    )
                 }
             }
         }
@@ -108,15 +113,17 @@ fun CardsComponentView(
 @Composable
 @Preview(showBackground = true)
 fun PreviewCardsComponentView() {
-    CardsComponentView(
-        data = CardsModel(
-            cardElements = listOf(
-                CardElement("Hola", images = emptyList())
+    DynamicListComposeTheme {
+        CardsComponentView(
+            data = CardsModel(
+                cardElements = listOf(
+                    CardElement(1, "Hola", images = emptyList())
+                ),
+                title = "Title",
             ),
-            title = "Title",
-        ),
-        componentIndex = 0,
-        showCaseState = rememberShowCaseState(),
-        modifier = Modifier
-    ) { _, _ -> }
+            componentIndex = 0,
+            showCaseState = rememberShowCaseState(),
+            modifier = Modifier
+        ) { _, _ -> }
+    }
 }

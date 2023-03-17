@@ -99,6 +99,7 @@
         "title": "Nature",
         "items": [
           {
+            "id": 0,
             "title": "Pets",
             "images": [
               {
@@ -128,6 +129,7 @@
             ]
           },
           {
+            "id": 1,
             "title": "Cactus",
             "images": [
               {
@@ -163,6 +165,7 @@
             ]
           },
           {
+            "id": 2,
             "title": "Fruits",
             "images": [
               {

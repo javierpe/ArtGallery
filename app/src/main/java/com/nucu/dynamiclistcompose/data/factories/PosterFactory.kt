@@ -40,7 +40,7 @@ class PosterFactory @Inject constructor(): DynamicListFactory {
 
         PosterComponentScreenView(
             model = model.value,
-            isExpandedScreen = componentInfo.windowWidthSizeClass == WindowWidthSizeClass.Expanded
+            isExpandedScreen = componentInfo.dynamicListObject.widthSizeClass == WindowWidthSizeClass.Expanded
         )
     }
 

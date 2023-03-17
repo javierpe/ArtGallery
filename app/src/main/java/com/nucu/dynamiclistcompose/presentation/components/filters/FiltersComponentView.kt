@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.common.StaticGridList
 import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DURATION
+import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
 import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
 import kotlinx.coroutines.launch
 
@@ -216,9 +217,11 @@ fun FilterItemComponent(
 @Composable
 @Preview
 fun PreviewFiltersComponentViewScreen() {
-    FiltersComponentViewScreen(
-        modifier = Modifier,
-        data = emptyList(),
-        windowWidthSizeClass = WindowWidthSizeClass.Compact
-    ) { }
+    DynamicListComposeTheme {
+        FiltersComponentViewScreen(
+            modifier = Modifier,
+            data = emptyList(),
+            windowWidthSizeClass = WindowWidthSizeClass.Compact
+        ) { }
+    }
 }

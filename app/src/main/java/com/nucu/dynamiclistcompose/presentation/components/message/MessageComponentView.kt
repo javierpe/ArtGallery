@@ -24,6 +24,7 @@ import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseS
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.asShowCaseTarget
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
+import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
 
 @Composable
 fun MessageComponentView(
@@ -67,10 +68,12 @@ fun MessageComponentView(
 @Composable
 @Preview
 fun PreviewTobaccoComponentView() {
-    MessageComponentView(
-        modifier = Modifier,
-        message = "Hola a todos",
-        0,
-        rememberShowCaseState()
-    )
+    DynamicListComposeTheme {
+        MessageComponentView(
+            modifier = Modifier,
+            message = "Hola a todos",
+            0,
+            rememberShowCaseState()
+        )
+    }
 }

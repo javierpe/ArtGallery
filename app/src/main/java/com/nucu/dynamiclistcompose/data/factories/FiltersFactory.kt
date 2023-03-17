@@ -50,7 +50,7 @@ class FiltersFactory @Inject constructor(): DynamicListFactory {
         FiltersComponentViewScreen(
             modifier = modifier.testTag("filters_component"),
             data = model.value,
-            windowWidthSizeClass = componentInfo.windowWidthSizeClass
+            windowWidthSizeClass = componentInfo.dynamicListObject.widthSizeClass
         ) {
             componentInfo.scrollAction?.invoke(
                 ScrollAction.ScrollRender(it)

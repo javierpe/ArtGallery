@@ -1,7 +1,6 @@
 package com.nucu.dynamiclistcompose.presentation.viewModels
 
 import androidx.lifecycle.ViewModel
-import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.data.actions.ContextViewAction
 import com.nucu.dynamiclistcompose.data.controllers.DefaultDynamicListController
 import com.nucu.dynamiclistcompose.data.models.ContextType
@@ -12,9 +11,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 abstract class ContextViewModel: ViewModel() {
-
-    @Inject
-    lateinit var navigationController: NavigationController
 
     @Inject
     lateinit var headerAdapterController: DefaultDynamicListController
@@ -33,8 +29,4 @@ abstract class ContextViewModel: ViewModel() {
      * The idea is only change properties and not all the model
       */
     abstract val requestModel: DynamicListRequestModel
-
-    fun onBackPressed() {
-        navigationController.popBackStack()
-    }
 }

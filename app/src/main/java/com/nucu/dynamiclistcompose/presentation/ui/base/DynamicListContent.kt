@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.snapshotFlow
@@ -19,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.data.actions.ScrollAction
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.DynamicListElement
+import com.nucu.dynamiclistcompose.data.models.DynamicListObject
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.presentation.ui.utils.rememberMetricsStateHolder
 
@@ -26,8 +26,8 @@ import com.nucu.dynamiclistcompose.presentation.ui.utils.rememberMetricsStateHol
 @Composable
 fun DynamicListScreen(
     content: List<DynamicListElement>,
+    dynamicListObject: DynamicListObject,
     listState: LazyListState,
-    widthSizeClass: WindowWidthSizeClass,
     showCaseState: ShowCaseState,
     withVerticalPadding: Boolean = true,
     onAction: ((ScrollAction) -> Unit)? = null
@@ -68,7 +68,7 @@ fun DynamicListScreen(
                 component = it.componentItemModel,
                 componentInfo = ComponentInfo(
                     scrollAction = onAction,
-                    windowWidthSizeClass = widthSizeClass,
+                    dynamicListObject = dynamicListObject,
                     showCaseState = showCaseState
                 )
             )

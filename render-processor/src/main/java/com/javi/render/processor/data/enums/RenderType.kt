@@ -9,5 +9,6 @@ enum class RenderType constructor(val value: String) {
     BANNER_CAROUSEL("banner_carousel"),
     FACES("faces"),
     PROFILE("profile"),
-    POSTER("poster")
+    POSTER("poster"),
+    CARDS_GRID("cards_grid")
 }

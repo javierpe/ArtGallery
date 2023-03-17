@@ -1,19 +1,15 @@
 package com.nucu.dynamiclistcompose.presentation.viewModels
 
-import androidx.lifecycle.ViewModel
-import com.javier.api.NavigationController
-import com.ramcosta.composedestinations.spec.Direction
+import com.nucu.dynamiclistcompose.data.models.ContextType
+import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class CardsViewModel @Inject constructor(
-    private val navigationController: NavigationController
-): ViewModel() {
+class CardsViewModel @Inject constructor(): ContextViewModel() {
 
-    fun navigateToCardsDetail(
-        direction: Direction
-    ) {
-        navigationController.navigateTo(direction)
-    }
+    override val context: ContextType = ContextType.CARDS
+    override val requestModel: DynamicListRequestModel = DynamicListRequestModel(
+        contextType = ContextType.CARDS
+    )
 }

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
@@ -18,6 +17,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.javi.render.processor.annotations.factory.AdapterFactory
 import com.javi.render.processor.data.enums.RenderType
+import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
@@ -27,7 +27,7 @@ import javax.inject.Inject
 
 @AdapterFactory
 class BannerCarouselFactory @Inject constructor(
-
+    private val navigationController: NavigationController
 ): DynamicListFactory {
 
     override val renders: List<RenderType>
@@ -54,7 +54,8 @@ class BannerCarouselFactory @Inject constructor(
             images = model.value,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState,
-            isExpandedScreen = componentInfo.windowWidthSizeClass == WindowWidthSizeClass.Expanded
+            widthSizeClass = componentInfo.dynamicListObject.widthSizeClass,
+            navigationController = navigationController
         )
     }
 

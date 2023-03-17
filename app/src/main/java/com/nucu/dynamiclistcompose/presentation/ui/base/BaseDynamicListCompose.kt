@@ -7,8 +7,10 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.nucu.dynamiclistcompose.data.models.DynamicListObject
 import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DynamicListHeaderComponentView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCase
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
@@ -18,12 +20,14 @@ import com.nucu.dynamiclistcompose.presentation.viewModels.ContextViewModel
 fun ContextView(
     title: String,
     widthSizeClass: WindowWidthSizeClass,
+    state: HashMap<String, String>? = remember { hashMapOf() },
     viewModel: ContextViewModel
 ) {
 
     /**
      * 1. Change context should be a compose state.
      * 2. Reload should be a compose state.
+     * 3. Pagination
      */
 
     val action by viewModel.contextViewAction.collectAsStateWithLifecycle()
@@ -48,11 +52,13 @@ fun ContextView(
             Box(
                 modifier = Modifier.padding(padding)
             ) {
-                DynamicListCompose(viewModel.requestModel).DynamicListScreen(
+                DynamicListCompose(viewModel.requestModel.copy(state = state)).DynamicListScreen(
                     headerAdapterController = viewModel.headerAdapterController,
                     bodyAdapterController = viewModel.bodyAdapterController,
+                    dynamicListObject = DynamicListObject(
+                        widthSizeClass = widthSizeClass
+                    ),
                     action = action,
-                    widthSizeClass = widthSizeClass,
                     showCaseState = showCaseState,
                     bodyListState = bodyLazyListState
                 )

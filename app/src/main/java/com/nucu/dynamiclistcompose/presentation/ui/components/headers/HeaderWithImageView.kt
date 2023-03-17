@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -44,7 +43,6 @@ fun HeaderWithImageView(
     title: String,
     icon: ImageVector,
     bodyLazyListState: LazyListState? = null,
-    bodyLazyGridState: LazyGridState? = null,
     onIconClick: () -> Unit
 ) {
 
@@ -66,17 +64,17 @@ fun HeaderWithImageView(
 
     val firstVisibleItem by remember {
         derivedStateOf {
-            bodyLazyListState?.firstVisibleItemIndex ?: bodyLazyGridState?.firstVisibleItemIndex ?: 0
+            bodyLazyListState?.firstVisibleItemIndex ?: 0
         }
     }
 
     val progress by animateFloatAsState(
-        targetValue = if (firstVisibleItem in 0..1) 0f else 1f,
+        targetValue = if (firstVisibleItem in -1..0) 0f else 1f,
         tween(DURATION)
     )
 
     val motionHeight by animateDpAsState(
-        targetValue = if (firstVisibleItem in 0..1) MAX_HEIGHT.dp else MIN_HEIGHT.dp,
+        targetValue = if (firstVisibleItem in -1..0) MAX_HEIGHT.dp else MIN_HEIGHT.dp,
         tween(DURATION)
     )
 

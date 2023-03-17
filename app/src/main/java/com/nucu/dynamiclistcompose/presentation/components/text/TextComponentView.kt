@@ -22,6 +22,7 @@ import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseS
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.asShowCaseTarget
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
+import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
 import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
 
 @Composable
@@ -69,10 +70,12 @@ fun TextComponentView(
 @Composable
 @Preview(showBackground = true)
 fun PreviewHeaderComponentView() {
-    TextComponentView(
-        modifier = Modifier,
-        0,
-        rememberShowCaseState(),
-        "Hello"
-    )
+    DynamicListComposeTheme {
+        TextComponentView(
+            modifier = Modifier,
+            0,
+            rememberShowCaseState(),
+            "Hello"
+        )
+    }
 }

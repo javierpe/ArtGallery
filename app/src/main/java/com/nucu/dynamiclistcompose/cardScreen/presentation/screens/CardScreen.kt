@@ -2,22 +2,29 @@ package com.nucu.dynamiclistcompose.cardScreen.presentation.screens
 
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import com.javier.api.models.Route
-import com.nucu.dynamiclistcompose.cardScreen.presentation.contents.CardContent
+import androidx.compose.runtime.remember
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.nucu.dynamiclistcompose.presentation.ui.base.ContextView
+import com.nucu.dynamiclistcompose.presentation.viewModels.CardsViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 
-@Destination(
-    route =  "card_screen/{${Route.CardScreen.CARD_TEXT}}/{${Route.CardScreen.IMAGE_URL}}"
-)
+@Destination
 @Composable
 fun CardScreen(
+    id: Int,
     title: String,
-    images: Array<String>,
-    widthSizeClass: WindowWidthSizeClass
+    widthSizeClass: WindowWidthSizeClass,
+    viewModel: CardsViewModel = hiltViewModel()
 ) {
-    CardContent(
+
+    val state = remember {
+        hashMapOf("id" to id.toString())
+    }
+
+    ContextView(
         title = title,
-        images = images.toList(),
-        widthSizeClass = widthSizeClass
+        widthSizeClass = widthSizeClass,
+        viewModel = viewModel,
+        state = state
     )
 }

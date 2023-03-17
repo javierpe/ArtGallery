@@ -2,8 +2,8 @@ package com.nucu.dynamiclistcompose.data.factories
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -19,51 +19,58 @@ import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
-import com.nucu.dynamiclistcompose.presentation.components.banner.BannerComponentViewScreen
-import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
+import com.nucu.dynamiclistcompose.presentation.components.cardsGrid.CardsGridComponentViewScreen
+import com.nucu.dynamiclistcompose.presentation.components.cardsGrid.CardsGridModel
+import com.nucu.dynamiclistcompose.presentation.ui.components.VerticalGrid
 import javax.inject.Inject
 
 @AdapterFactory
-class BannerFactory @Inject constructor(
+class CardsGridFactory @Inject constructor(
     private val navigationController: NavigationController
 ): DynamicListFactory {
 
     override val renders: List<RenderType>
         get() = listOf(
-            RenderType.BANNER
+            RenderType.CARDS_GRID
         )
 
-    override val hasShowCaseConfigured = true
+    override val hasShowCaseConfigured: Boolean = false
 
     @Composable
     override fun CreateComponent(
         modifier: Modifier,
         component: ComponentItemModel,
-        componentInfo: ComponentInfo
+        componentInfo: ComponentInfo,
     ) {
         val model = remember {
             derivedStateOf {
-                component.resource as BannerModel
+                component.resource as CardsGridModel
             }
         }
-        BannerComponentViewScreen(
-            modifier = modifier.testTag("banner_component"),
-            model = model.value,
-            componentIndex = component.index,
-            showCaseState = componentInfo.showCaseState,
-            navigationController = navigationController
+
+        CardsGridComponentViewScreen(
+            images = model.value.images,
+            navigationController = navigationController,
         )
     }
 
+    @Suppress("UnusedPrivateMember", "MagicNumber")
     @Composable
     override fun CreateSkeleton() {
-        Box(
+
+        VerticalGrid(
             modifier = Modifier
-                .testTag("skeleton")
-                .clip(RoundedCornerShape(16.dp))
-                .fillMaxWidth()
-                .height(150.dp)
-                .background(MaterialTheme.colors.primary)
-        )
+                .testTag("card-container-skeleton")
+        ) {
+            for (x in 1..6) {
+                Box(
+                    modifier = Modifier
+                        .height(250.dp)
+                        .padding(16.dp)
+                        .clip(RoundedCornerShape(10.dp))
+                        .background(MaterialTheme.colors.primary)
+                )
+            }
+        }
     }
 }

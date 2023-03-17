@@ -13,11 +13,11 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.javi.render.processor.data.enums.RenderType
+import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.destinations.BannerScreenDestination
 import com.nucu.dynamiclistcompose.presentation.components.common.BannerImageView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
@@ -25,7 +25,7 @@ import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseS
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.asShowCaseTarget
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
-import com.nucu.dynamiclistcompose.presentation.viewModels.BannerViewModel
+import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
 
 const val BANNER_IMAGE_TEST_TAG = "banner-image"
 const val BANNER_IMAGE_SCREEN_TEST_TAG = "banner-image-screen"
@@ -36,7 +36,7 @@ fun BannerComponentViewScreen(
     model: BannerModel,
     componentIndex: Int,
     showCaseState: ShowCaseState,
-    viewModel: BannerViewModel = hiltViewModel()
+    navigationController: NavigationController
 ) {
     BannerComponentView(
         modifier = modifier.testTag(BANNER_IMAGE_SCREEN_TEST_TAG),
@@ -44,7 +44,7 @@ fun BannerComponentViewScreen(
         componentIndex = componentIndex,
         showCaseState = showCaseState
     ) {
-        viewModel.loadBanner(
+        navigationController.navigateTo(
             BannerScreenDestination(it)
         )
     }
@@ -98,10 +98,12 @@ fun BannerComponentView(
 @Composable
 @Preview(showBackground = true)
 fun PreviewCompactBannerComponentView() {
-    BannerComponentView(
-        modifier = Modifier,
-        model = BannerModel(""),
-        componentIndex = 0,
-        showCaseState = rememberShowCaseState()
-    ) { }
+    DynamicListComposeTheme {
+        BannerComponentView(
+            modifier = Modifier,
+            model = BannerModel(""),
+            componentIndex = 0,
+            showCaseState = rememberShowCaseState()
+        ) { }
+    }
 }

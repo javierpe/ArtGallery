@@ -11,6 +11,7 @@ data class CardsModel(
 )
 
 data class CardElement(
+    @Json(name = "id") val id: Int,
     @Json(name = "title") val title: String,
     @Json(name = "images") val images: List<CardImage>
 )

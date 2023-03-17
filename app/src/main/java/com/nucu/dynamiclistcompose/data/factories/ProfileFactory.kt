@@ -39,7 +39,7 @@ class ProfileFactory @Inject constructor(
 
         ProfileComponentScreenView(
             model = model.value,
-            isExpandedScreen = componentInfo.windowWidthSizeClass == WindowWidthSizeClass.Expanded
+            isExpandedScreen = componentInfo.dynamicListObject.widthSizeClass == WindowWidthSizeClass.Expanded
         )
     }
 

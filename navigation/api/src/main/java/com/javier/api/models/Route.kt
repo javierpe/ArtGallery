@@ -8,8 +8,5 @@ sealed class Route(val name: String) {
         const val IMAGE_URL = "bannerImageURL"
     }
 
-    object CardScreen: Route("card_screen") {
-        const val IMAGE_URL = "images"
-        const val CARD_TEXT = "title"
-    }
+    object CardScreen: Route("card_screen")
 }

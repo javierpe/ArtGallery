@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
 import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
 
 const val PROFILE_COMPONENT_SCREEN_TAG = "profile-component-screen-tag"
@@ -106,14 +107,16 @@ fun ProfileComponentView(
 @Composable
 @Preview
 fun PreviewProfileComponentView() {
-    ProfileComponentView(
-        modifier = Modifier.height(profileHeight),
-        model = ProfileModel(
-            name = "Picasso",
-            shortDescription = "Modern art",
-            lifeDate = "1881 - 1973",
-            color = "#DFB799",
-            country = "Málaga, Spain"
+    DynamicListComposeTheme {
+        ProfileComponentView(
+            modifier = Modifier.height(profileHeight),
+            model = ProfileModel(
+                name = "Picasso",
+                shortDescription = "Modern art",
+                lifeDate = "1881 - 1973",
+                color = "#DFB799",
+                country = "Málaga, Spain"
+            )
         )
-    )
+    }
 }

@@ -29,10 +29,10 @@ class NavigationControllerImpl @Inject constructor() : NavigationController {
     }
 
     override fun hasBackElement(): Boolean {
-        return !navHostController?.backQueue.isNullOrEmpty()
+        return !navHostController?.currentBackStack?.value.isNullOrEmpty()
     }
 
     override fun isHome(): Boolean {
-        return navHostController?.backQueue?.size == 2
+        return navHostController?.currentBackStack?.value?.size == 2
     }
 }

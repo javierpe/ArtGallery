@@ -1,0 +1,56 @@
+{
+  "header": [ ],
+  "body": [
+    {
+      "render": "banner",
+      "index": 0,
+      "resource": {
+        "url": "https://i.pinimg.com/474x/bf/69/9f/bf699f7500be95a3e8a0dea075b0ab3d.jpg",
+        "info": {
+          "title": "Juan",
+          "description": "Mexico"
+        }
+      }
+    },
+    {
+      "render": "cards_grid",
+      "index": 1,
+      "resource": {
+        "id": 1,
+        "title": "Cactus",
+        "images": [
+          {
+            "image_url": "https://i.pinimg.com/474x/44/29/ef/4429efee4e18c26ae7bb040014704163.jpg"
+          },
+          {
+            "image_url": "https://i.pinimg.com/474x/a1/49/18/a149189f7843be642b3aedcea0ae5d27.jpg"
+          },
+          {
+            "image_url": "https://i.pinimg.com/474x/5a/e1/40/5ae1404b52068eaea1e53adcfc5a0f1a.jpg"
+          },
+          {
+            "image_url": "https://i.pinimg.com/474x/d9/bd/33/d9bd3308836c3176734fa7543a46e673.jpg"
+          },
+          {
+            "image_url": "https://i.pinimg.com/474x/bf/69/9f/bf699f7500be95a3e8a0dea075b0ab3d.jpg"
+          },
+          {
+            "image_url": "https://i.pinimg.com/474x/f8/1f/c5/f81fc5afcc0a078022d57290d5df0856.jpg"
+          },
+          {
+            "image_url": "https://i.pinimg.com/474x/32/86/39/3286399cfd0db19a663046acc78d0508.jpg"
+          },
+          {
+            "image_url": "https://i.pinimg.com/474x/e4/a3/6b/e4a36b124384e25badf980701a071672.jpg"
+          },
+          {
+            "image_url": "https://i.pinimg.com/474x/82/61/4b/82614b5aed19ef4ec4fda777bde3e80a.jpg"
+          },
+          {
+            "image_url": "https://i.pinimg.com/474x/40/bb/20/40bb200e57f7804671128ea3dcf73ab3.jpg"
+          }
+        ]
+      }
+    }
+  ]
+}

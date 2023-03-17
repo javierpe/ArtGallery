@@ -20,6 +20,7 @@ import com.nucu.dynamiclistcompose.data.actions.ScrollAction
 import com.nucu.dynamiclistcompose.data.actions.TargetAction
 import com.nucu.dynamiclistcompose.data.controllers.DynamicListComposeController
 import com.nucu.dynamiclistcompose.data.controllers.DynamicListComposeLoader
+import com.nucu.dynamiclistcompose.data.models.DynamicListObject
 import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
 import com.nucu.dynamiclistcompose.presentation.ui.components.ErrorView
 import com.nucu.dynamiclistcompose.presentation.ui.components.LoaderView
@@ -41,7 +42,7 @@ class DynamicListCompose(
         bodyAdapterController: T,
         headerAdapterController: T,
         action: ContextViewAction?,
-        widthSizeClass: WindowWidthSizeClass,
+        dynamicListObject: DynamicListObject,
         showCaseState: ShowCaseState,
         bodyListState: LazyListState
     ) {
@@ -50,7 +51,7 @@ class DynamicListCompose(
 
         DynamicListContent(
             action = action,
-            widthSizeClass = widthSizeClass,
+            dynamicListObject = dynamicListObject,
             showCaseState = showCaseState,
             bodyListState = bodyListState
         )
@@ -58,7 +59,7 @@ class DynamicListCompose(
 
     @Composable
     private fun DynamicListContent(
-        widthSizeClass: WindowWidthSizeClass,
+        dynamicListObject: DynamicListObject,
         action: ContextViewAction?,
         showCaseState: ShowCaseState,
         bodyListState: LazyListState,
@@ -106,10 +107,10 @@ class DynamicListCompose(
                 }
 
                 DynamicListView(
-                    widthSizeClass = widthSizeClass,
+                    dynamicListObject = dynamicListObject,
                     contentHeader = {
                         headerComposeController?.ComposeHeader(
-                            widthSizeClass = widthSizeClass,
+                            dynamicListObject = dynamicListObject,
                             showCaseState = showCaseState
                         ) {
                             if (it.target == TargetAction.BODY) {
@@ -119,7 +120,7 @@ class DynamicListCompose(
                     },
                     contentBody = {
                         bodyComposeController?.ComposeBody(
-                            widthSizeClass = widthSizeClass,
+                            dynamicListObject = dynamicListObject,
                             sharedAction = actionBody.value,
                             showCaseState = showCaseState,
                             bodyListState = bodyListState
@@ -137,11 +138,11 @@ class DynamicListCompose(
 
 @Composable
 fun DynamicListView(
-    widthSizeClass: WindowWidthSizeClass,
+    dynamicListObject: DynamicListObject,
     contentHeader: @Composable () -> Unit,
     contentBody: @Composable () -> Unit
 ) {
-    when(widthSizeClass) {
+    when(dynamicListObject.widthSizeClass) {
         WindowWidthSizeClass.Compact -> {
             Column {
                 contentHeader()

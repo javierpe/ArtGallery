@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.javi.render.processor.annotations.factory.AdapterFactory
 import com.javi.render.processor.data.enums.RenderType
+import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
@@ -25,7 +26,9 @@ import com.nucu.dynamiclistcompose.presentation.components.card.CardsModel
 import javax.inject.Inject
 
 @AdapterFactory
-class CardsFactory @Inject constructor(): DynamicListFactory {
+class CardsFactory @Inject constructor(
+    private val navigationController: NavigationController
+): DynamicListFactory {
 
     override val renders: List<RenderType>
         get() = listOf(
@@ -49,7 +52,8 @@ class CardsFactory @Inject constructor(): DynamicListFactory {
             modifier = modifier.testTag("cards_component"),
             data = model.value,
             componentIndex = component.index,
-            showCaseState = componentInfo.showCaseState
+            showCaseState = componentInfo.showCaseState,
+            navigationController = navigationController
         )
     }
 

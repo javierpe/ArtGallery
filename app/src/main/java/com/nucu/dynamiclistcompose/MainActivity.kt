@@ -4,32 +4,26 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.metrics.performance.JankStats
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.javier.api.NavigationController
-import com.javier.api.models.Route
 import com.nucu.dynamiclistcompose.presentation.ui.base.ContextView
 import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
 import com.nucu.dynamiclistcompose.presentation.viewModels.MainViewModel
@@ -78,19 +72,14 @@ class MainActivity : ComponentActivity() {
                     val navHostEngine = rememberAnimatedNavHostEngine(
                         navHostContentAlignment = Alignment.TopCenter,
                         rootDefaultAnimations = RootNavGraphDefaultAnimations(
+                            /**
+                             * Animation by Route:
+                             * targetState.destination.route.orEmpty().contains(Route.CardScreen.name)
+                              */
                             enterTransition = {
-                                if (
-                                    targetState.destination.route.orEmpty().contains(Route.CardScreen.name)
-                                ) {
-                                    slideIntoContainer(
-                                        towards = AnimatedContentScope.SlideDirection.Left,
-                                        animationSpec = tween(ANIMATION_DURATION)
-                                    )
-                                } else {
-                                    fadeIn(
-                                        tween(ANIMATION_DURATION)
-                                    )
-                                }
+                                fadeIn(
+                                    tween(ANIMATION_DURATION)
+                                )
                             },
                             popEnterTransition = {
                                 fadeIn(

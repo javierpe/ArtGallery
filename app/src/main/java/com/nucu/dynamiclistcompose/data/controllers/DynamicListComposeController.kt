@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
@@ -20,6 +19,7 @@ import com.nucu.dynamiclistcompose.data.api.TooltipPreferencesApi
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.models.DynamicListElement
+import com.nucu.dynamiclistcompose.data.models.DynamicListObject
 import com.nucu.dynamiclistcompose.data.models.DynamicListShowCaseModel
 import com.nucu.dynamiclistcompose.presentation.ui.animations.BlinkAnimation
 import com.nucu.dynamiclistcompose.presentation.ui.base.DynamicListScreen
@@ -32,7 +32,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.*
+import java.util.Queue
+import java.util.LinkedList
 
 abstract class DynamicListComposeController {
 
@@ -129,7 +130,7 @@ abstract class DynamicListComposeController {
 
     @Composable
     fun ComposeHeader(
-        widthSizeClass: WindowWidthSizeClass,
+        dynamicListObject: DynamicListObject,
         showCaseState: ShowCaseState,
         onAction: (ScrollAction) -> Unit
     ) {
@@ -141,7 +142,7 @@ abstract class DynamicListComposeController {
         DynamicListScreen(
             content = elements,
             listState = listState,
-            widthSizeClass = widthSizeClass,
+            dynamicListObject = dynamicListObject,
             onAction = onAction,
             showCaseState = showCaseState,
             withVerticalPadding = false
@@ -150,7 +151,7 @@ abstract class DynamicListComposeController {
 
     @Composable
     fun ComposeBody(
-        widthSizeClass: WindowWidthSizeClass,
+        dynamicListObject: DynamicListObject,
         sharedAction: ScrollAction? = null,
         showCaseState: ShowCaseState,
         bodyListState: LazyListState,
@@ -186,7 +187,7 @@ abstract class DynamicListComposeController {
         DynamicListScreen(
             content = elements,
             listState = bodyListState,
-            widthSizeClass = widthSizeClass,
+            dynamicListObject = dynamicListObject,
             showCaseState = showCaseState,
             onAction = onAction,
         )
