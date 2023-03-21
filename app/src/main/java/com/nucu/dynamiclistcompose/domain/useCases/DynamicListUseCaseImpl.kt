@@ -1,13 +1,13 @@
 package com.nucu.dynamiclistcompose.domain.useCases
 
 import androidx.datastore.preferences.core.booleanPreferencesKey
-import com.javi.api.LocalBasketApi
 import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.data.api.DynamicListControllerApi
 import com.nucu.dynamiclistcompose.data.api.DynamicListUseCaseApi
 import com.nucu.dynamiclistcompose.data.api.TooltipPreferencesApi
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
+import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.models.DynamicListElement
 import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
 import com.nucu.dynamiclistcompose.data.models.DynamicListShowCaseModel
@@ -21,7 +21,6 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.withContext
@@ -46,6 +45,7 @@ class DynamicListUseCaseImpl @Inject constructor(
             .map {
                 // Save skeletons
                 if (it is DynamicListAction.SuccessAction) {
+
                     val showCaseSequence: Queue<DynamicListShowCaseModel> = LinkedList()
 
                     val bodyElements = it.container.body.map { component ->
@@ -107,13 +107,10 @@ class DynamicListUseCaseImpl @Inject constructor(
             }
             .onEach {
                 if (it is DynamicListAction.SuccessAction) {
-                    database.skeletonsDao().saveSkeletonsByContext(
-                        SkeletonsEntity(
-                            context = requestModel.contextType.source,
-                            renders = (it.container.header + it.container.body).map { component ->
-                                RenderType.valueOf(component.render.uppercase())
-                            }
-                        )
+                    saveSkeletons(
+                        it.container.body,
+                        it.container.header,
+                        requestModel.contextType.source
                     )
                 }
             }
@@ -135,6 +132,22 @@ class DynamicListUseCaseImpl @Inject constructor(
             .catch {
                 println(it)
                 emit(DynamicListAction.ErrorAction(it))
-            }.flowOn(ioDispatcher)
+            }
+            .flowOn(ioDispatcher)
+    }
+
+    private fun saveSkeletons(
+        body: List<ComponentItemModel>,
+        header: List<ComponentItemModel>,
+        source: String
+    ) {
+        database.skeletonsDao().saveSkeletonsByContext(
+            SkeletonsEntity(
+                context = source,
+                renders = (header + body).map { component ->
+                    RenderType.valueOf(component.render.uppercase())
+                }
+            )
+        )
     }
 }

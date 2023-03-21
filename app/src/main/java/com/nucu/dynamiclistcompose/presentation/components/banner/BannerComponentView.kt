@@ -67,10 +67,6 @@ fun BannerComponentView(
                 onClickAction.invoke(model.product)
             }
     ) {
-
-        if (model.product.id == 49) {
-            println()
-        }
         BannerImageView(
             modifier = modifier
                 .height(150.dp)

@@ -2,6 +2,7 @@ package com.javi.impl
 
 import com.javi.api.LocalBasketApi
 import com.javi.api.data.ProductImageModel
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import javax.inject.Inject
@@ -14,8 +15,15 @@ class LocalBasketImpl @Inject constructor(
 
     private val localBasketProducts: MutableList<ProductImageModel> = mutableListOf()
 
-    private val _basketProducts = MutableSharedFlow<List<ProductImageModel>>(1)
+    private val _basketProducts = MutableSharedFlow<List<ProductImageModel>>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_LATEST
+    )
     override val basketProducts: SharedFlow<List<ProductImageModel>> = _basketProducts
+
+    override suspend fun setUp() {
+        _basketProducts.emit(emptyList())
+    }
 
     override suspend fun addToCart(productImageModel: ProductImageModel) {
 
