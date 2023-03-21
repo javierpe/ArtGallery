@@ -22,7 +22,8 @@ import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
 
 @Composable
 fun ProductImageContent(
-    imageURL: String
+    imageURL: String,
+    onAdd: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -36,7 +37,7 @@ fun ProductImageContent(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
             ) {
-
+                onAdd()
             }
         }
     ) { paddingValues ->
@@ -61,6 +62,6 @@ fun PreviewBannerContent() {
     DynamicListComposeTheme {
         ProductImageContent(
             "Hello",
-        )
+        ) { }
     }
 }

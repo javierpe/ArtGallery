@@ -18,9 +18,9 @@ import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.javi.render.processor.data.enums.RenderType
 import com.javier.api.NavigationController
-import com.nucu.dynamiclistcompose.destinations.ProductImageScreenDestination
 import com.nucu.dynamiclistcompose.presentation.components.common.BannerImageView
-import com.nucu.dynamiclistcompose.presentation.components.prodcut.ProductImageModel
+import com.javi.api.data.ProductImageModel
+import com.nucu.dynamiclistcompose.destinations.ProductImageScreenDestination
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseStyle
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipView
@@ -57,17 +57,20 @@ fun BannerComponentView(
     model: BannerModel,
     componentIndex: Int,
     showCaseState: ShowCaseState,
-    onClickAction: (String) -> Unit
+    onClickAction: (ProductImageModel) -> Unit
 ) {
     Box(
         modifier = Modifier
             .testTag(BANNER_IMAGE_TEST_TAG)
             .padding(start = 16.dp, end = 16.dp)
             .clickable {
-                onClickAction.invoke(model.product.imageURL)
+                onClickAction.invoke(model.product)
             }
     ) {
 
+        if (model.product.id == 49) {
+            println()
+        }
         BannerImageView(
             modifier = modifier
                 .height(150.dp)
@@ -89,9 +92,10 @@ fun BannerComponentView(
                 ),
             imageURL = model.product.imageURL,
             onClickAction = {
-                onClickAction(model.product.imageURL)
+                onClickAction(model.product)
             },
-            bannerInfo = model.bannerInfo
+            bannerInfo = model.bannerInfo,
+            quantity = model.product.quantity
         )
     }
 }
@@ -102,7 +106,7 @@ fun PreviewCompactBannerComponentView() {
     DynamicListComposeTheme {
         BannerComponentView(
             modifier = Modifier,
-            model = BannerModel(ProductImageModel()),
+            model = BannerModel(ProductImageModel(0, 0, "")),
             componentIndex = 0,
             showCaseState = rememberShowCaseState()
         ) { }

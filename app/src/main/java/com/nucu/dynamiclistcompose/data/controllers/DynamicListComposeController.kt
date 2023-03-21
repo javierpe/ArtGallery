@@ -8,10 +8,10 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.actions.ScrollAction
@@ -29,9 +29,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.Queue
 import java.util.LinkedList
 
@@ -54,56 +52,19 @@ abstract class DynamicListComposeController {
 
     private var showCaseSequence: Queue<DynamicListShowCaseModel> = LinkedList()
 
-    var data: List<ComponentItemModel> = listOf()
+    var data: List<ComponentItemModel> = mutableStateListOf()
 
     var skeletons: List<RenderType> = listOf()
 
-    suspend fun dispatch(components: List<ComponentItemModel>) {
-        data = components
-        transform()
-    }
 
     open fun dispatchSkeletons(renderTypes: List<RenderType>) {
         skeletons = renderTypes
     }
 
-    private suspend fun transform() {
-        withContext(defaultDispatcher) {
-            _elements.value = getMapComponents().map { component ->
-                val adapter = delegates.firstOrNull { adapterFactory ->
-                    adapterFactory.renders.any { renderType ->
-                        renderType.value == component.render
-                    }
-                }
-
-                if (
-                    adapter?.hasShowCaseConfigured == true &&
-                    showCaseSequence.none { it.render == component.render }
-                ) {
-                    val alreadyShowed = tooltipPreferencesApi.getState(
-                        booleanPreferencesKey(component.render),
-                        false
-                    ).first()
-
-                    if (alreadyShowed.not()) {
-                        // Add to sequence
-                        showCaseSequence.add(
-                            DynamicListShowCaseModel(component.render, component.index)
-                        )
-                    }
-                }
-
-                DynamicListElement(
-                    factory = adapter,
-                    componentItemModel = component
-                )
-            }
-
-            showCaseSequence.add(
-                DynamicListShowCaseModel("", 0, true)
-            )
-        }
+    fun dispatchShowCaseSequence(sequence: Queue<DynamicListShowCaseModel>) {
+        showCaseSequence = sequence
     }
+
 
     @Composable
     fun DynamicListSkeletons() {
@@ -130,12 +91,11 @@ abstract class DynamicListComposeController {
 
     @Composable
     fun ComposeHeader(
+        elements: List<DynamicListElement>,
         dynamicListObject: DynamicListObject,
         showCaseState: ShowCaseState,
         onAction: (ScrollAction) -> Unit
     ) {
-
-        val elements by elements.collectAsStateWithLifecycle()
 
         val listState = rememberLazyListState()
 
@@ -149,8 +109,10 @@ abstract class DynamicListComposeController {
         )
     }
 
+    @Suppress("LongParameterList")
     @Composable
     fun ComposeBody(
+        elements: List<DynamicListElement>,
         dynamicListObject: DynamicListObject,
         sharedAction: ScrollAction? = null,
         showCaseState: ShowCaseState,
@@ -159,8 +121,6 @@ abstract class DynamicListComposeController {
     ) {
 
         val showOnNextShowCase by showCaseState.currentIndex.collectAsStateWithLifecycle()
-
-        val elements by elements.collectAsStateWithLifecycle()
 
         val coroutineScope = rememberCoroutineScope()
 

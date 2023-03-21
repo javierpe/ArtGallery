@@ -28,6 +28,7 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.google.accompanist.pager.rememberPagerState
+import com.javi.api.data.ProductImageModel
 import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.destinations.ProductImageScreenDestination
 import com.nucu.dynamiclistcompose.presentation.components.common.ImageComponentView
@@ -60,7 +61,7 @@ fun PosterComponentView(
     title: String,
     list: List<PosterModelItem>,
     isExpandedScreen: Boolean = false,
-    onClick: (String) -> Unit
+    onClick: (ProductImageModel) -> Unit
 ) {
     val pagerState = rememberPagerState()
 
@@ -128,7 +129,7 @@ fun PosterComponentView(
                                 x = (100.dp * pageOffset).roundToPx(),
                                 y = 0
                             )
-                        }.clickable { onClick(list[page].productImage.imageURL) },
+                        }.clickable { onClick(list[page].productImage) },
                     imageURL = list[page].productImage.imageURL,
                     contentScale = ContentScale.Fit
                 )

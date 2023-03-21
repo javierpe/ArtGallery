@@ -1,27 +1,26 @@
 package com.nucu.dynamiclistcompose.bannerScreen.presentation.screens
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import com.javier.api.models.Route
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.javi.api.data.ProductImageModel
 import com.nucu.dynamiclistcompose.bannerScreen.presentation.contents.ProductImageContent
+import com.nucu.dynamiclistcompose.presentation.viewModels.ProductImageScreenViewModel
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Destination(
-    route = "banner_screen/{${Route.BannerScreen.IMAGE_URL}}"
+    navArgsDelegate = ProductImageModel::class
 )
 @Composable
 fun ProductImageScreen(
-    bannerImageURL: String,
+    navigator: DestinationsNavigator,
+    productImageModel: ProductImageModel,
+    viewModel: ProductImageScreenViewModel = hiltViewModel()
 ) {
     ProductImageContent(
-        imageURL = bannerImageURL,
-    )
-}
-
-@Composable
-@Preview
-fun PreviewProductImageScreen() {
-    ProductImageScreen(
-        "Hello"
-    )
+        imageURL = productImageModel.imageURL,
+    ) {
+        viewModel.addToCart(productImageModel)
+        navigator.popBackStack()
+    }
 }

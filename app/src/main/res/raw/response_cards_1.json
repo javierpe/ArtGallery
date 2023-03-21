@@ -5,7 +5,11 @@
       "render": "banner",
       "index": 0,
       "resource": {
-        "url": "https://i.pinimg.com/474x/bf/69/9f/bf699f7500be95a3e8a0dea075b0ab3d.jpg",
+        "product": {
+          "id": 105,
+          "quantity": 0,
+          "image_url": "https://i.pinimg.com/474x/bf/69/9f/bf699f7500be95a3e8a0dea075b0ab3d.jpg"
+        },
         "info": {
           "title": "Juan",
           "description": "Mexico"

@@ -1,5 +1,6 @@
 package com.nucu.dynamiclistcompose.domain.impl
 
+import com.javi.api.LocalBasketApi
 import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.data.api.DynamicListControllerApi
 import com.nucu.dynamiclistcompose.data.api.DynamicListMockResponseApi
@@ -16,7 +17,8 @@ private const val DEFAULT_DELAY: Long = 3000
 
 class DynamicListControllerImpl @Inject constructor(
     private val dynamicListRenderProcessorApi: DynamicListRenderProcessorApi,
-    private val dynamicListMockResponseApi: DynamicListMockResponseApi
+    private val dynamicListMockResponseApi: DynamicListMockResponseApi,
+    private val basketApi: LocalBasketApi,
 ) : DynamicListControllerApi {
 
     override suspend fun get(
@@ -59,8 +61,8 @@ class DynamicListControllerImpl @Inject constructor(
 
         // Response...
         val container = DynamicListContainer(
-            headers = header,
-            bodies = body
+            header = header,
+            body = body
         )
 
         emit(DynamicListAction.SuccessAction(container))

@@ -95,6 +95,12 @@ android {
 
 dependencies {
 
+    // Basket
+    implementation(project(":basket:api"))
+    implementation(project(":basket:impl"))
+    implementation(project(":basket:wiring"))
+
+
     // Navigation
     implementation(project(":navigation:api"))
     implementation(project(":navigation:impl"))

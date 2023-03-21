@@ -27,8 +27,8 @@ class DynamicListViewModel @Inject constructor(
         job?.cancel()
         job = viewModelScope.launch {
             useCase.get(0, requestModel).collect {
-                 _dynamicListAction.value = it
-             }
+                _dynamicListAction.value = it
+            }
         }
     }
 }

@@ -255,7 +255,7 @@
       "render": "banner",
       "index": 5,
       "resource": {
-        "image": {
+        "product": {
           "id": 49,
           "quantity": 0,
           "image_url": "https://i.pinimg.com/564x/02/45/db/0245db766623a9bb8933f2a446b6043a.jpg"
@@ -279,7 +279,7 @@
       "resource": {
         "banners": [
           {
-            "image": {
+            "product": {
               "id": 50,
               "quantity": 0,
               "image_url": "https://i.pinimg.com/564x/0b/fd/5e/0bfd5e418c3347ad333de3aafeb8b440.jpg"
@@ -290,7 +290,7 @@
             }
           },
           {
-            "image": {
+            "product": {
               "id": 51,
               "quantity": 0,
               "image_url": "https://i.pinimg.com/736x/6a/7d/0a/6a7d0aa73190902397a25b541b14831e.jpg"
@@ -301,7 +301,7 @@
             }
           },
           {
-            "image": {
+            "product": {
               "id": 52,
               "quantity": 0,
               "image_url": "https://i.pinimg.com/564x/41/e5/ab/41e5ab5144a057e3bc13eec5aee7d68e.jpg"
@@ -312,7 +312,7 @@
             }
           },
           {
-            "image": {
+            "product": {
               "id": 53,
               "quantity": 0,
               "image_url": "https://i.pinimg.com/564x/54/56/c6/5456c6aaf24216ca1d1da17c4a3b9ffd.jpg"
@@ -350,7 +350,7 @@
       "render": "banner",
       "index": 11,
       "resource": {
-        "image": {
+        "product": {
           "id": 54,
           "quantity": 0,
           "image_url": "https://i.pinimg.com/564x/b5/4c/9d/b54c9dd2f96cbc540c805e14057c58bc.jpg"
@@ -374,7 +374,7 @@
       "resource": {
         "banners": [
           {
-            "image": {
+            "product": {
               "id": 55,
               "quantity": 0,
               "image_url": "https://i.pinimg.com/564x/06/6e/a1/066ea1a756825ad682fc700242cd9eaf.jpg"
@@ -385,7 +385,7 @@
             }
           },
           {
-            "image": {
+            "product": {
               "id": 100,
               "quantity": 0,
               "image_url": "https://i.pinimg.com/474x/e3/3f/08/e33f082577a1761bca0dc3fa10743b27.jpg"
@@ -396,7 +396,7 @@
             }
           },
           {
-            "image": {
+            "product": {
               "id": 56,
               "quantity": 0,
               "image_url": "https://i.pinimg.com/564x/82/d8/c8/82d8c8e1ee15d730b6113442e948f0ea.jpg"
@@ -407,7 +407,7 @@
             }
           },
           {
-            "image": {
+            "product": {
               "id": 57,
               "quantity": 0,
               "image_url": "https://i.pinimg.com/564x/61/e4/72/61e4729d2e98e19c74009768f9dfd68f.jpg"
@@ -418,7 +418,7 @@
             }
           },
           {
-            "image": {
+            "product": {
               "id": 58,
               "quantity": 0,
               "image_url": "https://i.pinimg.com/564x/28/b3/7a/28b37aebdd6240f3587d303a35077dfa.jpg"
@@ -429,7 +429,7 @@
             }
           },
           {
-            "image": {
+            "product": {
               "id": 59,
               "quantity": 0,
               "image_url": "https://i.pinimg.com/564x/ca/b5/7e/cab57ed4da2ff1643a43aaec62a5ea1c.jpg"
@@ -440,7 +440,7 @@
             }
           },
           {
-            "image": {
+            "product": {
               "id": 60,
               "quantity": 0,
               "image_url": "https://i.pinimg.com/564x/4a/22/a0/4a22a002e14ca84772dd925804ebf1c5.jpg"

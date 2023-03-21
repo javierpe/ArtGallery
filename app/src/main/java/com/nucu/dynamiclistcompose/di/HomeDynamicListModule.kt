@@ -18,7 +18,7 @@ object HomeDynamicListModule {
     fun provideDefaultAdapterController(
         delegates: MutableSet<@JvmSuppressWildcards DynamicListFactory>,
         @DefaultDispatcher defaultDispatcher: CoroutineDispatcher,
-        tooltipPreferencesApi: TooltipPreferencesApi
+        tooltipPreferencesApi: TooltipPreferencesApi,
     ): DefaultDynamicListController {
         return DefaultDynamicListController(
             delegates,

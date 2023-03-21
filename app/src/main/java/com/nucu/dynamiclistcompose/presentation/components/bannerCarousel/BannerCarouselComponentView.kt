@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.javi.api.data.ProductImageModel
 import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
@@ -61,7 +62,7 @@ fun BannerCarouselComponentView(
     images: List<BannerModel>,
     componentIndex: Int,
     showCaseState: ShowCaseState,
-    onClickAction: (String) -> Unit,
+    onClickAction: (ProductImageModel) -> Unit,
 ) {
 
     val height = if (isExpandedScreen) {
@@ -111,9 +112,10 @@ fun BannerCarouselComponentView(
                     .width(width),
                 imageURL = item.product.imageURL,
                 onClickAction = {
-                    onClickAction(item.product.imageURL)
+                    onClickAction(item.product)
                 },
-                bannerInfo = item.bannerInfo
+                bannerInfo = item.bannerInfo,
+                quantity = item.product.quantity
             )
         }
     }

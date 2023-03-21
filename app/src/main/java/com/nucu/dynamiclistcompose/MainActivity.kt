@@ -32,6 +32,7 @@ import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultA
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.dependency
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -129,12 +130,14 @@ class MainActivity : ComponentActivity() {
 @RootNavGraph(start = true)
 @Composable
 fun MainScreen(
+    navigator: DestinationsNavigator,
     widthSizeClass: WindowWidthSizeClass,
     viewModel: MainViewModel = hiltViewModel()
 ) {
     ContextView(
         title = "Art Gallery",
         widthSizeClass = widthSizeClass,
+        navigator = navigator,
         viewModel = viewModel
     )
 }

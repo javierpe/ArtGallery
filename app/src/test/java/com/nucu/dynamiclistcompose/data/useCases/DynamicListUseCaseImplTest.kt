@@ -55,8 +55,8 @@ class DynamicListUseCaseImplTest {
     private val successAction by lazy {
         DynamicListAction.SuccessAction(
             container = DynamicListContainer(
-                headers = emptyList(),
-                bodies = emptyList()
+                header = emptyList(),
+                body = emptyList()
             )
         )
     }

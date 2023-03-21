@@ -6,11 +6,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -26,7 +24,6 @@ import com.nucu.dynamiclistcompose.presentation.ui.components.ErrorView
 import com.nucu.dynamiclistcompose.presentation.ui.components.LoaderView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.presentation.viewModels.DynamicListViewModel
-import kotlinx.coroutines.launch
 
 class DynamicListCompose(
     requestModel: DynamicListRequestModel
@@ -53,7 +50,7 @@ class DynamicListCompose(
             action = action,
             dynamicListObject = dynamicListObject,
             showCaseState = showCaseState,
-            bodyListState = bodyListState
+            bodyListState = bodyListState,
         )
     }
 
@@ -92,15 +89,8 @@ class DynamicListCompose(
             }
 
             is DynamicListAction.SuccessAction -> {
-                val container = (dynamicListState as DynamicListAction.SuccessAction).container
-                val coroutineScope = rememberCoroutineScope()
-
-                LaunchedEffect(container, dynamicListViewModel) {
-                    coroutineScope.launch {
-                        headerComposeController?.dispatch(container.headers)
-                        bodyComposeController?.dispatch(container.bodies)
-                    }
-                }
+                val dynamicListAction = (dynamicListState as DynamicListAction.SuccessAction)
+                bodyComposeController?.dispatchShowCaseSequence(dynamicListAction.showCaseQueue)
 
                 val actionBody = remember {
                     mutableStateOf<ScrollAction?>(null)
@@ -111,7 +101,8 @@ class DynamicListCompose(
                     contentHeader = {
                         headerComposeController?.ComposeHeader(
                             dynamicListObject = dynamicListObject,
-                            showCaseState = showCaseState
+                            showCaseState = showCaseState,
+                            elements = dynamicListAction.header
                         ) {
                             if (it.target == TargetAction.BODY) {
                                 actionBody.value = it
@@ -123,7 +114,8 @@ class DynamicListCompose(
                             dynamicListObject = dynamicListObject,
                             sharedAction = actionBody.value,
                             showCaseState = showCaseState,
-                            bodyListState = bodyListState
+                            bodyListState = bodyListState,
+                            elements = dynamicListAction.body
                         ) {
                             if (it.target == TargetAction.BODY) {
                                 actionBody.value = it

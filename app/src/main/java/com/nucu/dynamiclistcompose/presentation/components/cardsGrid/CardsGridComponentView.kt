@@ -10,9 +10,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.javier.api.NavigationController
-import com.nucu.dynamiclistcompose.destinations.ProductImageScreenDestination
 import com.nucu.dynamiclistcompose.presentation.components.common.ImageComponentView
-import com.nucu.dynamiclistcompose.presentation.components.prodcut.ProductImageModel
+import com.javi.api.data.ProductImageModel
+import com.nucu.dynamiclistcompose.destinations.ProductImageScreenDestination
 import com.nucu.dynamiclistcompose.presentation.ui.components.VerticalGrid
 
 @Composable
@@ -32,7 +32,7 @@ fun CardsGridComponentViewScreen(
 @Composable
 fun CardsGridComponentView(
     data: List<ProductImageModel>,
-    onClick: (String) -> Unit
+    onClick: (ProductImageModel) -> Unit
 ) {
 
     VerticalGrid(
@@ -46,7 +46,7 @@ fun CardsGridComponentView(
                     .padding(16.dp)
                     .clip(RoundedCornerShape(10.dp))
                     .clickable {
-                        onClick.invoke(item.imageURL)
+                        onClick.invoke(item)
                     },
                 imageURL = item.imageURL
             )

@@ -15,11 +15,13 @@ import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DynamicLis
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCase
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.presentation.viewModels.ContextViewModel
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
 fun ContextView(
     title: String,
     widthSizeClass: WindowWidthSizeClass,
+    navigator: DestinationsNavigator,
     state: HashMap<String, String>? = remember { hashMapOf() },
     viewModel: ContextViewModel
 ) {
@@ -56,7 +58,8 @@ fun ContextView(
                     headerAdapterController = viewModel.headerAdapterController,
                     bodyAdapterController = viewModel.bodyAdapterController,
                     dynamicListObject = DynamicListObject(
-                        widthSizeClass = widthSizeClass
+                        widthSizeClass = widthSizeClass,
+                        navigator
                     ),
                     action = action,
                     showCaseState = showCaseState,

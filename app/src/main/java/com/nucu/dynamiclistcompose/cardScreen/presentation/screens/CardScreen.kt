@@ -7,6 +7,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.nucu.dynamiclistcompose.presentation.ui.base.ContextView
 import com.nucu.dynamiclistcompose.presentation.viewModels.CardsViewModel
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Destination
 @Composable
@@ -14,6 +15,7 @@ fun CardScreen(
     id: Int,
     title: String,
     widthSizeClass: WindowWidthSizeClass,
+    navigator: DestinationsNavigator,
     viewModel: CardsViewModel = hiltViewModel()
 ) {
 
@@ -25,6 +27,7 @@ fun CardScreen(
         title = title,
         widthSizeClass = widthSizeClass,
         viewModel = viewModel,
-        state = state
+        state = state,
+        navigator = navigator
     )
 }

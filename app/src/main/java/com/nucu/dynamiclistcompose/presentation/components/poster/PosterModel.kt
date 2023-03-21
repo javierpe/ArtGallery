@@ -2,7 +2,7 @@ package com.nucu.dynamiclistcompose.presentation.components.poster
 
 import com.javi.render.processor.annotations.render.RenderClass
 import com.javi.render.processor.data.enums.RenderType
-import com.nucu.dynamiclistcompose.presentation.components.prodcut.ProductImageModel
+import com.javi.api.data.ProductImageModel
 import com.squareup.moshi.Json
 
 @RenderClass(type = RenderType.POSTER)
