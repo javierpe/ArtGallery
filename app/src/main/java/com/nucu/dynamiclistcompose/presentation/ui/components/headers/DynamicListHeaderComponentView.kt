@@ -16,7 +16,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.nucu.dynamiclistcompose.data.models.ContextType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
@@ -27,7 +26,7 @@ import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.asShowCas
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
 import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
-import com.nucu.dynamiclistcompose.presentation.viewModels.HeaderViewModel
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 /**
  * Define header design by context
@@ -37,9 +36,9 @@ fun DynamicListHeaderComponentView(
     title: String,
     contextType: ContextType,
     bodyLazyListState: LazyListState? = null,
-    viewModel: HeaderViewModel = hiltViewModel()
+    navigator: DestinationsNavigator? = null
 ) {
-    val icon = if (viewModel.isHome()) Icons.Default.Star else Icons.Default.ArrowBack
+    val icon = if (contextType == ContextType.HOME) Icons.Default.Star else Icons.Default.ArrowBack
 
     when (contextType) {
 
@@ -48,9 +47,7 @@ fun DynamicListHeaderComponentView(
                 title = title,
                 icon = icon,
                 onIconClick = {
-                    if (!viewModel.isHome()) {
-                        viewModel.handleIconClick()
-                    }
+                    navigator?.popBackStack()
                 }
             )
         }
@@ -61,8 +58,8 @@ fun DynamicListHeaderComponentView(
                 bodyLazyListState = bodyLazyListState,
                 icon = icon,
                 onIconClick = {
-                    if (!viewModel.isHome()) {
-                        viewModel.handleIconClick()
+                    if (contextType != ContextType.HOME) {
+                        navigator?.popBackStack()
                     }
                 }
             )

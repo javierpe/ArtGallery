@@ -19,9 +19,11 @@ import com.nucu.dynamiclistcompose.presentation.components.common.ImageComponent
 import com.nucu.dynamiclistcompose.presentation.ui.components.BuyButtonComponentView
 import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DynamicListHeaderComponentView
 import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
 fun ProductImageContent(
+    navigator: DestinationsNavigator? = null,
     imageURL: String,
     onAdd: () -> Unit
 ) {
@@ -29,7 +31,8 @@ fun ProductImageContent(
         topBar = {
             DynamicListHeaderComponentView(
                 title = "Buy",
-                contextType = ContextType.BANNER_DETAIL
+                contextType = ContextType.BANNER_DETAIL,
+                navigator = navigator
             )
         },
         bottomBar = {
@@ -61,7 +64,7 @@ fun ProductImageContent(
 fun PreviewBannerContent() {
     DynamicListComposeTheme {
         ProductImageContent(
-            "Hello",
+            imageURL = "Hello",
         ) { }
     }
 }

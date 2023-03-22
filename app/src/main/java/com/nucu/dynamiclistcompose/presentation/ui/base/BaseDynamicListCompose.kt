@@ -47,7 +47,8 @@ fun ContextView(
                 DynamicListHeaderComponentView(
                     title = title,
                     contextType = viewModel.context,
-                    bodyLazyListState = bodyLazyListState
+                    bodyLazyListState = bodyLazyListState,
+                    navigator = navigator
                 )
             }
         ) { padding ->

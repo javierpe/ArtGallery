@@ -19,6 +19,7 @@ fun ProductImageScreen(
 ) {
     ProductImageContent(
         imageURL = productImageModel.imageURL,
+        navigator = navigator
     ) {
         viewModel.addToCart(productImageModel)
         navigator.popBackStack()
