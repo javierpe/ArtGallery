@@ -17,7 +17,6 @@ import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.javi.render.processor.data.enums.RenderType
-import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.presentation.components.common.BannerImageView
 import com.javi.api.data.ProductImageModel
 import com.nucu.dynamiclistcompose.destinations.ProductImageScreenDestination
@@ -27,6 +26,7 @@ import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipVi
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.asShowCaseTarget
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 const val BANNER_IMAGE_TEST_TAG = "banner-image"
 const val BANNER_IMAGE_SCREEN_TEST_TAG = "banner-image-screen"
@@ -37,7 +37,7 @@ fun BannerComponentViewScreen(
     model: BannerModel,
     componentIndex: Int,
     showCaseState: ShowCaseState,
-    navigationController: NavigationController
+    navigator: DestinationsNavigator
 ) {
     BannerComponentView(
         modifier = modifier.testTag(BANNER_IMAGE_SCREEN_TEST_TAG),
@@ -45,7 +45,7 @@ fun BannerComponentViewScreen(
         componentIndex = componentIndex,
         showCaseState = showCaseState
     ) {
-        navigationController.navigateTo(
+        navigator.navigate(
             ProductImageScreenDestination(it)
         )
     }

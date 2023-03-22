@@ -17,7 +17,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.javi.render.processor.annotations.factory.AdapterFactory
 import com.javi.render.processor.data.enums.RenderType
-import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
@@ -27,7 +26,7 @@ import javax.inject.Inject
 
 @AdapterFactory
 class BannerCarouselFactory @Inject constructor(
-    private val navigationController: NavigationController
+
 ): DynamicListFactory {
 
     override val renders: List<RenderType>
@@ -49,13 +48,14 @@ class BannerCarouselFactory @Inject constructor(
                 (component.resource as BannerCarouselModel).banners
             }
         }
+
         BannerCarouselComponentViewScreen(
             modifier = modifier.testTag("banner_carousel_component"),
             images = model.value,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState,
             widthSizeClass = componentInfo.dynamicListObject.widthSizeClass,
-            navigationController = navigationController
+            navigator = componentInfo.dynamicListObject.navigator
         )
     }
 

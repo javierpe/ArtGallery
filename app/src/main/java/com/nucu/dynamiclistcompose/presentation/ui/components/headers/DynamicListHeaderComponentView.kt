@@ -39,7 +39,6 @@ fun DynamicListHeaderComponentView(
     bodyLazyListState: LazyListState? = null,
     viewModel: HeaderViewModel = hiltViewModel()
 ) {
-
     val icon = if (viewModel.isHome()) Icons.Default.Star else Icons.Default.ArrowBack
 
     when (contextType) {

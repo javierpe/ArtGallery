@@ -9,21 +9,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.presentation.components.common.ImageComponentView
 import com.javi.api.data.ProductImageModel
 import com.nucu.dynamiclistcompose.destinations.ProductImageScreenDestination
 import com.nucu.dynamiclistcompose.presentation.ui.components.VerticalGrid
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
 fun CardsGridComponentViewScreen(
     images: List<ProductImageModel>,
-    navigationController: NavigationController
+    navigator: DestinationsNavigator
 ) {
     CardsGridComponentView(
         data = images,
     ) {
-        navigationController.navigateTo(
+        navigator.navigate(
             ProductImageScreenDestination(it)
         )
     }

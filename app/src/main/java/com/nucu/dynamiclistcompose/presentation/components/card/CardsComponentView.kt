@@ -15,7 +15,6 @@ import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.javi.render.processor.data.enums.RenderType
-import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.destinations.CardScreenDestination
 import com.nucu.dynamiclistcompose.presentation.components.common.CardItemVIew
 import com.nucu.dynamiclistcompose.presentation.components.common.TitleDecoratedView
@@ -25,6 +24,7 @@ import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipVi
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.asShowCaseTarget
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 const val CARD_COMPONENT_SCREEN_TAG = "card_component_screen"
 const val CARD_COMPONENT_TAG = "card_component"
@@ -35,7 +35,7 @@ fun CardsComponentViewScreen(
     data: CardsModel,
     componentIndex: Int,
     showCaseState: ShowCaseState,
-    navigationController: NavigationController
+    navigator: DestinationsNavigator
 ) {
     CardsComponentView(
         modifier = modifier.testTag(CARD_COMPONENT_SCREEN_TAG),
@@ -43,7 +43,7 @@ fun CardsComponentViewScreen(
         componentIndex = componentIndex,
         showCaseState = showCaseState
     ) { id, title ->
-        navigationController.navigateTo(
+        navigator.navigate(
             CardScreenDestination(
                 id = id,
                 title = title

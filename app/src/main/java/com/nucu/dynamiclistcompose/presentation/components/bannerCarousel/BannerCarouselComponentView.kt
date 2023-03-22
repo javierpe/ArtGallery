@@ -18,7 +18,6 @@ import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
 import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
 import com.javi.render.processor.data.enums.RenderType
-import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.destinations.ProductImageScreenDestination
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
 import com.nucu.dynamiclistcompose.presentation.components.common.BannerImageView
@@ -26,6 +25,7 @@ import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseS
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseStyle
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipView
 import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.asShowCaseTarget
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 const val BANNER_CAROUSEL_IMAGE_TEST_TAG = "banner-carousel-image"
 const val BANNER_CAROUSEL_IMAGE_SCREEN_TEST_TAG = "banner-carousel-image-screen"
@@ -38,7 +38,7 @@ fun BannerCarouselComponentViewScreen(
     componentIndex: Int,
     showCaseState: ShowCaseState,
     widthSizeClass: WindowWidthSizeClass,
-    navigationController: NavigationController
+    navigator: DestinationsNavigator
 ) {
     BannerCarouselComponentView(
         modifier = modifier
@@ -48,7 +48,7 @@ fun BannerCarouselComponentViewScreen(
         showCaseState = showCaseState,
         isExpandedScreen = widthSizeClass == WindowWidthSizeClass.Expanded,
     ) {
-        navigationController.navigateTo(
+        navigator.navigate(
             ProductImageScreenDestination(it)
         )
     }

@@ -29,10 +29,10 @@ import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.google.accompanist.pager.rememberPagerState
 import com.javi.api.data.ProductImageModel
-import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.destinations.ProductImageScreenDestination
 import com.nucu.dynamiclistcompose.presentation.components.common.ImageComponentView
 import com.nucu.dynamiclistcompose.presentation.components.common.TitleDecoratedView
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlin.math.absoluteValue
 
 const val POSTER_COMPONENT_SCREEN_TAG = "poster_component_screen_tag"
@@ -41,7 +41,7 @@ const val POSTER_COMPONENT_SCREEN_TAG = "poster_component_screen_tag"
 fun PosterComponentScreenView(
     model: PosterModel,
     isExpandedScreen: Boolean = false,
-    navigationController: NavigationController
+    navigator: DestinationsNavigator
 ) {
     PosterComponentView(
         modifier = Modifier.testTag(POSTER_COMPONENT_SCREEN_TAG),
@@ -49,7 +49,7 @@ fun PosterComponentScreenView(
         title = model.title,
         isExpandedScreen = isExpandedScreen
     ) {
-        navigationController.navigateTo(
+        navigator.navigate(
             ProductImageScreenDestination(it)
         )
     }
