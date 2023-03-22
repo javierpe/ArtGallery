@@ -1,7 +1,9 @@
 package com.nucu.dynamiclistcompose.bannerScreen.presentation.screens
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.javi.api.data.ProductImageModel
 import com.nucu.dynamiclistcompose.bannerScreen.presentation.contents.ProductImageContent
 import com.nucu.dynamiclistcompose.presentation.viewModels.ProductImageScreenViewModel
@@ -17,11 +19,22 @@ fun ProductImageScreen(
     productImageModel: ProductImageModel,
     viewModel: ProductImageScreenViewModel = hiltViewModel()
 ) {
+
+    val productQuantityUpdates = viewModel.productQuantityUpdates.collectAsStateWithLifecycle()
+
+    LaunchedEffect( productImageModel) {
+        viewModel.setProduct(productImageModel)
+    }
+
     ProductImageContent(
         imageURL = productImageModel.imageURL,
-        navigator = navigator
-    ) {
-        viewModel.addToCart(productImageModel)
-        navigator.popBackStack()
-    }
+        navigator = navigator,
+        quantity = productQuantityUpdates.value,
+        onAdd = {
+            viewModel.onAdd(productImageModel)
+        },
+        onDecrement = {
+            viewModel.onDecrement(productImageModel)
+        }
+    )
 }

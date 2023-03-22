@@ -25,7 +25,7 @@ class LocalBasketImpl @Inject constructor(
         _basketProducts.emit(emptyList())
     }
 
-    override suspend fun addToCart(productImageModel: ProductImageModel) {
+    override suspend fun onAdd(productImageModel: ProductImageModel) {
 
         val alreadyOnBasket = localBasketProducts.firstOrNull {
             it.id == productImageModel.id
@@ -39,6 +39,24 @@ class LocalBasketImpl @Inject constructor(
         } else {
             // Add
             localBasketProducts.add(productImageModel.copy(quantity = 1))
+        }
+
+        _basketProducts.emit(localBasketProducts)
+    }
+
+    override suspend fun onDecrement(productImageModel: ProductImageModel) {
+        val alreadyOnBasket = localBasketProducts.firstOrNull {
+            it.id == productImageModel.id
+        }
+
+        if (alreadyOnBasket != null && alreadyOnBasket.quantity == 0) {
+            // Remove
+            localBasketProducts.removeAt(localBasketProducts.indexOf(alreadyOnBasket))
+        } else if (alreadyOnBasket != null) {
+            // Decrement
+            val index = localBasketProducts.indexOf(alreadyOnBasket)
+            val product = localBasketProducts[index]
+            localBasketProducts[index] = product.copy(quantity = product.quantity - 1)
         }
 
         _basketProducts.emit(localBasketProducts)

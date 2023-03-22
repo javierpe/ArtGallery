@@ -18,7 +18,10 @@ interface LocalBasketApi {
     /**
      * Add product to local basket.
      */
-    suspend fun addToCart(
-        productImageModel: ProductImageModel
-    )
+    suspend fun onAdd(productImageModel: ProductImageModel)
+
+    /**
+     * Decrement product quantity
+     */
+    suspend fun onDecrement(productImageModel: ProductImageModel)
 }
