@@ -23,3 +23,4 @@
 -keep class com.nucu.dynamiclistcompose.presentation.components.** { *; }
 -keep class com.nucu.dynamiclistcompose.data.** { *; }
 -keep class com.dynamic.** { *; }
+-keep class com.javi.api.data.** { *; }
