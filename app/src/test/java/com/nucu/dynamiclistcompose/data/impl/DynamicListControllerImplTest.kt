@@ -1,6 +1,7 @@
 package com.nucu.dynamiclistcompose.data.impl
 
 import app.cash.turbine.test
+import com.javi.data.enums.ContextType
 import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.data.api.DynamicListMockResponseApi
 import com.nucu.dynamiclistcompose.data.api.DynamicListRenderProcessorApi
@@ -60,7 +61,11 @@ class DynamicListControllerImplTest {
     @Test
     fun `SuccessAction should return`() = runTest {
         whenever(
-            dynamicListMockResponseApi.getJsonDataFromAsset()
+            dynamicListMockResponseApi.getDataFromAsset(
+                DynamicListRequestModel(
+                    contextType = ContextType.HOME
+                )
+            )
         ).thenReturn(
             defaultDataContentModel
         )

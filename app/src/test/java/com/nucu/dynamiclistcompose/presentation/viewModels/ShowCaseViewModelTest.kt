@@ -1,8 +1,8 @@
 package com.nucu.dynamiclistcompose.presentation.viewModels
 
 import androidx.datastore.preferences.core.booleanPreferencesKey
-import com.nucu.dynamiclistcompose.data.api.TooltipPreferencesApi
-import com.nucu.dynamiclistcompose.presentation.viewModels.ShowCaseViewModel
+import com.javi.api.TooltipPreferencesApi
+import com.javi.design.system.viewModels.ShowCaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -20,7 +20,7 @@ import org.mockito.kotlin.verify
 class ShowCaseViewModelTest {
 
     @Mock
-    lateinit var tooltipPreferencesApi: TooltipPreferencesApi
+    lateinit var tooltipPreferencesApi: com.javi.api.TooltipPreferencesApi
 
     private lateinit var showCaseViewModel: ShowCaseViewModel
 

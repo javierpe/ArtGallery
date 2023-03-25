@@ -22,10 +22,10 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.metrics.performance.JankStats
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
-import com.javier.api.NavigationController
 import com.nucu.dynamiclistcompose.presentation.ui.base.ContextView
-import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
+import com.javi.design.system.theme.DynamicListComposeTheme
 import com.nucu.dynamiclistcompose.presentation.viewModels.MainViewModel
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
@@ -35,15 +35,11 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.dependency
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 private const val ANIMATION_DURATION = 700
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-    @Inject
-    lateinit var navigationController: NavigationController
 
     private var jankStats: JankStats? = null
 
@@ -77,6 +73,10 @@ class MainActivity : ComponentActivity() {
                              * Animation by Route:
                              * targetState.destination.route.orEmpty().contains(Route.CardScreen.name)
                               */
+                            /**
+                             * Animation by Route:
+                             * targetState.destination.route.orEmpty().contains(Route.CardScreen.name)
+                              */
                             enterTransition = {
                                 fadeIn(
                                     tween(ANIMATION_DURATION)
@@ -98,7 +98,7 @@ class MainActivity : ComponentActivity() {
                     DestinationsNavHost(
                         navGraph = NavGraphs.root,
                         engine = navHostEngine,
-                        navController = navigationController.init(),
+                        navController = rememberAnimatedNavController(),
                         dependenciesContainerBuilder = {
                             dependency(calculateWindowSizeClass(this@MainActivity).widthSizeClass)
                         }
@@ -123,11 +123,8 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Destination(
-    route = "main",
-    start = true
-)
 @RootNavGraph(start = true)
+@Destination
 @Composable
 fun MainScreen(
     navigator: DestinationsNavigator,

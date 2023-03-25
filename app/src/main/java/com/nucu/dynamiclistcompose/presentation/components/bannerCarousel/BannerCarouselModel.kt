@@ -1,8 +1,8 @@
 package com.nucu.dynamiclistcompose.presentation.components.bannerCarousel
 
-import com.javi.api.data.ProductImageModel
+import com.javi.data.ProductImageModel
+import com.javi.render.data.RenderType
 import com.javi.render.processor.annotations.render.RenderClass
-import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.session.SessionAware
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
 import com.squareup.moshi.Json

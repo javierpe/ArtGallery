@@ -1,6 +1,6 @@
 package com.nucu.dynamiclistcompose.data.listeners
 
-import com.javi.render.processor.data.enums.RenderType
+import com.javi.render.data.RenderType
 
 interface DynamicListComponentListener {
 

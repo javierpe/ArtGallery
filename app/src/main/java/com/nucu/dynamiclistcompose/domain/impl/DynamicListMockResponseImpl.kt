@@ -1,10 +1,10 @@
 package com.nucu.dynamiclistcompose.domain.impl
 
 import android.content.Context
+import com.javi.data.enums.ContextType
 import com.nucu.dynamiclistcompose.R
 import com.nucu.dynamiclistcompose.data.api.DynamicListMockResponseApi
 import com.nucu.dynamiclistcompose.data.extensions.tryFromJson
-import com.nucu.dynamiclistcompose.data.models.ContextType
 import com.nucu.dynamiclistcompose.data.models.DataContentModel
 import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
 import com.squareup.moshi.Moshi

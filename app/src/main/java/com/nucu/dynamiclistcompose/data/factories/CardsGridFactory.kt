@@ -14,13 +14,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.javi.render.processor.annotations.factory.AdapterFactory
-import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.presentation.components.cardsGrid.CardsGridComponentViewScreen
 import com.nucu.dynamiclistcompose.presentation.components.cardsGrid.CardsGridModel
-import com.nucu.dynamiclistcompose.presentation.ui.components.VerticalGrid
+import com.javi.design.system.molecules.VerticalGrid
+import com.javi.render.data.RenderType
 import javax.inject.Inject
 
 @AdapterFactory

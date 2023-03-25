@@ -4,8 +4,8 @@ import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSType
+import com.javi.render.data.RenderType
 import com.javi.render.processor.annotations.render.RenderClass
-import com.javi.render.processor.data.enums.RenderType
 import com.javi.render.processor.data.models.ModelClassProcessed
 import com.javi.render.processor.data.utils.PACKAGE_FACTORIES
 import com.javi.render.processor.data.utils.PACKAGE_MOSHI

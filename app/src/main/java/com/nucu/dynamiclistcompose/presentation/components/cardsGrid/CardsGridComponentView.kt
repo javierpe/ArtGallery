@@ -9,10 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.nucu.dynamiclistcompose.presentation.components.common.ImageComponentView
-import com.javi.api.data.ProductImageModel
-import com.nucu.dynamiclistcompose.destinations.ProductImageScreenDestination
-import com.nucu.dynamiclistcompose.presentation.ui.components.VerticalGrid
+import com.javi.design.system.ImageComponentView
+import com.javi.data.ProductImageModel
+import com.javi.design.system.molecules.VerticalGrid
+import com.javi.product.detail.presentation.screens.destinations.ProductImageScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable

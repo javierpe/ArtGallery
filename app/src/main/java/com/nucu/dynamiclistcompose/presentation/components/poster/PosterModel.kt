@@ -1,8 +1,8 @@
 package com.nucu.dynamiclistcompose.presentation.components.poster
 
 import com.javi.render.processor.annotations.render.RenderClass
-import com.javi.render.processor.data.enums.RenderType
-import com.javi.api.data.ProductImageModel
+import com.javi.data.ProductImageModel
+import com.javi.render.data.RenderType
 import com.squareup.moshi.Json
 
 @RenderClass(type = RenderType.POSTER)

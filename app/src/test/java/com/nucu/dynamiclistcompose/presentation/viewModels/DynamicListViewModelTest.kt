@@ -1,11 +1,11 @@
 package com.nucu.dynamiclistcompose.presentation.viewModels
 
 import app.cash.turbine.test
+import com.javi.basket.api.LocalBasketApi
+import com.javi.data.enums.ContextType
 import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.data.api.DynamicListUseCaseApi
-import com.nucu.dynamiclistcompose.data.models.ContextType
 import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
-import com.nucu.dynamiclistcompose.presentation.viewModels.DynamicListViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
@@ -28,13 +28,17 @@ class DynamicListViewModelTest {
     @Mock
     lateinit var useCase: DynamicListUseCaseApi
 
+    @Mock
+    lateinit var localBasketApi: LocalBasketApi
+
     private lateinit var dynamicListViewModel: DynamicListViewModel
 
     @Before
     fun setUp() {
         Dispatchers.setMain(StandardTestDispatcher())
         dynamicListViewModel = DynamicListViewModel(
-            useCase
+            useCase,
+            localBasketApi
         )
     }
 

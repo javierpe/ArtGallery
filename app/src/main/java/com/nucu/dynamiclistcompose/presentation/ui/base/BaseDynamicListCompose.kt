@@ -11,9 +11,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nucu.dynamiclistcompose.data.models.DynamicListObject
-import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DynamicListHeaderComponentView
-import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCase
-import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
+import com.javi.design.system.molecules.headers.DynamicListHeaderComponentView
+import com.javi.design.system.molecules.showCase.ShowCase
+import com.javi.design.system.molecules.showCase.rememberShowCaseState
 import com.nucu.dynamiclistcompose.presentation.viewModels.ContextViewModel
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 

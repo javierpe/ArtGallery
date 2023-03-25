@@ -2,11 +2,10 @@ package com.nucu.dynamiclistcompose.data.impl
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.javi.render.processor.data.enums.RenderType
+import com.javi.render.data.RenderType
 import com.nucu.dynamiclistcompose.data.renders.BannerCarouselRender
 import com.nucu.dynamiclistcompose.data.renders.base.DynamicListRender
 import com.nucu.dynamiclistcompose.domain.impl.DynamicListRenderProcessorImpl
-import com.nucu.dynamiclistcompose.presentation.components.text.TextModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -19,14 +18,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import org.mockito.kotlin.whenever
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(MockitoJUnitRunner::class)
 class DynamicListRenderProcessorImplTest {
-
-    @Mock
-    lateinit var gson: Gson
 
     private lateinit var render: BannerCarouselRender
 

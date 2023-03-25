@@ -2,7 +2,7 @@ package com.nucu.dynamiclistcompose.presentation.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.javi.api.LocalBasketApi
+import com.javi.basket.api.LocalBasketApi
 import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.data.api.DynamicListUseCaseApi
 import com.nucu.dynamiclistcompose.data.extensions.propagateBasketProducts

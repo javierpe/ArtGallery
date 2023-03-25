@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.javi.wiring'
+    namespace 'com.javi.basket.wiring'
     compileSdk 33
 
     defaultConfig {

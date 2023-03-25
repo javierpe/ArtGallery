@@ -1,6 +1,6 @@
 package com.nucu.dynamiclistcompose.presentation.viewModels
 
-import com.nucu.dynamiclistcompose.data.models.ContextType
+import com.javi.data.enums.ContextType
 import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

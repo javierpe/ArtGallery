@@ -19,7 +19,7 @@ import com.nucu.dynamiclistcompose.data.actions.ScrollAction
 import com.nucu.dynamiclistcompose.data.models.ComponentInfo
 import com.nucu.dynamiclistcompose.data.models.DynamicListElement
 import com.nucu.dynamiclistcompose.data.models.DynamicListObject
-import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
+import com.javi.design.system.molecules.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.presentation.ui.utils.rememberMetricsStateHolder
 
 @Suppress("LongParameterList", "FunctionNaming")

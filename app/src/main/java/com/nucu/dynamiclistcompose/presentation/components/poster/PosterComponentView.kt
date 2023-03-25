@@ -28,10 +28,10 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.google.accompanist.pager.rememberPagerState
-import com.javi.api.data.ProductImageModel
-import com.nucu.dynamiclistcompose.destinations.ProductImageScreenDestination
-import com.nucu.dynamiclistcompose.presentation.components.common.ImageComponentView
-import com.nucu.dynamiclistcompose.presentation.components.common.TitleDecoratedView
+import com.javi.data.ProductImageModel
+import com.javi.design.system.ImageComponentView
+import com.javi.design.system.atoms.TitleDecoratedView
+import com.javi.product.detail.presentation.screens.destinations.ProductImageScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlin.math.absoluteValue
 

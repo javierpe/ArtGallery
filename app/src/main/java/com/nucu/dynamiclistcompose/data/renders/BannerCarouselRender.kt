@@ -1,7 +1,7 @@
 package com.nucu.dynamiclistcompose.data.renders
 
+import com.javi.render.data.RenderType
 import com.javi.render.processor.annotations.render.RenderFactory
-import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.renders.base.DynamicListRender
 import com.nucu.dynamiclistcompose.presentation.components.bannerCarousel.BannerCarouselModel
 import javax.inject.Inject

@@ -1,10 +1,8 @@
 package com.nucu.dynamiclistcompose.data.controllers
 
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import com.nucu.dynamiclistcompose.data.api.TooltipPreferencesApi
+import com.javi.render.data.RenderType
 import com.nucu.dynamiclistcompose.data.factories.BannerFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
-import com.javi.render.processor.data.enums.RenderType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
@@ -23,9 +21,6 @@ import org.mockito.kotlin.whenever
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(MockitoJUnitRunner::class)
 class DefaultDynamicListControllerTest {
-
-    @Mock
-    lateinit var tooltipPreferencesApi: TooltipPreferencesApi
 
     private lateinit var defaultDynamicListController: DefaultDynamicListController
 
@@ -46,8 +41,7 @@ class DefaultDynamicListControllerTest {
             delegates = mutableSetOf(
                 BannerFactory()
             ),
-            defaultDispatcher = dispatcher,
-            tooltipPreferencesApi = tooltipPreferencesApi
+            defaultDispatcher = dispatcher
         )
     }
 
@@ -59,16 +53,10 @@ class DefaultDynamicListControllerTest {
     @Test
     fun `mapComponents should have componentItemModel`() = runTest {
 
-        whenever(tooltipPreferencesApi.getState(
-            booleanPreferencesKey(RenderType.BANNER.value),
+        whenever(tooltipPreferencesApi.getBooleanState(
+            RenderType.BANNER.value,
             false
         )).thenReturn(flow { emit(false) })
-
-        defaultDynamicListController.dispatch(
-            components = listOf(
-                componentItemModel
-            )
-        )
 
         assert(defaultDynamicListController.getMapComponents().contains(componentItemModel))
     }

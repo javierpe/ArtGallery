@@ -1,9 +1,11 @@
 package com.nucu.dynamiclistcompose.data.useCases
 
 import app.cash.turbine.test
+import com.javi.api.TooltipPreferencesApi
+import com.javi.data.enums.ContextType
 import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.data.api.DynamicListControllerApi
-import com.nucu.dynamiclistcompose.data.models.ContextType
+import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.DynamicListContainer
 import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
 import com.nucu.dynamiclistcompose.domain.database.AppDatabase
@@ -42,6 +44,9 @@ class DynamicListUseCaseImplTest {
     lateinit var skeletonsDao: SkeletonsDao
 
     @Mock
+    lateinit var tooltipPreferencesApi: TooltipPreferencesApi
+
+    @Mock
     lateinit var errorAction: DynamicListAction.ErrorAction
 
     private lateinit var dynamicListUseCaseImpl: DynamicListUseCaseImpl
@@ -67,7 +72,9 @@ class DynamicListUseCaseImplTest {
         dynamicListUseCaseImpl = DynamicListUseCaseImpl(
             dispatcher,
             controller,
-            database
+            database,
+            mutableSetOf(),
+            tooltipPreferencesApi
         )
 
         whenever(database.skeletonsDao()).thenReturn(skeletonsDao)

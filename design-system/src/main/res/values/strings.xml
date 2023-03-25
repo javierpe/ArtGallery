@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_loading" translatable="false">Cargando</string>
+    <string name="label_error" translatable="false">Error</string>
+    <string name="label_retry" translatable="false">Reintentar</string>
+</resources>

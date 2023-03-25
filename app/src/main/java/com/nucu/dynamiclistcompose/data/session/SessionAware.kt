@@ -1,6 +1,6 @@
 package com.nucu.dynamiclistcompose.data.session
 
-import com.javi.api.data.ProductImageModel
+import com.javi.data.ProductImageModel
 
 interface SessionAware<T> {
 

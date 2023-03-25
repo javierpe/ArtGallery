@@ -1,6 +1,6 @@
 package com.nucu.dynamiclistcompose.data.actions
 
-import com.javi.render.processor.data.enums.RenderType
+import com.javi.render.data.RenderType
 import com.nucu.dynamiclistcompose.data.models.DynamicListContainer
 import com.nucu.dynamiclistcompose.data.models.DynamicListElement
 import com.nucu.dynamiclistcompose.data.models.DynamicListShowCaseModel

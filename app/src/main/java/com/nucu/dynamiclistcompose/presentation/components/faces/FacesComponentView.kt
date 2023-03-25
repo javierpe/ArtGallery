@@ -20,9 +20,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.size.Size
-import com.nucu.dynamiclistcompose.presentation.components.common.ImageComponentView
-import com.nucu.dynamiclistcompose.presentation.components.common.toPx
-import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
+import com.javi.design.system.ImageComponentView
+import com.javi.design.system.molecules.toPx
+import com.javi.design.system.theme.Typography
 
 @Composable
 fun FacesComponentView(

@@ -2,7 +2,7 @@ package com.javi.render.processor.creators
 
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.KSPLogger
-import com.javi.render.processor.data.enums.RenderType
+import com.javi.render.data.RenderType
 import com.javi.render.processor.data.models.ModelClassProcessed
 import com.javi.render.processor.data.utils.DI_RENDER_MODULE_COMMENT
 import com.javi.render.processor.data.utils.DI_RENDER_MODULE_FILE_NAME

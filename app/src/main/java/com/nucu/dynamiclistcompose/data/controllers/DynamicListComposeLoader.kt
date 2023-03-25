@@ -2,10 +2,9 @@ package com.nucu.dynamiclistcompose.data.controllers
 
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
-import com.javi.api.LocalBasketApi
 import com.nucu.dynamiclistcompose.data.actions.ContextViewAction
 import com.nucu.dynamiclistcompose.data.models.DynamicListObject
-import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
+import com.javi.design.system.molecules.showCase.ShowCaseState
 
 abstract class DynamicListComposeLoader {
 

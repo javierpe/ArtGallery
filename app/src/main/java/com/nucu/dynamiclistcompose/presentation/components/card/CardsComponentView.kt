@@ -12,18 +12,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nucu.dynamiclistcompose.R
-import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
-import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
-import com.javi.render.processor.data.enums.RenderType
+import com.javi.design.system.data.showCase.ShapeType
+import com.javi.design.system.data.showCase.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.destinations.CardScreenDestination
-import com.nucu.dynamiclistcompose.presentation.components.common.CardItemVIew
-import com.nucu.dynamiclistcompose.presentation.components.common.TitleDecoratedView
-import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
-import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseStyle
-import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipView
-import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.asShowCaseTarget
-import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.rememberShowCaseState
-import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
+import com.javi.design.system.atoms.TitleDecoratedView
+import com.javi.design.system.molecules.CardItemVIew
+import com.javi.design.system.molecules.showCase.ShowCaseState
+import com.javi.design.system.molecules.showCase.ShowCaseStyle
+import com.javi.design.system.molecules.TooltipView
+import com.javi.design.system.molecules.showCase.asShowCaseTarget
+import com.javi.design.system.molecules.showCase.rememberShowCaseState
+import com.javi.design.system.theme.DynamicListComposeTheme
+import com.javi.render.data.RenderType
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 const val CARD_COMPONENT_SCREEN_TAG = "card_component_screen"

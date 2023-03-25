@@ -13,21 +13,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.javi.api.data.ProductImageModel
+import com.javi.data.ProductImageModel
 import com.nucu.dynamiclistcompose.R
-import com.nucu.dynamiclistcompose.data.models.showCase.ShapeType
-import com.nucu.dynamiclistcompose.data.models.showCase.ShowCaseStrategy
-import com.javi.render.processor.data.enums.RenderType
-import com.nucu.dynamiclistcompose.destinations.ProductImageScreenDestination
+import com.javi.design.system.data.showCase.ShapeType
+import com.javi.design.system.data.showCase.ShowCaseStrategy
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
-import com.nucu.dynamiclistcompose.presentation.components.common.BannerImageView
-import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
-import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseStyle
-import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.TooltipView
-import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.asShowCaseTarget
+import com.javi.design.system.molecules.BannerImageView
+import com.javi.design.system.molecules.showCase.ShowCaseState
+import com.javi.design.system.molecules.showCase.ShowCaseStyle
+import com.javi.design.system.molecules.TooltipView
+import com.javi.design.system.molecules.showCase.asShowCaseTarget
+import com.javi.product.detail.presentation.screens.destinations.ProductImageScreenDestination
+import com.javi.render.data.RenderType
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
-const val BANNER_CAROUSEL_IMAGE_TEST_TAG = "banner-carousel-image"
 const val BANNER_CAROUSEL_IMAGE_SCREEN_TEST_TAG = "banner-carousel-image-screen"
 
 @Suppress("LongParameterList")
@@ -114,8 +113,9 @@ fun BannerCarouselComponentView(
                 onClickAction = {
                     onClickAction(item.product)
                 },
-                bannerInfo = item.bannerInfo,
-                quantity = item.product.quantity
+                quantity = item.product.quantity,
+                title = item.bannerInfo?.title.orEmpty(),
+                description = item.bannerInfo?.description.orEmpty()
             )
         }
     }

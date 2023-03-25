@@ -1,9 +1,9 @@
 package com.nucu.dynamiclistcompose.presentation.viewModels
 
 import androidx.lifecycle.ViewModel
+import com.javi.data.enums.ContextType
 import com.nucu.dynamiclistcompose.data.actions.ContextViewAction
 import com.nucu.dynamiclistcompose.data.controllers.DefaultDynamicListController
-import com.nucu.dynamiclistcompose.data.models.ContextType
 import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

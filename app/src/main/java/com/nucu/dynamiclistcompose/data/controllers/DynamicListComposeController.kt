@@ -13,17 +13,16 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.actions.ScrollAction
-import com.nucu.dynamiclistcompose.data.api.TooltipPreferencesApi
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.models.DynamicListElement
 import com.nucu.dynamiclistcompose.data.models.DynamicListObject
 import com.nucu.dynamiclistcompose.data.models.DynamicListShowCaseModel
-import com.nucu.dynamiclistcompose.presentation.ui.animations.BlinkAnimation
+import com.javi.design.system.animations.BlinkAnimation
 import com.nucu.dynamiclistcompose.presentation.ui.base.DynamicListScreen
-import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
+import com.javi.design.system.molecules.showCase.ShowCaseState
+import com.javi.render.data.RenderType
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -38,8 +37,6 @@ abstract class DynamicListComposeController {
     abstract val delegates: MutableSet<@JvmSuppressWildcards DynamicListFactory>
 
     abstract val defaultDispatcher: CoroutineDispatcher
-
-    abstract val tooltipPreferencesApi: TooltipPreferencesApi
 
     open fun getMapComponents(): List<ComponentItemModel> = data
 

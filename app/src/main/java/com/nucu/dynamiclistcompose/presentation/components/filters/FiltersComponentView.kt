@@ -38,11 +38,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.javi.render.processor.data.enums.RenderType
-import com.nucu.dynamiclistcompose.presentation.components.common.StaticGridList
-import com.nucu.dynamiclistcompose.presentation.ui.components.headers.DURATION
-import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
-import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
+import com.javi.design.system.molecules.StaticGridList
+import com.javi.design.system.molecules.headers.DURATION
+import com.javi.design.system.theme.DynamicListComposeTheme
+import com.javi.design.system.theme.Typography
+import com.javi.render.data.RenderType
 import kotlinx.coroutines.launch
 
 @Composable

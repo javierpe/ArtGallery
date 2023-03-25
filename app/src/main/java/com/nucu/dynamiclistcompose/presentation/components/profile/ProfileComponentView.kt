@@ -20,8 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.nucu.dynamiclistcompose.presentation.ui.theme.DynamicListComposeTheme
-import com.nucu.dynamiclistcompose.presentation.ui.theme.Typography
+import com.javi.design.system.theme.DynamicListComposeTheme
+import com.javi.design.system.theme.Typography
 
 const val PROFILE_COMPONENT_SCREEN_TAG = "profile-component-screen-tag"
 

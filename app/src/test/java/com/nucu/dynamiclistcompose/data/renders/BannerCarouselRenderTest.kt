@@ -1,6 +1,6 @@
 package com.nucu.dynamiclistcompose.data.renders
 
-import com.javi.render.processor.data.enums.RenderType
+import com.javi.render.data.RenderType
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerInfo
 import com.nucu.dynamiclistcompose.presentation.components.banner.BannerModel
 import com.nucu.dynamiclistcompose.presentation.components.bannerCarousel.BannerCarouselModel

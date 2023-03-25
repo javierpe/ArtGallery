@@ -1,6 +1,6 @@
 package com.nucu.dynamiclistcompose.data.extensions
 
-import com.javi.api.data.ProductImageModel
+import com.javi.data.ProductImageModel
 import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.session.SessionAware

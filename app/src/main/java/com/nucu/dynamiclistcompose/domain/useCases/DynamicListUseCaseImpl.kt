@@ -1,11 +1,10 @@
 package com.nucu.dynamiclistcompose.domain.useCases
 
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import com.javi.render.processor.data.enums.RenderType
 import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.data.api.DynamicListControllerApi
 import com.nucu.dynamiclistcompose.data.api.DynamicListUseCaseApi
-import com.nucu.dynamiclistcompose.data.api.TooltipPreferencesApi
+import com.javi.api.TooltipPreferencesApi
+import com.javi.render.data.RenderType
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.ComponentItemModel
 import com.nucu.dynamiclistcompose.data.models.DynamicListElement
@@ -59,8 +58,8 @@ class DynamicListUseCaseImpl @Inject constructor(
                             adapter?.hasShowCaseConfigured == true &&
                             showCaseSequence.none { it.render == component.render }
                         ) {
-                            val alreadyShowed = tooltipPreferencesApi.getState(
-                                booleanPreferencesKey(component.render),
+                            val alreadyShowed = tooltipPreferencesApi.getBooleanState(
+                                component.render,
                                 false
                             ).first()
 

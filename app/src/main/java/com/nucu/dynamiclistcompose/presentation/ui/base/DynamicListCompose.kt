@@ -20,9 +20,9 @@ import com.nucu.dynamiclistcompose.data.controllers.DynamicListComposeController
 import com.nucu.dynamiclistcompose.data.controllers.DynamicListComposeLoader
 import com.nucu.dynamiclistcompose.data.models.DynamicListObject
 import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
-import com.nucu.dynamiclistcompose.presentation.ui.components.ErrorView
-import com.nucu.dynamiclistcompose.presentation.ui.components.LoaderView
-import com.nucu.dynamiclistcompose.presentation.ui.components.showCase.ShowCaseState
+import com.javi.design.system.atoms.ErrorView
+import com.javi.design.system.atoms.LoaderView
+import com.javi.design.system.molecules.showCase.ShowCaseState
 import com.nucu.dynamiclistcompose.presentation.viewModels.DynamicListViewModel
 
 class DynamicListCompose(
