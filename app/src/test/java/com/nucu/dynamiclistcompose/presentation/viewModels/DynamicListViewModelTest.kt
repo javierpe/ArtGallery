@@ -3,7 +3,7 @@ package com.nucu.dynamiclistcompose.presentation.viewModels
 import app.cash.turbine.test
 import com.javi.basket.api.LocalBasketApi
 import com.javi.data.enums.ContextType
-import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
+import com.javi.dynamic.list.data.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.data.api.DynamicListUseCaseApi
 import com.nucu.dynamiclistcompose.data.models.DynamicListRequestModel
 import kotlinx.coroutines.Dispatchers
@@ -50,7 +50,7 @@ class DynamicListViewModelTest {
     @Test
     fun `dynamicListAction should have a initial action`() = runTest {
         dynamicListViewModel.dynamicListAction.test {
-            assert(awaitItem() is DynamicListAction.LoadingAction)
+            assert(awaitItem() is com.javi.dynamic.list.data.actions.DynamicListAction.LoadingAction)
             cancelAndConsumeRemainingEvents()
         }
     }
@@ -59,13 +59,13 @@ class DynamicListViewModelTest {
     fun `dynamicListAction should have the state provides by useCase`() = runTest {
         val requestModel = DynamicListRequestModel(ContextType.HOME)
         whenever(useCase.get(0, requestModel)).thenReturn(
-            flow { emit(DynamicListAction.ErrorAction(Throwable("Error"))) }
+            flow { emit(com.javi.dynamic.list.data.actions.DynamicListAction.ErrorAction(Throwable("Error"))) }
         )
 
         dynamicListViewModel.dynamicListAction.test {
             dynamicListViewModel.load(requestModel)
             awaitItem()
-            assert(awaitItem() is DynamicListAction.ErrorAction)
+            assert(awaitItem() is com.javi.dynamic.list.data.actions.DynamicListAction.ErrorAction)
             cancelAndConsumeRemainingEvents()
         }
     }

@@ -1,5 +1,6 @@
 package com.nucu.dynamiclistcompose.cardScreen.presentation.screens
 
+/*
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -30,4 +31,4 @@ fun CardScreen(
         state = state,
         navigator = navigator
     )
-}
+}*/

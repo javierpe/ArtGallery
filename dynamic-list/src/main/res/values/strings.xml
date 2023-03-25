@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tooltip_baner_carousel" translatable="false">This is a banner inside a carousel!</string>
+    <string name="tooltip_banner" translatable="false">This is a banner component!</string>
+    <string name="tooltip_text" translatable="false">This is a header!</string>
+    <string name="tooltip_text_subtitle" translatable="false">Click to continue to the next tooltip!</string>
+    <string name="tooltip_message" translatable="false">This is a message component with animation!</string>
+    <string name="tooltip_cards" translatable="false">This is a card inside a carousel!</string>
+</resources>

@@ -2,7 +2,7 @@ package com.nucu.dynamiclistcompose.data.impl
 
 import app.cash.turbine.test
 import com.javi.data.enums.ContextType
-import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
+import com.javi.dynamic.list.data.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.data.api.DynamicListMockResponseApi
 import com.nucu.dynamiclistcompose.data.api.DynamicListRenderProcessorApi
 import com.nucu.dynamiclistcompose.data.models.*
@@ -71,7 +71,7 @@ class DynamicListControllerImplTest {
         )
 
         dynamicListControllerImpl.get(0, dynamicListRequestModel).test {
-            assert(awaitItem() is DynamicListAction.SuccessAction)
+            assert(awaitItem() is com.javi.dynamic.list.data.actions.DynamicListAction.SuccessAction)
             cancelAndConsumeRemainingEvents()
         }
     }

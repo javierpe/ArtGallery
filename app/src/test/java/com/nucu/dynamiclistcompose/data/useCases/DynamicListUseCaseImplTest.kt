@@ -3,7 +3,7 @@ package com.nucu.dynamiclistcompose.data.useCases
 import app.cash.turbine.test
 import com.javi.api.TooltipPreferencesApi
 import com.javi.data.enums.ContextType
-import com.nucu.dynamiclistcompose.data.actions.DynamicListAction
+import com.javi.dynamic.list.data.actions.DynamicListAction
 import com.nucu.dynamiclistcompose.data.api.DynamicListControllerApi
 import com.nucu.dynamiclistcompose.data.factories.base.DynamicListFactory
 import com.nucu.dynamiclistcompose.data.models.DynamicListContainer
@@ -47,7 +47,7 @@ class DynamicListUseCaseImplTest {
     lateinit var tooltipPreferencesApi: TooltipPreferencesApi
 
     @Mock
-    lateinit var errorAction: DynamicListAction.ErrorAction
+    lateinit var errorAction: com.javi.dynamic.list.data.actions.DynamicListAction.ErrorAction
 
     private lateinit var dynamicListUseCaseImpl: DynamicListUseCaseImpl
 
@@ -58,7 +58,7 @@ class DynamicListUseCaseImplTest {
     }
 
     private val successAction by lazy {
-        DynamicListAction.SuccessAction(
+        com.javi.dynamic.list.data.actions.DynamicListAction.SuccessAction(
             container = DynamicListContainer(
                 header = emptyList(),
                 body = emptyList()
@@ -92,7 +92,7 @@ class DynamicListUseCaseImplTest {
         ).thenReturn(flow { emit(errorAction) })
 
         assert(
-            dynamicListUseCaseImpl.get(0, dynamicListRequestModel).first() is DynamicListAction.LoadingAction
+            dynamicListUseCaseImpl.get(0, dynamicListRequestModel).first() is com.javi.dynamic.list.data.actions.DynamicListAction.LoadingAction
         )
     }
 
@@ -106,7 +106,7 @@ class DynamicListUseCaseImplTest {
             database.skeletonsDao().provideSkeletonsByContext(ContextType.HOME.source)
         ).thenReturn(SkeletonsEntity(ContextType.HOME.source, emptyList()))
 
-        dynamicListUseCaseImpl.get(0, dynamicListRequestModel).first() is DynamicListAction.SkeletonAction
+        dynamicListUseCaseImpl.get(0, dynamicListRequestModel).first() is com.javi.dynamic.list.data.actions.DynamicListAction.SkeletonAction
     }
 
     @Test
@@ -138,7 +138,7 @@ class DynamicListUseCaseImplTest {
 
         dynamicListUseCaseImpl.get(0, dynamicListRequestModel).test {
             awaitItem()
-            assert(awaitItem() is DynamicListAction.ErrorAction)
+            assert(awaitItem() is com.javi.dynamic.list.data.actions.DynamicListAction.ErrorAction)
             cancelAndIgnoreRemainingEvents()
         }
     }

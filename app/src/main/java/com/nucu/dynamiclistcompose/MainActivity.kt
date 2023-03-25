@@ -11,29 +11,25 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.metrics.performance.JankStats
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
-import com.nucu.dynamiclistcompose.presentation.ui.base.ContextView
 import com.javi.design.system.theme.DynamicListComposeTheme
-import com.nucu.dynamiclistcompose.presentation.viewModels.MainViewModel
+import com.javi.home.HomeScreenNavGraph
+import com.javi.product.detail.presentation.screens.ProductDetailNavGraph
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
-import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.RootNavGraph
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.dependency
+import com.ramcosta.composedestinations.spec.DestinationSpec
+import com.ramcosta.composedestinations.spec.NavGraphSpec
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val ANIMATION_DURATION = 700
@@ -96,7 +92,7 @@ class MainActivity : ComponentActivity() {
                     )
 
                     DestinationsNavHost(
-                        navGraph = NavGraphs.root,
+                        navGraph = RootNavGraph,
                         engine = navHostEngine,
                         navController = rememberAnimatedNavController(),
                         dependenciesContainerBuilder = {
@@ -123,18 +119,16 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@RootNavGraph(start = true)
-@Destination
-@Composable
-fun MainScreen(
-    navigator: DestinationsNavigator,
-    widthSizeClass: WindowWidthSizeClass,
-    viewModel: MainViewModel = hiltViewModel()
-) {
-    ContextView(
-        title = "Art Gallery",
-        widthSizeClass = widthSizeClass,
-        navigator = navigator,
-        viewModel = viewModel
+object RootNavGraph: NavGraphSpec {
+
+    override val route = "root"
+
+    override val destinationsByRoute = emptyMap<String, DestinationSpec<*>>()
+
+    override val startRoute = HomeScreenNavGraph
+
+    override val nestedNavGraphs = listOf(
+        HomeScreenNavGraph,
+        ProductDetailNavGraph
     )
 }
