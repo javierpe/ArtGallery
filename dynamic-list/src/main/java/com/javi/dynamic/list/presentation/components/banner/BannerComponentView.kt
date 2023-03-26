@@ -44,9 +44,9 @@ fun BannerComponentViewScreen(
         componentIndex = componentIndex,
         showCaseState = showCaseState
     ) {
-        navigator.navigate(
+        /*navigator.navigate(
             ProductImageScreenDestination(it)
-        )
+        )*/
     }
 }
 

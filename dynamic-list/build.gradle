@@ -1,9 +1,9 @@
 plugins {
+    id 'com.google.devtools.ksp' version '1.7.22-1.0.8'
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-    id 'com.google.devtools.ksp' version '1.7.22-1.0.8'
 }
 
 android {
@@ -66,7 +66,6 @@ dependencies {
     // Data
     implementation project(":data")
 
-
     // Design System
     implementation project(":design-system")
 
@@ -76,7 +75,6 @@ dependencies {
 
     // Coil (Bad performance in debug mode)
     implementation "io.coil-kt:coil-compose:2.2.2"
-
 
     // Performance
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'

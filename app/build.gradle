@@ -1,9 +1,9 @@
 plugins {
+    id 'com.google.devtools.ksp' version '1.7.22-1.0.8'
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-    id 'com.google.devtools.ksp' version '1.7.22-1.0.8'
 }
 
 android {
@@ -95,17 +95,10 @@ android {
 
 dependencies {
 
-    // Design system
+    // Navigation
+    implementation project(":navigation")
+
     implementation project(":design-system")
-
-    // Dynamic List
-    implementation project(":home")
-
-    // Product detail
-    implementation project(":product-detail")
-
-    // Render
-    implementation project(":render-data")
 
     // Preferences
     implementation(project(":preferences:api"))
@@ -128,6 +121,11 @@ dependencies {
 
     // System UI Controller
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.29.1-alpha"
+
+    // Navigation
+    implementation "io.github.raamcosta.compose-destinations:core:$compose_destinations_version"
+    implementation "io.github.raamcosta.compose-destinations:animations-core:$compose_destinations_version"
+    ksp "io.github.raamcosta.compose-destinations:ksp:$compose_destinations_version"
 
     // Alpha
     implementation "androidx.compose.material3:material3-window-size-class:1.0.1"
