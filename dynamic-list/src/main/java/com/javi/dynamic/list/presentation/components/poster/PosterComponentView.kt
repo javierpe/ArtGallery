@@ -31,7 +31,7 @@ import com.google.accompanist.pager.rememberPagerState
 import com.javi.data.ProductImageModel
 import com.javi.design.system.ImageComponentView
 import com.javi.design.system.atoms.TitleDecoratedView
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.javi.navigation.api.NavigationDestinationsApi
 import kotlin.math.absoluteValue
 
 const val POSTER_COMPONENT_SCREEN_TAG = "poster_component_screen_tag"
@@ -40,7 +40,7 @@ const val POSTER_COMPONENT_SCREEN_TAG = "poster_component_screen_tag"
 fun PosterComponentScreenView(
     model: PosterModel,
     isExpandedScreen: Boolean = false,
-    navigator: DestinationsNavigator
+    navigationDestinationsApi: NavigationDestinationsApi
 ) {
     PosterComponentView(
         modifier = Modifier.testTag(POSTER_COMPONENT_SCREEN_TAG),
@@ -48,9 +48,9 @@ fun PosterComponentScreenView(
         title = model.title,
         isExpandedScreen = isExpandedScreen
     ) {
-        /*navigator.navigate(
-            ProductImageScreenDestination(it)
-        )*/
+        navigationDestinationsApi.navigateToProductDetailPage(
+            imageURL = it.imageURL
+        )
     }
 }
 

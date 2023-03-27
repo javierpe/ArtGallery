@@ -15,13 +15,11 @@ import com.javi.design.system.molecules.showCase.ShowCase
 import com.javi.design.system.molecules.showCase.rememberShowCaseState
 import com.javi.dynamic.list.data.models.DynamicListObject
 import com.javi.dynamic.list.presentation.viewModels.ContextViewModel
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
 fun ContextView(
     title: String,
     widthSizeClass: WindowWidthSizeClass,
-    navigator: DestinationsNavigator,
     state: HashMap<String, String>? = remember { hashMapOf() },
     viewModel: ContextViewModel
 ) {
@@ -47,9 +45,10 @@ fun ContextView(
                 DynamicListHeaderComponentView(
                     title = title,
                     contextType = viewModel.context,
-                    bodyLazyListState = bodyLazyListState,
-                    navigator = navigator
-                )
+                    bodyLazyListState = bodyLazyListState
+                ) {
+
+                }
             }
         ) { padding ->
             Box(
@@ -59,8 +58,7 @@ fun ContextView(
                     headerAdapterController = viewModel.headerAdapterController,
                     bodyAdapterController = viewModel.bodyAdapterController,
                     dynamicListObject = DynamicListObject(
-                        widthSizeClass = widthSizeClass,
-                        navigator
+                        widthSizeClass = widthSizeClass
                     ),
                     action = action,
                     showCaseState = showCaseState,

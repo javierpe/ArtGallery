@@ -41,7 +41,7 @@ android {
 
     ksp {
         arg("compose-destinations.mode", "navgraphs")
-        arg("compose-destinations.moduleName", "homeScreen")
+        arg("compose-destinations.moduleName", "home")
     }
 }
 
@@ -68,9 +68,6 @@ dependencies {
     implementation "androidx.compose.material3:material3-window-size-class:1.0.1"
     implementation "androidx.compose.material3:material3:1.0.1"
 
-    // Navigation
-    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
-
     // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     implementation 'androidx.constraintlayout:constraintlayout-core:1.0.4'
@@ -79,7 +76,6 @@ dependencies {
     // Navigation
     implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
     implementation "io.github.raamcosta.compose-destinations:core:$compose_destinations_version"
-    implementation "io.github.raamcosta.compose-destinations:animations-core:$compose_destinations_version"
     ksp "io.github.raamcosta.compose-destinations:ksp:$compose_destinations_version"
 
     // Compose

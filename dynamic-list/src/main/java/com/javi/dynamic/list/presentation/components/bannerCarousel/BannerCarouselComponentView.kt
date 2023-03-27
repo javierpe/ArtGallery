@@ -23,8 +23,8 @@ import com.javi.design.system.molecules.TooltipView
 import com.javi.design.system.molecules.showCase.asShowCaseTarget
 import com.javi.dynamic.list.R
 import com.javi.dynamic.list.presentation.components.banner.BannerModel
+import com.javi.navigation.api.NavigationDestinationsApi
 import com.javi.render.data.RenderType
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 const val BANNER_CAROUSEL_IMAGE_SCREEN_TEST_TAG = "banner-carousel-image-screen"
 
@@ -36,7 +36,7 @@ fun BannerCarouselComponentViewScreen(
     componentIndex: Int,
     showCaseState: ShowCaseState,
     widthSizeClass: WindowWidthSizeClass,
-    navigator: DestinationsNavigator
+    navigationDestinationsApi: NavigationDestinationsApi
 ) {
     BannerCarouselComponentView(
         modifier = modifier
@@ -46,9 +46,9 @@ fun BannerCarouselComponentViewScreen(
         showCaseState = showCaseState,
         isExpandedScreen = widthSizeClass == WindowWidthSizeClass.Expanded,
     ) {
-        /*navigator.navigate(
-            ProductImageScreenDestination(it)
-        )*/
+        navigationDestinationsApi.navigateToProductDetailPage(
+            it.imageURL
+        )
     }
 }
 

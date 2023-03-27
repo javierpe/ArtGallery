@@ -20,18 +20,18 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
 fun ProductImageContent(
-    navigator: DestinationsNavigator? = null,
     imageURL: String,
     quantity: Int,
     onAdd: () -> Unit,
-    onDecrement: () -> Unit
+    onDecrement: () -> Unit,
+    onBack: () -> Unit
 ) {
     Scaffold(
         topBar = {
             DynamicListHeaderComponentView(
                 title = "Buy",
                 contextType = ContextType.BANNER_DETAIL,
-                navigator = navigator
+                onBack = onBack
             )
         },
         bottomBar = {
@@ -68,5 +68,5 @@ fun PreviewBannerContent() {
         quantity = 0,
         onAdd = { },
         onDecrement = { }
-    )
+    ) { }
 }

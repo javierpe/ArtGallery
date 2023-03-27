@@ -20,13 +20,15 @@ import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.presentation.components.bannerCarousel.BannerCarouselComponentViewScreen
 import com.javi.dynamic.list.presentation.components.bannerCarousel.BannerCarouselModel
+import com.javi.navigation.api.NavigationContractApi
+import com.javi.navigation.api.NavigationDestinationsApi
 import com.javi.render.data.RenderType
 import com.javi.render.processor.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
 @AdapterFactory
 class BannerCarouselFactory @Inject constructor(
-
+    private val navigationDestinationsApi: NavigationDestinationsApi
 ): DynamicListFactory {
 
     override val renders: List<RenderType>
@@ -55,7 +57,7 @@ class BannerCarouselFactory @Inject constructor(
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState,
             widthSizeClass = componentInfo.dynamicListObject.widthSizeClass,
-            navigator = componentInfo.dynamicListObject.navigator
+            navigationDestinationsApi = navigationDestinationsApi
         )
     }
 

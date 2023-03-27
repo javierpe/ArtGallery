@@ -19,13 +19,14 @@ import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.presentation.components.poster.PosterComponentScreenView
 import com.javi.dynamic.list.presentation.components.poster.PosterModel
+import com.javi.navigation.api.NavigationDestinationsApi
 import com.javi.render.data.RenderType
 import com.javi.render.processor.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
 @AdapterFactory
 class PosterFactory @Inject constructor(
-
+    private val navigationDestinationsApi: NavigationDestinationsApi
 ): DynamicListFactory {
 
     override val renders: List<RenderType> = listOf(RenderType.POSTER)
@@ -43,7 +44,7 @@ class PosterFactory @Inject constructor(
         PosterComponentScreenView(
             model = model.value,
             isExpandedScreen = componentInfo.dynamicListObject.widthSizeClass == WindowWidthSizeClass.Expanded,
-            navigator = componentInfo.dynamicListObject.navigator
+            navigationDestinationsApi = navigationDestinationsApi
         )
     }
 

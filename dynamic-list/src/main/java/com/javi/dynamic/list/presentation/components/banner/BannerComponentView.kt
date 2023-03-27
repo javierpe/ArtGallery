@@ -24,8 +24,8 @@ import com.javi.design.system.molecules.showCase.asShowCaseTarget
 import com.javi.design.system.molecules.showCase.rememberShowCaseState
 import com.javi.design.system.theme.DynamicListComposeTheme
 import com.javi.dynamic.list.R
+import com.javi.navigation.api.NavigationDestinationsApi
 import com.javi.render.data.RenderType
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 const val BANNER_IMAGE_TEST_TAG = "banner-image"
 const val BANNER_IMAGE_SCREEN_TEST_TAG = "banner-image-screen"
@@ -36,7 +36,7 @@ fun BannerComponentViewScreen(
     model: BannerModel,
     componentIndex: Int,
     showCaseState: ShowCaseState,
-    navigator: DestinationsNavigator
+    navigationDestinationsApi: NavigationDestinationsApi
 ) {
     BannerComponentView(
         modifier = modifier.testTag(BANNER_IMAGE_SCREEN_TEST_TAG),
@@ -44,9 +44,9 @@ fun BannerComponentViewScreen(
         componentIndex = componentIndex,
         showCaseState = showCaseState
     ) {
-        /*navigator.navigate(
-            ProductImageScreenDestination(it)
-        )*/
+        navigationDestinationsApi.navigateToProductDetailPage(
+            it.imageURL
+        )
     }
 }
 

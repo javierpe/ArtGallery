@@ -20,13 +20,14 @@ import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.presentation.components.card.CardsComponentViewScreen
 import com.javi.dynamic.list.presentation.components.card.CardsModel
+import com.javi.navigation.api.NavigationDestinationsApi
 import com.javi.render.data.RenderType
 import com.javi.render.processor.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
 @AdapterFactory
 class CardsFactory @Inject constructor(
-
+    private val navigationDestinationsApi: NavigationDestinationsApi
 ): DynamicListFactory {
 
     override val renders: List<RenderType>
@@ -52,7 +53,7 @@ class CardsFactory @Inject constructor(
             data = model.value,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState,
-            navigator = componentInfo.dynamicListObject.navigator
+            navigationDestinationsApi = navigationDestinationsApi
         )
     }
 

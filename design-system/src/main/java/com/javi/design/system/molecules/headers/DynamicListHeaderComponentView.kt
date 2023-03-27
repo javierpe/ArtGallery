@@ -36,7 +36,7 @@ fun DynamicListHeaderComponentView(
     title: String,
     contextType: ContextType,
     bodyLazyListState: LazyListState? = null,
-    navigator: DestinationsNavigator? = null
+    onBack: () -> Unit
 ) {
     val icon = if (contextType == ContextType.HOME) Icons.Default.Star else Icons.Default.ArrowBack
 
@@ -46,9 +46,7 @@ fun DynamicListHeaderComponentView(
             SimpleHeaderView(
                 title = title,
                 icon = icon,
-                onIconClick = {
-                    navigator?.popBackStack()
-                }
+                onIconClick = onBack
             )
         }
 
@@ -59,7 +57,7 @@ fun DynamicListHeaderComponentView(
                 icon = icon,
                 onIconClick = {
                     if (contextType != ContextType.HOME) {
-                        navigator?.popBackStack()
+                        onBack()
                     }
                 }
             )
@@ -126,7 +124,7 @@ fun PreviewHeaderComponentView() {
             title = "Hello from the header view of DynamicList",
             contextType = ContextType.HOME,
             rememberLazyListState()
-        )
+        ) { }
     }
 }
 
@@ -138,6 +136,6 @@ fun PreviewSimpleHeaderComponentView() {
             title = "Hello from the header view of DynamicList",
             contextType = ContextType.HOME,
             rememberLazyListState()
-        )
+        ) { }
     }
 }

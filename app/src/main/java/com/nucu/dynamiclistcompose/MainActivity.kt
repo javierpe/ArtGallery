@@ -13,12 +13,16 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.metrics.performance.JankStats
 import com.javi.design.system.theme.DynamicListComposeTheme
-import com.javi.navigation.MainNavigationHost
+import com.javi.navigation.api.NavigationContractApi
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var navigationContractApi: NavigationContractApi
 
     private var jankStats: JankStats? = null
 
@@ -44,8 +48,7 @@ class MainActivity : ComponentActivity() {
                         },
                     color = colorResource(id = R.color.ic_launcher_background)
                 ) {
-
-                    MainNavigationHost(activity = this@MainActivity)
+                    navigationContractApi.NavHost(activity = this@MainActivity)
                 }
             }
         }
