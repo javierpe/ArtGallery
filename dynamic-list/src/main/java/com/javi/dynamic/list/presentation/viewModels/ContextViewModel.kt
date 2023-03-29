@@ -1,15 +1,12 @@
 package com.javi.dynamic.list.presentation.viewModels
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.javi.data.enums.ContextType
 import com.javi.dynamic.list.data.actions.ContextViewAction
 import com.javi.dynamic.list.data.controllers.DefaultDynamicListController
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 abstract class ContextViewModel: ViewModel() {

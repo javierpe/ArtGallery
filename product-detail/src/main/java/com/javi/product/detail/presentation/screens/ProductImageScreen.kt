@@ -6,7 +6,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.javi.product.detail.presentation.contents.ProductImageContent
 import com.javi.product.detail.viewModels.ProductImageScreenViewModel
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.NavGraph
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 
 @RootNavGraph(start = true)

@@ -35,7 +35,7 @@ fun <T: DynamicListComposeController> DynamicListScreen(
     showCaseState: ShowCaseState,
     bodyListState: LazyListState,
     requestModel: DynamicListRequestModel,
-    dynamicListState: (DynamicListStateAction) -> Unit
+    dynamicListListener: (DynamicListListener) -> Unit
 ) {
 
     DynamicListContent(
@@ -45,7 +45,7 @@ fun <T: DynamicListComposeController> DynamicListScreen(
         dynamicListObject = dynamicListObject,
         showCaseState = showCaseState,
         bodyListState = bodyListState,
-        dynamicListState = dynamicListState,
+        dynamicListListener = dynamicListListener,
         requestModel = requestModel
     )
 }
@@ -59,14 +59,14 @@ private fun DynamicListContent(
     action: ContextViewAction?,
     showCaseState: ShowCaseState,
     bodyListState: LazyListState,
-    dynamicListState: (DynamicListStateAction) -> Unit,
     requestModel: DynamicListRequestModel,
+    dynamicListListener: (DynamicListListener) -> Unit,
     dynamicListViewModel: DynamicListViewModel = hiltViewModel()
 ) {
 
     val uiState by dynamicListViewModel.dynamicListAction.collectAsStateWithLifecycle()
 
-    LaunchedEffect(key1 = requestModel) {
+    LaunchedEffect(requestModel) {
         dynamicListViewModel.load(requestModel)
     }
 
@@ -80,6 +80,9 @@ private fun DynamicListContent(
     when (uiState) {
 
         is DynamicListAction.SkeletonAction -> {
+            dynamicListListener.invoke(
+                DynamicListListener.OnStartLoading
+            )
             bodyAdapterController?.dispatchSkeletons(
                 (uiState as DynamicListAction.SkeletonAction).renderTypes
             )
@@ -87,6 +90,9 @@ private fun DynamicListContent(
         }
 
         is DynamicListAction.LoadingAction -> {
+            dynamicListListener.invoke(
+                DynamicListListener.OnStartLoading
+            )
             LoaderView()
         }
 

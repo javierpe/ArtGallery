@@ -1,11 +1,8 @@
 package com.javi.card.page
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.Button
-import androidx.compose.material.Text
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.javi.card.page.viewModels.CardsPageViewModel
 import com.javi.dynamic.list.presentation.ui.base.ContextView
@@ -29,19 +26,11 @@ fun CardsPage(
     }
 
     Column {
-        Button(onClick = {
-            dynamicListState.requestModel.value = viewModel.requestModel.copy(
-                state = hashMapOf("id" to "2")
-            )
-        }) {
-            Text(text = "Update state")
-        }
-
         ContextView(
             title = title,
             widthSizeClass = widthSizeClass,
             viewModel = viewModel,
-            dynamicListRequestModel = dynamicListState.requestModel.value
+            dynamicListRequestModel = dynamicListState.value
         )
     }
 }

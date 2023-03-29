@@ -7,7 +7,6 @@ import com.javi.dynamic.list.data.api.DynamicListMockResponseApi
 import com.javi.dynamic.list.data.extensions.tryFromJson
 import com.javi.dynamic.list.data.models.DataContentModel
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
-import com.javi.dynamic.list.presentation.ui.base.DynamicListState
 import com.squareup.moshi.Moshi
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject

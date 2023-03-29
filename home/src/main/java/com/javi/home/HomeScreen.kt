@@ -19,10 +19,11 @@ fun HomeScreen(
     val dynamicListRequestModel = rememberDynamicListRequestState {
         viewModel.requestModel
     }
+
     ContextView(
         title = "Art Gallery",
         widthSizeClass = widthSizeClass,
         viewModel = viewModel,
-        dynamicListRequestModel = dynamicListRequestModel.requestModel.value
+        dynamicListRequestModel = dynamicListRequestModel.value
     )
 }
