@@ -53,7 +53,7 @@ class ComponentsCreator(
 
         val render = PropertySpec
             .builder(PROP_PARENT_MODEL_RENDER_NAME, String::class)
-            .initializer(" \"\"")
+            .initializer("\"\"")
             .addAnnotation(
                 AnnotationSpec
                     .builder(ClassName(PACKAGE_MOSHI, listOf("Json")))

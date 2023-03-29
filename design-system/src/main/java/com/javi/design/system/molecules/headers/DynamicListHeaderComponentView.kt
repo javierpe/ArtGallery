@@ -26,7 +26,6 @@ import com.javi.design.system.molecules.showCase.asShowCaseTarget
 import com.javi.design.system.molecules.showCase.rememberShowCaseState
 import com.javi.design.system.theme.DynamicListComposeTheme
 import com.javi.design.system.theme.Typography
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 /**
  * Define header design by context

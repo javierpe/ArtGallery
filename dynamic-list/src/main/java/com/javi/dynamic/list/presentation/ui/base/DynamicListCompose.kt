@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,121 +21,146 @@ import com.javi.design.system.atoms.ErrorView
 import com.javi.design.system.atoms.LoaderView
 import com.javi.design.system.molecules.showCase.ShowCaseState
 import com.javi.dynamic.list.data.controllers.DynamicListComposeController
-import com.javi.dynamic.list.data.controllers.DynamicListComposeLoader
 import com.javi.dynamic.list.data.models.DynamicListObject
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.presentation.viewModels.DynamicListViewModel
 
-class DynamicListCompose(
-    requestModel: DynamicListRequestModel
-) : DynamicListComposeLoader() {
+@Suppress("LongParameterList")
+@Composable
+fun <T: DynamicListComposeController> DynamicListScreen(
+    bodyAdapterController: T,
+    headerAdapterController: T,
+    action: ContextViewAction?,
+    dynamicListObject: DynamicListObject,
+    showCaseState: ShowCaseState,
+    bodyListState: LazyListState,
+    requestModel: DynamicListRequestModel,
+    dynamicListState: (DynamicListStateAction) -> Unit
+) {
 
-    private var bodyComposeController: DynamicListComposeController? = null
-    private var headerComposeController: DynamicListComposeController? = null
+    DynamicListContent(
+        bodyAdapterController = bodyAdapterController,
+        headerAdapterController = headerAdapterController,
+        action = action,
+        dynamicListObject = dynamicListObject,
+        showCaseState = showCaseState,
+        bodyListState = bodyListState,
+        dynamicListState = dynamicListState,
+        requestModel = requestModel
+    )
+}
 
-    private val dynamicListRequestModel = mutableStateOf<DynamicListRequestModel?>(requestModel)
+@Suppress("LongParameterList")
+@Composable
+private fun DynamicListContent(
+    bodyAdapterController: DynamicListComposeController? = null,
+    headerAdapterController: DynamicListComposeController? = null,
+    dynamicListObject: DynamicListObject,
+    action: ContextViewAction?,
+    showCaseState: ShowCaseState,
+    bodyListState: LazyListState,
+    dynamicListState: (DynamicListStateAction) -> Unit,
+    requestModel: DynamicListRequestModel,
+    dynamicListViewModel: DynamicListViewModel = hiltViewModel()
+) {
 
-    @Composable
-    override fun <T: DynamicListComposeController> DynamicListScreen(
-        bodyAdapterController: T,
-        headerAdapterController: T,
-        action: ContextViewAction?,
-        dynamicListObject: DynamicListObject,
-        showCaseState: ShowCaseState,
-        bodyListState: LazyListState
-    ) {
-        this.bodyComposeController = bodyAdapterController
-        this.headerComposeController = headerAdapterController
+    val uiState by dynamicListViewModel.dynamicListAction.collectAsStateWithLifecycle()
 
-        DynamicListContent(
-            action = action,
-            dynamicListObject = dynamicListObject,
-            showCaseState = showCaseState,
-            bodyListState = bodyListState,
-        )
+    LaunchedEffect(key1 = requestModel) {
+        dynamicListViewModel.load(requestModel)
     }
 
-    @Composable
-    private fun DynamicListContent(
-        dynamicListObject: DynamicListObject,
-        action: ContextViewAction?,
-        showCaseState: ShowCaseState,
-        bodyListState: LazyListState,
-        dynamicListViewModel: DynamicListViewModel = hiltViewModel()
-    ) {
-        val dynamicListState by dynamicListViewModel.dynamicListAction.collectAsStateWithLifecycle()
+    action?.let {
+        when (it) {
+            is ContextViewAction.Reload -> dynamicListViewModel.load(requestModel)
+            else -> Unit
+        }
+    }
 
-        action?.let {
-            when (it) {
-                is ContextViewAction.Reload -> dynamicListViewModel.load(dynamicListRequestModel.value!!)
+    when (uiState) {
+
+        is DynamicListAction.SkeletonAction -> {
+            bodyAdapterController?.dispatchSkeletons(
+                (uiState as DynamicListAction.SkeletonAction).renderTypes
+            )
+            bodyAdapterController?.DynamicListSkeletons()
+        }
+
+        is DynamicListAction.LoadingAction -> {
+            LoaderView()
+        }
+
+        is DynamicListAction.ErrorAction -> {
+            ErrorView((uiState as DynamicListAction.ErrorAction).exception) {
+                dynamicListViewModel.load(requestModel)
             }
         }
 
-        when (dynamicListState) {
-
-            is DynamicListAction.SkeletonAction -> {
-                val skeletons = (dynamicListState as DynamicListAction.SkeletonAction).renderTypes
-                bodyComposeController?.dispatchSkeletons(skeletons)
-                bodyComposeController?.DynamicListSkeletons()
-            }
-
-            is DynamicListAction.LoadingAction -> {
-                LoaderView()
-                dynamicListViewModel.load(dynamicListRequestModel.value!!)
-            }
-
-            is DynamicListAction.ErrorAction ->
-                ErrorView((dynamicListState as DynamicListAction.ErrorAction).exception) {
-                dynamicListViewModel.load(dynamicListRequestModel.value!!)
-            }
-
-            is DynamicListAction.SuccessAction -> {
-                val dynamicListAction = (dynamicListState as DynamicListAction.SuccessAction)
-                bodyComposeController?.dispatchShowCaseSequence(dynamicListAction.showCaseQueue)
-
-                val actionBody = remember {
-                    mutableStateOf<ScrollAction?>(null)
-                }
-
-                DynamicListView(
-                    dynamicListObject = dynamicListObject,
-                    contentHeader = {
-                        headerComposeController?.ComposeHeader(
-                            dynamicListObject = dynamicListObject,
-                            showCaseState = showCaseState,
-                            elements = dynamicListAction.header
-                        ) {
-                            if (it.target == TargetAction.BODY) {
-                                actionBody.value = it
-                            }
-                        }
-                    },
-                    contentBody = {
-                        bodyComposeController?.ComposeBody(
-                            dynamicListObject = dynamicListObject,
-                            sharedAction = actionBody.value,
-                            showCaseState = showCaseState,
-                            bodyListState = bodyListState,
-                            elements = dynamicListAction.body
-                        ) {
-                            if (it.target == TargetAction.BODY) {
-                                actionBody.value = it
-                            }
-                        }
-                    }
-                )
-            }
+        is DynamicListAction.SuccessAction -> {
+            DynamicListSuccess(
+                action = (uiState as DynamicListAction.SuccessAction),
+                headerComposeController = headerAdapterController,
+                bodyComposeController = bodyAdapterController,
+                dynamicListObject = dynamicListObject,
+                showCaseState = showCaseState,
+                bodyListState = bodyListState
+            )
         }
     }
 }
 
+@Suppress("LongParameterList")
 @Composable
-fun DynamicListView(
+fun DynamicListSuccess(
+    action: DynamicListAction.SuccessAction,
+    headerComposeController: DynamicListComposeController? = null,
+    bodyComposeController: DynamicListComposeController? = null,
     dynamicListObject: DynamicListObject,
+    showCaseState: ShowCaseState,
+    bodyListState: LazyListState
+) {
+    bodyComposeController?.dispatchShowCaseSequence(action.showCaseQueue)
+
+    val actionBody = remember {
+        mutableStateOf<ScrollAction?>(null)
+    }
+
+    DynamicListLayout(
+        widthSizeClass = dynamicListObject.widthSizeClass,
+        contentHeader = {
+            headerComposeController?.ComposeHeader(
+                dynamicListObject = dynamicListObject,
+                showCaseState = showCaseState,
+                elements = action.header
+            ) {
+                if (it.target == TargetAction.BODY) {
+                    actionBody.value = it
+                }
+            }
+        },
+        contentBody = {
+            bodyComposeController?.ComposeBody(
+                dynamicListObject = dynamicListObject,
+                sharedAction = actionBody.value,
+                showCaseState = showCaseState,
+                bodyListState = bodyListState,
+                elements = action.body
+            ) {
+                if (it.target == TargetAction.BODY) {
+                    actionBody.value = it
+                }
+            }
+        }
+    )
+}
+
+@Composable
+fun DynamicListLayout(
+    widthSizeClass: WindowWidthSizeClass,
     contentHeader: @Composable () -> Unit,
     contentBody: @Composable () -> Unit
 ) {
-    when(dynamicListObject.widthSizeClass) {
+    when(widthSizeClass) {
         WindowWidthSizeClass.Compact -> {
             Column {
                 contentHeader()

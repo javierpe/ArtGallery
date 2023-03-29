@@ -53,6 +53,16 @@ kotlin {
 
 dependencies {
 
+    // Gson
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.moshi:moshi-kotlin:1.14.0"
+    implementation "com.squareup.moshi:moshi-adapters:1.13.0"
+    ksp 'com.squareup.moshi:moshi-kotlin-codegen:1.14.0'
+
+    // Render processor
+    implementation(project(":render-processor"))
+    ksp(project(":render-processor"))
+
     // Navigation
     implementation project(":navigation:api")
 
@@ -72,22 +82,12 @@ dependencies {
     // Design System
     implementation project(":design-system")
 
-    // Render processor
-    implementation(project(":render-processor"))
-    ksp(project(":render-processor"))
-
     // Coil (Bad performance in debug mode)
     implementation "io.coil-kt:coil-compose:2.2.2"
 
     // Performance
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
     implementation "androidx.metrics:metrics-performance:1.0.0-alpha03"
-
-    // Gson
-    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
-    implementation "com.squareup.moshi:moshi-kotlin:1.14.0"
-    implementation "com.squareup.moshi:moshi-adapters:1.13.0"
-    ksp 'com.squareup.moshi:moshi-kotlin-codegen:1.14.0'
 
     // Pager
     implementation "com.google.accompanist:accompanist-pager:0.26.2-beta"

@@ -10,6 +10,7 @@ import javax.inject.Inject
 class CardsPageViewModel @Inject constructor(): ContextViewModel() {
 
     override val context: ContextType = ContextType.CARDS
+
     override val requestModel: DynamicListRequestModel = DynamicListRequestModel(
         contextType = ContextType.CARDS
     )

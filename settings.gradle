@@ -14,9 +14,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "DynamicListCompose"
 include ':app'
-include ':dynamic-list'
 include ':app:benchmark'
-include ':render-processor'
 include ':basket'
 include ':basket:api'
 include ':basket:impl'
@@ -35,3 +33,5 @@ include ':navigation:api'
 include ':navigation:wiring'
 include ':navigation:impl'
 include ':cards-page'
+include ':render-processor'
+include ':dynamic-list'

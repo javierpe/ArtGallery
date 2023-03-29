@@ -11,7 +11,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -25,8 +24,10 @@ class DynamicListViewModel @Inject constructor(
     private var job: Job? = null
 
     private val _dynamicListAction = MutableStateFlow<DynamicListAction>(
-        DynamicListAction.LoadingAction)
-    val dynamicListAction: StateFlow<DynamicListAction> = _dynamicListAction.asStateFlow()
+        DynamicListAction.LoadingAction
+    )
+
+    val dynamicListAction: StateFlow<DynamicListAction> = _dynamicListAction
 
     init {
         viewModelScope.launch {
@@ -34,10 +35,10 @@ class DynamicListViewModel @Inject constructor(
         }
     }
 
-    fun load(requestModel: DynamicListRequestModel) {
+    fun load(dynamicListRequestModel: DynamicListRequestModel) {
         job?.cancel()
         job = viewModelScope.launch {
-            useCase.get(0, requestModel)
+            useCase.get(0, dynamicListRequestModel)
                 .combine(basketApi.basketProducts) { data, basket ->
                     if (basket.isNotEmpty() && data is DynamicListAction.SuccessAction) {
                         data.propagateBasketProducts(basket)
@@ -45,8 +46,8 @@ class DynamicListViewModel @Inject constructor(
                         data
                     }
                 }.collect {
-                _dynamicListAction.value = it
-            }
+                    _dynamicListAction.emit(it)
+                }
         }
     }
 }
