@@ -84,7 +84,7 @@ class FacesFactory @Inject constructor(
 @Composable
 fun FacesSkeletonItem() {
 
-    val size = 67.dp
+    val size = 70.dp
     val roundedText = 6.dp
     val heightText = 13.dp
 

@@ -61,6 +61,11 @@ fun DynamicListHeaderComponentView(
                 }
             )
         }
+        else -> {
+            TextHeaderView(
+                title = title,
+            )
+        }
     }
 }
 
@@ -113,6 +118,20 @@ fun SimpleHeaderView(
             )
         }
     }
+}
+
+@Composable
+fun TextHeaderView(
+    title: String,
+) {
+    Text(
+        modifier = Modifier
+            .padding(16.dp)
+            .wrapContentHeight(),
+        text = title,
+        style = Typography.h4,
+        color = MaterialTheme.colors.secondary
+    )
 }
 
 @Composable

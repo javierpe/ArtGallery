@@ -1,7 +1,8 @@
 package com.javi.data.enums
 
 enum class ContextType constructor(val source: String) {
-    HOME("HOME"),
-    BANNER_DETAIL("BANNER_DETAIL"),
-    CARDS("CARDS")
+    HOME("home"),
+    BANNER_DETAIL("banner_detail"),
+    CARDS("cards"),
+    PLACES("places")
 }

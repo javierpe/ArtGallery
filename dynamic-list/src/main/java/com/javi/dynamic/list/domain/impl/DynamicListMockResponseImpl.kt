@@ -29,6 +29,7 @@ class DynamicListMockResponseImpl @Inject constructor(
         return when(dynamicListRequestModel.contextType) {
             ContextType.HOME -> R.raw.response_home
             ContextType.CARDS -> getCards(dynamicListRequestModel.state)
+            ContextType.PLACES -> R.raw.response_places
             else -> R.raw.response_home
         }
     }

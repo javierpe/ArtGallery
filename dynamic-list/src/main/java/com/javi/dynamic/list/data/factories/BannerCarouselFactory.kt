@@ -4,7 +4,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
@@ -64,14 +66,16 @@ class BannerCarouselFactory @Inject constructor(
     @Composable
     override fun CreateSkeleton() {
         Row(
-            modifier = Modifier.testTag("skeleton"),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag("skeleton"),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(16.dp))
-                    .wrapContentWidth()
-                    .height(100.dp)
+                    .height(300.dp)
+                    .width(350.dp)
                     .background(MaterialTheme.colors.primary)
             )
 
@@ -79,7 +83,8 @@ class BannerCarouselFactory @Inject constructor(
                 modifier = Modifier
                     .clip(RoundedCornerShape(16.dp))
                     .wrapContentWidth()
-                    .height(100.dp)
+                    .height(300.dp)
+                    .width(350.dp)
                     .background(MaterialTheme.colors.primary)
             )
         }

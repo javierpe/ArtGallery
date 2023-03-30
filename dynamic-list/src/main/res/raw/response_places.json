@@ -1,0 +1,87 @@
+{
+  "header": [
+  ],
+  "body": [
+    {
+      "render": "text",
+      "index": 0,
+      "resource": {
+        "text": "Italy"
+      }
+    },
+    {
+      "render": "banner_carousel",
+      "index": 1,
+      "resource": {
+        "banners": [
+          {
+            "product": {
+              "id": 50,
+              "quantity": 0,
+              "image_url": "https://i.pinimg.com/564x/33/f2/98/33f298d1f1887073f23fd3d2d9b80a4a.jpg"
+            },
+            "info": {
+              "title": "Tuscany",
+              "description": "Italy"
+            }
+          },
+          {
+            "product": {
+              "id": 51,
+              "quantity": 0,
+              "image_url": "https://i.pinimg.com/564x/2a/3c/6d/2a3c6d950e02eab46f59c7965a4169a7.jpg"
+            },
+            "info": {
+              "title": "Florence",
+              "description": "Italy"
+            }
+          },
+          {
+            "product": {
+              "id": 52,
+              "quantity": 0,
+              "image_url": "https://i.pinimg.com/564x/3a/c4/69/3ac469bc1f5f2eba493fb7cf68a6a592.jpg"
+            },
+            "info": {
+              "title": "Milan",
+              "description": "Italy"
+            }
+          },
+          {
+            "product": {
+              "id": 53,
+              "quantity": 0,
+              "image_url": "https://i.pinimg.com/564x/97/46/c5/9746c5fe448115692b99eb4f338e41ca.jpg"
+            },
+            "info": {
+              "title": "Venice",
+              "description": "Italy"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "render": "text",
+      "index": 2,
+      "resource": {
+        "text": "The most famous..."
+      }
+    },
+    {
+      "render": "banner",
+      "index": 3,
+      "resource": {
+        "product": {
+          "id": 54,
+          "quantity": 0,
+          "image_url": "https://i.pinimg.com/564x/83/3c/2d/833c2da8360a3bf6fb277f8bac2afbca.jpg"
+        },
+        "info": {
+          "title": "Monna Lisa",
+          "description": "Leonardo Da Vinci"
+        }
+      }
+    }
+  ]
+}

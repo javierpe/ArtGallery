@@ -9,9 +9,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Build
+import androidx.compose.material.icons.rounded.Create
 import androidx.compose.material.icons.rounded.Favorite
+import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material.icons.rounded.KeyboardArrowDown
+import androidx.compose.material.icons.rounded.Place
 import androidx.compose.material.icons.rounded.ShoppingCart
 import androidx.compose.material.icons.rounded.Star
+import androidx.compose.material.icons.rounded.ThumbUp
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
@@ -26,6 +32,8 @@ import com.javi.design.system.data.models.NavigationBarItem
 import com.javi.design.system.molecules.NavigationBar
 import com.javi.home.HomeNavGraph
 import com.javi.home.destinations.HomeScreenDestination
+import com.javi.places.page.PlacesPageNavGraph
+import com.javi.places.page.destinations.PlacesPageDestination
 import com.javi.product.detail.presentation.screens.ProductDetailNavGraph
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
@@ -85,8 +93,10 @@ fun MainNavigationHost(
                     NavigationBarItem(name = "Favorites", icon = Icons.Rounded.Favorite) {
 
                     },
-                    NavigationBarItem(name = "Basket", icon = Icons.Rounded.ShoppingCart) {
-
+                    NavigationBarItem(name = "Places", icon = Icons.Rounded.Place) {
+                        navHostController.value?.navigate(
+                            direction = PlacesPageDestination()
+                        )
                     }
                 )
             )
@@ -116,6 +126,7 @@ object RootNavGraph: NavGraphSpec {
     override val nestedNavGraphs = listOf(
         HomeNavGraph,
         ProductDetailNavGraph,
-        CardsPageNavGraph
+        CardsPageNavGraph,
+        PlacesPageNavGraph
     )
 }
