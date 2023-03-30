@@ -8,18 +8,22 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Favorite
+import androidx.compose.material.icons.rounded.ShoppingCart
+import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.javi.card.page.CardsPageNavGraph
+import com.javi.design.system.data.models.NavigationBarItem
+import com.javi.design.system.molecules.NavigationBar
 import com.javi.home.HomeNavGraph
 import com.javi.home.destinations.HomeScreenDestination
 import com.javi.product.detail.presentation.screens.ProductDetailNavGraph
@@ -27,6 +31,7 @@ import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
 import com.ramcosta.composedestinations.navigation.dependency
+import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.spec.DestinationSpec
 import com.ramcosta.composedestinations.spec.NavGraphSpec
 import com.ramcosta.composedestinations.utils.currentDestinationAsState
@@ -60,27 +65,41 @@ fun MainNavigationHost(
         )
     )
 
-    val showBottomBar = rememberSaveable {
-        mutableStateOf(false)
+    val navHostController = remember {
+        mutableStateOf<NavController?>(null)
     }
+
+    val currentDestination = navHostController.value?.currentDestinationAsState()
 
     Scaffold(
         bottomBar = {
-            if (showBottomBar.value) {
-                Text(text = "Bottom bar", color = Color.Black)
-            }
+            NavigationBar(
+                navItems = listOf(
+                    NavigationBarItem(name = "Home", icon = Icons.Rounded.Star) {
+                        if (currentDestination?.value != HomeScreenDestination) {
+                            navHostController.value?.navigate(
+                                direction = HomeScreenDestination()
+                            )
+                        }
+                    },
+                    NavigationBarItem(name = "Favorites", icon = Icons.Rounded.Favorite) {
+
+                    },
+                    NavigationBarItem(name = "Basket", icon = Icons.Rounded.ShoppingCart) {
+
+                    }
+                )
+            )
         }
     ) { paddingValues ->
-        Box(
-            modifier = Modifier.padding(paddingValues)
-        ) {
+        Box(modifier = Modifier.padding(paddingValues)) {
             DestinationsNavHost(
                 navGraph = RootNavGraph,
                 engine = navHostEngine,
                 dependenciesContainerBuilder = {
                     dependency(calculateWindowSizeClass(activity).widthSizeClass)
                     onNavController(navController)
-                    showBottomBar.value = navController.currentDestinationAsState().value == HomeScreenDestination
+                    navHostController.value = navController
                 }
             )
         }

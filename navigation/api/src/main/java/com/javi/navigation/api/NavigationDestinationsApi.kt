@@ -11,7 +11,10 @@ interface NavigationDestinationsApi {
 
     fun popBackStack()
 
-    fun navigateToProductDetailPage(imageURL: String)
+    fun navigateToProductDetailPage(
+        launchSingle: Boolean = false,
+        imageURL: String
+    )
 
     fun navigateToCardsPage(
         id: Int,

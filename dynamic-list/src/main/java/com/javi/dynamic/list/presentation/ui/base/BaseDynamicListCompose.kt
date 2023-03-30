@@ -22,7 +22,7 @@ fun ContextView(
     title: String,
     widthSizeClass: WindowWidthSizeClass,
     dynamicListRequestModel: DynamicListRequestModel,
-    viewModel: ContextViewModel,
+    viewModel: ContextViewModel
 ) {
 
     val action by viewModel.contextViewAction.collectAsStateWithLifecycle(

@@ -223,7 +223,7 @@ private fun constraintSetEnd() = ConstraintSet (""" {
 		top: ['parent', 'top'],
         height: $MIN_HEIGHT,
         custom: {
-          background: '#FFF6EFED'
+          background: '#FFFFFF'
         }
 	},
 	title: {

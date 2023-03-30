@@ -9,7 +9,7 @@ import com.javi.product.detail.presentation.screens.destinations.ProductImageScr
 import com.ramcosta.composedestinations.navigation.navigate
 import javax.inject.Inject
 
-const val ANIMATION_DURATION = 700
+const val ANIMATION_DURATION = 300
 private const val MESSAGE = "Call first to setUp to set a NavController!"
 
 class NavigationDestinationsImpl @Inject constructor(
@@ -29,6 +29,7 @@ class NavigationDestinationsImpl @Inject constructor(
     }
 
     override fun navigateToProductDetailPage(
+        launchSingle: Boolean,
         imageURL: String
     ) {
 

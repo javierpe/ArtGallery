@@ -47,7 +47,7 @@ fun BannerCarouselComponentViewScreen(
         isExpandedScreen = widthSizeClass == WindowWidthSizeClass.Expanded,
     ) {
         navigationDestinationsApi.navigateToProductDetailPage(
-            it.imageURL
+           imageURL = it.imageURL
         )
     }
 }

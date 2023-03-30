@@ -13,7 +13,7 @@ class NavigationContractImpl @Inject constructor(
     @Composable
     override fun NavHost(activity: Activity) {
         MainNavigationHost(
-            activity
+            activity,
         ) {
             navigationDestinationsApi.setUp(it)
         }

@@ -45,7 +45,7 @@ fun BannerComponentViewScreen(
         showCaseState = showCaseState
     ) {
         navigationDestinationsApi.navigateToProductDetailPage(
-            it.imageURL
+            imageURL = it.imageURL
         )
     }
 }
