@@ -1,5 +1,6 @@
 package com.javi.navigation.impl
 
+import android.net.Uri
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.navigation.NavController
@@ -56,6 +57,12 @@ class NavigationDestinationsImpl @Inject constructor(
                 title = title
             )
         )
+    }
+
+    override fun navigate(uri: Uri) {
+        checkNavController()
+
+        navController?.navigate(uri)
     }
 
     private fun checkNavController() {

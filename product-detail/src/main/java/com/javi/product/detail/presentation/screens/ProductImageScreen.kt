@@ -1,5 +1,6 @@
 package com.javi.product.detail.presentation.screens
 
+import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -14,7 +15,8 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 @Destination(
     deepLinks = [
         DeepLink(
-            uriPattern = "${DEEPLINK_MAIN}product_detail/{imageUrl}"
+            uriPattern = "${DEEPLINK_MAIN}product_image_screen/{imageUrl}/",
+            action = Intent.ACTION_VIEW
         )
     ]
 )

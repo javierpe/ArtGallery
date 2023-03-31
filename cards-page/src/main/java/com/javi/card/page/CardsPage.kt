@@ -1,5 +1,6 @@
 package com.javi.card.page
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
@@ -16,7 +17,7 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 @Destination(
     deepLinks = [
         DeepLink(
-            uriPattern = "${DEEPLINK_MAIN}cards_page/{id}/{title}"
+            uriPattern = "${DEEPLINK_MAIN}cards_page/{id}/{title}/",
         )
     ]
 )

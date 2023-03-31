@@ -1,5 +1,6 @@
 package com.javi.navigation.api
 
+import android.net.Uri
 import androidx.navigation.NavController
 
 interface NavigationDestinationsApi {
@@ -20,4 +21,6 @@ interface NavigationDestinationsApi {
         id: Int,
         title: String
     )
+
+    fun navigate(uri: Uri)
 }
