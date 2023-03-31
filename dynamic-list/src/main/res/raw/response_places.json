@@ -3,15 +3,22 @@
   ],
   "body": [
     {
-      "render": "text",
+      "render": "message",
       "index": 0,
+      "resource": {
+        "message": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    },
+    {
+      "render": "text",
+      "index": 1,
       "resource": {
         "text": "Italy"
       }
     },
     {
       "render": "banner_carousel",
-      "index": 1,
+      "index": 2,
       "resource": {
         "banners": [
           {
@@ -63,14 +70,14 @@
     },
     {
       "render": "text",
-      "index": 2,
+      "index": 3,
       "resource": {
         "text": "The most famous..."
       }
     },
     {
       "render": "banner",
-      "index": 3,
+      "index": 4,
       "resource": {
         "product": {
           "id": 54,
@@ -81,6 +88,17 @@
           "title": "Monna Lisa",
           "description": "Leonardo Da Vinci"
         }
+      }
+    },
+    {
+      "render": "profile",
+      "index": 5,
+      "resource": {
+        "name": "Leonardo Da Vinci",
+        "short_description": "Renaissance",
+        "life_date": "1452 - 1519",
+        "country": "Anchiano, Florencia",
+        "color": "#CDC6A0"
       }
     }
   ]

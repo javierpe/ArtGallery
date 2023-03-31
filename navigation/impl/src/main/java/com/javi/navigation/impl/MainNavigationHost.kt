@@ -26,6 +26,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import androidx.navigation.Navigator
+import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.javi.card.page.CardsPageNavGraph
 import com.javi.design.system.data.models.NavigationBarItem
@@ -41,6 +43,7 @@ import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
 import com.ramcosta.composedestinations.navigation.dependency
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.spec.DestinationSpec
+import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
 import com.ramcosta.composedestinations.spec.NavGraphSpec
 import com.ramcosta.composedestinations.utils.currentDestinationAsState
 
@@ -81,40 +84,42 @@ fun MainNavigationHost(
 
     Scaffold(
         bottomBar = {
-            NavigationBar(
-                navItems = listOf(
-                    NavigationBarItem(name = "Home", icon = Icons.Rounded.Star) {
-                        if (currentDestination?.value != HomeScreenDestination) {
+            if (currentDestination?.value?.isWhiteListed() == true) {
+                NavigationBar(
+                    navItems = listOf(
+                        NavigationBarItem(name = "Home", icon = Icons.Rounded.Star) {
+                            if (currentDestination.value != HomeScreenDestination) {
+                                navHostController.value?.navigate(
+                                    direction = HomeScreenDestination()
+                                )
+                            }
+                        },
+                        NavigationBarItem(name = "Favorites", icon = Icons.Rounded.Favorite) {
+
+                        },
+                        NavigationBarItem(name = "Places", icon = Icons.Rounded.Place) {
                             navHostController.value?.navigate(
-                                direction = HomeScreenDestination()
+                                direction = PlacesPageDestination()
                             )
                         }
-                    },
-                    NavigationBarItem(name = "Favorites", icon = Icons.Rounded.Favorite) {
-
-                    },
-                    NavigationBarItem(name = "Places", icon = Icons.Rounded.Place) {
-                        navHostController.value?.navigate(
-                            direction = PlacesPageDestination()
-                        )
-                    }
+                    )
                 )
-            )
+            }
         }
     ) { paddingValues ->
-        Box(modifier = Modifier.padding(paddingValues)) {
-            DestinationsNavHost(
-                navGraph = RootNavGraph,
-                engine = navHostEngine,
-                dependenciesContainerBuilder = {
-                    dependency(calculateWindowSizeClass(activity).widthSizeClass)
-                    onNavController(navController)
-                    navHostController.value = navController
-                }
-            )
-        }
+        DestinationsNavHost(
+            modifier = Modifier.padding(paddingValues),
+            navGraph = RootNavGraph,
+            engine = navHostEngine,
+            dependenciesContainerBuilder = {
+                dependency(calculateWindowSizeClass(activity).widthSizeClass)
+                onNavController(navController)
+                navHostController.value = navController
+            }
+        )
     }
 }
+
 object RootNavGraph: NavGraphSpec {
 
     override val route = "root"
@@ -129,4 +134,8 @@ object RootNavGraph: NavGraphSpec {
         CardsPageNavGraph,
         PlacesPageNavGraph
     )
+}
+
+fun DestinationSpec<*>.isWhiteListed(): Boolean {
+    return this == HomeScreenDestination || this == PlacesPageDestination
 }

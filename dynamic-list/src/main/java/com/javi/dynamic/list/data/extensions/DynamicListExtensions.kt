@@ -1,13 +1,13 @@
 package com.javi.dynamic.list.data.extensions
 
 import com.javi.data.ProductImageModel
-import com.javi.dynamic.list.data.actions.DynamicListAction
+import com.javi.dynamic.list.data.actions.DynamicListUIEvents
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.session.SessionAware
 
-fun DynamicListAction.SuccessAction.propagateBasketProducts(
+fun DynamicListUIEvents.SuccessAction.propagateBasketProducts(
     basketProducts: List<ProductImageModel>
-): DynamicListAction.SuccessAction {
+): DynamicListUIEvents.SuccessAction {
     val updatedBody = container.body.map { componentItemModel ->
         componentItemModel.updateSession(basketProducts)
     }
@@ -18,7 +18,7 @@ fun DynamicListAction.SuccessAction.propagateBasketProducts(
         )
     }
 
-    return DynamicListAction.SuccessAction(
+    return DynamicListUIEvents.SuccessAction(
         container = container.copy(body = updatedBody),
         body = updateDynamicListElementBody,
         header = header,

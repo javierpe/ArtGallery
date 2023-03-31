@@ -6,16 +6,19 @@ import com.javi.dynamic.list.data.models.DynamicListShowCaseModel
 import com.javi.render.data.RenderType
 import java.util.*
 
-sealed class DynamicListAction {
+sealed class DynamicListUIEvents {
+
+    object None: DynamicListUIEvents()
+
     /**
      * Show loader view
      */
-    object LoadingAction : DynamicListAction()
+    object LoadingAction : DynamicListUIEvents()
 
     /**
      * Show error view
      */
-    class ErrorAction(val exception: Throwable): DynamicListAction()
+    class ErrorAction(val exception: Throwable): DynamicListUIEvents()
 
     /**
      * Show data from response
@@ -25,10 +28,10 @@ sealed class DynamicListAction {
         val body: List<DynamicListElement> = emptyList(),
         val header: List<DynamicListElement> = emptyList(),
         val showCaseQueue: Queue<DynamicListShowCaseModel> = LinkedList()
-    ): DynamicListAction()
+    ): DynamicListUIEvents()
 
     /**
      * Show skeleton
      */
-    class SkeletonAction(val renderTypes: List<RenderType>): DynamicListAction()
+    class SkeletonAction(val renderTypes: List<RenderType>): DynamicListUIEvents()
 }

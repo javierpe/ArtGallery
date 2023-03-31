@@ -1,6 +1,7 @@
 package com.javi.dynamic.list.domain.useCases
 
-import com.javi.dynamic.list.data.actions.DynamicListAction
+import android.util.Log
+import com.javi.dynamic.list.data.actions.DynamicListUIEvents
 import com.javi.api.TooltipPreferencesApi
 import com.javi.dynamic.list.data.api.DynamicListControllerApi
 import com.javi.dynamic.list.data.api.DynamicListUseCaseApi
@@ -38,12 +39,12 @@ class DynamicListUseCaseImpl @Inject constructor(
         page: Int,
         requestModel: DynamicListRequestModel,
         withSkeletons: Boolean
-    ): Flow<DynamicListAction> {
+    ): Flow<DynamicListUIEvents> {
         return controller
             .get(page, requestModel)
             .map {
                 // Save skeletons
-                if (it is DynamicListAction.SuccessAction) {
+                if (it is DynamicListUIEvents.SuccessAction) {
 
                     val showCaseSequence: Queue<DynamicListShowCaseModel> = LinkedList()
 
@@ -94,7 +95,7 @@ class DynamicListUseCaseImpl @Inject constructor(
                         DynamicListShowCaseModel("", 0, true)
                     )
 
-                    DynamicListAction.SuccessAction(
+                    DynamicListUIEvents.SuccessAction(
                         container = it.container,
                         body = bodyElements,
                         header = headerElements,
@@ -105,7 +106,7 @@ class DynamicListUseCaseImpl @Inject constructor(
                 }
             }
             .onEach {
-                if (it is DynamicListAction.SuccessAction) {
+                if (it is DynamicListUIEvents.SuccessAction) {
                     saveSkeletons(
                         it.container.body,
                         it.container.header,
@@ -122,15 +123,15 @@ class DynamicListUseCaseImpl @Inject constructor(
                     }
 
                     skeletonContext?.let {
-                        emit(DynamicListAction.SkeletonAction(it.renders))
+                        emit(DynamicListUIEvents.SkeletonAction(it.renders))
                     } ?: kotlin.run {
-                        emit(DynamicListAction.LoadingAction)
+                        emit(DynamicListUIEvents.LoadingAction)
                     }
                 }
             }
             .catch {
-                println(it)
-                emit(DynamicListAction.ErrorAction(it))
+                Log.e("DL_ERROR", it.message.toString())
+                emit(DynamicListUIEvents.ErrorAction(it))
             }
             .flowOn(ioDispatcher)
     }

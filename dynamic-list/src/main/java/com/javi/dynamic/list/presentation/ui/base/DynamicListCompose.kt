@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.javi.dynamic.list.data.actions.ContextViewAction
-import com.javi.dynamic.list.data.actions.DynamicListAction
+import com.javi.dynamic.list.data.actions.DynamicListUIEvents
 import com.javi.dynamic.list.data.actions.ScrollAction
 import com.javi.dynamic.list.data.actions.TargetAction
 import com.javi.design.system.atoms.ErrorView
@@ -37,7 +37,6 @@ fun <T: DynamicListComposeController> DynamicListScreen(
     requestModel: DynamicListRequestModel,
     dynamicListListener: (DynamicListListener) -> Unit
 ) {
-
     DynamicListContent(
         bodyAdapterController = bodyAdapterController,
         headerAdapterController = headerAdapterController,
@@ -70,8 +69,8 @@ private fun DynamicListContent(
         dynamicListViewModel.load(requestModel)
     }
 
-    action?.let {
-        when (it) {
+    LaunchedEffect(action) {
+        when (action) {
             is ContextViewAction.Reload -> dynamicListViewModel.load(requestModel)
             else -> Unit
         }
@@ -79,32 +78,32 @@ private fun DynamicListContent(
 
     when (uiState) {
 
-        is DynamicListAction.SkeletonAction -> {
+        is DynamicListUIEvents.SkeletonAction -> {
             dynamicListListener.invoke(
                 DynamicListListener.OnStartLoading
             )
             bodyAdapterController?.dispatchSkeletons(
-                (uiState as DynamicListAction.SkeletonAction).renderTypes
+                (uiState as DynamicListUIEvents.SkeletonAction).renderTypes
             )
             bodyAdapterController?.DynamicListSkeletons()
         }
 
-        is DynamicListAction.LoadingAction -> {
+        is DynamicListUIEvents.LoadingAction -> {
             dynamicListListener.invoke(
                 DynamicListListener.OnStartLoading
             )
             LoaderView()
         }
 
-        is DynamicListAction.ErrorAction -> {
-            ErrorView((uiState as DynamicListAction.ErrorAction).exception) {
+        is DynamicListUIEvents.ErrorAction -> {
+            ErrorView((uiState as DynamicListUIEvents.ErrorAction).exception) {
                 dynamicListViewModel.load(requestModel)
             }
         }
 
-        is DynamicListAction.SuccessAction -> {
+        is DynamicListUIEvents.SuccessAction -> {
             DynamicListSuccess(
-                action = (uiState as DynamicListAction.SuccessAction),
+                action = (uiState as DynamicListUIEvents.SuccessAction),
                 headerComposeController = headerAdapterController,
                 bodyComposeController = bodyAdapterController,
                 dynamicListObject = dynamicListObject,
@@ -112,13 +111,15 @@ private fun DynamicListContent(
                 bodyListState = bodyListState
             )
         }
+
+        else -> Unit
     }
 }
 
 @Suppress("LongParameterList")
 @Composable
 fun DynamicListSuccess(
-    action: DynamicListAction.SuccessAction,
+    action: DynamicListUIEvents.SuccessAction,
     headerComposeController: DynamicListComposeController? = null,
     bodyComposeController: DynamicListComposeController? = null,
     dynamicListObject: DynamicListObject,

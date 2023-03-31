@@ -3,7 +3,7 @@ package com.javi.dynamic.list.presentation.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.javi.basket.api.LocalBasketApi
-import com.javi.dynamic.list.data.actions.DynamicListAction
+import com.javi.dynamic.list.data.actions.DynamicListUIEvents
 import com.javi.dynamic.list.data.api.DynamicListUseCaseApi
 import com.javi.dynamic.list.data.extensions.propagateBasketProducts
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
@@ -23,11 +23,11 @@ class DynamicListViewModel @Inject constructor(
 
     private var job: Job? = null
 
-    private val _dynamicListAction = MutableStateFlow<DynamicListAction>(
-        DynamicListAction.LoadingAction
+    private val _dynamicListAction = MutableStateFlow<DynamicListUIEvents>(
+        DynamicListUIEvents.None
     )
 
-    val dynamicListAction: StateFlow<DynamicListAction> = _dynamicListAction
+    val dynamicListAction: StateFlow<DynamicListUIEvents> = _dynamicListAction
 
     init {
         viewModelScope.launch {
@@ -40,7 +40,7 @@ class DynamicListViewModel @Inject constructor(
         job = viewModelScope.launch {
             useCase.get(0, dynamicListRequestModel)
                 .combine(basketApi.basketProducts) { data, basket ->
-                    if (basket.isNotEmpty() && data is DynamicListAction.SuccessAction) {
+                    if (basket.isNotEmpty() && data is DynamicListUIEvents.SuccessAction) {
                         data.propagateBasketProducts(basket)
                     } else {
                         data

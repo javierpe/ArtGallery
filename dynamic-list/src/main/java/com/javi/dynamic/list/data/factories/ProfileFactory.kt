@@ -2,7 +2,9 @@ package com.javi.dynamic.list.data.factories
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
@@ -49,6 +51,8 @@ class ProfileFactory @Inject constructor(
           modifier = Modifier
               .testTag("skeleton")
               .height(profileHeight)
+              .fillMaxSize()
+              .wrapContentSize(unbounded = true)
               .background(MaterialTheme.colors.primary)
         )
     }

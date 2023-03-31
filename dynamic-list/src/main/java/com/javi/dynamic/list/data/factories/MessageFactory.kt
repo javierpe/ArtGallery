@@ -58,7 +58,7 @@ class MessageFactory @Inject constructor(): DynamicListFactory {
                 .testTag("skeleton")
                 .clip(RoundedCornerShape(10.dp))
                 .fillMaxWidth()
-                .height(70.dp)
+                .height(80.dp)
                 .background(MaterialTheme.colors.primary)
         )
     }

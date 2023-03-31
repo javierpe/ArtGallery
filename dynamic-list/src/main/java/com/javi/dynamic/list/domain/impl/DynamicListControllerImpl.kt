@@ -1,6 +1,6 @@
 package com.javi.dynamic.list.domain.impl
 
-import com.javi.dynamic.list.data.actions.DynamicListAction
+import com.javi.dynamic.list.data.actions.DynamicListUIEvents
 import com.javi.dynamic.list.data.api.DynamicListControllerApi
 import com.javi.dynamic.list.data.api.DynamicListMockResponseApi
 import com.javi.dynamic.list.data.api.DynamicListRenderProcessorApi
@@ -22,7 +22,7 @@ class DynamicListControllerImpl @Inject constructor(
     override suspend fun get(
         page: Int,
         requestModel: DynamicListRequestModel
-    ): Flow<DynamicListAction> = flow {
+    ): Flow<DynamicListUIEvents> = flow {
 
         // Emulate response delay
         delay(DEFAULT_DELAY)
@@ -63,6 +63,6 @@ class DynamicListControllerImpl @Inject constructor(
             body = body
         )
 
-        emit(DynamicListAction.SuccessAction(container))
+        emit(DynamicListUIEvents.SuccessAction(container))
     }
 }
