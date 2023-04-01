@@ -5,6 +5,7 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.material.icons.rounded.Star
@@ -21,10 +22,13 @@ import com.javi.design.system.theme.DynamicListComposeTheme
 @Composable
 fun NavigationBar(
     modifier: Modifier = Modifier,
+    selected: String,
     navItems: List<NavigationBarItem>
 ) {
     val selectedItem = remember {
-        mutableStateOf(navItems.first().name)
+        mutableStateOf(
+            selected
+        )
     }
 
     BottomNavigation(
@@ -34,12 +38,12 @@ fun NavigationBar(
     ) {
         navItems.forEach {
             BottomNavigationItem(
-                selected = (selectedItem.value == it.name),
+                selected = (selected == it.key),
                 onClick = {
-                    selectedItem.value = it.name
+                    selectedItem.value = it.key
                     it.onClick?.invoke()
                 },
-                icon = { Icon(imageVector = it.icon, contentDescription = it.name) },
+                icon = { Icon(imageVector = it.icon ?: Icons.Default.Star, contentDescription = it.name) },
                 label = { Text(text = it.name) },
                 enabled = true,
                 selectedContentColor = Color.Black,
@@ -54,6 +58,7 @@ fun NavigationBar(
 fun PreviewNavigationBar() {
     DynamicListComposeTheme {
         NavigationBar(
+            selected = "",
             navItems = listOf(
                 NavigationBarItem(name = "Home", icon = Icons.Rounded.Home),
                 NavigationBarItem(name = "Actual", icon = Icons.Rounded.Star),

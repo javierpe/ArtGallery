@@ -42,6 +42,7 @@ import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultA
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
 import com.ramcosta.composedestinations.navigation.dependency
 import com.ramcosta.composedestinations.navigation.navigate
+import com.ramcosta.composedestinations.navigation.popUpTo
 import com.ramcosta.composedestinations.spec.DestinationSpec
 import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
 import com.ramcosta.composedestinations.spec.NavGraphSpec
@@ -86,20 +87,30 @@ fun MainNavigationHost(
         bottomBar = {
             if (currentDestination?.value?.isWhiteListed() == true) {
                 NavigationBar(
+                    selected = currentDestination.value?.route.orEmpty(),
                     navItems = listOf(
-                        NavigationBarItem(name = "Home", icon = Icons.Rounded.Star) {
+                        NavigationBarItem(name = "Home", key = HomeScreenDestination.route, icon = Icons.Rounded.Star) {
                             if (currentDestination.value != HomeScreenDestination) {
                                 navHostController.value?.navigate(
-                                    direction = HomeScreenDestination()
+                                    direction = HomeScreenDestination(),
+                                    navOptionsBuilder = {
+                                        launchSingleTop = true
+                                    }
                                 )
                             }
                         },
-                        NavigationBarItem(name = "Favorites", icon = Icons.Rounded.Favorite) {
+                        NavigationBarItem(name = "Favorites", key = "favs", icon = Icons.Rounded.Favorite) {
 
                         },
-                        NavigationBarItem(name = "Places", icon = Icons.Rounded.Place) {
+                        NavigationBarItem(name = "Places", key = PlacesPageDestination.route, icon = Icons.Rounded.Place) {
                             navHostController.value?.navigate(
-                                direction = PlacesPageDestination()
+                                direction = PlacesPageDestination(),
+                                navOptionsBuilder = {
+                                    launchSingleTop = false
+                                    popUpTo(HomeNavGraph) {
+                                        saveState = true
+                                    }
+                                }
                             )
                         }
                     )

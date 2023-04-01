@@ -14,9 +14,10 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 
 @RootNavGraph(start = true)
 @Destination(
+    route = "places",
     deepLinks = [
         DeepLink(
-            uriPattern = "${DEEPLINK_MAIN}places"
+            uriPattern = "${DEEPLINK_MAIN}places/"
         )
     ]
 )
