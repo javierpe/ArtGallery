@@ -11,6 +11,11 @@ interface NavigationDestinationsApi {
     fun setUp(navController: NavController)
 
     /**
+     * Dispose NavController instance
+     */
+    fun onDispose()
+
+    /**
      * Return to back
      */
     fun popBackStack()

@@ -23,6 +23,10 @@ class NavigationDestinationsImpl @Inject constructor(
         this.navController = navController
     }
 
+    override fun onDispose() {
+        this.navController = null
+    }
+
     override fun popBackStack() {
         checkNavController()
 

@@ -15,4 +15,8 @@ class NavigationContractImpl @Inject constructor(
             navigationDestinationsApi.setUp(it)
         }
     }
+
+    override fun onDispose() {
+        navigationDestinationsApi.onDispose()
+    }
 }

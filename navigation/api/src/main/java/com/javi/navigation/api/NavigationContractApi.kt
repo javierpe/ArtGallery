@@ -1,6 +1,5 @@
 package com.javi.navigation.api
 
-import android.app.Activity
 import androidx.compose.runtime.Composable
 
 interface NavigationContractApi {
@@ -10,4 +9,9 @@ interface NavigationContractApi {
      */
     @Composable
     fun NavHost()
+
+    /**
+     * Dispose
+     */
+    fun onDispose()
 }
