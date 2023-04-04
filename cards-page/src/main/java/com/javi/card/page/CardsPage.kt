@@ -1,7 +1,5 @@
 package com.javi.card.page
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Button
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -34,19 +32,10 @@ fun CardsPage(
         )
     }
 
-    Column {
-        Button(
-            onClick = {
-                dynamicListState.value = viewModel.requestModel.copy(state = hashMapOf("id" to "1"))
-            }
-        ) {
-
-        }
-        ContextView(
-            title = title,
-            widthSizeClass = widthSizeClass,
-            viewModel = viewModel,
-            dynamicListRequestModel = dynamicListState.value
-        )
-    }
+    ContextView(
+        title = title,
+        widthSizeClass = widthSizeClass,
+        viewModel = viewModel,
+        dynamicListRequestModel = dynamicListState.value
+    )
 }

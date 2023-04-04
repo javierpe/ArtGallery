@@ -62,8 +62,9 @@ fun DynamicListHeaderComponentView(
             )
         }
         else -> {
-            TextHeaderView(
+            SimpleHeaderView(
                 title = title,
+                onIconClick = onBack
             )
         }
     }
@@ -72,7 +73,7 @@ fun DynamicListHeaderComponentView(
 @Composable
 fun SimpleHeaderView(
     title: String,
-    icon: ImageVector,
+    icon: ImageVector? = null,
     onIconClick: () -> Unit
 ) {
     val showCaseState = rememberShowCaseState()
@@ -85,26 +86,28 @@ fun SimpleHeaderView(
         ) {
             val (backRef, titleRef) = createRefs()
 
-            BackButtonComponentView(
-                modifier = Modifier
-                    .constrainAs(backRef) {
-                        top.linkTo(parent.top)
-                        start.linkTo(parent.start)
-                    }
-                    .asShowCaseTarget(
-                        index = 0,
-                        style = ShowCaseStyle.Default.copy(shapeType = ShapeType.CIRCLE),
-                        content = {
-                            TooltipView(text = "Aquí puedes dar back")
-                        },
-                        strategy = ShowCaseStrategy(onlyUserInteraction = true),
-                        key = "back-button",
-                        state = showCaseState
-                    ),
-                onClick = onIconClick,
-                iconColor = MaterialTheme.colors.secondary,
-                icon = icon
-            )
+            icon?.let {
+                BackButtonComponentView(
+                    modifier = Modifier
+                        .constrainAs(backRef) {
+                            top.linkTo(parent.top)
+                            start.linkTo(parent.start)
+                        }
+                        .asShowCaseTarget(
+                            index = 0,
+                            style = ShowCaseStyle.Default.copy(shapeType = ShapeType.CIRCLE),
+                            content = {
+                                TooltipView(text = "Aquí puedes dar back")
+                            },
+                            strategy = ShowCaseStrategy(onlyUserInteraction = true),
+                            key = "back-button",
+                            state = showCaseState
+                        ),
+                    onClick = onIconClick,
+                    iconColor = MaterialTheme.colors.secondary,
+                    icon = it
+                )
+            }
 
             Text(
                 modifier = Modifier.constrainAs(titleRef) {
@@ -118,20 +121,6 @@ fun SimpleHeaderView(
             )
         }
     }
-}
-
-@Composable
-fun TextHeaderView(
-    title: String,
-) {
-    Text(
-        modifier = Modifier
-            .padding(16.dp)
-            .wrapContentHeight(),
-        text = title,
-        style = Typography.h4,
-        color = MaterialTheme.colors.secondary
-    )
 }
 
 @Composable

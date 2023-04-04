@@ -16,7 +16,7 @@ fun HomeScreen(
     widthSizeClass: WindowWidthSizeClass,
     viewModel: MainViewModel = hiltViewModel()
 ) {
-    val dynamicListRequestModel = rememberDynamicListRequestState {
+    val dynamicListState = rememberDynamicListRequestState {
         viewModel.requestModel
     }
 
@@ -24,6 +24,6 @@ fun HomeScreen(
         title = "Art Gallery",
         widthSizeClass = widthSizeClass,
         viewModel = viewModel,
-        dynamicListRequestModel = dynamicListRequestModel.value
+        dynamicListRequestModel = dynamicListState.value
     )
 }

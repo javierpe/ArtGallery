@@ -5,19 +5,12 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Build
-import androidx.compose.material.icons.rounded.Create
 import androidx.compose.material.icons.rounded.Favorite
-import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material.icons.rounded.Place
-import androidx.compose.material.icons.rounded.ShoppingCart
 import androidx.compose.material.icons.rounded.Star
-import androidx.compose.material.icons.rounded.ThumbUp
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
@@ -26,8 +19,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import androidx.navigation.Navigator
-import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.javi.card.page.CardsPageNavGraph
 import com.javi.design.system.data.models.NavigationBarItem
@@ -42,9 +33,7 @@ import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultA
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
 import com.ramcosta.composedestinations.navigation.dependency
 import com.ramcosta.composedestinations.navigation.navigate
-import com.ramcosta.composedestinations.navigation.popUpTo
 import com.ramcosta.composedestinations.spec.DestinationSpec
-import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
 import com.ramcosta.composedestinations.spec.NavGraphSpec
 import com.ramcosta.composedestinations.utils.currentDestinationAsState
 
@@ -95,6 +84,7 @@ fun MainNavigationHost(
                                     direction = HomeScreenDestination(),
                                     navOptionsBuilder = {
                                         launchSingleTop = true
+                                        restoreState = true
                                     }
                                 )
                             }
@@ -106,10 +96,7 @@ fun MainNavigationHost(
                             navHostController.value?.navigate(
                                 direction = PlacesPageDestination(),
                                 navOptionsBuilder = {
-                                    launchSingleTop = false
-                                    popUpTo(HomeNavGraph) {
-                                        saveState = true
-                                    }
+                                    launchSingleTop = true
                                 }
                             )
                         }
