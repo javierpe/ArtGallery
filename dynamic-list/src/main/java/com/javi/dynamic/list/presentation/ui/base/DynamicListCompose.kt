@@ -1,17 +1,21 @@
 package com.javi.dynamic.list.presentation.ui.base
 
+import android.app.Activity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.javi.dynamic.list.data.actions.ContextViewAction
@@ -31,7 +35,6 @@ import com.javi.dynamic.list.presentation.viewModels.DynamicListViewModel
 fun ContextViewContent(
     bodyAdapterController: DynamicListComposeController? = null,
     headerAdapterController: DynamicListComposeController? = null,
-    dynamicListObject: DynamicListObject,
     action: ContextViewAction?,
     showCaseState: ShowCaseState,
     bodyListState: LazyListState,
@@ -86,7 +89,6 @@ fun ContextViewContent(
                 action = (uiState as DynamicListUIState.SuccessAction),
                 headerComposeController = headerAdapterController,
                 bodyComposeController = bodyAdapterController,
-                dynamicListObject = dynamicListObject,
                 showCaseState = showCaseState,
                 bodyListState = bodyListState
             )
@@ -96,13 +98,13 @@ fun ContextViewContent(
     }
 }
 
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Suppress("LongParameterList")
 @Composable
 fun DynamicListSuccess(
     action: DynamicListUIState.SuccessAction,
     headerComposeController: DynamicListComposeController? = null,
     bodyComposeController: DynamicListComposeController? = null,
-    dynamicListObject: DynamicListObject,
     showCaseState: ShowCaseState,
     bodyListState: LazyListState
 ) {
@@ -112,11 +114,15 @@ fun DynamicListSuccess(
         mutableStateOf<ScrollAction?>(null)
     }
 
+    val windowWidthSizeClass = calculateWindowSizeClass(activity = LocalContext.current as Activity)
+
     DynamicListLayout(
-        widthSizeClass = dynamicListObject.widthSizeClass,
+        widthSizeClass = windowWidthSizeClass.widthSizeClass,
         contentHeader = {
             headerComposeController?.ComposeHeader(
-                dynamicListObject = dynamicListObject,
+                dynamicListObject = DynamicListObject(
+                    widthSizeClass = windowWidthSizeClass.widthSizeClass
+                ),
                 showCaseState = showCaseState,
                 elements = action.header
             ) {
@@ -127,7 +133,9 @@ fun DynamicListSuccess(
         },
         contentBody = {
             bodyComposeController?.ComposeBody(
-                dynamicListObject = dynamicListObject,
+                dynamicListObject = DynamicListObject(
+                    widthSizeClass = windowWidthSizeClass.widthSizeClass
+                ),
                 sharedAction = actionBody.value,
                 showCaseState = showCaseState,
                 bodyListState = bodyListState,

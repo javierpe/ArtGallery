@@ -84,6 +84,8 @@ dependencies {
     // Window
     //implementation("androidx.window:window:1.0.0")
 
+    implementation "io.github.raamcosta.compose-destinations:animations-core:$compose_destinations_version"
+
     // Performance
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
     implementation "androidx.metrics:metrics-performance:1.0.0-alpha03"

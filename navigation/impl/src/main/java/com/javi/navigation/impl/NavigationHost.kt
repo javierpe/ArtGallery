@@ -1,6 +1,5 @@
 package com.javi.navigation.impl
 
-import android.app.Activity
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -11,11 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.Place
 import androidx.compose.material.icons.rounded.Star
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
@@ -31,18 +26,14 @@ import com.javi.product.detail.presentation.screens.ProductDetailNavGraph
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
-import com.ramcosta.composedestinations.navigation.dependency
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.spec.DestinationSpec
 import com.ramcosta.composedestinations.spec.NavGraphSpec
 import com.ramcosta.composedestinations.utils.currentDestinationAsState
 
-@OptIn(ExperimentalAnimationApi::class, ExperimentalMaterialNavigationApi::class,
-    ExperimentalMaterial3WindowSizeClassApi::class
-)
+@OptIn(ExperimentalAnimationApi::class, ExperimentalMaterialNavigationApi::class)
 @Composable
-fun MainNavigationHost(
-    activity: Activity,
+fun NavigationHost(
     onNavController: (NavController) -> Unit
 ) {
     val navHostEngine = rememberAnimatedNavHostEngine(
@@ -66,37 +57,47 @@ fun MainNavigationHost(
         )
     )
 
-    val navHostController = remember {
-        mutableStateOf<NavController?>(null)
-    }
+    val remNavController = navHostEngine.rememberNavController()
 
-    val currentDestination = navHostController.value?.currentDestinationAsState()
+    val currentDestination = remNavController.currentDestinationAsState()
 
     Scaffold(
         bottomBar = {
-            if (currentDestination?.value?.isWhiteListed() == true) {
+            if (currentDestination.value?.isWhiteListed() == true) {
                 NavigationBar(
                     selected = currentDestination.value?.route.orEmpty(),
                     navItems = listOf(
-                        NavigationBarItem(name = "Home", key = HomeScreenDestination.route, icon = Icons.Rounded.Star) {
+                        NavigationBarItem(
+                            name = "Home",
+                            key = HomeScreenDestination.route,
+                            icon = Icons.Rounded.Star
+                        ) {
                             if (currentDestination.value != HomeScreenDestination) {
-                                navHostController.value?.navigate(
+                                remNavController.navigate(
                                     direction = HomeScreenDestination(),
                                     navOptionsBuilder = {
-                                        launchSingleTop = true
+                                        launchSingleTop = false
                                         restoreState = true
                                     }
                                 )
                             }
                         },
-                        NavigationBarItem(name = "Favorites", key = "favs", icon = Icons.Rounded.Favorite) {
+                        NavigationBarItem(
+                            name = "Favorites",
+                            key = "favs",
+                            icon = Icons.Rounded.Favorite
+                        ) {
 
                         },
-                        NavigationBarItem(name = "Places", key = PlacesPageDestination.route, icon = Icons.Rounded.Place) {
-                            navHostController.value?.navigate(
+                        NavigationBarItem(
+                            name = "Places",
+                            key = PlacesPageDestination.route,
+                            icon = Icons.Rounded.Place
+                        ) {
+                            remNavController.navigate(
                                 direction = PlacesPageDestination(),
                                 navOptionsBuilder = {
-                                    launchSingleTop = true
+                                    launchSingleTop = false
                                 }
                             )
                         }
@@ -109,10 +110,9 @@ fun MainNavigationHost(
             modifier = Modifier.padding(paddingValues),
             navGraph = RootNavGraph,
             engine = navHostEngine,
+            navController = remNavController,
             dependenciesContainerBuilder = {
-                dependency(calculateWindowSizeClass(activity).widthSizeClass)
                 onNavController(navController)
-                navHostController.value = navController
             }
         )
     }

@@ -59,8 +59,6 @@ dependencies {
     implementation project(":cards-page")
     implementation project(":design-system")
 
-    implementation "androidx.compose.material3:material3-window-size-class:1.0.1"
-
     // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
 

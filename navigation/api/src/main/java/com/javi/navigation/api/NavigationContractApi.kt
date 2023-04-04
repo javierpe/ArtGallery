@@ -9,7 +9,5 @@ interface NavigationContractApi {
      * This is called in root and should be not invoked again!
      */
     @Composable
-    fun NavHost(
-        activity: Activity
-    )
+    fun NavHost()
 }

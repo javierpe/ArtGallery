@@ -1,6 +1,5 @@
 package com.javi.navigation.impl
 
-import android.app.Activity
 import androidx.compose.runtime.Composable
 import com.javi.navigation.api.NavigationContractApi
 import com.javi.navigation.api.NavigationDestinationsApi
@@ -11,10 +10,8 @@ class NavigationContractImpl @Inject constructor(
 ): NavigationContractApi {
 
     @Composable
-    override fun NavHost(activity: Activity) {
-        MainNavigationHost(
-            activity,
-        ) {
+    override fun NavHost() {
+        NavigationHost {
             navigationDestinationsApi.setUp(it)
         }
     }

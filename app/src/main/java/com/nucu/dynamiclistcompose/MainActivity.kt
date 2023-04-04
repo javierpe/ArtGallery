@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                         },
                     color = colorResource(id = R.color.ic_launcher_background)
                 ) {
-                    navigationContractApi.NavHost(activity = this@MainActivity)
+                    navigationContractApi.NavHost()
                 }
             }
         }

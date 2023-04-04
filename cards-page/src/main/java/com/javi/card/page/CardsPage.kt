@@ -1,6 +1,5 @@
 package com.javi.card.page
 
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.javi.card.page.viewModels.CardsPageViewModel
@@ -23,7 +22,6 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 fun CardsPage(
     id: Int = 0,
     title: String = "",
-    widthSizeClass: WindowWidthSizeClass,
     viewModel: CardsPageViewModel = hiltViewModel()
 ) {
     val dynamicListState = rememberDynamicListRequestState {
@@ -34,7 +32,6 @@ fun CardsPage(
 
     ContextView(
         title = title,
-        widthSizeClass = widthSizeClass,
         viewModel = viewModel,
         dynamicListRequestModel = dynamicListState.value
     )
