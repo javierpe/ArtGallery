@@ -1,9 +1,5 @@
 package com.javi.navigation.impl
 
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
@@ -11,11 +7,8 @@ import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.Place
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
-import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
+import androidx.navigation.NavHostController
 import com.javi.card.page.CardsPageNavGraph
 import com.javi.design.system.data.models.NavigationBarItem
 import com.javi.design.system.molecules.NavigationBar
@@ -25,46 +18,20 @@ import com.javi.places.page.PlacesPageNavGraph
 import com.javi.places.page.destinations.PlacesPageDestination
 import com.javi.product.detail.presentation.screens.ProductDetailNavGraph
 import com.ramcosta.composedestinations.DestinationsNavHost
-import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
-import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
+import com.ramcosta.composedestinations.navigation.dependency
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.spec.DestinationSpec
 import com.ramcosta.composedestinations.spec.NavGraphSpec
+import com.ramcosta.composedestinations.spec.NavHostEngine
 import com.ramcosta.composedestinations.utils.currentDestinationAsState
 
-@OptIn(ExperimentalAnimationApi::class, ExperimentalMaterialNavigationApi::class)
 @Composable
 fun NavigationHost(
-    onNavController: (NavController) -> Unit
+    navHostEngine: NavHostEngine,
+    navHostController: NavHostController
 ) {
-    val navHostEngine = rememberAnimatedNavHostEngine(
-        navHostContentAlignment = Alignment.TopCenter,
-        rootDefaultAnimations = RootNavGraphDefaultAnimations(
-            enterTransition = {
-                fadeIn(
-                    tween(ANIMATION_DURATION)
-                )
-            },
-            popEnterTransition = {
-                fadeIn(
-                    tween(ANIMATION_DURATION)
-                )
-            },
-            popExitTransition = {
-                fadeOut(
-                    tween(ANIMATION_DURATION)
-                )
-            }
-        )
-    )
 
-    val remNavController = navHostEngine.rememberNavController()
-
-    val currentDestination = remNavController.currentDestinationAsState()
-
-    LaunchedEffect(Unit) {
-        onNavController(remNavController)
-    }
+    val currentDestination = navHostController.currentDestinationAsState()
 
     Scaffold(
         bottomBar = {
@@ -78,7 +45,7 @@ fun NavigationHost(
                             icon = Icons.Rounded.Star
                         ) {
                             if (currentDestination.value != HomeScreenDestination) {
-                                remNavController.navigate(
+                                navHostController.navigate(
                                     direction = HomeScreenDestination(),
                                     navOptionsBuilder = {
                                         launchSingleTop = false
@@ -99,7 +66,7 @@ fun NavigationHost(
                             key = PlacesPageDestination.route,
                             icon = Icons.Rounded.Place
                         ) {
-                            remNavController.navigate(
+                            navHostController.navigate(
                                 direction = PlacesPageDestination(),
                                 navOptionsBuilder = {
                                     launchSingleTop = false
@@ -115,7 +82,7 @@ fun NavigationHost(
             modifier = Modifier.padding(paddingValues),
             navGraph = RootNavGraph,
             engine = navHostEngine,
-            navController = remNavController
+            navController = navHostController
         )
     }
 }

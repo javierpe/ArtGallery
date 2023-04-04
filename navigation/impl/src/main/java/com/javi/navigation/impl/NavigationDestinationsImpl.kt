@@ -1,9 +1,7 @@
 package com.javi.navigation.impl
 
 import android.net.Uri
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.javi.card.page.destinations.CardsPageDestination
 import com.javi.navigation.api.NavigationDestinationsApi
 import com.javi.product.detail.presentation.screens.destinations.ProductImageScreenDestination
@@ -11,26 +9,26 @@ import com.ramcosta.composedestinations.navigation.navigate
 import javax.inject.Inject
 
 const val ANIMATION_DURATION = 300
-private const val MESSAGE = "Call first to setUp to set a NavController!"
+private const val MESSAGE = "Call first to setUp to set a navHostController!"
 
 class NavigationDestinationsImpl @Inject constructor(
 
 ): NavigationDestinationsApi {
 
-    private var navController: NavController? = null
+    private var navHostController: NavHostController? = null
 
-    override fun setUp(navController: NavController) {
-        this.navController = navController
+    override fun setUp(navHostController: NavHostController) {
+        this.navHostController = navHostController
     }
 
     override fun onDispose() {
-        this.navController = null
+        this.navHostController = null
     }
 
     override fun popBackStack() {
-        checkNavController()
+        checknavHostController()
 
-        navController?.popBackStack()
+        navHostController?.popBackStack()
     }
 
     override fun navigateToProductDetailPage(
@@ -38,24 +36,19 @@ class NavigationDestinationsImpl @Inject constructor(
         imageURL: String
     ) {
 
-        checkNavController()
+        checknavHostController()
 
-        navController?.navigate(
-            direction = ProductImageScreenDestination(
+        navHostController?.navigate(
+            ProductImageScreenDestination(
                 imageUrl = imageURL
-            ),
-            navOptionsBuilder = {
-                fadeIn(
-                    tween(ANIMATION_DURATION)
-                )
-            }
+            )
         )
     }
 
     override fun navigateToCardsPage(id: Int, title: String) {
-        checkNavController()
+        checknavHostController()
 
-        navController?.navigate(
+        navHostController?.navigate(
             direction = CardsPageDestination(
                 id = id,
                 title = title
@@ -64,13 +57,13 @@ class NavigationDestinationsImpl @Inject constructor(
     }
 
     override fun navigate(uri: Uri) {
-        checkNavController()
+        checknavHostController()
 
-        navController?.navigate(uri)
+        //navHostController?.navigate(deep)
     }
 
-    private fun checkNavController() {
-        require(navController != null) {
+    private fun checknavHostController() {
+        require(navHostController != null) {
             MESSAGE
         }
     }

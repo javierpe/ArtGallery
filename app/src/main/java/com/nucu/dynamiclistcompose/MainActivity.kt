@@ -68,7 +68,6 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onDestroy() {
-        navigationContractApi.onDispose()
         super.onDestroy()
     }
 }

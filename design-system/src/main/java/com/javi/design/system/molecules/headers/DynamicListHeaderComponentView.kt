@@ -26,6 +26,7 @@ import com.javi.design.system.molecules.showCase.asShowCaseTarget
 import com.javi.design.system.molecules.showCase.rememberShowCaseState
 import com.javi.design.system.theme.DynamicListComposeTheme
 import com.javi.design.system.theme.Typography
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 /**
  * Define header design by context
@@ -35,7 +36,7 @@ fun DynamicListHeaderComponentView(
     title: String,
     contextType: ContextType,
     bodyLazyListState: LazyListState? = null,
-    onBack: () -> Unit
+    destinationsNavigator: DestinationsNavigator? = null
 ) {
     val icon = if (contextType == ContextType.HOME) Icons.Default.Star else Icons.Default.ArrowBack
 
@@ -45,7 +46,9 @@ fun DynamicListHeaderComponentView(
             SimpleHeaderView(
                 title = title,
                 icon = icon,
-                onIconClick = onBack
+                onIconClick = {
+                    destinationsNavigator?.popBackStack()
+                }
             )
         }
 
@@ -56,15 +59,14 @@ fun DynamicListHeaderComponentView(
                 icon = icon,
                 onIconClick = {
                     if (contextType != ContextType.HOME) {
-                        onBack()
+                        destinationsNavigator?.popBackStack()
                     }
                 }
             )
         }
         else -> {
             SimpleHeaderView(
-                title = title,
-                onIconClick = onBack
+                title = title
             )
         }
     }
@@ -74,7 +76,7 @@ fun DynamicListHeaderComponentView(
 fun SimpleHeaderView(
     title: String,
     icon: ImageVector? = null,
-    onIconClick: () -> Unit
+    onIconClick: (() -> Unit)? = null
 ) {
     val showCaseState = rememberShowCaseState()
 
@@ -131,7 +133,7 @@ fun PreviewHeaderComponentView() {
             title = "Hello from the header view of DynamicList",
             contextType = ContextType.HOME,
             rememberLazyListState()
-        ) { }
+        )
     }
 }
 
@@ -143,6 +145,6 @@ fun PreviewSimpleHeaderComponentView() {
             title = "Hello from the header view of DynamicList",
             contextType = ContextType.HOME,
             rememberLazyListState()
-        ) { }
+        )
     }
 }

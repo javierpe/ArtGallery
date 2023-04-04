@@ -9,6 +9,7 @@ import com.javi.dynamic.list.presentation.ui.base.rememberDynamicListRequestStat
 import com.ramcosta.composedestinations.annotation.DeepLink
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @RootNavGraph(start = true)
 @Destination(
@@ -22,6 +23,7 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 fun CardsPage(
     id: Int = 0,
     title: String = "",
+    destinationsNavigator: DestinationsNavigator,
     viewModel: CardsPageViewModel = hiltViewModel()
 ) {
     val dynamicListState = rememberDynamicListRequestState {
@@ -33,6 +35,7 @@ fun CardsPage(
     ContextView(
         title = title,
         viewModel = viewModel,
+        destinationsNavigator = destinationsNavigator,
         dynamicListRequestModel = dynamicListState.value
     )
 }

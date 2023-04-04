@@ -1,5 +1,6 @@
 package com.javi.product.detail.presentation.contents
 
+import android.net.Uri
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +13,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.navDeepLink
+import com.javi.data.DEEPLINK_MAIN
 import com.javi.data.enums.ContextType
 import com.javi.design.system.ImageComponentView
 import com.javi.design.system.atoms.StepperButtonComponentView
@@ -22,16 +25,16 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 fun ProductImageContent(
     imageURL: String,
     quantity: Int,
+    destinationsNavigator: DestinationsNavigator? = null,
     onAdd: () -> Unit,
-    onDecrement: () -> Unit,
-    onBack: () -> Unit
+    onDecrement: () -> Unit
 ) {
     Scaffold(
         topBar = {
             DynamicListHeaderComponentView(
                 title = "Buy",
                 contextType = ContextType.BANNER_DETAIL,
-                onBack = onBack
+                destinationsNavigator = destinationsNavigator
             )
         },
         bottomBar = {
@@ -40,7 +43,12 @@ fun ProductImageContent(
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
                 quantity = quantity,
-                onAdd = onAdd,
+                onAdd = {
+                    destinationsNavigator?.navigate(
+                        route = "${DEEPLINK_MAIN}cards_page/1/Cactus/",
+                        onlyIfResumed = true
+                    )
+                },
                 onDecrement = onDecrement
             )
         }
@@ -68,5 +76,5 @@ fun PreviewBannerContent() {
         quantity = 0,
         onAdd = { },
         onDecrement = { }
-    ) { }
+    )
 }

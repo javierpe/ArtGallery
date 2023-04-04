@@ -10,8 +10,4 @@ interface NavigationContractApi {
     @Composable
     fun NavHost()
 
-    /**
-     * Dispose
-     */
-    fun onDispose()
 }

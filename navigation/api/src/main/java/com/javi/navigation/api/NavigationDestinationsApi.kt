@@ -2,13 +2,15 @@ package com.javi.navigation.api
 
 import android.net.Uri
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 interface NavigationDestinationsApi {
 
     /**
      * Call first to set NavController before to use all navigation destinations api
      */
-    fun setUp(navController: NavController)
+    fun setUp(navHostController: NavHostController)
 
     /**
      * Dispose NavController instance
