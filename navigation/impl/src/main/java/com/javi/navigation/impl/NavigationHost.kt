@@ -11,6 +11,7 @@ import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.Place
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
@@ -61,6 +62,10 @@ fun NavigationHost(
 
     val currentDestination = remNavController.currentDestinationAsState()
 
+    LaunchedEffect(Unit) {
+        onNavController(remNavController)
+    }
+
     Scaffold(
         bottomBar = {
             if (currentDestination.value?.isWhiteListed() == true) {
@@ -110,10 +115,7 @@ fun NavigationHost(
             modifier = Modifier.padding(paddingValues),
             navGraph = RootNavGraph,
             engine = navHostEngine,
-            navController = remNavController,
-            dependenciesContainerBuilder = {
-                onNavController(navController)
-            }
+            navController = remNavController
         )
     }
 }
