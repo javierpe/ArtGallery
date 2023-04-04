@@ -22,14 +22,14 @@ import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.presentation.components.bannerCarousel.BannerCarouselComponentViewScreen
 import com.javi.dynamic.list.presentation.components.bannerCarousel.BannerCarouselModel
-import com.javi.navigation.api.NavigationDestinationsApi
+import com.javi.product.detail.api.ProductDetailScreenLoader
 import com.javi.render.processor.core.RenderType
 import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
 @AdapterFactory
 class BannerCarouselFactory @Inject constructor(
-    private val navigationDestinationsApi: NavigationDestinationsApi
+    private val productDetailScreenLoader: ProductDetailScreenLoader
 ): DynamicListFactory {
 
     override val renders: List<RenderType>
@@ -57,9 +57,12 @@ class BannerCarouselFactory @Inject constructor(
             images = model.value,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState,
-            widthSizeClass = componentInfo.dynamicListObject.widthSizeClass,
-            navigationDestinationsApi = navigationDestinationsApi
-        )
+            widthSizeClass = componentInfo.dynamicListObject.widthSizeClass
+        ) {
+            componentInfo.dynamicListObject.destinationsNavigator?.navigate(
+                productDetailScreenLoader.getDestination(it)
+            )
+        }
     }
 
     @Composable

@@ -18,14 +18,14 @@ import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.presentation.components.banner.BannerComponentViewScreen
 import com.javi.dynamic.list.presentation.components.banner.BannerModel
-import com.javi.navigation.api.NavigationDestinationsApi
+import com.javi.product.detail.api.ProductDetailScreenLoader
 import com.javi.render.processor.core.RenderType
 import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
 @AdapterFactory
 class BannerFactory @Inject constructor(
-    private val navigationDestinationsApi: NavigationDestinationsApi
+    private val productDetailScreenLoader: ProductDetailScreenLoader
 ): DynamicListFactory {
 
     override val renders: List<RenderType>
@@ -50,9 +50,12 @@ class BannerFactory @Inject constructor(
             modifier = modifier.testTag("banner_component"),
             model = model.value,
             componentIndex = component.index,
-            showCaseState = componentInfo.showCaseState,
-            navigationDestinationsApi = navigationDestinationsApi
-        )
+            showCaseState = componentInfo.showCaseState
+        ) {
+            componentInfo.dynamicListObject.destinationsNavigator?.navigate(
+                productDetailScreenLoader.getDestination(it)
+            )
+        }
     }
 
     @Composable

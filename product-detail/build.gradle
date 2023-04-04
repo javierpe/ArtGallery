@@ -59,6 +59,7 @@ kotlin {
 }
 
 dependencies {
+    implementation project(":product-detail:api")
 
     implementation project(":data")
     implementation project(":basket:api")

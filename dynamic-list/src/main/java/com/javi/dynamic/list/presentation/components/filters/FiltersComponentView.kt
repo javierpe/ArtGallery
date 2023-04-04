@@ -49,7 +49,7 @@ import kotlinx.coroutines.launch
 fun FiltersComponentViewScreen(
     modifier: Modifier,
     data: List<FilterItemModel>,
-    windowWidthSizeClass: WindowWidthSizeClass,
+    windowWidthSizeClass: WindowWidthSizeClass? = null,
     onSelectItem: (RenderType) -> Unit
 ) {
 

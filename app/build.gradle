@@ -97,6 +97,11 @@ dependencies {
 
     implementation project(":design-system")
 
+    // Product detail
+    implementation project(":product-detail:api")
+    implementation project(":product-detail")
+    implementation project(":product-detail:wiring")
+
     // Navigation
     implementation project(":navigation:api")
     implementation project(":navigation:impl")

@@ -6,6 +6,7 @@ import com.javi.card.page.destinations.CardsPageDestination
 import com.javi.navigation.api.NavigationDestinationsApi
 import com.javi.product.detail.presentation.screens.destinations.ProductImageScreenDestination
 import com.ramcosta.composedestinations.navigation.navigate
+import com.ramcosta.composedestinations.spec.Direction
 import javax.inject.Inject
 
 const val ANIMATION_DURATION = 300
@@ -54,6 +55,12 @@ class NavigationDestinationsImpl @Inject constructor(
                 title = title
             )
         )
+    }
+
+    override fun navigate(direction: Direction) {
+        checknavHostController()
+
+        navHostController?.navigate(direction)
     }
 
     override fun navigate(uri: Uri) {

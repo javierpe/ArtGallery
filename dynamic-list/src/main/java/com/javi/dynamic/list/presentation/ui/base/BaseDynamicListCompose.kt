@@ -58,6 +58,7 @@ fun ContextView(
                     showCaseState = showCaseState,
                     bodyListState = bodyLazyListState,
                     requestModel = dynamicListRequestModel,
+                    destinationsNavigator = destinationsNavigator,
                     dynamicListListener = {
 
                     }

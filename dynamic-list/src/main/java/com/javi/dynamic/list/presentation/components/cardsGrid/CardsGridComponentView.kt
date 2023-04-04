@@ -12,19 +12,15 @@ import androidx.compose.ui.unit.dp
 import com.javi.design.system.ImageComponentView
 import com.javi.data.ProductImageModel
 import com.javi.design.system.molecules.VerticalGrid
-import com.javi.navigation.api.NavigationDestinationsApi
 
 @Composable
 fun CardsGridComponentViewScreen(
-    images: List<ProductImageModel>,
-    navigationDestinationsApi: NavigationDestinationsApi
+    images: List<ProductImageModel>
 ) {
     CardsGridComponentView(
         data = images,
     ) {
-        navigationDestinationsApi.navigateToProductDetailPage(
-            imageURL = it.imageURL
-        )
+        
     }
 }
 

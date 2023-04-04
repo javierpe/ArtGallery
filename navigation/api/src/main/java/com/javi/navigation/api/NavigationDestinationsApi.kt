@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.spec.Direction
 
 interface NavigationDestinationsApi {
 
@@ -40,6 +41,10 @@ interface NavigationDestinationsApi {
     fun navigateToCardsPage(
         id: Int,
         title: String
+    )
+
+    fun navigate(
+        direction: Direction
     )
 
     /**

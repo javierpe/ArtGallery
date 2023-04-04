@@ -22,7 +22,6 @@ import com.javi.design.system.molecules.showCase.asShowCaseTarget
 import com.javi.design.system.molecules.showCase.rememberShowCaseState
 import com.javi.design.system.theme.DynamicListComposeTheme
 import com.javi.dynamic.list.R
-import com.javi.navigation.api.NavigationDestinationsApi
 import com.javi.render.processor.core.RenderType
 
 const val CARD_COMPONENT_SCREEN_TAG = "card_component_screen"
@@ -34,7 +33,7 @@ fun CardsComponentViewScreen(
     data: CardsModel,
     componentIndex: Int,
     showCaseState: ShowCaseState,
-    navigationDestinationsApi: NavigationDestinationsApi
+    onProductDetail: (String) -> Unit
 ) {
     CardsComponentView(
         modifier = modifier.testTag(CARD_COMPONENT_SCREEN_TAG),
@@ -42,10 +41,7 @@ fun CardsComponentViewScreen(
         componentIndex = componentIndex,
         showCaseState = showCaseState
     ) { id, title ->
-        navigationDestinationsApi.navigateToCardsPage(
-            id = id,
-            title = title
-        )
+
     }
 }
 

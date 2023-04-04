@@ -29,6 +29,7 @@ import com.javi.dynamic.list.data.controllers.DynamicListComposeController
 import com.javi.dynamic.list.data.models.DynamicListObject
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.presentation.viewModels.DynamicListViewModel
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Suppress("LongParameterList")
 @Composable
@@ -39,6 +40,7 @@ fun ContextViewContent(
     showCaseState: ShowCaseState,
     bodyListState: LazyListState,
     requestModel: DynamicListRequestModel,
+    destinationsNavigator: DestinationsNavigator? = null,
     dynamicListListener: (DynamicListListener) -> Unit,
     dynamicListViewModel: DynamicListViewModel = hiltViewModel()
 ) {
@@ -90,7 +92,8 @@ fun ContextViewContent(
                 headerComposeController = headerAdapterController,
                 bodyComposeController = bodyAdapterController,
                 showCaseState = showCaseState,
-                bodyListState = bodyListState
+                bodyListState = bodyListState,
+                destinationsNavigator = destinationsNavigator
             )
         }
 
@@ -103,6 +106,7 @@ fun ContextViewContent(
 @Composable
 fun DynamicListSuccess(
     action: DynamicListUIState.SuccessAction,
+    destinationsNavigator: DestinationsNavigator? = null,
     headerComposeController: DynamicListComposeController? = null,
     bodyComposeController: DynamicListComposeController? = null,
     showCaseState: ShowCaseState,
@@ -121,7 +125,8 @@ fun DynamicListSuccess(
         contentHeader = {
             headerComposeController?.ComposeHeader(
                 dynamicListObject = DynamicListObject(
-                    widthSizeClass = windowWidthSizeClass.widthSizeClass
+                    widthSizeClass = windowWidthSizeClass.widthSizeClass,
+                    destinationsNavigator = destinationsNavigator
                 ),
                 showCaseState = showCaseState,
                 elements = action.header
@@ -134,7 +139,8 @@ fun DynamicListSuccess(
         contentBody = {
             bodyComposeController?.ComposeBody(
                 dynamicListObject = DynamicListObject(
-                    widthSizeClass = windowWidthSizeClass.widthSizeClass
+                    widthSizeClass = windowWidthSizeClass.widthSizeClass,
+                    destinationsNavigator = destinationsNavigator
                 ),
                 sharedAction = actionBody.value,
                 showCaseState = showCaseState,

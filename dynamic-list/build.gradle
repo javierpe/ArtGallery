@@ -54,6 +54,8 @@ kotlin {
 
 dependencies {
 
+    implementation project(":product-detail:api")
+
     // Gson
     implementation "com.squareup.moshi:moshi-kotlin:1.14.0"
     implementation "com.squareup.moshi:moshi-adapters:1.13.0"
@@ -64,7 +66,7 @@ dependencies {
     ksp(project(":render-processor"))
 
     // Navigation
-    implementation project(":navigation:api")
+    //implementation project(":navigation:api")
 
     // Preferences
     implementation project(":preferences:api")
