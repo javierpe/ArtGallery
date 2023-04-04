@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.javi.render.processor.annotations.factory.AdapterFactory
 import com.javi.design.system.molecules.VerticalGrid
 import com.javi.dynamic.list.data.factories.base.DynamicListFactory
 import com.javi.dynamic.list.data.models.ComponentInfo
@@ -21,7 +20,8 @@ import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.presentation.components.cardsGrid.CardsGridComponentViewScreen
 import com.javi.dynamic.list.presentation.components.cardsGrid.CardsGridModel
 import com.javi.navigation.api.NavigationDestinationsApi
-import com.javi.render.data.RenderType
+import com.javi.render.processor.core.RenderType
+import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
 @AdapterFactory

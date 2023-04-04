@@ -1,6 +1,6 @@
 package com.javi.dynamic.list.data.renders.base
 
-import com.javi.render.data.RenderType
+import com.javi.render.processor.core.RenderType
 
 interface DynamicListRender<out T> {
 

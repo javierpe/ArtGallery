@@ -1,6 +1,5 @@
 package com.javi.dynamic.list.di
 
-import com.google.gson.Gson
 import com.javi.dynamic.list.data.controllers.DefaultDynamicListController
 import com.javi.dynamic.list.data.factories.base.DynamicListFactory
 import dagger.Module
@@ -23,7 +22,4 @@ object HomeDynamicListModule {
             defaultDispatcher,
         )
     }
-
-    @Provides
-    fun provideGson() = Gson()
 }

@@ -1,4 +1,4 @@
-package com.javi.render.processor.annotations.render
+package com.javi.render.processor.core.annotations.render
 
 import kotlin.reflect.KClass
 

@@ -3,8 +3,8 @@ package com.javi.dynamic.list.presentation.components.bannerCarousel
 import com.javi.data.ProductImageModel
 import com.javi.dynamic.list.data.session.SessionAware
 import com.javi.dynamic.list.presentation.components.banner.BannerModel
-import com.javi.render.data.RenderType
-import com.javi.render.processor.annotations.render.RenderClass
+import com.javi.render.processor.core.RenderType
+import com.javi.render.processor.core.annotations.render.RenderClass
 import com.squareup.moshi.Json
 
 @RenderClass(type = RenderType.BANNER_CAROUSEL)

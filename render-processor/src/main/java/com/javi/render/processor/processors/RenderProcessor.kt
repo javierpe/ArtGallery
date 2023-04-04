@@ -7,16 +7,15 @@ import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSNode
 import com.google.devtools.ksp.validate
-import com.javi.render.processor.annotations.factory.AdapterFactory
-import com.javi.render.processor.annotations.render.RenderClass
-import com.javi.render.processor.annotations.render.RenderFactory
+import com.javi.render.processor.core.annotations.factory.AdapterFactory
+import com.javi.render.processor.core.annotations.render.RenderClass
+import com.javi.render.processor.core.annotations.render.RenderFactory
 import com.javi.render.processor.creators.ComponentsCreator
 import com.javi.render.processor.creators.FactoryModuleCreator
 import com.javi.render.processor.creators.MoshiModuleCreator
 import com.javi.render.processor.creators.RenderModuleCreator
 import com.javi.render.processor.data.models.ModelClassProcessed
 import com.javi.render.processor.data.utils.isValid
-import com.javi.render.processor.data.utils.log
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime
 import kotlin.time.toJavaDuration
@@ -48,21 +47,21 @@ internal class RenderProcessor(
             make(resolver)
         }
 
-        logger.log("Finished in ${elapsedTime.toJavaDuration().seconds}")
+        logger.warn("Finished in ${elapsedTime.toJavaDuration().seconds}")
         finish()
         return emptyList()
     }
 
     private fun make(resolver: Resolver) {
-        logger.log("Start processing!")
+        logger.warn("Start processing!")
 
-        logger.log("Make FactoryModule...")
+        logger.warn("Make FactoryModule...")
         makeFactories(resolver)
 
-        logger.log("Make RenderModule...")
+        logger.warn("Make RenderModule...")
         makeRenderModule(resolver)
 
-        logger.log("Make Components...")
+        logger.warn("Make Components...")
         makeComponents(resolver)
     }
 
@@ -71,6 +70,8 @@ internal class RenderProcessor(
             val resolved = resolver
                 .getSymbolsWithAnnotation(module)
                 .toList()
+
+            logger.warn("Found ${resolved.size} factories!")
 
             val symbols = getValidSymbols(resolved)
 
@@ -90,8 +91,11 @@ internal class RenderProcessor(
     private fun makeComponents(resolver: Resolver) {
         RenderClass::class.qualifiedName?.let {
             val resolved = resolver
-                .getSymbolsWithAnnotation(it)
+                .getSymbolsWithAnnotation(it, inDepth = true)
                 .toList()
+
+
+            logger.warn("Found ${resolved.size} renders!")
 
             componentsCreator.make(
                 validatedSymbols = getValidSymbols(resolved),

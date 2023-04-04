@@ -13,6 +13,7 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "DynamicListCompose"
+include ':render-processor'
 include ':app'
 include ':app:benchmark'
 include ':basket'
@@ -26,13 +27,12 @@ include ':preferences:api'
 include ':preferences:impl'
 include ':preferences:wiring'
 include ':data'
-include ':render-data'
 include ':dynamic-list'
 include ':home'
 include ':navigation:api'
 include ':navigation:wiring'
 include ':navigation:impl'
 include ':cards-page'
-include ':render-processor'
 include ':dynamic-list'
 include ':places-page'
+include ':render-processor-core'

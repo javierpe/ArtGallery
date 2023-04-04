@@ -5,11 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -35,21 +32,8 @@ fun StepperButtonComponentView(
     onDecrement: () -> Unit
 ) {
     if (quantity == 0) {
-        Box(
-            modifier = modifier
-                .clip(RoundedCornerShape(16.dp))
-                .fillMaxWidth()
-                .height(56.dp)
-                .background(Color.Black)
-                .clickable { onAdd() }
-        ) {
-            Text(
-                modifier = Modifier
-                    .align(Alignment.Center),
-                text = "Add to cart",
-                style = Typography.h6,
-                color = Color.White
-            )
+        ButtonComponentView(title =  "Add to cart") {
+            onAdd()
         }
     } else {
         Row(

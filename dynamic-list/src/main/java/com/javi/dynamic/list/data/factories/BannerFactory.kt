@@ -19,8 +19,8 @@ import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.presentation.components.banner.BannerComponentViewScreen
 import com.javi.dynamic.list.presentation.components.banner.BannerModel
 import com.javi.navigation.api.NavigationDestinationsApi
-import com.javi.render.data.RenderType
-import com.javi.render.processor.annotations.factory.AdapterFactory
+import com.javi.render.processor.core.RenderType
+import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
 @AdapterFactory

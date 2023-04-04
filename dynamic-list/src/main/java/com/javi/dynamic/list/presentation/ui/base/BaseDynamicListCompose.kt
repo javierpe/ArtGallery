@@ -39,19 +39,21 @@ fun ContextView(
     ) {
         Scaffold(
             topBar = {
-                DynamicListHeaderComponentView(
-                    title = title,
-                    contextType = viewModel.context,
-                    bodyLazyListState = bodyLazyListState
-                ) {
+                if (title.isNotEmpty()) {
+                    DynamicListHeaderComponentView(
+                        title = title,
+                        contextType = viewModel.context,
+                        bodyLazyListState = bodyLazyListState
+                    ) {
 
+                    }
                 }
             }
         ) { padding ->
             Box(
                 modifier = Modifier.padding(padding)
             ) {
-                DynamicListScreen(
+                ContextViewContent(
                     headerAdapterController = viewModel.headerAdapterController,
                     bodyAdapterController = viewModel.bodyAdapterController,
                     dynamicListObject = DynamicListObject(
@@ -60,10 +62,11 @@ fun ContextView(
                     action = action,
                     showCaseState = showCaseState,
                     bodyListState = bodyLazyListState,
-                    requestModel = dynamicListRequestModel
-                ) {
+                    requestModel = dynamicListRequestModel,
+                    dynamicListListener = {
 
-                }
+                    }
+                )
             }
         }
     }

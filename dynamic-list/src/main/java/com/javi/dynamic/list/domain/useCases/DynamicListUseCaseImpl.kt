@@ -1,7 +1,7 @@
 package com.javi.dynamic.list.domain.useCases
 
 import android.util.Log
-import com.javi.dynamic.list.data.actions.DynamicListUIEvents
+import com.javi.dynamic.list.data.actions.DynamicListUIState
 import com.javi.api.TooltipPreferencesApi
 import com.javi.dynamic.list.data.api.DynamicListControllerApi
 import com.javi.dynamic.list.data.api.DynamicListUseCaseApi
@@ -13,7 +13,7 @@ import com.javi.dynamic.list.data.models.DynamicListShowCaseModel
 import com.javi.dynamic.list.di.IODispatcher
 import com.javi.dynamic.list.domain.database.AppDatabase
 import com.javi.dynamic.list.domain.database.skeletons.SkeletonsEntity
-import com.javi.render.data.RenderType
+import com.javi.render.processor.core.RenderType
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -39,12 +39,12 @@ class DynamicListUseCaseImpl @Inject constructor(
         page: Int,
         requestModel: DynamicListRequestModel,
         withSkeletons: Boolean
-    ): Flow<DynamicListUIEvents> {
+    ): Flow<DynamicListUIState> {
         return controller
             .get(page, requestModel)
             .map {
                 // Save skeletons
-                if (it is DynamicListUIEvents.SuccessAction) {
+                if (it is DynamicListUIState.SuccessAction) {
 
                     val showCaseSequence: Queue<DynamicListShowCaseModel> = LinkedList()
 
@@ -95,7 +95,7 @@ class DynamicListUseCaseImpl @Inject constructor(
                         DynamicListShowCaseModel("", 0, true)
                     )
 
-                    DynamicListUIEvents.SuccessAction(
+                    DynamicListUIState.SuccessAction(
                         container = it.container,
                         body = bodyElements,
                         header = headerElements,
@@ -106,7 +106,7 @@ class DynamicListUseCaseImpl @Inject constructor(
                 }
             }
             .onEach {
-                if (it is DynamicListUIEvents.SuccessAction) {
+                if (it is DynamicListUIState.SuccessAction) {
                     saveSkeletons(
                         it.container.body,
                         it.container.header,
@@ -123,15 +123,15 @@ class DynamicListUseCaseImpl @Inject constructor(
                     }
 
                     skeletonContext?.let {
-                        emit(DynamicListUIEvents.SkeletonAction(it.renders))
+                        emit(DynamicListUIState.SkeletonAction(it.renders))
                     } ?: kotlin.run {
-                        emit(DynamicListUIEvents.LoadingAction)
+                        emit(DynamicListUIState.LoadingAction)
                     }
                 }
             }
             .catch {
                 Log.e("DL_ERROR", it.message.toString())
-                emit(DynamicListUIEvents.ErrorAction(it))
+                emit(DynamicListUIState.ErrorAction(it))
             }
             .flowOn(ioDispatcher)
     }

@@ -21,8 +21,8 @@ import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.presentation.components.card.CardsComponentViewScreen
 import com.javi.dynamic.list.presentation.components.card.CardsModel
 import com.javi.navigation.api.NavigationDestinationsApi
-import com.javi.render.data.RenderType
-import com.javi.render.processor.annotations.factory.AdapterFactory
+import com.javi.render.processor.core.RenderType
+import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
 @AdapterFactory

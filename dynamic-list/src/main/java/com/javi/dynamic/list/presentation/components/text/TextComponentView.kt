@@ -23,7 +23,7 @@ import com.javi.design.system.molecules.showCase.rememberShowCaseState
 import com.javi.design.system.theme.DynamicListComposeTheme
 import com.javi.design.system.theme.Typography
 import com.javi.dynamic.list.R
-import com.javi.render.data.RenderType
+import com.javi.render.processor.core.RenderType
 
 @Composable
 fun TextComponentView(

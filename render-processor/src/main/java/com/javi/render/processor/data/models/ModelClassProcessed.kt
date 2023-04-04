@@ -1,6 +1,6 @@
 package com.javi.render.processor.data.models
 
-import com.javi.render.data.RenderType
+import com.javi.render.processor.core.RenderType
 
 data class ModelClassProcessed(
     val packageName: String,

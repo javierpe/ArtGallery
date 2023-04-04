@@ -20,8 +20,8 @@ import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.presentation.components.poster.PosterComponentScreenView
 import com.javi.dynamic.list.presentation.components.poster.PosterModel
 import com.javi.navigation.api.NavigationDestinationsApi
-import com.javi.render.data.RenderType
-import com.javi.render.processor.annotations.factory.AdapterFactory
+import com.javi.render.processor.core.RenderType
+import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
 @AdapterFactory

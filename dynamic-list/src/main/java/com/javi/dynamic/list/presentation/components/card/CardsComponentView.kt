@@ -23,7 +23,7 @@ import com.javi.design.system.molecules.showCase.rememberShowCaseState
 import com.javi.design.system.theme.DynamicListComposeTheme
 import com.javi.dynamic.list.R
 import com.javi.navigation.api.NavigationDestinationsApi
-import com.javi.render.data.RenderType
+import com.javi.render.processor.core.RenderType
 
 const val CARD_COMPONENT_SCREEN_TAG = "card_component_screen"
 const val CARD_COMPONENT_TAG = "card_component"

@@ -24,7 +24,7 @@ import com.javi.design.system.molecules.showCase.asShowCaseTarget
 import com.javi.dynamic.list.R
 import com.javi.dynamic.list.presentation.components.banner.BannerModel
 import com.javi.navigation.api.NavigationDestinationsApi
-import com.javi.render.data.RenderType
+import com.javi.render.processor.core.RenderType
 
 const val BANNER_CAROUSEL_IMAGE_SCREEN_TEST_TAG = "banner-carousel-image-screen"
 

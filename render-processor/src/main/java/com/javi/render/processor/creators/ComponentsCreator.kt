@@ -4,8 +4,8 @@ import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSType
-import com.javi.render.data.RenderType
-import com.javi.render.processor.annotations.render.RenderClass
+import com.javi.render.processor.core.RenderType
+import com.javi.render.processor.core.annotations.render.RenderClass
 import com.javi.render.processor.data.models.ModelClassProcessed
 import com.javi.render.processor.data.utils.PACKAGE_FACTORIES
 import com.javi.render.processor.data.utils.PACKAGE_MOSHI
@@ -15,7 +15,6 @@ import com.javi.render.processor.data.utils.PROP_PARENT_MODEL_INDEX_NAME
 import com.javi.render.processor.data.utils.PROP_PARENT_MODEL_RENDER_NAME
 import com.javi.render.processor.data.utils.PROP_PARENT_MODEL_RESOURCE_NAME
 import com.javi.render.processor.data.utils.isDataClass
-import com.javi.render.processor.data.utils.log
 import com.javi.render.processor.data.utils.semanticName
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
@@ -44,7 +43,7 @@ class ComponentsCreator(
         names: MutableList<ModelClassProcessed>
     ) {
 
-        logger.log("Component Module: ${names.toString()}")
+        logger.warn("Component Module: ${names.toString()}")
 
         val fileSpec = FileSpec.builder(
             packageName = PACKAGE_FACTORIES,

@@ -1,4 +1,4 @@
-package com.javi.render.processor.annotations.factory
+package com.javi.render.processor.core.annotations.factory
 
 /**
  * This annotation allows FactoryModule creation that binds factory with his supertype.

@@ -3,14 +3,16 @@ package com.javi.design.system.atoms
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Button
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
@@ -34,17 +36,23 @@ fun LoaderView() {
 
 @Composable
 fun ErrorView(
+    modifier: Modifier = Modifier,
     exception: Throwable? = null,
     onRetry: () -> Unit
 ) {
-    Column {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
         Text(
-            text = exception?.message ?: stringResource(id = R.string.label_error),
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            text = exception?.toString() ?: stringResource(id = R.string.label_error),
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            color = Color.Black
         )
 
-        Button(onClick = { onRetry.invoke() }) {
-            Text(text = stringResource(id = R.string.label_retry))
+        ButtonComponentView(title = stringResource(id = R.string.label_retry)) {
+            onRetry()
         }
     }
 }

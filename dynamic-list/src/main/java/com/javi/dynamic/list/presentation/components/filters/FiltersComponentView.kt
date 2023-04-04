@@ -42,7 +42,7 @@ import com.javi.design.system.molecules.StaticGridList
 import com.javi.design.system.molecules.headers.DURATION
 import com.javi.design.system.theme.DynamicListComposeTheme
 import com.javi.design.system.theme.Typography
-import com.javi.render.data.RenderType
+import com.javi.render.processor.core.RenderType
 import kotlinx.coroutines.launch
 
 @Composable

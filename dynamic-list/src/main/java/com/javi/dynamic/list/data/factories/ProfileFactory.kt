@@ -18,8 +18,8 @@ import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.presentation.components.profile.ProfileComponentScreenView
 import com.javi.dynamic.list.presentation.components.profile.ProfileModel
 import com.javi.dynamic.list.presentation.components.profile.profileHeight
-import com.javi.render.data.RenderType
-import com.javi.render.processor.annotations.factory.AdapterFactory
+import com.javi.render.processor.core.RenderType
+import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
 @AdapterFactory

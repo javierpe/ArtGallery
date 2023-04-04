@@ -19,8 +19,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
-
--keep class com.nucu.dynamiclistcompose.presentation.components.** { *; }
--keep class com.nucu.dynamiclistcompose.data.** { *; }
 -keep class com.dynamic.** { *; }
 -keep class com.javi.data.** { *; }
+-keep class com.dynamic.** { *; }
+-keep class com.squareup.moshi.** { *; }
+-keep class com.javi.dynamic.list.presentation.components.** { *; }
+-keep class com.javi.dynamic.list.data.models.** { *; }

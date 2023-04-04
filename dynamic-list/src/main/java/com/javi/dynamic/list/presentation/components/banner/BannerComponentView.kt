@@ -25,7 +25,7 @@ import com.javi.design.system.molecules.showCase.rememberShowCaseState
 import com.javi.design.system.theme.DynamicListComposeTheme
 import com.javi.dynamic.list.R
 import com.javi.navigation.api.NavigationDestinationsApi
-import com.javi.render.data.RenderType
+import com.javi.render.processor.core.RenderType
 
 const val BANNER_IMAGE_TEST_TAG = "banner-image"
 const val BANNER_IMAGE_SCREEN_TEST_TAG = "banner-image-screen"

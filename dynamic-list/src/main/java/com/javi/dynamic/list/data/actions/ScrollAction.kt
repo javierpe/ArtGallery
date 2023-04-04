@@ -1,7 +1,6 @@
 package com.javi.dynamic.list.data.actions
 
-import com.javi.render.data.RenderType
-
+import com.javi.render.processor.core.RenderType
 
 sealed class ScrollAction(val target: TargetAction) {
 

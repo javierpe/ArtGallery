@@ -2,8 +2,8 @@ package com.javi.dynamic.list.data.renders
 
 import com.javi.dynamic.list.data.renders.base.DynamicListRender
 import com.javi.dynamic.list.presentation.components.bannerCarousel.BannerCarouselModel
-import com.javi.render.data.RenderType
-import com.javi.render.processor.annotations.render.RenderFactory
+import com.javi.render.processor.core.RenderType
+import com.javi.render.processor.core.annotations.render.RenderFactory
 import javax.inject.Inject
 
 @RenderFactory(model = BannerCarouselModel::class)

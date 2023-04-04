@@ -2,7 +2,6 @@ package com.javi.dynamic.list.data.factories
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,8 +18,8 @@ import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.presentation.components.text.TextComponentView
 import com.javi.dynamic.list.presentation.components.text.TextModel
-import com.javi.render.data.RenderType
-import com.javi.render.processor.annotations.factory.AdapterFactory
+import com.javi.render.processor.core.RenderType
+import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
 @AdapterFactory

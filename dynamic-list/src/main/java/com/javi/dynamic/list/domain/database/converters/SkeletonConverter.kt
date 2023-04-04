@@ -1,7 +1,7 @@
 package com.javi.dynamic.list.domain.database.converters
 
 import androidx.room.TypeConverter
-import com.javi.render.data.RenderType
+import com.javi.render.processor.core.RenderType
 import org.json.JSONArray
 import org.json.JSONObject
 

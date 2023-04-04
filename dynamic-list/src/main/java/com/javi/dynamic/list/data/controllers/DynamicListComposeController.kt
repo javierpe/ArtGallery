@@ -22,7 +22,7 @@ import com.javi.dynamic.list.data.models.DynamicListElement
 import com.javi.dynamic.list.data.models.DynamicListObject
 import com.javi.dynamic.list.data.models.DynamicListShowCaseModel
 import com.javi.dynamic.list.presentation.ui.base.DynamicListScreen
-import com.javi.render.data.RenderType
+import com.javi.render.processor.core.RenderType
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

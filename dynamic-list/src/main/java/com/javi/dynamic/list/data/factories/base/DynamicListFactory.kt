@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
-import com.javi.render.data.RenderType
+import com.javi.render.processor.core.RenderType
 
 interface DynamicListFactory {
 

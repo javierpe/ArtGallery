@@ -17,7 +17,6 @@ import com.javi.navigation.api.NavigationContractApi
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
