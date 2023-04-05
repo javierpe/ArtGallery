@@ -11,6 +11,7 @@ import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
+import com.javi.cards.page.api.CardsPageLoader
 import com.javi.design.system.data.models.NavigationBarItem
 import com.javi.home.HomeNavGraph
 import com.javi.home.destinations.HomeScreenDestination
@@ -27,7 +28,8 @@ private const val ANIMATION_DURATION = 400
 
 class NavigationContractImpl @Inject constructor(
     private val productDetailScreenLoader: ProductDetailScreenLoader,
-    private val placesPageLoader: PlacesPageLoader
+    private val placesPageLoader: PlacesPageLoader,
+    private val cardsPageLoader: CardsPageLoader
 ): NavigationContractApi {
 
     @OptIn(ExperimentalMaterialNavigationApi::class, ExperimentalAnimationApi::class)
@@ -108,7 +110,8 @@ class NavigationContractImpl @Inject constructor(
             graphList = listOf(
                 HomeNavGraph,
                 productDetailScreenLoader.provideNavGraph(),
-                placesPageLoader.provideNavGraph()
+                placesPageLoader.provideNavGraph(),
+                cardsPageLoader.provideNavGraph()
             ),
             navigationBarItems = navItems,
             currentDestinationRouteName = currentDestination.value?.route.orEmpty()

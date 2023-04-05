@@ -97,6 +97,11 @@ dependencies {
 
     implementation project(":design-system")
 
+    // Cards Page
+    implementation project(":cards-page:api")
+    implementation project(":cards-page:impl")
+    implementation project(":cards-page:wiring")
+
     // Places Page
     implementation project(":places-page:api")
     implementation project(":places-page:impl")
