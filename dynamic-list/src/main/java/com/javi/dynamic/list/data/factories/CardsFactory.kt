@@ -15,19 +15,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.javi.cards.page.api.CardsPageLoader
 import com.javi.dynamic.list.data.factories.base.DynamicListFactory
 import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.presentation.components.card.CardsComponentViewScreen
 import com.javi.dynamic.list.presentation.components.card.CardsModel
-import com.javi.product.detail.api.ProductDetailScreenLoader
 import com.javi.render.processor.core.RenderType
 import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
 @AdapterFactory
 class CardsFactory @Inject constructor(
-    private val productDetailScreenLoader: ProductDetailScreenLoader
+    private val cardsPageLoader: CardsPageLoader
 ): DynamicListFactory {
 
     override val renders: List<RenderType>
@@ -53,8 +53,13 @@ class CardsFactory @Inject constructor(
             data = model.value,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState
-        ) {
-
+        ) { id, title ->
+            componentInfo.navigator()?.navigate(
+                cardsPageLoader.getDestination(
+                    id = id,
+                    title = title
+                )
+            )
         }
     }
 

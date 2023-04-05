@@ -15,12 +15,13 @@ import com.javi.design.system.molecules.VerticalGrid
 
 @Composable
 fun CardsGridComponentViewScreen(
-    images: List<ProductImageModel>
+    images: List<ProductImageModel>,
+    onProductDetail: (String) -> Unit
 ) {
     CardsGridComponentView(
         data = images,
     ) {
-        
+        onProductDetail(it.imageURL)
     }
 }
 

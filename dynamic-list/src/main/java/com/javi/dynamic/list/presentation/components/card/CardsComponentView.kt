@@ -33,7 +33,7 @@ fun CardsComponentViewScreen(
     data: CardsModel,
     componentIndex: Int,
     showCaseState: ShowCaseState,
-    onProductDetail: (String) -> Unit
+    onCardPage: (Int, String) -> Unit
 ) {
     CardsComponentView(
         modifier = modifier.testTag(CARD_COMPONENT_SCREEN_TAG),
@@ -41,7 +41,7 @@ fun CardsComponentViewScreen(
         componentIndex = componentIndex,
         showCaseState = showCaseState
     ) { id, title ->
-
+        onCardPage(id, title)
     }
 }
 

@@ -55,6 +55,7 @@ kotlin {
 dependencies {
 
     implementation project(":product-detail:api")
+    implementation project(":cards-page:api")
 
     // Gson
     implementation "com.squareup.moshi:moshi-kotlin:1.14.0"
