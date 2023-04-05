@@ -20,7 +20,6 @@
    1. `render` is an enum of RenderType and is the record of each component in the list.
    2. `index` is the component's position in the list and must not be duplicated.
    3. `resource` is a JSON object and therefore can be converted to some data class.
-
 ![Definition](https://user-images.githubusercontent.com/7097754/229964052-a2069a24-b386-42e9-a666-5a0e3a3eb7aa.png)
 
 2. You must create a model capable of containing all these components, for example `DataContentModel`, here the header and body of our JSON are specified.
@@ -34,7 +33,6 @@ To create a new UI component you must follow the following steps:
 1. In the RenderType class you must register the name of the new component
 2. Create a model specific to the `resource` you need to convert
 3. Add the `@RenderClass` annotation to the model and pass the new render type you created as a parameter
-
 ![RenderClass](https://user-images.githubusercontent.com/7097754/229964442-857246bc-6cd4-4dbf-b369-5a552d0c4f6f.png)
 
 4. Create a render factory class that extends `DynamicListFactory` and that will take care of managing the component
@@ -48,12 +46,11 @@ To create a new UI component you must follow the following steps:
    2. `viewModel` you must create a ViewModel that extends from `ContextViewModel` that contains the screen information
    3. `destinationsNavigator` is a navigation instance
       1. `dynamicListRequestModel` here goes a `DynamicListRequestModel` object or via `rememberDynamicListRequestState`
-
 ![ContextView](https://user-images.githubusercontent.com/7097754/229964545-78096ce6-b286-4bbe-98e7-56a7c8e0aab0.png)
 
  ## Used libraries
 
- - [Compose Destinations](https://github.com/raamcosta/compose-destinations) - By @raamcosta es una gran librería para navegar en compose
+ - [Compose Destinations](https://github.com/raamcosta/compose-destinations) - Its a great navigation compose library
  - [Hilt](https://developer.android.com/training/dependency-injection/hilt-android?hl=es-419) - Dependency injection
  - [Coil](https://coil-kt.github.io/coil/compose/) - Image loader for compose
  - [Lottie](https://github.com/airbnb/lottie/blob/master/android-compose.md) - Lottie animations for compose
