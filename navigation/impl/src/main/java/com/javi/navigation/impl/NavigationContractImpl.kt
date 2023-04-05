@@ -13,8 +13,7 @@ import androidx.compose.ui.Alignment
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.javi.cards.page.api.CardsPageLoader
 import com.javi.design.system.data.models.NavigationBarItem
-import com.javi.home.HomeNavGraph
-import com.javi.home.destinations.HomeScreenDestination
+import com.javi.home.api.HomePageLoader
 import com.javi.navigation.api.NavigationContractApi
 import com.javi.places.page.api.PlacesPageLoader
 import com.javi.product.detail.api.ProductDetailScreenLoader
@@ -27,6 +26,7 @@ import javax.inject.Inject
 private const val ANIMATION_DURATION = 400
 
 class NavigationContractImpl @Inject constructor(
+    private val homePageLoader: HomePageLoader,
     private val productDetailScreenLoader: ProductDetailScreenLoader,
     private val placesPageLoader: PlacesPageLoader,
     private val cardsPageLoader: CardsPageLoader
@@ -64,12 +64,12 @@ class NavigationContractImpl @Inject constructor(
         val navItems = listOf(
             NavigationBarItem(
                 name = "Home",
-                key = HomeScreenDestination.route,
+                key = homePageLoader.provideDestinationSpec().route,
                 icon = Icons.Rounded.Star
             ) {
-                if (currentDestination.value != HomeScreenDestination) {
+                if (currentDestination.value != homePageLoader.provideDestinationSpec()) {
                     navHostController.navigate(
-                        direction = HomeScreenDestination(),
+                        direction = homePageLoader.getDestination(),
                         navOptionsBuilder = {
                             launchSingleTop = false
                             restoreState = true
@@ -100,7 +100,7 @@ class NavigationContractImpl @Inject constructor(
             }
         )
 
-        val showBottomNavigationBar = currentDestination.value == HomeScreenDestination ||
+        val showBottomNavigationBar = currentDestination.value == homePageLoader.provideDestinationSpec() ||
                 currentDestination.value == placesPageLoader.provideDestinationSpec()
 
         NavigationHost(
@@ -108,13 +108,14 @@ class NavigationContractImpl @Inject constructor(
             navHostController = navHostController,
             showBottomNavigationBar = showBottomNavigationBar,
             graphList = listOf(
-                HomeNavGraph,
+                homePageLoader.provideNavGraph(),
                 productDetailScreenLoader.provideNavGraph(),
                 placesPageLoader.provideNavGraph(),
                 cardsPageLoader.provideNavGraph()
             ),
             navigationBarItems = navItems,
-            currentDestinationRouteName = currentDestination.value?.route.orEmpty()
+            currentDestinationRouteName = currentDestination.value?.route.orEmpty(),
+            startRoute = homePageLoader.provideNavGraph()
         )
     }
 }

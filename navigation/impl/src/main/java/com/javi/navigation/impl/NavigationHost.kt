@@ -7,7 +7,6 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.javi.design.system.data.models.NavigationBarItem
 import com.javi.design.system.molecules.NavigationBar
-import com.javi.home.HomeNavGraph
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.spec.DestinationSpec
 import com.ramcosta.composedestinations.spec.NavGraphSpec
@@ -20,6 +19,7 @@ fun NavigationHost(
     navHostController: NavHostController,
     currentDestinationRouteName: String,
     showBottomNavigationBar: Boolean = false,
+    startRoute: NavGraphSpec,
     graphList: List<NavGraphSpec>,
     navigationBarItems: List<NavigationBarItem>
 ) {
@@ -36,7 +36,10 @@ fun NavigationHost(
 
         DestinationsNavHost(
             modifier = Modifier.padding(paddingValues),
-            navGraph = RootNavGraph(graphList),
+            navGraph = RootNavGraph(
+                startRoute = startRoute,
+                nestedNavGraphs = graphList
+            ),
             engine = navHostEngine,
             navController = navHostController
         )
@@ -44,14 +47,12 @@ fun NavigationHost(
 }
 
 class RootNavGraph constructor(
-    graphList: List<NavGraphSpec>
+    override val startRoute: NavGraphSpec,
+    override val nestedNavGraphs: List<NavGraphSpec>
 ): NavGraphSpec {
 
     override val route = "root"
 
     override val destinationsByRoute = emptyMap<String, DestinationSpec<*>>()
 
-    override val startRoute = HomeNavGraph
-
-    override val nestedNavGraphs = graphList
 }
