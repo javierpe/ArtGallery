@@ -35,7 +35,7 @@ android {
 dependencies {
 
     implementation project(":product-detail:api")
-    implementation project(":product-detail")
+    implementation project(":product-detail:impl")
 
     // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"

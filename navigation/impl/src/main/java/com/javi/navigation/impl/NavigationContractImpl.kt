@@ -4,21 +4,30 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Favorite
+import androidx.compose.material.icons.rounded.Place
+import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
+import com.javi.design.system.data.models.NavigationBarItem
+import com.javi.home.HomeNavGraph
+import com.javi.home.destinations.HomeScreenDestination
 import com.javi.navigation.api.NavigationContractApi
-import com.javi.navigation.api.NavigationDestinationsApi
+import com.javi.places.page.api.PlacesPageLoader
+import com.javi.product.detail.api.ProductDetailScreenLoader
 import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
+import com.ramcosta.composedestinations.navigation.navigate
+import com.ramcosta.composedestinations.utils.currentDestinationAsState
 import javax.inject.Inject
 
+private const val ANIMATION_DURATION = 400
+
 class NavigationContractImpl @Inject constructor(
-    private val navigationDestinationsApi: NavigationDestinationsApi
+    private val productDetailScreenLoader: ProductDetailScreenLoader,
+    private val placesPageLoader: PlacesPageLoader
 ): NavigationContractApi {
 
     @OptIn(ExperimentalMaterialNavigationApi::class, ExperimentalAnimationApi::class)
@@ -48,27 +57,61 @@ class NavigationContractImpl @Inject constructor(
 
         val navHostController = navHostEngine.rememberNavController()
 
-        val currentLifeCycleOwner = LocalLifecycleOwner.current
+        val currentDestination = navHostController.currentDestinationAsState()
 
-        DisposableEffect(currentLifeCycleOwner) {
-
-            val observer = LifecycleEventObserver { _, event ->
-                if (event == Lifecycle.Event.ON_CREATE) {
-                    navigationDestinationsApi.setUp(navHostController)
+        val navItems = listOf(
+            NavigationBarItem(
+                name = "Home",
+                key = HomeScreenDestination.route,
+                icon = Icons.Rounded.Star
+            ) {
+                if (currentDestination.value != HomeScreenDestination) {
+                    navHostController.navigate(
+                        direction = HomeScreenDestination(),
+                        navOptionsBuilder = {
+                            launchSingleTop = false
+                            restoreState = true
+                        }
+                    )
                 }
-            }
+            },
 
-            currentLifeCycleOwner.lifecycle.addObserver(observer)
+            NavigationBarItem(
+                name = "Favorites",
+                key = "favs",
+                icon = Icons.Rounded.Favorite
+            ) {
 
-            onDispose {
-                navigationDestinationsApi.onDispose()
-                currentLifeCycleOwner.lifecycle.removeObserver(observer)
+            },
+
+            NavigationBarItem(
+                name = "Places",
+                key = placesPageLoader.provideDestinationSpec().route,
+                icon = Icons.Rounded.Place
+            ) {
+                navHostController.navigate(
+                    direction = placesPageLoader.getDestination(),
+                    navOptionsBuilder = {
+                        launchSingleTop = false
+                    }
+                )
             }
-        }
+        )
+
+        val showBottomNavigationBar = currentDestination.value == HomeScreenDestination ||
+                currentDestination.value == placesPageLoader.provideDestinationSpec()
 
         NavigationHost(
             navHostEngine = navHostEngine,
-            navHostController = navHostController
+            navHostController = navHostController,
+            showBottomNavigationBar = showBottomNavigationBar,
+            graphList = listOf(
+                HomeNavGraph,
+                productDetailScreenLoader.provideNavGraph(),
+                placesPageLoader.provideNavGraph()
+            ),
+            navigationBarItems = navItems,
+            currentDestinationRouteName = currentDestination.value?.route.orEmpty()
         )
     }
 }

@@ -54,8 +54,8 @@ dependencies {
     implementation project(":navigation:api")
 
     implementation project(":home")
-    implementation project(":product-detail")
-    implementation project(":places-page")
+    implementation project(":product-detail:api")
+    implementation project(":places-page:api")
     implementation project(":cards-page")
     implementation project(":design-system")
 
