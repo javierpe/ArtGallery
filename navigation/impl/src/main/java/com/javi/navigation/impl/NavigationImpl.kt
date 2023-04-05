@@ -23,7 +23,7 @@ import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.utils.currentDestinationAsState
 import javax.inject.Inject
 
-private const val ANIMATION_DURATION = 400
+private const val ANIMATION_DURATION = 700
 
 class NavigationImpl @Inject constructor(
     private val homePageLoader: HomePageLoader,
@@ -41,6 +41,11 @@ class NavigationImpl @Inject constructor(
             rootDefaultAnimations = RootNavGraphDefaultAnimations(
                 enterTransition = {
                     fadeIn(
+                        tween(ANIMATION_DURATION)
+                    )
+                },
+                exitTransition = {
+                    fadeOut(
                         tween(ANIMATION_DURATION)
                     )
                 },
