@@ -1,4 +1,4 @@
-package com.javi.navigation.api
+package com.javi.cards.page.wiring
 
 import org.junit.Test
 
