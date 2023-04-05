@@ -1,7 +1,7 @@
 package com.javi.navigation.wiring
 
-import com.javi.navigation.api.NavigationContractApi
-import com.javi.navigation.impl.NavigationContractImpl
+import com.javi.navigation.api.NavigationApi
+import com.javi.navigation.impl.NavigationImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,6 +15,6 @@ abstract class NavigationContractModule {
     @Binds
     @Singleton
     abstract fun bindNavigationContractApi(
-        impl: NavigationContractImpl
-    ): NavigationContractApi
+        impl: NavigationImpl
+    ): NavigationApi
 }

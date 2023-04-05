@@ -13,7 +13,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.metrics.performance.JankStats
 import com.javi.design.system.theme.DynamicListComposeTheme
-import com.javi.navigation.api.NavigationContractApi
+import com.javi.navigation.api.NavigationApi
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
 
     @Inject
-    lateinit var navigationContractApi: NavigationContractApi
+    lateinit var navigationContractApi: NavigationApi
 
     private var jankStats: JankStats? = null
 

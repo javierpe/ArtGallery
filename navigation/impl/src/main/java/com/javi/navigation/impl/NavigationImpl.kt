@@ -14,7 +14,7 @@ import com.google.accompanist.navigation.material.ExperimentalMaterialNavigation
 import com.javi.cards.page.api.CardsPageLoader
 import com.javi.design.system.data.models.NavigationBarItem
 import com.javi.home.api.HomePageLoader
-import com.javi.navigation.api.NavigationContractApi
+import com.javi.navigation.api.NavigationApi
 import com.javi.places.page.api.PlacesPageLoader
 import com.javi.product.detail.api.ProductDetailScreenLoader
 import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
@@ -25,12 +25,12 @@ import javax.inject.Inject
 
 private const val ANIMATION_DURATION = 400
 
-class NavigationContractImpl @Inject constructor(
+class NavigationImpl @Inject constructor(
     private val homePageLoader: HomePageLoader,
     private val productDetailScreenLoader: ProductDetailScreenLoader,
     private val placesPageLoader: PlacesPageLoader,
     private val cardsPageLoader: CardsPageLoader
-): NavigationContractApi {
+): NavigationApi {
 
     @OptIn(ExperimentalMaterialNavigationApi::class, ExperimentalAnimationApi::class)
     @Composable
