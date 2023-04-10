@@ -53,8 +53,8 @@ fun CardItemView(
             .wrapContentWidth()
             .height(100.dp)
             .withBounceClick(),
-        shape = RoundedCornerShape(12.dp),
-        elevation = 5.dp,
+        shape = RoundedCornerShape(16.dp),
+        elevation = 15.dp,
         backgroundColor = MaterialTheme.colors.primaryVariant
     ) {
 

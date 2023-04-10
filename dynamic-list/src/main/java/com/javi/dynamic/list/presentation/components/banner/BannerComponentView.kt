@@ -67,7 +67,6 @@ fun BannerComponentView(
             modifier = modifier
                 .height(150.dp)
                 .fillMaxSize()
-                .clip(RoundedCornerShape(16.dp))
                 .asShowCaseTarget(
                     index = componentIndex,
                     style = ShowCaseStyle.Default.copy(

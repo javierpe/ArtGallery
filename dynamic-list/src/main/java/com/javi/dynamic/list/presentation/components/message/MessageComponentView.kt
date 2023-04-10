@@ -2,7 +2,7 @@ package com.javi.dynamic.list.presentation.components.message
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import androidx.compose.foundation.background
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,7 +11,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -52,9 +51,9 @@ fun MessageComponentView(
                 key = RenderType.MESSAGE.value,
                 state = showCaseState
             ),
-        shape = RoundedCornerShape(12.dp),
-        elevation = 5.dp,
-        backgroundColor = MaterialTheme.colors.primaryVariant
+        shape = RoundedCornerShape(16.dp),
+        backgroundColor = MaterialTheme.colors.onPrimary,
+        border = BorderStroke(1.dp, MaterialTheme.colors.secondary.copy(alpha = 0.1f))
     ) {
         Text(
             modifier = Modifier
@@ -71,7 +70,8 @@ fun MessageComponentView(
 @Preview(
     name = "MessageComponentView | Night Mode On",
     uiMode = UI_MODE_NIGHT_YES,
-    showBackground = true
+    showBackground = true,
+    backgroundColor = 0xFF383838
 )
 fun PreviewNightModeMessageComponentView() {
     DynamicListComposeTheme {

@@ -4,13 +4,12 @@ import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -36,11 +35,12 @@ fun BannerImageView(
     onClickAction: () -> Unit
 ) {
 
-    Box(
+    Card(
         modifier = modifier
             .withBounceClick()
-            .clip(RoundedCornerShape(16.dp))
-            .testTag(BANNER_CAROUSEL_IMAGE_TEST_TAG)
+            .testTag(BANNER_CAROUSEL_IMAGE_TEST_TAG),
+        shape = RoundedCornerShape(16.dp),
+        elevation = 15.dp
     ) {
 
         ImageComponentView(
@@ -63,7 +63,6 @@ fun BannerImageView(
         if (quantity > 0) {
             Text(
                 modifier = Modifier
-                    .align(Alignment.TopEnd)
                     .size(40.dp)
                     .clip(RoundedCornerShape(bottomStart = 10.dp))
                     .background(Color.White),

@@ -69,7 +69,7 @@ fun BannerCarouselComponentView(
     } else 350.dp
 
     LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        horizontalArrangement = Arrangement.spacedBy(20.dp),
         modifier = modifier
             .fillMaxWidth(),
         contentPadding = PaddingValues(start = 16.dp, end = 16.dp)
