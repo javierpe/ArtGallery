@@ -83,6 +83,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-compose:$compose_lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$compose_lifecycle_version"
     implementation "androidx.core:core-ktx:$android_core_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
     // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"

@@ -40,6 +40,7 @@ const val MIN_HEIGHT = 65
 @OptIn(ExperimentalMotionApi::class)
 @Composable
 fun HeaderWithImageView(
+    modifier: Modifier = Modifier,
     title: String,
     icon: ImageVector,
     bodyLazyListState: LazyListState? = null,
@@ -143,7 +144,7 @@ fun HeaderWithImageView(
         start = constraintSetStart(),
         end = constraintSetEnd(),
         progress = progress,
-        modifier = Modifier.height(motionHeight)
+        modifier = modifier.height(motionHeight)
     ) {
         val backgroundProperties = motionProperties(backgroundLayoutId)
         val titleProperties = motionProperties(titleLayoutId)

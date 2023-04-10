@@ -1,6 +1,5 @@
 package com.javi.design.system.molecules.headers
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyListState
@@ -33,6 +32,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
  */
 @Composable
 fun DynamicListHeaderComponentView(
+    modifier: Modifier = Modifier,
     title: String,
     contextType: ContextType,
     bodyLazyListState: LazyListState? = null,
@@ -73,54 +73,53 @@ fun DynamicListHeaderComponentView(
 
 @Composable
 fun SimpleHeaderView(
+    modifier: Modifier = Modifier,
     title: String,
     icon: ImageVector? = null,
     onIconClick: (() -> Unit)? = null
 ) {
     val showCaseState = rememberShowCaseState()
 
-    Column {
-        ConstraintLayout(
-            modifier = Modifier
-                .padding(16.dp)
-                .wrapContentHeight(),
-        ) {
-            val (backRef, titleRef) = createRefs()
+    ConstraintLayout(
+        modifier = modifier
+            .padding(16.dp)
+            .wrapContentHeight(),
+    ) {
+        val (backRef, titleRef) = createRefs()
 
-            icon?.let {
-                BackButtonComponentView(
-                    modifier = Modifier
-                        .constrainAs(backRef) {
-                            top.linkTo(parent.top)
-                            start.linkTo(parent.start)
-                        }
-                        .asShowCaseTarget(
-                            index = 0,
-                            style = ShowCaseStyle.Default.copy(shapeType = ShapeType.CIRCLE),
-                            content = {
-                                TooltipView(text = "Aquí puedes dar back")
-                            },
-                            strategy = ShowCaseStrategy(onlyUserInteraction = true),
-                            key = "back-button",
-                            state = showCaseState
-                        ),
-                    onClick = onIconClick,
-                    iconColor = MaterialTheme.colors.secondary,
-                    icon = it
-                )
-            }
-
-            Text(
-                modifier = Modifier.constrainAs(titleRef) {
-                    top.linkTo(backRef.top)
-                    bottom.linkTo(backRef.bottom)
-                    start.linkTo(backRef.end, 10.dp)
-                },
-                text = title,
-                style = Typography.h6,
-                color = MaterialTheme.colors.secondary
+        icon?.let {
+            BackButtonComponentView(
+                modifier = Modifier
+                    .constrainAs(backRef) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                    }
+                    .asShowCaseTarget(
+                        index = 0,
+                        style = ShowCaseStyle.Default.copy(shapeType = ShapeType.CIRCLE),
+                        content = {
+                            TooltipView(text = "Aquí puedes dar back")
+                        },
+                        strategy = ShowCaseStrategy(onlyUserInteraction = true),
+                        key = "back-button",
+                        state = showCaseState
+                    ),
+                onClick = onIconClick,
+                iconColor = MaterialTheme.colors.secondary,
+                icon = it
             )
         }
+
+        Text(
+            modifier = Modifier.constrainAs(titleRef) {
+                top.linkTo(backRef.top)
+                bottom.linkTo(backRef.bottom)
+                start.linkTo(backRef.end, 10.dp)
+            },
+            text = title,
+            style = Typography.h6,
+            color = MaterialTheme.colors.secondary
+        )
     }
 }
 
@@ -131,7 +130,7 @@ fun PreviewHeaderComponentView() {
         DynamicListHeaderComponentView(
             title = "Hello from the header view of DynamicList",
             contextType = ContextType.HOME,
-            rememberLazyListState()
+            bodyLazyListState = rememberLazyListState()
         )
     }
 }
@@ -143,7 +142,7 @@ fun PreviewSimpleHeaderComponentView() {
         DynamicListHeaderComponentView(
             title = "Hello from the header view of DynamicList",
             contextType = ContextType.HOME,
-            rememberLazyListState()
+            bodyLazyListState = rememberLazyListState()
         )
     }
 }
