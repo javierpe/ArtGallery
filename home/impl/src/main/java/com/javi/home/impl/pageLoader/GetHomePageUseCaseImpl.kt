@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class GetHomePageUseCaseImpl @Inject constructor() : GetHomePageUseCase {
 
-    override val route: String = HomeNavGraph.route
+    override val route: String = HomeScreenDestination.route
 
     override val navGraph: NavGraphSpec = HomeNavGraph
 

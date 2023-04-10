@@ -7,9 +7,9 @@ import com.ramcosta.composedestinations.spec.Direction
 import com.ramcosta.composedestinations.spec.NavGraphSpec
 import javax.inject.Inject
 
-class GetCardsPageUseCaseImpl @Inject constructor(): GetCardsPageUseCase {
+class GetCardsPageUseCaseImpl @Inject constructor() : GetCardsPageUseCase {
 
-    override val route: String = CardsPageNavGraph.route
+    override val route: String = CardsPageDestination.route
 
     override val navGraph: NavGraphSpec = CardsPageNavGraph
 

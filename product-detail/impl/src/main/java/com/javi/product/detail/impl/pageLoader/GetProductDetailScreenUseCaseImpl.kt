@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class GetProductDetailScreenUseCaseImpl @Inject constructor() : GetProductDetailPageUseCase {
 
-    override val route: String = ProductDetailNavGraph.route
+    override val route: String = ProductImageScreenDestination.route
 
     override val navGraph: NavGraphSpec = ProductDetailNavGraph
 
