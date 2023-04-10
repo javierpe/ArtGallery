@@ -15,16 +15,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.javi.design.system.atoms.ErrorView
+import com.javi.design.system.atoms.LoaderView
+import com.javi.design.system.molecules.showCase.ShowCaseState
 import com.javi.dynamic.list.data.actions.ContextViewAction
 import com.javi.dynamic.list.data.actions.DynamicListUIState
 import com.javi.dynamic.list.data.actions.ScrollAction
 import com.javi.dynamic.list.data.actions.TargetAction
-import com.javi.design.system.atoms.ErrorView
-import com.javi.design.system.atoms.LoaderView
-import com.javi.design.system.molecules.showCase.ShowCaseState
 import com.javi.dynamic.list.data.controllers.DynamicListComposeController
 import com.javi.dynamic.list.data.models.DynamicListObject
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
@@ -44,7 +45,6 @@ fun ContextViewContent(
     dynamicListListener: (DynamicListListener) -> Unit,
     dynamicListViewModel: DynamicListViewModel = hiltViewModel()
 ) {
-
     val uiState by dynamicListViewModel.dynamicListAction.collectAsStateWithLifecycle()
 
     LaunchedEffect(requestModel) {
@@ -59,7 +59,6 @@ fun ContextViewContent(
     }
 
     when (uiState) {
-
         is DynamicListUIState.SkeletonAction -> {
             dynamicListListener.invoke(
                 DynamicListListener.OnStartLoading
@@ -161,7 +160,7 @@ fun DynamicListLayout(
     contentHeader: @Composable () -> Unit,
     contentBody: @Composable () -> Unit
 ) {
-    when(widthSizeClass) {
+    when (widthSizeClass) {
         WindowWidthSizeClass.Compact -> {
             Column {
                 contentHeader()

@@ -34,6 +34,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
@@ -194,7 +195,6 @@ fun FilterItemComponent(
                 ambientColor = colorAnimation,
                 spotColor = colorAnimation,
                 elevation = elevationAnimation,
-                shape = RoundedCornerShape(cornerRadius)
             )
             .clip(RoundedCornerShape(cornerRadius))
             .background(colorAnimation.copy(alpha = 0.5f))
@@ -228,7 +228,7 @@ fun PreviewNightModeFiltersComponentViewScreen() {
                 FilterItemModel(text = "Text 2", goTo = "", color = "#A0D4CD"),
                 FilterItemModel(text = "Text 3", goTo = "", color = "#43AAA0"),
                 FilterItemModel(text = "Text 4", goTo = "", color = "#619197"),
-                FilterItemModel(text = "Text 5", goTo = "", color = "#FFDAB9"),
+                FilterItemModel(text = "Text 5", goTo = "", color = "#FFDAB9")
             ),
             windowWidthSizeClass = WindowWidthSizeClass.Compact
         ) { }
@@ -250,7 +250,7 @@ fun PreviewNoNightModeFiltersComponentViewScreen() {
                 FilterItemModel(text = "Text 2", goTo = "", color = "#A0D4CD"),
                 FilterItemModel(text = "Text 3", goTo = "", color = "#43AAA0"),
                 FilterItemModel(text = "Text 4", goTo = "", color = "#619197"),
-                FilterItemModel(text = "Text 5", goTo = "", color = "#FFDAB9"),
+                FilterItemModel(text = "Text 5", goTo = "", color = "#FFDAB9")
             ),
             windowWidthSizeClass = WindowWidthSizeClass.Compact
         ) { }
