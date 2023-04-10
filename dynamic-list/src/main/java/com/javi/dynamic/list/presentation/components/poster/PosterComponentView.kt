@@ -1,27 +1,17 @@
 package com.javi.dynamic.list.presentation.components.poster
 
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
@@ -33,6 +23,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.javi.data.ProductImageModel
 import com.javi.design.system.ImageComponentView
+import com.javi.design.system.atoms.HorizontalPagerIndicators
 import com.javi.design.system.atoms.TitleDecoratedView
 import com.javi.design.system.extensions.withBounceClick
 
@@ -95,7 +86,7 @@ fun PosterComponentViewV2(
                 )
             }
         }
-        
+
         Spacer(modifier = Modifier.padding(bottom = 25.dp))
 
         HorizontalPagerIndicators(
@@ -105,43 +96,5 @@ fun PosterComponentViewV2(
             pageCount = list.size,
             state = pagerState
         )
-    }
-}
-
-private const val ANIMATION_DURATION = 550
-
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun HorizontalPagerIndicators(
-    modifier: Modifier = Modifier,
-    pageCount: Int,
-    state: PagerState
-) {
-    Row(
-        modifier = modifier
-            .wrapContentHeight()
-            .wrapContentWidth(),
-        horizontalArrangement = Arrangement.Center
-    ) {
-        repeat(pageCount) { iteration ->
-
-            val animateColor = animateColorAsState(
-                targetValue = if (state.currentPage == iteration) {
-                    MaterialTheme.colors.primary
-                } else {
-                    MaterialTheme.colors.secondary
-                },
-                tween(ANIMATION_DURATION)
-            )
-
-            Box(
-                modifier = Modifier
-                    .size(15.dp)
-                    .padding(3.dp)
-                    .clip(CircleShape)
-                    .background(animateColor.value)
-                    .size(20.dp)
-            )
-        }
     }
 }
