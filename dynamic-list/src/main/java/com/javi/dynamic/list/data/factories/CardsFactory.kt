@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.javi.cards.page.api.CardsPageLoader
+import com.javi.cards.page.api.GetCardsPageUseCase
 import com.javi.dynamic.list.data.factories.base.DynamicListFactory
 import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
@@ -27,7 +27,7 @@ import javax.inject.Inject
 
 @AdapterFactory
 class CardsFactory @Inject constructor(
-    private val cardsPageLoader: CardsPageLoader
+    private val getCardsPageUseCase: GetCardsPageUseCase
 ): DynamicListFactory {
 
     override val renders: List<RenderType>
@@ -55,7 +55,7 @@ class CardsFactory @Inject constructor(
             showCaseState = componentInfo.showCaseState
         ) { id, title ->
             componentInfo.navigator()?.navigate(
-                cardsPageLoader.getDestination(
+                getCardsPageUseCase(
                     id = id,
                     title = title
                 )

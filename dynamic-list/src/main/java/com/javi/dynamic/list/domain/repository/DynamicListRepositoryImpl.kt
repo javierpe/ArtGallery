@@ -1,9 +1,9 @@
-package com.javi.dynamic.list.domain.impl
+package com.javi.dynamic.list.domain.repository
 
 import com.javi.dynamic.list.data.actions.DynamicListUIState
-import com.javi.dynamic.list.data.api.DynamicListControllerApi
-import com.javi.dynamic.list.data.api.DynamicListMockResponseApi
-import com.javi.dynamic.list.data.api.DynamicListRenderProcessorApi
+import com.javi.dynamic.list.data.dataSources.DynamicListDataSourceApi
+import com.javi.dynamic.list.data.useCases.DynamicListRenderProcessorApi
+import com.javi.dynamic.list.data.repositories.DynamicListRepository
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListContainer
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
@@ -14,10 +14,10 @@ import javax.inject.Inject
 
 private const val DEFAULT_DELAY: Long = 3000
 
-class DynamicListControllerImpl @Inject constructor(
+class DynamicListRepositoryImpl @Inject constructor(
     private val dynamicListRenderProcessorApi: DynamicListRenderProcessorApi,
-    private val dynamicListMockResponseApi: DynamicListMockResponseApi
-) : DynamicListControllerApi {
+    private val dynamicListMockResponseApi: DynamicListDataSourceApi
+) : DynamicListRepository {
 
     override suspend fun get(
         page: Int,

@@ -1,10 +1,10 @@
 package com.javi.dynamic.list.di
 
-import com.javi.dynamic.list.data.api.DynamicListControllerApi
-import com.javi.dynamic.list.data.api.DynamicListMockResponseApi
-import com.javi.dynamic.list.data.api.DynamicListRenderProcessorApi
-import com.javi.dynamic.list.domain.impl.DynamicListControllerImpl
-import com.javi.dynamic.list.domain.impl.DynamicListMockResponseImpl
+import com.javi.dynamic.list.data.repositories.DynamicListRepository
+import com.javi.dynamic.list.data.dataSources.DynamicListDataSourceApi
+import com.javi.dynamic.list.data.useCases.DynamicListRenderProcessorApi
+import com.javi.dynamic.list.domain.repository.DynamicListRepositoryImpl
+import com.javi.dynamic.list.domain.dataSource.DynamicListDataSourceImpl
 import com.javi.dynamic.list.domain.impl.DynamicListRenderProcessorImpl
 import dagger.Binds
 import dagger.Module
@@ -19,14 +19,14 @@ abstract class DynamicListWiringModule {
     @Binds
     @Singleton
     abstract fun bindDynamicListController(
-        impl: DynamicListControllerImpl
-    ): DynamicListControllerApi
+        impl: DynamicListRepositoryImpl
+    ): DynamicListRepository
 
     @Binds
     @Singleton
     abstract fun bindDynamicListMockResponse(
-        impl: DynamicListMockResponseImpl
-    ): DynamicListMockResponseApi
+        impl: DynamicListDataSourceImpl
+    ): DynamicListDataSourceApi
 
     @Binds
     @Singleton

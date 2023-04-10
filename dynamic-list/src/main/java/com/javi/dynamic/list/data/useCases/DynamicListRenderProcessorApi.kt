@@ -1,4 +1,4 @@
-package com.javi.dynamic.list.data.api
+package com.javi.dynamic.list.data.useCases
 
 interface DynamicListRenderProcessorApi {
 

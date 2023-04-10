@@ -1,7 +1,13 @@
 package com.javi.dynamic.list.di
 
-import com.javi.dynamic.list.data.api.DynamicListUseCaseApi
+import com.javi.dynamic.list.data.useCases.GetDynamicListUseCase
+import com.javi.dynamic.list.data.useCases.GetDynamicListShowCaseUseCase
+import com.javi.dynamic.list.data.useCases.GetSkeletonsByContextUseCase
+import com.javi.dynamic.list.data.useCases.SaveSkeletonsUseCase
 import com.javi.dynamic.list.domain.useCases.DynamicListUseCaseImpl
+import com.javi.dynamic.list.domain.useCases.GetDynamicListShowCaseUseCaseImpl
+import com.javi.dynamic.list.domain.useCases.GetSkeletonsByContextUseCaseImpl
+import com.javi.dynamic.list.domain.useCases.SaveSkeletonsUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,5 +22,23 @@ abstract class DynamicListUseCasesModule {
     @Singleton
     abstract fun bindUseCase(
         impl: DynamicListUseCaseImpl
-    ): DynamicListUseCaseApi
+    ): GetDynamicListUseCase
+
+    @Binds
+    @Singleton
+    abstract fun bindGetDynamicListDataUseCase(
+        impl: GetDynamicListShowCaseUseCaseImpl
+    ): GetDynamicListShowCaseUseCase
+
+    @Binds
+    @Singleton
+    abstract fun bindGetSkeletonsByContextUseCase(
+        impl: GetSkeletonsByContextUseCaseImpl
+    ): GetSkeletonsByContextUseCase
+
+    @Binds
+    @Singleton
+    abstract fun bindSaveSkeletonsUseCase(
+        impl: SaveSkeletonsUseCaseImpl
+    ): SaveSkeletonsUseCase
 }

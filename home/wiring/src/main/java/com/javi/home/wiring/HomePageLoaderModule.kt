@@ -1,7 +1,7 @@
 package com.javi.home.wiring
 
-import com.javi.home.api.HomePageLoader
-import com.javi.home.impl.pageLoader.HomePageLoaderImpl
+import com.javi.home.api.GetHomePageUseCase
+import com.javi.home.impl.pageLoader.GetHomePageUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,6 +15,6 @@ abstract class HomePageLoaderModule {
     @Binds
     @Singleton
     abstract fun bindLoader(
-        impl: HomePageLoaderImpl
-    ): HomePageLoader
+        impl: GetHomePageUseCaseImpl
+    ): GetHomePageUseCase
 }

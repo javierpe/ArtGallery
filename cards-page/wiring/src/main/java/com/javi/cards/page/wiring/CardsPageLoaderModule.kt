@@ -1,7 +1,7 @@
 package com.javi.cards.page.wiring
 
-import com.javi.cards.page.api.CardsPageLoader
-import com.javi.cards.page.impl.pageLoader.CardsPageLoaderImpl
+import com.javi.cards.page.api.GetCardsPageUseCase
+import com.javi.cards.page.impl.pageLoader.GetCardsPageUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,6 +15,6 @@ abstract class CardsPageLoaderModule {
     @Binds
     @Singleton
     abstract fun bindLoader(
-        impl: CardsPageLoaderImpl
-    ): CardsPageLoader
+        impl: GetCardsPageUseCaseImpl
+    ): GetCardsPageUseCase
 }

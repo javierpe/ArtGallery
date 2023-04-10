@@ -1,14 +1,15 @@
 package com.javi.product.detail.api
 
 import com.ramcosta.composedestinations.spec.Direction
-import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
 import com.ramcosta.composedestinations.spec.NavGraphSpec
 
-interface ProductDetailScreenLoader {
+interface GetProductDetailPageUseCase {
 
-    fun getDestination(
+    val route: String
+
+    val navGraph: NavGraphSpec
+
+    operator fun invoke(
         imageUrl: String
     ): Direction
-
-    fun provideNavGraph(): NavGraphSpec
 }

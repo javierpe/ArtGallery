@@ -1,9 +1,9 @@
-package com.javi.dynamic.list.domain.impl
+package com.javi.dynamic.list.domain.dataSource
 
 import android.content.Context
 import com.javi.data.enums.ContextType
 import com.javi.dynamic.list.R
-import com.javi.dynamic.list.data.api.DynamicListMockResponseApi
+import com.javi.dynamic.list.data.dataSources.DynamicListDataSourceApi
 import com.javi.dynamic.list.data.extensions.tryFromJson
 import com.javi.dynamic.list.data.models.DataContentModel
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
@@ -11,10 +11,10 @@ import com.squareup.moshi.Moshi
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class DynamicListMockResponseImpl @Inject constructor(
+class DynamicListDataSourceImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val moshi: Moshi
-): DynamicListMockResponseApi {
+): DynamicListDataSourceApi {
 
     override suspend fun getDataFromAsset(dynamicListRequestModel: DynamicListRequestModel): DataContentModel {
         val data = context.resources

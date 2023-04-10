@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.javi.basket.api.LocalBasketApi
 import com.javi.dynamic.list.data.actions.DynamicListUIState
-import com.javi.dynamic.list.data.api.DynamicListUseCaseApi
+import com.javi.dynamic.list.data.useCases.GetDynamicListUseCase
 import com.javi.dynamic.list.data.extensions.propagateBasketProducts
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DynamicListViewModel @Inject constructor(
-    private val useCase: DynamicListUseCaseApi,
+    private val getDynamicListUseCase: GetDynamicListUseCase,
     private val basketApi: LocalBasketApi
 ) : ViewModel() {
 
@@ -38,7 +38,7 @@ class DynamicListViewModel @Inject constructor(
     fun load(dynamicListRequestModel: DynamicListRequestModel) {
         job?.cancel()
         job = viewModelScope.launch {
-            useCase.get(0, dynamicListRequestModel)
+            getDynamicListUseCase(0, dynamicListRequestModel)
                 .combine(basketApi.basketProducts) { data, basket ->
                     if (basket.isNotEmpty() && data is DynamicListUIState.SuccessAction) {
                         data.propagateBasketProducts(basket)

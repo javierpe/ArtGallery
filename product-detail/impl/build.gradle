@@ -77,18 +77,17 @@ dependencies {
 
     // Compose
     implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.material:material:1.4.0"
+    implementation "androidx.compose.material:material:$material_compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$compose_lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-compose:$compose_lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$compose_lifecycle_version"
-    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation "androidx.core:core-ktx:$android_core_version"
 
     // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
 
-    implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     testImplementation 'junit:junit:4.13.2'

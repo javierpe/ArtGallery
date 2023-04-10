@@ -1,6 +1,6 @@
 package com.javi.dynamic.list.domain.impl
 
-import com.javi.dynamic.list.data.api.DynamicListRenderProcessorApi
+import com.javi.dynamic.list.data.useCases.DynamicListRenderProcessorApi
 import com.javi.dynamic.list.data.renders.base.DynamicListRender
 import javax.inject.Inject
 

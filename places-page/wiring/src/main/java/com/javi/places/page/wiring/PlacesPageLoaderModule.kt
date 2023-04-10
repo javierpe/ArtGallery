@@ -1,7 +1,7 @@
 package com.javi.places.page.wiring
 
-import com.javi.places.page.api.PlacesPageLoader
-import com.javi.places.page.impl.pageLoader.PlacesPageLoaderImpl
+import com.javi.places.page.api.GetPlacesPageUseCase
+import com.javi.places.page.impl.pageLoader.GetPlacesPageUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,6 +15,6 @@ abstract class PlacesPageLoaderModule {
     @Binds
     @Singleton
     abstract fun bindLoader(
-        impl: PlacesPageLoaderImpl
-    ): PlacesPageLoader
+        impl: GetPlacesPageUseCaseImpl
+    ): GetPlacesPageUseCase
 }

@@ -1,7 +1,7 @@
 package com.javi.product.detail.wiring
 
-import com.javi.product.detail.api.ProductDetailScreenLoader
-import com.javi.product.detail.impl.pageLoader.ProductDetailScreenLoaderImpl
+import com.javi.product.detail.api.GetProductDetailPageUseCase
+import com.javi.product.detail.impl.pageLoader.GetProductDetailScreenUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,6 +15,6 @@ abstract class ProductDetailScreenLoaderModule {
     @Binds
     @Singleton
     abstract fun bindLoader(
-        impl: ProductDetailScreenLoaderImpl
-    ): ProductDetailScreenLoader
+        impl: GetProductDetailScreenUseCaseImpl
+    ): GetProductDetailPageUseCase
 }

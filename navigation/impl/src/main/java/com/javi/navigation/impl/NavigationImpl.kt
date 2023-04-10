@@ -11,12 +11,12 @@ import androidx.compose.material.icons.rounded.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
-import com.javi.cards.page.api.CardsPageLoader
+import com.javi.cards.page.api.GetCardsPageUseCase
 import com.javi.design.system.data.models.NavigationBarItem
-import com.javi.home.api.HomePageLoader
+import com.javi.home.api.GetHomePageUseCase
 import com.javi.navigation.api.NavigationApi
-import com.javi.places.page.api.PlacesPageLoader
-import com.javi.product.detail.api.ProductDetailScreenLoader
+import com.javi.places.page.api.GetPlacesPageUseCase
+import com.javi.product.detail.api.GetProductDetailPageUseCase
 import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
 import com.ramcosta.composedestinations.navigation.navigate
@@ -26,10 +26,10 @@ import javax.inject.Inject
 private const val ANIMATION_DURATION = 700
 
 class NavigationImpl @Inject constructor(
-    private val homePageLoader: HomePageLoader,
-    private val productDetailScreenLoader: ProductDetailScreenLoader,
-    private val placesPageLoader: PlacesPageLoader,
-    private val cardsPageLoader: CardsPageLoader
+    private val homePageLoader: GetHomePageUseCase,
+    private val getProductDetailScreenUseCase: GetProductDetailPageUseCase,
+    private val placesPageLoader: GetPlacesPageUseCase,
+    private val getCardsPageUseCase: GetCardsPageUseCase
 ): NavigationApi {
 
     @OptIn(ExperimentalMaterialNavigationApi::class, ExperimentalAnimationApi::class)
@@ -69,12 +69,12 @@ class NavigationImpl @Inject constructor(
         val navItems = listOf(
             NavigationBarItem(
                 name = "Home",
-                key = homePageLoader.provideDestinationSpec().route,
+                key = homePageLoader.route,
                 icon = Icons.Rounded.Star
             ) {
-                if (currentDestination.value != homePageLoader.provideDestinationSpec()) {
+                if (currentDestination.value?.route != homePageLoader.route) {
                     navHostController.navigate(
-                        direction = homePageLoader.getDestination(),
+                        direction = homePageLoader(),
                         navOptionsBuilder = {
                             launchSingleTop = false
                             restoreState = true
@@ -93,11 +93,11 @@ class NavigationImpl @Inject constructor(
 
             NavigationBarItem(
                 name = "Places",
-                key = placesPageLoader.provideDestinationSpec().route,
+                key = placesPageLoader.navGraph.route,
                 icon = Icons.Rounded.Place
             ) {
                 navHostController.navigate(
-                    direction = placesPageLoader.getDestination(),
+                    direction = placesPageLoader(),
                     navOptionsBuilder = {
                         launchSingleTop = false
                     }
@@ -105,22 +105,22 @@ class NavigationImpl @Inject constructor(
             }
         )
 
-        val showBottomNavigationBar = currentDestination.value == homePageLoader.provideDestinationSpec() ||
-                currentDestination.value == placesPageLoader.provideDestinationSpec()
+        val showBottomNavigationBar = currentDestination.value?.route == homePageLoader.route ||
+                currentDestination.value?.route == placesPageLoader.navGraph.route
 
         NavigationHost(
             navHostEngine = navHostEngine,
             navHostController = navHostController,
             showBottomNavigationBar = showBottomNavigationBar,
             graphList = listOf(
-                homePageLoader.provideNavGraph(),
-                productDetailScreenLoader.provideNavGraph(),
-                placesPageLoader.provideNavGraph(),
-                cardsPageLoader.provideNavGraph()
+                homePageLoader.navGraph,
+                getProductDetailScreenUseCase.navGraph,
+                placesPageLoader.navGraph,
+                getCardsPageUseCase.navGraph
             ),
             navigationBarItems = navItems,
             currentDestinationRouteName = currentDestination.value?.route.orEmpty(),
-            startRoute = homePageLoader.provideNavGraph()
+            startRoute = homePageLoader.navGraph
         )
     }
 }
