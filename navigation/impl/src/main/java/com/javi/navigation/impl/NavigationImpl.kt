@@ -91,7 +91,7 @@ class NavigationImpl @Inject constructor(
 
             NavigationBarItem(
                 name = "Places",
-                key = placesPageLoader.navGraph.route,
+                key = placesPageLoader.route,
                 icon = Icons.Rounded.Place
             ) {
                 navHostController.navigate(
@@ -104,7 +104,7 @@ class NavigationImpl @Inject constructor(
         )
 
         val showBottomNavigationBar = currentDestination.value?.route == homePageLoader.route ||
-            currentDestination.value?.route == placesPageLoader.navGraph.route
+            currentDestination.value?.route == placesPageLoader.route
 
         NavigationHost(
             navHostEngine = navHostEngine,
