@@ -34,7 +34,6 @@ fun BannerImageView(
     description: String,
     onClickAction: () -> Unit
 ) {
-
     Card(
         modifier = modifier
             .withBounceClick()
@@ -42,7 +41,6 @@ fun BannerImageView(
         shape = RoundedCornerShape(16.dp),
         elevation = 15.dp
     ) {
-
         ImageComponentView(
             modifier = Modifier
                 .fillMaxSize()

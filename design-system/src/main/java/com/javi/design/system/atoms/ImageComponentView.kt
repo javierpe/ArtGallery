@@ -20,7 +20,6 @@ fun ImageComponentView(
     colorFilter: ColorFilter? = null,
     contentScale: ContentScale = ContentScale.Crop
 ) {
-
     var requestBuilder = ImageRequest.Builder(LocalContext.current)
         .data(imageURL)
         .diskCacheKey(imageURL)

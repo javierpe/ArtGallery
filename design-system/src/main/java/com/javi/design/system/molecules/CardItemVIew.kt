@@ -57,7 +57,6 @@ fun CardItemView(
         elevation = 15.dp,
         backgroundColor = MaterialTheme.colors.primaryVariant
     ) {
-
         Column(
             modifier = Modifier
                 .clickable {
@@ -76,7 +75,6 @@ fun CardItemView(
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
                 modifier = Modifier.fillMaxSize()
             ) {
-
                 pictures.value.forEach { cardImage ->
                     CardImageItem(imageURL = cardImage.imageURL)
                 }

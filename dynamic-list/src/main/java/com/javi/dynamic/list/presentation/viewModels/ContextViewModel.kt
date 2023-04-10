@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
-abstract class ContextViewModel: ViewModel() {
+abstract class ContextViewModel : ViewModel() {
 
     @Inject
     lateinit var headerAdapterController: DefaultDynamicListController
@@ -29,6 +29,6 @@ abstract class ContextViewModel: ViewModel() {
      * Maybe this can be removed and create abstract properties
      * like state or other params for request model.
      * The idea is only change properties and not all the model
-      */
+     */
     abstract val requestModel: DynamicListRequestModel
 }

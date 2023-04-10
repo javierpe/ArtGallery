@@ -7,7 +7,7 @@ import com.ramcosta.composedestinations.spec.Direction
 import com.ramcosta.composedestinations.spec.NavGraphSpec
 import javax.inject.Inject
 
-class GetHomePageUseCaseImpl @Inject constructor(): GetHomePageUseCase {
+class GetHomePageUseCaseImpl @Inject constructor() : GetHomePageUseCase {
 
     override val route: String = HomeNavGraph.route
 

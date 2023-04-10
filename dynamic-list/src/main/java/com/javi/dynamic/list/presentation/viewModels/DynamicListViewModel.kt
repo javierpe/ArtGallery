@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.javi.basket.api.LocalBasketApi
 import com.javi.dynamic.list.data.actions.DynamicListUIState
-import com.javi.dynamic.list.data.useCases.GetDynamicListUseCase
 import com.javi.dynamic.list.data.extensions.propagateBasketProducts
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
+import com.javi.dynamic.list.data.useCases.GetDynamicListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow

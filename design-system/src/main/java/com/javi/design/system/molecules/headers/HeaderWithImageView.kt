@@ -26,11 +26,11 @@ import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
 import androidx.core.graphics.toColorLong
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.javi.design.system.atoms.BackButtonComponentView
 import com.javi.design.system.data.BACKGROUND
 import com.javi.design.system.data.BACK_BUTTON_BACKGROUND
 import com.javi.design.system.data.BACK_BUTTON_ICON_COLOR
 import com.javi.design.system.data.TEXT_COLOR
-import com.javi.design.system.atoms.BackButtonComponentView
 import com.javi.design.system.theme.Typography
 
 const val DURATION = 500
@@ -45,7 +45,6 @@ fun HeaderWithImageView(
     bodyLazyListState: LazyListState? = null,
     onIconClick: () -> Unit
 ) {
-
     val backgroundLayoutId = "background"
     val titleLayoutId = "title"
     val backButtonLayoutId = "back_button"
@@ -83,57 +82,57 @@ fun HeaderWithImageView(
      *
      *  val (backgroundRef, titleRef, backButtonRef) = createRefs()
 
-        val constraintSetStart = ConstraintSet {
-            constrain(backgroundRef) {
-            start.linkTo(parent.start)
-            end.linkTo(parent.end)
-            top.linkTo(parent.top)
+     val constraintSetStart = ConstraintSet {
+     constrain(backgroundRef) {
+     start.linkTo(parent.start)
+     end.linkTo(parent.end)
+     top.linkTo(parent.top)
 
-            height = Dimension.value(120.dp)
-        }
+     height = Dimension.value(120.dp)
+     }
 
-        constrain(titleRef) {
-            bottom.linkTo(parent.bottom)
-            start.linkTo(parent.start, 16.dp)
-            top.linkTo(backButtonRef.bottom)
-        }
+     constrain(titleRef) {
+     bottom.linkTo(parent.bottom)
+     start.linkTo(parent.start, 16.dp)
+     top.linkTo(backButtonRef.bottom)
+     }
 
-        constrain(backButtonRef) {
-            start.linkTo(parent.start, 16.dp)
-            top.linkTo(parent.top, 16.dp)
-            }
-        }
+     constrain(backButtonRef) {
+     start.linkTo(parent.start, 16.dp)
+     top.linkTo(parent.top, 16.dp)
+     }
+     }
 
-        val constraintSetEnd = ConstraintSet {
-            constrain(backgroundRef) {
-            start.linkTo(parent.start)
-            end.linkTo(parent.end)
-            top.linkTo(parent.top)
+     val constraintSetEnd = ConstraintSet {
+     constrain(backgroundRef) {
+     start.linkTo(parent.start)
+     end.linkTo(parent.end)
+     top.linkTo(parent.top)
 
-            height = Dimension.value(65.dp)
-        }
+     height = Dimension.value(65.dp)
+     }
 
-        constrain(titleRef) {
-            bottom.linkTo(backButtonRef.bottom)
-            start.linkTo(backButtonRef.end, 10.dp)
-            top.linkTo(backButtonRef.top)
-        }
+     constrain(titleRef) {
+     bottom.linkTo(backButtonRef.bottom)
+     start.linkTo(backButtonRef.end, 10.dp)
+     top.linkTo(backButtonRef.top)
+     }
 
-        constrain(backButtonRef) {
-            start.linkTo(parent.start, 16.dp)
-            top.linkTo(parent.top, 16.dp)
-            }
-        }
+     constrain(backButtonRef) {
+     start.linkTo(parent.start, 16.dp)
+     top.linkTo(parent.top, 16.dp)
+     }
+     }
      */
 
     /**
      * Second mode
      *     val motionSceneContent = remember {
-                context.resources
-                .openRawResource(R.raw.motion_scene)
-                .readBytes()
-                .decodeToString()
-            }
+     context.resources
+     .openRawResource(R.raw.motion_scene)
+     .readBytes()
+     .decodeToString()
+     }
      */
 
     /**
@@ -146,7 +145,6 @@ fun HeaderWithImageView(
         progress = progress,
         modifier = Modifier.height(motionHeight)
     ) {
-
         val backgroundProperties = motionProperties(backgroundLayoutId)
         val titleProperties = motionProperties(titleLayoutId)
         val backButtonProperties = motionProperties(backButtonLayoutId)
@@ -185,10 +183,10 @@ fun HeaderWithImageView(
             icon = icon
         )
     }
-
 }
 
-private fun constraintSetStart() = ConstraintSet (""" {
+private fun constraintSetStart() = ConstraintSet(
+    """ {
 	background: { 
 		start: ['parent', 'start'],
 		end: ['parent', 'end'],
@@ -214,9 +212,11 @@ private fun constraintSetStart() = ConstraintSet (""" {
           back_button_icon_color: '#000000'
         }
 	}
-} """ )
+} """
+)
 
-private fun constraintSetEnd() = ConstraintSet (""" {
+private fun constraintSetEnd() = ConstraintSet(
+    """ {
 	background: { 
 		start: ['parent', 'start'],
 		end: ['parent', 'end'],
@@ -242,4 +242,5 @@ private fun constraintSetEnd() = ConstraintSet (""" {
           back_button_icon_color: '#FFFFFF'
         }
 	}
-} """ )
+} """
+)

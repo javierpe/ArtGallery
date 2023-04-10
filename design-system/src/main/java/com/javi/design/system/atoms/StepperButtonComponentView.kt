@@ -32,7 +32,7 @@ fun StepperButtonComponentView(
     onDecrement: () -> Unit
 ) {
     if (quantity == 0) {
-        ButtonComponentView(title =  "Add to cart") {
+        ButtonComponentView(title = "Add to cart") {
             onAdd()
         }
     } else {

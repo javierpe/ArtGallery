@@ -30,12 +30,11 @@ class NavigationImpl @Inject constructor(
     private val getProductDetailScreenUseCase: GetProductDetailPageUseCase,
     private val placesPageLoader: GetPlacesPageUseCase,
     private val getCardsPageUseCase: GetCardsPageUseCase
-): NavigationApi {
+) : NavigationApi {
 
     @OptIn(ExperimentalMaterialNavigationApi::class, ExperimentalAnimationApi::class)
     @Composable
     override fun NavHost() {
-
         val navHostEngine = rememberAnimatedNavHostEngine(
             navHostContentAlignment = Alignment.TopCenter,
             rootDefaultAnimations = RootNavGraphDefaultAnimations(
@@ -88,7 +87,6 @@ class NavigationImpl @Inject constructor(
                 key = "favs",
                 icon = Icons.Rounded.Favorite
             ) {
-
             },
 
             NavigationBarItem(
@@ -106,7 +104,7 @@ class NavigationImpl @Inject constructor(
         )
 
         val showBottomNavigationBar = currentDestination.value?.route == homePageLoader.route ||
-                currentDestination.value?.route == placesPageLoader.navGraph.route
+            currentDestination.value?.route == placesPageLoader.navGraph.route
 
         NavigationHost(
             navHostEngine = navHostEngine,

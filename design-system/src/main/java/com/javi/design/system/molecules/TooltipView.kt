@@ -41,7 +41,7 @@ fun TooltipView(
         ) {
             Text(
                 text = text,
-                modifier = Modifier.padding(5.dp) ,
+                modifier = Modifier.padding(5.dp),
                 textAlign = TextAlign.Center,
                 style = Typography.h6,
                 color = Color.White

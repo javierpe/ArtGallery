@@ -1,7 +1,7 @@
 package com.javi.dynamic.list.di
 
-import com.javi.dynamic.list.data.useCases.GetDynamicListUseCase
 import com.javi.dynamic.list.data.useCases.GetDynamicListShowCaseUseCase
+import com.javi.dynamic.list.data.useCases.GetDynamicListUseCase
 import com.javi.dynamic.list.data.useCases.GetSkeletonsByContextUseCase
 import com.javi.dynamic.list.data.useCases.SaveSkeletonsUseCase
 import com.javi.dynamic.list.domain.useCases.DynamicListUseCaseImpl

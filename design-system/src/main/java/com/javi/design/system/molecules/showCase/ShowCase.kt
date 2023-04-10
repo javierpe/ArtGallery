@@ -171,7 +171,6 @@ fun ShowCaseUntilExpirationTime(
     target: ShowCaseTargets,
     onShowCaseCompleted: () -> Unit
 ) {
-
     val scope = rememberCoroutineScope()
 
     // Show tooltip
@@ -193,7 +192,6 @@ fun TargetContent(
     target: ShowCaseTargets,
     onShowcaseCompleted: () -> Unit
 ) {
-
     val screenHeight = LocalConfiguration.current.screenHeightDp
     val targetCords = target.coordinates
     val gutterArea = 88.dp
@@ -245,7 +243,8 @@ fun TargetContent(
         LaunchedEffect(animatable) {
             delay(index * 1000L)
             animatable.animateTo(
-                targetValue = 1f, animationSpec = animationSpec
+                targetValue = 1f,
+                animationSpec = animationSpec
             )
         }
     }
@@ -263,7 +262,6 @@ fun TargetContent(
                 }
                 .graphicsLayer(alpha = 0.99f)
         ) {
-
             if (target.style.shapeType == ShapeType.RECTANGLE) {
                 drawRect(color = Color.Black, alpha = 0.9f)
             } else {
@@ -339,7 +337,6 @@ fun ShowCaseContent(
     targetRadius: Float,
     updateContentCoordinates: (LayoutCoordinates) -> Unit
 ) {
-
     var contentOffsetY by remember {
         mutableStateOf(0f)
     }
@@ -347,9 +344,11 @@ fun ShowCaseContent(
     Box(
         content = currentTarget.content,
         modifier = Modifier
-            .offset(y = with(LocalDensity.current) {
-                contentOffsetY.toDp()
-            })
+            .offset(
+                y = with(LocalDensity.current) {
+                    contentOffsetY.toDp()
+                }
+            )
             .onGloballyPositioned {
                 updateContentCoordinates(it)
                 val contentHeight = it.size.height
@@ -365,7 +364,6 @@ fun ShowCaseContent(
             }
             .padding(start = 16.dp, end = 16.dp, top = 10.dp)
     )
-
 }
 
 fun getOuterCircleCenter(
@@ -390,8 +388,11 @@ fun getOuterCircleCenter(
     )
 
     val centerY =
-        if (onTop) targetRect.center.y - targetRadius - contentHeight
-        else targetRect.center.y + targetRadius + contentHeight
+        if (onTop) {
+            targetRect.center.y - targetRadius - contentHeight
+        } else {
+            targetRect.center.y + targetRadius + contentHeight
+        }
 
     outerCenterY = centerY
     outerCenterX = (left + right) / 2
@@ -400,7 +401,6 @@ fun getOuterCircleCenter(
 }
 
 fun getOuterRect(contentRect: Rect, targetRect: Rect): Rect {
-
     val topLeftX = min(contentRect.topLeft.x, targetRect.topLeft.x)
     val topLeftY = min(contentRect.topLeft.y, targetRect.topLeft.y)
     val bottomRightX = max(contentRect.bottomRight.x, targetRect.bottomRight.x)
@@ -411,8 +411,8 @@ fun getOuterRect(contentRect: Rect, targetRect: Rect): Rect {
 
 fun getOuterRadius(outerRect: Rect): Float {
     val d = sqrt(
-        outerRect.height.toDouble().pow(2.0)
-                + outerRect.width.toDouble().pow(2.0)
+        outerRect.height.toDouble().pow(2.0) +
+            outerRect.width.toDouble().pow(2.0)
     ).toFloat()
 
     return (d / 2f)

@@ -33,7 +33,6 @@ fun LoaderView() {
     }
 }
 
-
 @Composable
 fun ErrorView(
     modifier: Modifier = Modifier,

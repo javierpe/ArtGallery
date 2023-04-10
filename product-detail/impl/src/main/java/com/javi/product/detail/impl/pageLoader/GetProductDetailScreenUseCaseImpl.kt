@@ -7,7 +7,7 @@ import com.ramcosta.composedestinations.spec.Direction
 import com.ramcosta.composedestinations.spec.NavGraphSpec
 import javax.inject.Inject
 
-class GetProductDetailScreenUseCaseImpl @Inject constructor(): GetProductDetailPageUseCase {
+class GetProductDetailScreenUseCaseImpl @Inject constructor() : GetProductDetailPageUseCase {
 
     override val route: String = ProductDetailNavGraph.route
 

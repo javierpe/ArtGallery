@@ -22,7 +22,6 @@ fun BannerInfoView(
     title: String,
     description: String
 ) {
-
     Box(
         modifier = modifier
             .fillMaxWidth()

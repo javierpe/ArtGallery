@@ -2,11 +2,11 @@ package com.javi.dynamic.list.domain.repository
 
 import com.javi.dynamic.list.data.actions.DynamicListUIState
 import com.javi.dynamic.list.data.dataSources.DynamicListDataSourceApi
-import com.javi.dynamic.list.data.useCases.DynamicListRenderProcessorApi
-import com.javi.dynamic.list.data.repositories.DynamicListRepository
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListContainer
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
+import com.javi.dynamic.list.data.repositories.DynamicListRepository
+import com.javi.dynamic.list.data.useCases.DynamicListRenderProcessorApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -23,7 +23,6 @@ class DynamicListRepositoryImpl @Inject constructor(
         page: Int,
         requestModel: DynamicListRequestModel
     ): Flow<DynamicListUIState> = flow {
-
         // Emulate response delay
         delay(DEFAULT_DELAY)
 

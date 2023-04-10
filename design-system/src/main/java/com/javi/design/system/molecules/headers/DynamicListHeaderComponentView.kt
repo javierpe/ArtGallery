@@ -41,7 +41,6 @@ fun DynamicListHeaderComponentView(
     val icon = if (contextType == ContextType.HOME) Icons.Default.Star else Icons.Default.ArrowBack
 
     when (contextType) {
-
         ContextType.BANNER_DETAIL -> {
             SimpleHeaderView(
                 title = title,

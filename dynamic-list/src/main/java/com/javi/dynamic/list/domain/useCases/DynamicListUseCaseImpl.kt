@@ -2,11 +2,12 @@ package com.javi.dynamic.list.domain.useCases
 
 import android.util.Log
 import com.javi.dynamic.list.data.actions.DynamicListUIState
+import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.data.repositories.DynamicListRepository
+import com.javi.dynamic.list.data.useCases.GetDynamicListShowCaseUseCase
 import com.javi.dynamic.list.data.useCases.GetDynamicListUseCase
 import com.javi.dynamic.list.data.useCases.GetSkeletonsByContextUseCase
 import com.javi.dynamic.list.data.useCases.SaveSkeletonsUseCase
-import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.di.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -20,10 +21,10 @@ import javax.inject.Inject
 class DynamicListUseCaseImpl @Inject constructor(
     @IODispatcher val ioDispatcher: CoroutineDispatcher,
     private val controller: DynamicListRepository,
-    private val getDynamicListShowCaseUseCaseImpl: GetDynamicListShowCaseUseCaseImpl,
+    private val getDynamicListShowCaseUseCaseImpl: GetDynamicListShowCaseUseCase,
     private val saveSkeletonsUseCase: SaveSkeletonsUseCase,
     private val getSkeletonsByContextUseCase: GetSkeletonsByContextUseCase
-): GetDynamicListUseCase {
+) : GetDynamicListUseCase {
 
     override suspend operator fun invoke(
         page: Int,

@@ -17,7 +17,6 @@ import com.javi.design.system.ImageComponentView
 fun CardImageItem(
     imageURL: String
 ) {
-
     val size = 46.dp
     val context = LocalContext.current
 

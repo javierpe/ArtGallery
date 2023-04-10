@@ -11,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ShowCaseViewModel @Inject constructor(
     private val tooltipPreferencesApi: TooltipPreferencesApi
-): ViewModel() {
+) : ViewModel() {
 
     private var job: Job? = null
 

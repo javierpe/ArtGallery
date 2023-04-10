@@ -19,7 +19,6 @@ fun ShowCase(
     }
 
     Box(modifier) {
-
         scope.content()
 
         if (showIntroShowCase) {

@@ -11,7 +11,7 @@ import javax.inject.Inject
 class GetSkeletonsByContextUseCaseImpl @Inject constructor(
     @IODispatcher val ioDispatcher: CoroutineDispatcher,
     private val database: AppDatabase
-): GetSkeletonsByContextUseCase {
+) : GetSkeletonsByContextUseCase {
 
     override suspend fun invoke(
         source: String

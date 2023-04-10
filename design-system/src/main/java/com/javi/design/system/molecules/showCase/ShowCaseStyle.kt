@@ -23,7 +23,6 @@ class ShowCaseStyle(
         withAnimation: Boolean = this.withAnimation,
         cornerRadius: Dp = this.cornerRadius
     ): ShowCaseStyle {
-
         return ShowCaseStyle(
             backgroundColor = backgroundColor,
             backgroundAlpha = backgroundAlpha,

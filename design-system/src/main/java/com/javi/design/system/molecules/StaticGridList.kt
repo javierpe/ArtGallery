@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun <T: Any> StaticGridList(
+fun <T : Any> StaticGridList(
     modifier: Modifier = Modifier,
     columns: Int = 2,
     list: List<T>,

@@ -14,7 +14,7 @@ import javax.inject.Inject
 class DynamicListDataSourceImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val moshi: Moshi
-): DynamicListDataSourceApi {
+) : DynamicListDataSourceApi {
 
     override suspend fun getDataFromAsset(dynamicListRequestModel: DynamicListRequestModel): DataContentModel {
         val data = context.resources
@@ -26,7 +26,7 @@ class DynamicListDataSourceImpl @Inject constructor(
     }
 
     private fun getResponseByContext(dynamicListRequestModel: DynamicListRequestModel): Int {
-        return when(dynamicListRequestModel.contextType) {
+        return when (dynamicListRequestModel.contextType) {
             ContextType.HOME -> R.raw.response_home
             ContextType.CARDS -> getCards(dynamicListRequestModel.state)
             ContextType.PLACES -> R.raw.response_places
