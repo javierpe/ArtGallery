@@ -1,11 +1,12 @@
 package com.javi.dynamic.list.presentation.components.message
 
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -34,12 +35,10 @@ fun MessageComponentView(
     showCaseState: ShowCaseState
 ) {
 
-    Box(
+    Card(
         modifier = modifier
             .fillMaxWidth()
             .padding(start = 16.dp, end = 16.dp)
-            .clip(RoundedCornerShape(12.dp))
-            .background(MaterialTheme.colors.secondary)
             .asShowCaseTarget(
                 index = componentIndex,
                 style = ShowCaseStyle.Default.copy(
@@ -52,22 +51,46 @@ fun MessageComponentView(
                 strategy = ShowCaseStrategy(firstToHappen = true),
                 key = RenderType.MESSAGE.value,
                 state = showCaseState
-            )
+            ),
+        shape = RoundedCornerShape(12.dp),
+        elevation = 5.dp,
+        backgroundColor = MaterialTheme.colors.primaryVariant
     ) {
         Text(
             modifier = Modifier
                 .padding(10.dp)
-                .wrapContentSize(),
+                .fillMaxWidth(),
             textAlign = TextAlign.Justify,
             text = message,
-            color = MaterialTheme.colors.primary
+            color = MaterialTheme.colors.secondary.copy(alpha = 0.5f)
         )
     }
 }
 
 @Composable
-@Preview
-fun PreviewTobaccoComponentView() {
+@Preview(
+    name = "MessageComponentView | Night Mode On",
+    uiMode = UI_MODE_NIGHT_YES,
+    showBackground = true
+)
+fun PreviewNightModeMessageComponentView() {
+    DynamicListComposeTheme {
+        MessageComponentView(
+            modifier = Modifier,
+            message = "Hola a todos",
+            0,
+            rememberShowCaseState()
+        )
+    }
+}
+
+@Composable
+@Preview(
+    name = "MessageComponentView | Night Mode Off",
+    uiMode = UI_MODE_NIGHT_NO,
+    showBackground = true
+)
+fun PreviewNoNightModeMessageComponentView() {
     DynamicListComposeTheme {
         MessageComponentView(
             modifier = Modifier,

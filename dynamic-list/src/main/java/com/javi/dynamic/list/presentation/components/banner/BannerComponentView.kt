@@ -95,7 +95,7 @@ fun BannerComponentView(
 
 @Composable
 @Preview(showBackground = true)
-fun PreviewCompactBannerComponentView() {
+fun PreviewBannerComponentView() {
     DynamicListComposeTheme {
         BannerComponentView(
             modifier = Modifier,

@@ -69,7 +69,7 @@ fun TextComponentView(
 
 @Composable
 @Preview(showBackground = true)
-fun PreviewHeaderComponentView() {
+fun PreviewTextComponentView() {
     DynamicListComposeTheme {
         TextComponentView(
             modifier = Modifier,

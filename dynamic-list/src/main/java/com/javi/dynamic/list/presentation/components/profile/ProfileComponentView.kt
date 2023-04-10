@@ -1,6 +1,8 @@
 package com.javi.dynamic.list.presentation.components.profile
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -51,7 +53,11 @@ fun ProfileComponentView(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Color(android.graphics.Color.parseColor(model.color)))
+            .background(
+                Color(android.graphics.Color.parseColor(model.color)).copy(
+                    alpha = if (isSystemInDarkTheme()) 0.5f else 1f
+                )
+            )
             .padding(top = 20.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
     ) {
         Column(
@@ -105,9 +111,32 @@ fun ProfileComponentView(
 }
 
 @Composable
-@Preview
-fun PreviewProfileComponentView() {
+@Preview(
+    name = "ProfileComponentView | Night Mode Off",
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+fun PreviewNightModeOffProfileComponentView() {
     DynamicListComposeTheme {
+        ProfileComponentView(
+            modifier = Modifier.height(profileHeight),
+            model = ProfileModel(
+                name = "Picasso",
+                shortDescription = "Modern art",
+                lifeDate = "1881 - 1973",
+                color = "#DFB799",
+                country = "Málaga, Spain"
+            )
+        )
+    }
+}
+
+@Composable
+@Preview(
+    name = "ProfileComponentView | Night Mode On",
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+fun PreviewNightModeOnProfileComponentView() {
+    DynamicListComposeTheme(darkTheme = true) {
         ProfileComponentView(
             modifier = Modifier.height(profileHeight),
             model = ProfileModel(

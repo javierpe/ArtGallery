@@ -1,75 +1,71 @@
-@file:OptIn(ExperimentalPagerApi::class, ExperimentalPagerApi::class)
-
 package com.javi.dynamic.list.presentation.components.poster
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.lerp
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.HorizontalPagerIndicator
-import com.google.accompanist.pager.calculateCurrentOffsetForPage
-import com.google.accompanist.pager.rememberPagerState
 import com.javi.data.ProductImageModel
 import com.javi.design.system.ImageComponentView
 import com.javi.design.system.atoms.TitleDecoratedView
-import kotlin.math.absoluteValue
+import com.javi.design.system.extensions.withBounceClick
 
 const val POSTER_COMPONENT_SCREEN_TAG = "poster_component_screen_tag"
 
 @Composable
 fun PosterComponentScreenView(
     model: PosterModel,
-    isExpandedScreen: Boolean = false,
     onProductDetail: (String) -> Unit
 ) {
-    PosterComponentView(
+    PosterComponentViewV2(
         modifier = Modifier.testTag(POSTER_COMPONENT_SCREEN_TAG),
         list = model.elements,
         title = model.title,
-        isExpandedScreen = isExpandedScreen
     ) {
         onProductDetail(it.imageURL)
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun PosterComponentView(
+fun PosterComponentViewV2(
     modifier: Modifier = Modifier,
     title: String,
     list: List<PosterModelItem>,
-    isExpandedScreen: Boolean = false,
     onClick: (ProductImageModel) -> Unit
 ) {
     val pagerState = rememberPagerState()
-
-    val height = if (isExpandedScreen) {
-        200.dp
-    } else 350.dp
 
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-
         TitleDecoratedView(
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 25.dp),
@@ -77,65 +73,75 @@ fun PosterComponentView(
         )
 
         HorizontalPager(
-            modifier = Modifier
-                .height(height),
-            count = list.size,
-            state = pagerState,
-            contentPadding = PaddingValues(horizontal = 10.dp)
+            pageCount = list.size,
+            state = pagerState
         ) { page ->
+
             Box(
                 modifier = Modifier
-                    .graphicsLayer {
-                        // Calculate the absolute offset for the current page from the
-                        // scroll position. We use the absolute value which allows us to mirror
-                        // any effects for both directions
-                        val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
-
-                        // We animate the scaleX + scaleY, between 85% and 100%
-                        lerp(
-                            start = 0.3.dp,
-                            stop = 0.35.dp,
-                            fraction = 1f - pageOffset.coerceIn(0f, 1f)
-                        ).also { scale ->
-                            scaleX = scale.toPx()
-                            scaleY = scale.toPx()
-                        }
-
-                        // We animate the alpha, between 50% and 100%
-                        alpha = lerp(
-                            start = 0.dp,
-                            stop = 1.dp,
-                            fraction = 1f - pageOffset.coerceIn(0f, 1f)
-                        ).toPx()
-                    }
-
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(16.dp))
             ) {
                 ImageComponentView(
                     modifier = Modifier
-                        .fillMaxSize()
-                        // We add an offset lambda, to apply a light parallax effect
-                        .offset {
-                            // Calculate the offset for the current page from the
-                            // scroll position
-                            val pageOffset = this@HorizontalPager.calculateCurrentOffsetForPage(page)
-                            // Then use it as a multiplier to apply an offset
-                            IntOffset(
-                                x = (100.dp * pageOffset).roundToPx(),
-                                y = 0
-                            )
-                        }.clickable { onClick(list[page].productImage) },
+                        .height(450.dp)
+                        .align(Alignment.Center)
+                        .withBounceClick()
+                        .clickable {
+                            onClick(list[page].productImage)
+                        },
                     imageURL = list[page].productImage.imageURL,
                     contentScale = ContentScale.Fit
                 )
             }
         }
+        
+        Spacer(modifier = Modifier.padding(bottom = 25.dp))
 
-        HorizontalPagerIndicator(
-            pagerState = pagerState,
+        HorizontalPagerIndicators(
             modifier = Modifier
-                .align(Alignment.CenterHorizontally),
+                .align(CenterHorizontally)
+                .alpha(0.6f),
+            pageCount = list.size,
+            state = pagerState
         )
+    }
+}
+
+private const val ANIMATION_DURATION = 550
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun HorizontalPagerIndicators(
+    modifier: Modifier = Modifier,
+    pageCount: Int,
+    state: PagerState
+) {
+    Row(
+        modifier = modifier
+            .wrapContentHeight()
+            .wrapContentWidth(),
+        horizontalArrangement = Arrangement.Center
+    ) {
+        repeat(pageCount) { iteration ->
+
+            val animateColor = animateColorAsState(
+                targetValue = if (state.currentPage == iteration) {
+                    MaterialTheme.colors.primary
+                } else {
+                    MaterialTheme.colors.secondary
+                },
+                tween(ANIMATION_DURATION)
+            )
+
+            Box(
+                modifier = Modifier
+                    .size(15.dp)
+                    .padding(3.dp)
+                    .clip(CircleShape)
+                    .background(animateColor.value)
+                    .size(20.dp)
+            )
+        }
     }
 }

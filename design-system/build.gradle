@@ -78,6 +78,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$compose_lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-compose:$compose_lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$compose_lifecycle_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
     implementation "androidx.core:core-ktx:$android_core_version"
     implementation 'androidx.appcompat:appcompat:1.6.1'

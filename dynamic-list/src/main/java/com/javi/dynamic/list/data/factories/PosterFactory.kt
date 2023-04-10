@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
@@ -42,8 +41,7 @@ class PosterFactory @Inject constructor(
         }
 
         PosterComponentScreenView(
-            model = model.value,
-            isExpandedScreen = componentInfo.dynamicListObject.widthSizeClass == WindowWidthSizeClass.Expanded,
+            model = model.value
         ) {
             componentInfo.navigator()?.navigate(
                 getProductDetailScreenUseCase(it)

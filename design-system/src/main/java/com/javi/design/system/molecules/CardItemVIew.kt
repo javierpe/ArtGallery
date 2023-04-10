@@ -1,5 +1,6 @@
 package com.javi.design.system.molecules
 
+import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,14 +21,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.javi.data.ProductImageModel
+import com.javi.design.system.extensions.withBounceClick
+import com.javi.design.system.theme.DynamicListComposeTheme
 import com.javi.design.system.theme.Typography
 
 private const val MAX_ELEMENTS = 3
 
 @Composable
-fun CardItemVIew(
+fun CardItemView(
     modifier: Modifier = Modifier,
     title: String,
     images: List<ProductImageModel>,
@@ -48,15 +52,17 @@ fun CardItemVIew(
             .testTag("card-item")
             .wrapContentWidth()
             .height(100.dp)
-            .clickable {
-                onClick()
-            },
+            .withBounceClick(),
         shape = RoundedCornerShape(12.dp),
-        elevation = 5.dp
+        elevation = 5.dp,
+        backgroundColor = MaterialTheme.colors.primaryVariant
     ) {
 
         Column(
             modifier = Modifier
+                .clickable {
+                    onClick()
+                }
                 .padding(10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
@@ -89,5 +95,27 @@ fun CardItemVIew(
                 }
             }
         }
+    }
+}
+
+@Composable
+@Preview(
+    name = "CardItemView | Night Mode Off",
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+fun PreviewNightModeCardItemView() {
+    DynamicListComposeTheme {
+        CardItemView(title = "Title", images = emptyList()) { }
+    }
+}
+
+@Composable
+@Preview(
+    name = "CardItemView | Night Mode On",
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+fun PreviewNoNightModeCardItemView() {
+    DynamicListComposeTheme {
+        CardItemView(title = "Title", images = emptyList()) { }
     }
 }

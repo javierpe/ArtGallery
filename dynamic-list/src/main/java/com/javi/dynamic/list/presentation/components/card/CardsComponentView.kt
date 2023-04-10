@@ -1,5 +1,7 @@
 package com.javi.dynamic.list.presentation.components.card
 
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -14,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.javi.design.system.data.showCase.ShapeType
 import com.javi.design.system.data.showCase.ShowCaseStrategy
 import com.javi.design.system.atoms.TitleDecoratedView
-import com.javi.design.system.molecules.CardItemVIew
+import com.javi.design.system.molecules.CardItemView
 import com.javi.design.system.molecules.showCase.ShowCaseState
 import com.javi.design.system.molecules.showCase.ShowCaseStyle
 import com.javi.design.system.molecules.TooltipView
@@ -88,7 +90,7 @@ fun CardsComponentView(
                     )
                 } else Modifier
 
-                CardItemVIew(
+                CardItemView(
                     modifier = modifierCard,
                     title = item.title,
                     images = item.images
@@ -104,8 +106,31 @@ fun CardsComponentView(
 }
 
 @Composable
-@Preview(showBackground = true)
-fun PreviewCardsComponentView() {
+@Preview(
+    uiMode = UI_MODE_NIGHT_YES,
+)
+fun PreviewNightModeCardsComponentView() {
+    DynamicListComposeTheme {
+        CardsComponentView(
+            data = CardsModel(
+                cardElements = listOf(
+                    CardElement(1, "Hola", images = emptyList())
+                ),
+                title = "Title",
+            ),
+            componentIndex = 0,
+            showCaseState = rememberShowCaseState(),
+            modifier = Modifier
+        ) { _, _ -> }
+    }
+}
+
+@Composable
+@Preview(
+    uiMode = UI_MODE_NIGHT_NO,
+    showBackground = true
+)
+fun PreviewNoNightModeCardsComponentView() {
     DynamicListComposeTheme {
         CardsComponentView(
             data = CardsModel(
