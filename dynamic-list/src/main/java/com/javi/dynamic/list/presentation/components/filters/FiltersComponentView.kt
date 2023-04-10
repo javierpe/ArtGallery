@@ -1,5 +1,7 @@
 package com.javi.dynamic.list.presentation.components.filters
 
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
@@ -11,7 +13,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
@@ -52,7 +54,6 @@ fun FiltersComponentViewScreen(
     windowWidthSizeClass: WindowWidthSizeClass? = null,
     onSelectItem: (RenderType) -> Unit
 ) {
-
     AnimatedVisibility(visible = windowWidthSizeClass == WindowWidthSizeClass.Compact) {
         FilterListComponentView(
             modifier = modifier,
@@ -62,8 +63,8 @@ fun FiltersComponentViewScreen(
     }
 
     AnimatedVisibility(
-        visible = windowWidthSizeClass == WindowWidthSizeClass.Medium
-                || windowWidthSizeClass == WindowWidthSizeClass.Expanded
+        visible = windowWidthSizeClass == WindowWidthSizeClass.Medium ||
+            windowWidthSizeClass == WindowWidthSizeClass.Expanded
     ) {
         FilterGridComponentView(
             modifier = modifier,
@@ -81,7 +82,6 @@ fun FilterGridComponentView(
     isMediumScreen: Boolean = false,
     onSelectItem: (RenderType) -> Unit
 ) {
-
     var state by remember {
         mutableStateOf(mapOf(0 to 0))
     }
@@ -90,7 +90,7 @@ fun FilterGridComponentView(
 
     StaticGridList(
         modifier = modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .padding(start = 16.dp, end = 16.dp, top = 16.dp),
         list = data
     ) { columnIndex, rowIndex, item ->
@@ -136,14 +136,14 @@ fun FilterListComponentView(
 
     LazyRow(
         modifier = modifier
-            .fillMaxSize(),
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         state = listState,
         contentPadding = PaddingValues(16.dp)
     ) {
         itemsIndexed(
             items = data,
-        ) {  index, item ->
+        ) { index, item ->
             FilterItemComponent(
                 modifier = Modifier.wrapContentSize(),
                 text = item.text,
@@ -162,7 +162,6 @@ fun FilterListComponentView(
     }
 }
 
-
 @Suppress("LongParameterList")
 @Composable
 fun FilterItemComponent(
@@ -173,7 +172,6 @@ fun FilterItemComponent(
     color: Color,
     onClick: () -> Unit
 ) {
-
     val elevationAnimation: Dp by animateDpAsState(
         if (isSelected) 50.dp else 0.dp,
         spring(stiffness = Spring.StiffnessLow)
@@ -215,12 +213,45 @@ fun FilterItemComponent(
 }
 
 @Composable
-@Preview
-fun PreviewFiltersComponentViewScreen() {
+@Preview(
+    name = "FiltersComponentViewScreen | Night Mode On",
+    showBackground = true,
+    backgroundColor = 0xFF383838,
+    uiMode = UI_MODE_NIGHT_YES
+)
+fun PreviewNightModeFiltersComponentViewScreen() {
     DynamicListComposeTheme {
         FiltersComponentViewScreen(
             modifier = Modifier,
-            data = emptyList(),
+            data = listOf(
+                FilterItemModel(text = "Text 1", goTo = "", color = "#FECD50"),
+                FilterItemModel(text = "Text 2", goTo = "", color = "#A0D4CD"),
+                FilterItemModel(text = "Text 3", goTo = "", color = "#43AAA0"),
+                FilterItemModel(text = "Text 4", goTo = "", color = "#619197"),
+                FilterItemModel(text = "Text 5", goTo = "", color = "#FFDAB9"),
+            ),
+            windowWidthSizeClass = WindowWidthSizeClass.Compact
+        ) { }
+    }
+}
+
+@Composable
+@Preview(
+    name = "FiltersComponentViewScreen | Night Mode Off",
+    showBackground = true,
+    uiMode = UI_MODE_NIGHT_NO
+)
+fun PreviewNoNightModeFiltersComponentViewScreen() {
+    DynamicListComposeTheme {
+        FiltersComponentViewScreen(
+            modifier = Modifier,
+            data = listOf(
+                FilterItemModel(text = "Text 1", goTo = "", color = "#FECD50"),
+                FilterItemModel(text = "Text 2", goTo = "", color = "#A0D4CD"),
+                FilterItemModel(text = "Text 3", goTo = "", color = "#43AAA0"),
+                FilterItemModel(text = "Text 4", goTo = "", color = "#619197"),
+                FilterItemModel(text = "Text 5", goTo = "", color = "#FFDAB9"),
+            ),
             windowWidthSizeClass = WindowWidthSizeClass.Compact
         ) { }
     }

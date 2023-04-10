@@ -49,7 +49,6 @@ fun FaceView(
     imageUrl: String,
     onClick: () -> Unit
 ) {
-
     val size = 70.dp
     val context = LocalContext.current
 
@@ -57,7 +56,6 @@ fun FaceView(
         verticalArrangement = Arrangement.spacedBy(5.dp),
         modifier = Modifier.width(70.dp)
     ) {
-
         ImageComponentView(
             modifier = Modifier
                 .size(size)

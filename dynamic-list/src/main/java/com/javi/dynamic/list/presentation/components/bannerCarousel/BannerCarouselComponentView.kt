@@ -17,9 +17,9 @@ import com.javi.data.ProductImageModel
 import com.javi.design.system.data.showCase.ShapeType
 import com.javi.design.system.data.showCase.ShowCaseStrategy
 import com.javi.design.system.molecules.BannerImageView
+import com.javi.design.system.molecules.TooltipView
 import com.javi.design.system.molecules.showCase.ShowCaseState
 import com.javi.design.system.molecules.showCase.ShowCaseStyle
-import com.javi.design.system.molecules.TooltipView
 import com.javi.design.system.molecules.showCase.asShowCaseTarget
 import com.javi.dynamic.list.R
 import com.javi.dynamic.list.presentation.components.banner.BannerModel
@@ -59,14 +59,17 @@ fun BannerCarouselComponentView(
     showCaseState: ShowCaseState,
     onClickAction: (ProductImageModel) -> Unit,
 ) {
-
     val height = if (isExpandedScreen) {
         200.dp
-    } else 300.dp
+    } else {
+        300.dp
+    }
 
     val width = if (isExpandedScreen) {
         250.dp
-    } else 350.dp
+    } else {
+        350.dp
+    }
 
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(20.dp),
@@ -99,7 +102,9 @@ fun BannerCarouselComponentView(
                     key = RenderType.BANNER_CAROUSEL.value,
                     state = showCaseState
                 )
-            } else Modifier
+            } else {
+                Modifier
+            }
 
             BannerImageView(
                 modifier = modifierBanner

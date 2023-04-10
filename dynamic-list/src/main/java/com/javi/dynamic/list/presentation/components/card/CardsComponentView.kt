@@ -13,13 +13,13 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.javi.design.system.atoms.TitleDecoratedView
 import com.javi.design.system.data.showCase.ShapeType
 import com.javi.design.system.data.showCase.ShowCaseStrategy
-import com.javi.design.system.atoms.TitleDecoratedView
 import com.javi.design.system.molecules.CardItemView
+import com.javi.design.system.molecules.TooltipView
 import com.javi.design.system.molecules.showCase.ShowCaseState
 import com.javi.design.system.molecules.showCase.ShowCaseStyle
-import com.javi.design.system.molecules.TooltipView
 import com.javi.design.system.molecules.showCase.asShowCaseTarget
 import com.javi.design.system.molecules.showCase.rememberShowCaseState
 import com.javi.design.system.theme.DynamicListComposeTheme
@@ -53,13 +53,12 @@ fun CardsComponentView(
     data: CardsModel,
     componentIndex: Int,
     showCaseState: ShowCaseState,
-    onNavigateToDetail:(Int, String) -> Unit
+    onNavigateToDetail: (Int, String) -> Unit
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(10.dp),
         modifier = modifier
     ) {
-
         TitleDecoratedView(
             text = data.title
         )
@@ -88,7 +87,9 @@ fun CardsComponentView(
                         key = RenderType.CARDS.value,
                         state = showCaseState
                     )
-                } else Modifier
+                } else {
+                    Modifier
+                }
 
                 CardItemView(
                     modifier = modifierCard,

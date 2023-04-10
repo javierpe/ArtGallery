@@ -9,8 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.javi.design.system.ImageComponentView
 import com.javi.data.ProductImageModel
+import com.javi.design.system.ImageComponentView
 import com.javi.design.system.molecules.VerticalGrid
 
 @Composable
@@ -30,12 +30,11 @@ fun CardsGridComponentView(
     data: List<ProductImageModel>,
     onClick: (ProductImageModel) -> Unit
 ) {
-
     VerticalGrid(
         modifier = Modifier
             .testTag("card-container")
     ) {
-        data.forEach {item ->
+        data.forEach { item ->
             ImageComponentView(
                 modifier = Modifier
                     .height(250.dp)
