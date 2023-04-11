@@ -60,7 +60,7 @@ fun ContextView(
                     requestModel = dynamicListRequestModel,
                     destinationsNavigator = destinationsNavigator,
                     dynamicListListener = {
-
+                        viewModel.sendDynamicListState(it)
                     }
                 )
             }

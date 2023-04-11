@@ -5,6 +5,7 @@ import com.javi.data.enums.ContextType
 import com.javi.dynamic.list.data.actions.ContextViewAction
 import com.javi.dynamic.list.data.controllers.DefaultDynamicListController
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
+import com.javi.dynamic.list.presentation.ui.base.DynamicListStateListener
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
@@ -23,6 +24,9 @@ abstract class ContextViewModel : ViewModel() {
     private val _contextViewAction = MutableStateFlow<ContextViewAction?>(null)
     internal val contextViewAction: StateFlow<ContextViewAction?> = _contextViewAction
 
+    private val _dynamicListStateListener = MutableStateFlow<DynamicListStateListener?>(null)
+    val dynamicListStateListener: StateFlow<DynamicListStateListener?> = _dynamicListStateListener
+
     abstract val context: ContextType
 
     /**
@@ -31,4 +35,8 @@ abstract class ContextViewModel : ViewModel() {
      * The idea is only change properties and not all the model
      */
     abstract val requestModel: DynamicListRequestModel
+
+    internal fun sendDynamicListState(dynamicListState: DynamicListStateListener) {
+        _dynamicListStateListener.value = dynamicListState
+    }
 }

@@ -41,7 +41,7 @@ fun ContextViewContent(
     bodyListState: LazyListState,
     requestModel: DynamicListRequestModel,
     destinationsNavigator: DestinationsNavigator? = null,
-    dynamicListListener: (DynamicListListener) -> Unit,
+    dynamicListListener: (DynamicListStateListener) -> Unit,
     dynamicListViewModel: DynamicListViewModel = hiltViewModel()
 ) {
     val uiState by dynamicListViewModel.dynamicListAction.collectAsStateWithLifecycle()
@@ -60,7 +60,7 @@ fun ContextViewContent(
     when (uiState) {
         is DynamicListUIState.SkeletonAction -> {
             dynamicListListener.invoke(
-                DynamicListListener.OnStartLoading
+                DynamicListStateListener.OnStartLoading
             )
             bodyAdapterController?.dispatchSkeletons(
                 (uiState as DynamicListUIState.SkeletonAction).renderTypes
@@ -70,7 +70,7 @@ fun ContextViewContent(
 
         is DynamicListUIState.LoadingAction -> {
             dynamicListListener.invoke(
-                DynamicListListener.OnStartLoading
+                DynamicListStateListener.OnStartLoading
             )
             LoaderView()
         }
@@ -92,6 +92,26 @@ fun ContextViewContent(
                 showCaseState = showCaseState,
                 bodyListState = bodyListState,
                 destinationsNavigator = destinationsNavigator
+            )
+
+            if (headerAdapterController?.data?.isNotEmpty() == true) {
+                dynamicListListener.invoke(
+                    DynamicListStateListener.OnHeaderItemsLoaded(
+                        components = headerAdapterController.data
+                    )
+                )
+            }
+
+            if (bodyAdapterController?.data?.isNotEmpty() == true) {
+                dynamicListListener.invoke(
+                    DynamicListStateListener.OnBodyItemsLoaded(
+                        components = bodyAdapterController.data
+                    )
+                )
+            }
+
+            dynamicListListener.invoke(
+                DynamicListStateListener.OnContextLoaded
             )
         }
 

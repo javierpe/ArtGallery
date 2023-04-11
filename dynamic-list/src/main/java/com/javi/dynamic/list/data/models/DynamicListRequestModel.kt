@@ -6,6 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class DynamicListRequestModel(
+    val requestFlag: Boolean = false,
     val contextType: ContextType,
     val state: HashMap<String, String> = hashMapOf()
 ) : Parcelable

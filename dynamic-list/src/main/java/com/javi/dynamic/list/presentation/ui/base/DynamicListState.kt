@@ -18,11 +18,17 @@ fun rememberDynamicListRequestState(
     }
 }
 
-sealed class DynamicListListener {
+sealed class DynamicListStateListener {
 
-    object OnStartLoading : DynamicListListener()
+    object OnStartLoading : DynamicListStateListener()
+
+    object OnContextLoaded : DynamicListStateListener()
 
     class OnHeaderItemsLoaded(
         val components: List<ComponentItemModel>
-    ) : DynamicListListener()
+    ) : DynamicListStateListener()
+
+    class OnBodyItemsLoaded(
+        val components: List<ComponentItemModel>
+    ) : DynamicListStateListener()
 }
