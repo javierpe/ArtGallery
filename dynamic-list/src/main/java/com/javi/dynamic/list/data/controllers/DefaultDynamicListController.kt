@@ -9,7 +9,7 @@ import javax.inject.Inject
 class DefaultDynamicListController @Inject constructor(
     override val delegates: MutableSet<@JvmSuppressWildcards DynamicListFactory>,
     override val defaultDispatcher: CoroutineDispatcher,
-): DynamicListComposeController() {
+) : DynamicListComposeController() {
 
     override fun getMapComponents(): List<ComponentItemModel> = data
 
