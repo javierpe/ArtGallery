@@ -21,7 +21,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.javi.design.system.atoms.ErrorView
 import com.javi.design.system.atoms.LoaderView
 import com.javi.design.system.molecules.showCase.ShowCaseState
-import com.javi.dynamic.list.data.actions.ContextViewAction
 import com.javi.dynamic.list.data.actions.DynamicListUIState
 import com.javi.dynamic.list.data.actions.ScrollAction
 import com.javi.dynamic.list.data.actions.TargetAction
@@ -36,24 +35,19 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 fun ContextViewContent(
     bodyAdapterController: DynamicListComposeController? = null,
     headerAdapterController: DynamicListComposeController? = null,
-    action: ContextViewAction?,
     showCaseState: ShowCaseState,
     bodyListState: LazyListState,
     requestModel: DynamicListRequestModel,
     destinationsNavigator: DestinationsNavigator? = null,
     dynamicListListener: (DynamicListStateListener) -> Unit,
+    forceReload: Boolean = false,
     dynamicListViewModel: DynamicListViewModel = hiltViewModel()
 ) {
     val uiState by dynamicListViewModel.dynamicListAction.collectAsStateWithLifecycle()
 
-    LaunchedEffect(requestModel) {
-        dynamicListViewModel.load(requestModel)
-    }
-
-    LaunchedEffect(action) {
-        when (action) {
-            is ContextViewAction.Reload -> dynamicListViewModel.load(requestModel)
-            else -> Unit
+    LaunchedEffect(forceReload) {
+        if (forceReload) {
+            dynamicListViewModel.load(requestModel)
         }
     }
 

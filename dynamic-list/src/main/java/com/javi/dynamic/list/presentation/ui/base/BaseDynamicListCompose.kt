@@ -11,7 +11,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.javi.design.system.molecules.headers.DynamicListHeaderComponentView
 import com.javi.design.system.molecules.showCase.ShowCase
 import com.javi.design.system.molecules.showCase.rememberShowCaseState
-import com.javi.dynamic.list.data.actions.ContextViewAction
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.presentation.viewModels.ContextViewModel
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -20,13 +19,10 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 fun ContextView(
     title: String,
     destinationsNavigator: DestinationsNavigator? = null,
-    dynamicListRequestModel: DynamicListRequestModel,
+    requestModel: DynamicListRequestModel,
     viewModel: ContextViewModel
 ) {
-
-    val action by viewModel.contextViewAction.collectAsStateWithLifecycle(
-        initialValue = ContextViewAction.None
-    )
+    val state by viewModel.dynamicListStateListener.collectAsStateWithLifecycle()
 
     val showCaseState = rememberShowCaseState()
 
@@ -54,11 +50,11 @@ fun ContextView(
                 ContextViewContent(
                     headerAdapterController = viewModel.headerAdapterController,
                     bodyAdapterController = viewModel.bodyAdapterController,
-                    action = action,
                     showCaseState = showCaseState,
                     bodyListState = bodyLazyListState,
-                    requestModel = dynamicListRequestModel,
+                    requestModel = requestModel,
                     destinationsNavigator = destinationsNavigator,
+                    forceReload = state == null,
                     dynamicListListener = {
                         viewModel.sendDynamicListState(it)
                     }

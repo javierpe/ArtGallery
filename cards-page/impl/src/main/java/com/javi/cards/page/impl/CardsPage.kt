@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.javi.cards.page.impl.viewModels.CardsPageViewModel
 import com.javi.data.DEEPLINK_MAIN
+import com.javi.data.enums.ContextType
+import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.presentation.ui.base.ContextView
 import com.javi.dynamic.list.presentation.ui.base.rememberDynamicListRequestState
 import com.ramcosta.composedestinations.annotation.DeepLink
@@ -26,8 +28,9 @@ fun CardsPage(
     destinationsNavigator: DestinationsNavigator,
     viewModel: CardsPageViewModel = hiltViewModel()
 ) {
-    val dynamicListState = rememberDynamicListRequestState {
-        viewModel.requestModel.copy(
+    val requestModel = rememberDynamicListRequestState {
+        DynamicListRequestModel(
+            contextType = ContextType.CARDS,
             state = hashMapOf("id" to id.toString())
         )
     }
@@ -36,6 +39,6 @@ fun CardsPage(
         title = title,
         viewModel = viewModel,
         destinationsNavigator = destinationsNavigator,
-        dynamicListRequestModel = dynamicListState.value
+        requestModel = requestModel.value
     )
 }
