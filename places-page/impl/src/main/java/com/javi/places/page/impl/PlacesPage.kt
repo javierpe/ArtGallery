@@ -8,6 +8,7 @@ import com.javi.places.page.impl.viewModels.PlacesPageViewModel
 import com.ramcosta.composedestinations.annotation.DeepLink
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @RootNavGraph(start = true)
 @Destination(
@@ -20,12 +21,13 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 )
 @Composable
 fun PlacesPage(
+    destinationsNavigator: DestinationsNavigator,
     viewModel: PlacesPageViewModel = hiltViewModel()
 ) {
-
     ContextView(
         title = "Places",
         dynamicListRequestModel = viewModel.requestModel,
-        viewModel = viewModel
+        viewModel = viewModel,
+        destinationsNavigator = destinationsNavigator
     )
 }
