@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.javi.data.DEEPLINK_MAIN
 import com.javi.data.enums.ContextType
-import com.javi.design.system.ImageComponentView
+import com.javi.design.system.atoms.ImageComponentView
 import com.javi.design.system.atoms.StepperButtonComponentView
 import com.javi.design.system.molecules.headers.DynamicListHeaderComponentView
 import com.javi.design.system.theme.DynamicListComposeTheme

@@ -22,7 +22,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.javi.data.ProductImageModel
-import com.javi.design.system.ImageComponentView
+import com.javi.design.system.atoms.ImageComponentView
 import com.javi.design.system.atoms.HorizontalPagerIndicators
 import com.javi.design.system.atoms.TitleDecoratedView
 import com.javi.design.system.extensions.withBounceClick

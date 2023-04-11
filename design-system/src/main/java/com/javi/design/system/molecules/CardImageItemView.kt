@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.size.Size
-import com.javi.design.system.ImageComponentView
+import com.javi.design.system.atoms.ImageComponentView
 
 @Composable
 fun CardImageItem(

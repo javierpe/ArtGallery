@@ -10,7 +10,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.javi.data.ProductImageModel
-import com.javi.design.system.ImageComponentView
+import com.javi.design.system.atoms.ImageComponentView
 import com.javi.design.system.molecules.VerticalGrid
 
 @Composable

@@ -53,41 +53,34 @@ fun BannerComponentView(
     showCaseState: ShowCaseState,
     onClickAction: (ProductImageModel) -> Unit
 ) {
-    Box(
-        modifier = Modifier
+    BannerImageView(
+        modifier = modifier
+            .height(150.dp)
+            .fillMaxSize()
             .testTag(BANNER_IMAGE_TEST_TAG)
             .padding(start = 16.dp, end = 16.dp)
-            .clickable {
-                onClickAction.invoke(model.product)
-            }
-    ) {
-        BannerImageView(
-            modifier = modifier
-                .height(150.dp)
-                .fillMaxSize()
-                .asShowCaseTarget(
-                    index = componentIndex,
-                    style = ShowCaseStyle.Default.copy(
-                        shapeType = ShapeType.RECTANGLE,
-                        cornerRadius = 16.dp,
-                        withAnimation = false
-                    ),
-                    content = {
-                        TooltipView(text = stringResource(R.string.tooltip_banner))
-                    },
-                    strategy = ShowCaseStrategy(firstToHappen = true),
-                    key = RenderType.BANNER.value,
-                    state = showCaseState
+            .asShowCaseTarget(
+                index = componentIndex,
+                style = ShowCaseStyle.Default.copy(
+                    shapeType = ShapeType.RECTANGLE,
+                    cornerRadius = 16.dp,
+                    withAnimation = false
                 ),
-            imageURL = model.product.imageURL,
-            onClickAction = {
-                onClickAction(model.product)
-            },
-            quantity = model.product.quantity,
-            title = model.bannerInfo?.title.orEmpty(),
-            description = model.bannerInfo?.description.orEmpty()
-        )
-    }
+                content = {
+                    TooltipView(text = stringResource(R.string.tooltip_banner))
+                },
+                strategy = ShowCaseStrategy(firstToHappen = true),
+                key = RenderType.BANNER.value,
+                state = showCaseState
+            ),
+        imageURL = model.product.imageURL,
+        onClickAction = {
+            onClickAction(model.product)
+        },
+        quantity = model.product.quantity,
+        title = model.bannerInfo?.title.orEmpty(),
+        description = model.bannerInfo?.description.orEmpty()
+    )
 }
 
 @Composable

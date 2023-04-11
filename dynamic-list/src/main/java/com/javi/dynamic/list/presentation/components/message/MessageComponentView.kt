@@ -3,23 +3,26 @@ package com.javi.dynamic.list.presentation.components.message
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.javi.design.system.data.showCase.ShapeType
 import com.javi.design.system.data.showCase.ShowCaseStrategy
+import com.javi.design.system.molecules.TooltipView
 import com.javi.design.system.molecules.showCase.ShowCaseState
 import com.javi.design.system.molecules.showCase.ShowCaseStyle
-import com.javi.design.system.molecules.TooltipView
 import com.javi.design.system.molecules.showCase.asShowCaseTarget
 import com.javi.design.system.molecules.showCase.rememberShowCaseState
 import com.javi.design.system.theme.DynamicListComposeTheme
@@ -33,11 +36,16 @@ fun MessageComponentView(
     componentIndex: Int,
     showCaseState: ShowCaseState
 ) {
-
-    Card(
+    Box(
         modifier = modifier
             .fillMaxWidth()
             .padding(start = 16.dp, end = 16.dp)
+            .clip(RoundedCornerShape(16.dp))
+            .border(
+                border = BorderStroke(1.dp, MaterialTheme.colors.secondary.copy(alpha = 0.1f)),
+                shape = RoundedCornerShape(16.dp)
+            )
+            .background(MaterialTheme.colors.onPrimary.copy(alpha = 0.5f))
             .asShowCaseTarget(
                 index = componentIndex,
                 style = ShowCaseStyle.Default.copy(
@@ -50,10 +58,7 @@ fun MessageComponentView(
                 strategy = ShowCaseStrategy(firstToHappen = true),
                 key = RenderType.MESSAGE.value,
                 state = showCaseState
-            ),
-        shape = RoundedCornerShape(16.dp),
-        backgroundColor = MaterialTheme.colors.onPrimary,
-        border = BorderStroke(1.dp, MaterialTheme.colors.secondary.copy(alpha = 0.1f))
+            )
     ) {
         Text(
             modifier = Modifier

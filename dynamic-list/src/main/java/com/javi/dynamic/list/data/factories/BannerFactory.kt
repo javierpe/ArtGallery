@@ -26,7 +26,7 @@ import javax.inject.Inject
 @AdapterFactory
 class BannerFactory @Inject constructor(
     private val getProductDetailScreenUseCase: GetProductDetailPageUseCase
-): DynamicListFactory {
+) : DynamicListFactory {
 
     override val renders: List<RenderType>
         get() = listOf(

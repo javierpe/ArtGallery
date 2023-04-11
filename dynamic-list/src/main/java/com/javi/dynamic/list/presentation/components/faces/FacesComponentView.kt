@@ -20,7 +20,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.size.Size
-import com.javi.design.system.ImageComponentView
+import com.javi.design.system.atoms.ImageComponentView
 import com.javi.design.system.molecules.toPx
 import com.javi.design.system.theme.Typography
 
