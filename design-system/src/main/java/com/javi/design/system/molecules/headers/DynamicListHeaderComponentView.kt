@@ -1,5 +1,6 @@
 package com.javi.design.system.molecules.headers
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyListState
@@ -43,6 +44,7 @@ fun DynamicListHeaderComponentView(
     when (contextType) {
         ContextType.BANNER_DETAIL -> {
             SimpleHeaderView(
+                modifier = modifier,
                 title = title,
                 icon = icon,
                 onIconClick = {
@@ -53,6 +55,7 @@ fun DynamicListHeaderComponentView(
 
         ContextType.HOME, ContextType.CARDS -> {
             HeaderWithImageView(
+                modifier = modifier,
                 title = title,
                 bodyLazyListState = bodyLazyListState,
                 icon = icon,
@@ -65,6 +68,7 @@ fun DynamicListHeaderComponentView(
         }
         else -> {
             SimpleHeaderView(
+                modifier = modifier,
                 title = title
             )
         }
@@ -82,6 +86,7 @@ fun SimpleHeaderView(
 
     ConstraintLayout(
         modifier = modifier
+            .fillMaxWidth()
             .padding(16.dp)
             .wrapContentHeight(),
     ) {

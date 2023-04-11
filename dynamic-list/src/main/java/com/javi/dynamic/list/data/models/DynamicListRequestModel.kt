@@ -8,4 +8,4 @@ import kotlinx.parcelize.Parcelize
 data class DynamicListRequestModel(
     val contextType: ContextType,
     val state: HashMap<String, String> = hashMapOf()
-): Parcelable
+) : Parcelable

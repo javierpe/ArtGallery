@@ -60,7 +60,7 @@ class BannerCarouselFactory @Inject constructor(
             widthSizeClass = componentInfo.dynamicListObject.widthSizeClass
         ) {
             componentInfo.dynamicListObject.destinationsNavigator?.navigate(
-                productDetailScreenLoader(it)
+                direction = productDetailScreenLoader(it)
             )
         }
     }
