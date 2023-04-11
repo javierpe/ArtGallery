@@ -9,5 +9,4 @@ interface NavigationApi {
      */
     @Composable
     fun NavHost()
-
 }

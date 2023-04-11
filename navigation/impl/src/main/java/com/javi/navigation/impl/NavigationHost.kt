@@ -49,10 +49,9 @@ fun NavigationHost(
 class RootNavGraph constructor(
     override val startRoute: NavGraphSpec,
     override val nestedNavGraphs: List<NavGraphSpec>
-): NavGraphSpec {
+) : NavGraphSpec {
 
     override val route = "root"
 
     override val destinationsByRoute = emptyMap<String, DestinationSpec<*>>()
-
 }

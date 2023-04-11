@@ -21,6 +21,7 @@ import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultA
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.utils.currentDestinationAsState
+import com.ramcosta.composedestinations.utils.isRouteOnBackStack
 import javax.inject.Inject
 
 private const val ANIMATION_DURATION = 700
@@ -72,12 +73,17 @@ class NavigationImpl @Inject constructor(
                 icon = Icons.Rounded.Star
             ) {
                 if (currentDestination.value?.route != homePageLoader.route) {
+
+                    if (navHostController.isRouteOnBackStack(homePageLoader.navGraph)) {
+                        navHostController.popBackStack(
+                            route = homePageLoader.route,
+                            inclusive = false
+                        )
+                        return@NavigationBarItem
+                    }
+
                     navHostController.navigate(
-                        direction = homePageLoader(),
-                        navOptionsBuilder = {
-                            launchSingleTop = false
-                            restoreState = true
-                        }
+                        direction = homePageLoader()
                     )
                 }
             },
@@ -94,12 +100,18 @@ class NavigationImpl @Inject constructor(
                 key = placesPageLoader.route,
                 icon = Icons.Rounded.Place
             ) {
-                navHostController.navigate(
-                    direction = placesPageLoader(),
-                    navOptionsBuilder = {
-                        launchSingleTop = false
+                if (currentDestination.value?.route != placesPageLoader.route) {
+
+                    if (navHostController.isRouteOnBackStack(placesPageLoader.navGraph)) {
+                        navHostController.popBackStack(
+                            route = placesPageLoader.route,
+                            inclusive = false
+                        )
+                        return@NavigationBarItem
                     }
-                )
+
+                    navHostController.navigate(placesPageLoader())
+                }
             }
         )
 
