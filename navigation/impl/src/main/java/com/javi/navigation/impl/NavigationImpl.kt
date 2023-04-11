@@ -73,7 +73,6 @@ class NavigationImpl @Inject constructor(
                 icon = Icons.Rounded.Star
             ) {
                 if (currentDestination.value?.route != homePageLoader.route) {
-
                     if (navHostController.isRouteOnBackStack(homePageLoader.navGraph)) {
                         navHostController.popBackStack(
                             route = homePageLoader.route,
@@ -101,7 +100,6 @@ class NavigationImpl @Inject constructor(
                 icon = Icons.Rounded.Place
             ) {
                 if (currentDestination.value?.route != placesPageLoader.route) {
-
                     if (navHostController.isRouteOnBackStack(placesPageLoader.navGraph)) {
                         navHostController.popBackStack(
                             route = placesPageLoader.route,
@@ -110,7 +108,9 @@ class NavigationImpl @Inject constructor(
                         return@NavigationBarItem
                     }
 
-                    navHostController.navigate(placesPageLoader())
+                    navHostController.navigate(
+                        direction = placesPageLoader()
+                    )
                 }
             }
         )
