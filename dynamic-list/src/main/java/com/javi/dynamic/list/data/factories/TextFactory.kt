@@ -23,7 +23,7 @@ import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
 @AdapterFactory
-class TextFactory @Inject constructor(): DynamicListFactory {
+class TextFactory @Inject constructor() : DynamicListFactory {
 
     override val renders: List<RenderType>
         get() = listOf(

@@ -31,9 +31,7 @@ import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
 @AdapterFactory
-class FacesFactory @Inject constructor(
-
-): DynamicListFactory {
+class FacesFactory @Inject constructor() : DynamicListFactory {
 
     override val renders: List<RenderType>
         get() = listOf(
@@ -63,27 +61,23 @@ class FacesFactory @Inject constructor(
 
     @Composable
     override fun CreateSkeleton() {
-
         Row(
             modifier = Modifier
                 .testTag("skeleton")
-                .padding(start = 16.dp, end = 16.dp)
                 .fillMaxWidth()
+                .padding(start = 16.dp)
                 .wrapContentSize(unbounded = true),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            FacesSkeletonItem()
-            FacesSkeletonItem()
-            FacesSkeletonItem()
-            FacesSkeletonItem()
-            FacesSkeletonItem()
+            for (ignored in 0..4) {
+                FacesSkeletonItem()
+            }
         }
     }
 }
 
 @Composable
 fun FacesSkeletonItem() {
-
     val size = 70.dp
     val roundedText = 6.dp
     val heightText = 13.dp

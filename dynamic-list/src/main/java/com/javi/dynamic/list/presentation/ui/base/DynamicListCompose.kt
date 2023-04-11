@@ -59,7 +59,7 @@ fun ContextViewContent(
             bodyAdapterController?.dispatchSkeletons(
                 (uiState as DynamicListUIState.SkeletonAction).renderTypes
             )
-            bodyAdapterController?.DynamicListSkeletons()
+            bodyAdapterController?.ComposeSkeletons()
         }
 
         is DynamicListUIState.LoadingAction -> {

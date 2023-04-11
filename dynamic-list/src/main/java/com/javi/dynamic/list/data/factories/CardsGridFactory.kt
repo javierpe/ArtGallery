@@ -27,7 +27,7 @@ import javax.inject.Inject
 @AdapterFactory
 class CardsGridFactory @Inject constructor(
     private val getProductDetailScreenUseCase: GetProductDetailPageUseCase
-): DynamicListFactory {
+) : DynamicListFactory {
 
     override val renders: List<RenderType>
         get() = listOf(
@@ -60,7 +60,6 @@ class CardsGridFactory @Inject constructor(
     @Suppress("UnusedPrivateMember", "MagicNumber")
     @Composable
     override fun CreateSkeleton() {
-
         VerticalGrid(
             modifier = Modifier
                 .testTag("card-container-skeleton")

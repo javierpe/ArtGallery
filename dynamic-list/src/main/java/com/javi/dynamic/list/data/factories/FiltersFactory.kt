@@ -15,7 +15,6 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.javi.dynamic.list.data.factories.base.DynamicListFactory
@@ -28,7 +27,7 @@ import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
 @AdapterFactory
-class FiltersFactory @Inject constructor(): DynamicListFactory {
+class FiltersFactory @Inject constructor() : DynamicListFactory {
 
     override val renders: List<RenderType>
         get() = listOf(
@@ -41,7 +40,6 @@ class FiltersFactory @Inject constructor(): DynamicListFactory {
         component: ComponentItemModel,
         componentInfo: ComponentInfo
     ) {
-
         val model = remember {
             derivedStateOf {
                 (component.resource as Filters).items
@@ -63,53 +61,21 @@ class FiltersFactory @Inject constructor(): DynamicListFactory {
         Row(
             modifier = Modifier
                 .testTag("skeleton")
-                .fillMaxWidth()
-                .wrapContentSize(unbounded = true),
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-
             val width = 80.dp
             val height = 40.dp
 
-            Box(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(15.dp))
-                    .background(MaterialTheme.colors.primary)
-                    .width(width)
-                    .height(height)
-            )
-
-            Box(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(15.dp))
-                    .background(MaterialTheme.colors.primary)
-                    .width(width)
-                    .height(height)
-            )
-
-            Box(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(15.dp))
-                    .background(MaterialTheme.colors.primary)
-                    .width(width)
-                    .height(height)
-            )
-
-            Box(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(15.dp))
-                    .background(MaterialTheme.colors.primary)
-                    .width(width)
-                    .height(height)
-            )
-
-            Box(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(15.dp))
-                    .background(MaterialTheme.colors.primary)
-                    .width(width)
-                    .height(height)
-            )
+            for (ignored in 0..5) {
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(15.dp))
+                        .background(MaterialTheme.colors.primary)
+                        .width(width)
+                        .height(height)
+                )
+            }
         }
     }
 }

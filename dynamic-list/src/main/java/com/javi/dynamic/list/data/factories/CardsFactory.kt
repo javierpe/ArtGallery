@@ -28,7 +28,7 @@ import javax.inject.Inject
 @AdapterFactory
 class CardsFactory @Inject constructor(
     private val getCardsPageUseCase: GetCardsPageUseCase
-): DynamicListFactory {
+) : DynamicListFactory {
 
     override val renders: List<RenderType>
         get() = listOf(
@@ -69,7 +69,6 @@ class CardsFactory @Inject constructor(
             modifier = Modifier.testTag("skeleton"),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(10.dp))

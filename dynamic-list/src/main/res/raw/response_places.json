@@ -3,13 +3,6 @@
   ],
   "body": [
     {
-      "render": "message",
-      "index": 0,
-      "resource": {
-        "message": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-      }
-    },
-    {
       "render": "text",
       "index": 1,
       "resource": {
@@ -72,7 +65,7 @@
       "render": "text",
       "index": 3,
       "resource": {
-        "text": "The most famous..."
+        "text": "Popular"
       }
     },
     {
@@ -99,6 +92,13 @@
         "life_date": "1452 - 1519",
         "country": "Anchiano, Florencia",
         "color": "#CDC6A0"
+      }
+    },
+    {
+      "render": "message",
+      "index": 6,
+      "resource": {
+        "message": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
       }
     }
   ]

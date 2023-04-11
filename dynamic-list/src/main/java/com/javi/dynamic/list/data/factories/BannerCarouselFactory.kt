@@ -30,7 +30,7 @@ import javax.inject.Inject
 @AdapterFactory
 class BannerCarouselFactory @Inject constructor(
     private val productDetailScreenLoader: GetProductDetailPageUseCase
-): DynamicListFactory {
+) : DynamicListFactory {
 
     override val renders: List<RenderType>
         get() = listOf(
@@ -45,7 +45,6 @@ class BannerCarouselFactory @Inject constructor(
         component: ComponentItemModel,
         componentInfo: ComponentInfo,
     ) {
-
         val model = remember {
             derivedStateOf {
                 (component.resource as BannerCarouselModel).banners

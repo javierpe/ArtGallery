@@ -2,9 +2,8 @@ package com.javi.dynamic.list.data.factories
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
@@ -23,9 +22,7 @@ import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
 @AdapterFactory
-class ProfileFactory @Inject constructor(
-
-): DynamicListFactory {
+class ProfileFactory @Inject constructor() : DynamicListFactory {
 
     override val renders: List<RenderType> = listOf(RenderType.PROFILE)
 
@@ -48,12 +45,11 @@ class ProfileFactory @Inject constructor(
     @Composable
     override fun CreateSkeleton() {
         Box(
-          modifier = Modifier
-              .testTag("skeleton")
-              .height(profileHeight)
-              .fillMaxSize()
-              .wrapContentSize(unbounded = true)
-              .background(MaterialTheme.colors.primary)
+            modifier = Modifier
+                .testTag("skeleton")
+                .fillMaxWidth()
+                .height(profileHeight)
+                .background(MaterialTheme.colors.primary)
         )
     }
 }

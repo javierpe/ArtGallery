@@ -21,6 +21,7 @@ import com.javi.dynamic.list.data.models.DynamicListElement
 import com.javi.dynamic.list.data.models.DynamicListObject
 import com.javi.dynamic.list.presentation.ui.utils.rememberMetricsStateHolder
 
+@OptIn(ExperimentalFoundationApi::class)
 @Suppress("LongParameterList", "FunctionNaming")
 @Composable
 fun DynamicListScreen(
@@ -31,10 +32,11 @@ fun DynamicListScreen(
     withVerticalPadding: Boolean = true,
     onAction: ((com.javi.dynamic.list.data.actions.ScrollAction) -> Unit)? = null
 ) {
-
     val metricsStateHolder = rememberMetricsStateHolder()
 
-    // Reporting scrolling state from compose should be done from side effect to prevent recomposition.
+    /**
+     * Reporting scrolling state from compose should be done from side effect to prevent recomposition.
+     */
     LaunchedEffect(metricsStateHolder, listState) {
         snapshotFlow { listState.isScrollInProgress }.collect { isScrolling ->
             if (isScrolling) {

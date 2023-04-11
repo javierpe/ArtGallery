@@ -13,9 +13,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.javi.dynamic.list.data.actions.ScrollAction
 import com.javi.design.system.animations.BlinkAnimation
 import com.javi.design.system.molecules.showCase.ShowCaseState
+import com.javi.dynamic.list.data.actions.ScrollAction
 import com.javi.dynamic.list.data.factories.base.DynamicListFactory
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListElement
@@ -29,8 +29,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.util.Queue
 import java.util.LinkedList
+import java.util.Queue
 
 abstract class DynamicListComposeController {
 
@@ -53,7 +53,6 @@ abstract class DynamicListComposeController {
 
     var skeletons: List<RenderType> = listOf()
 
-
     open fun dispatchSkeletons(renderTypes: List<RenderType>) {
         skeletons = renderTypes
     }
@@ -62,9 +61,8 @@ abstract class DynamicListComposeController {
         showCaseSequence = sequence
     }
 
-
     @Composable
-    fun DynamicListSkeletons() {
+    fun ComposeSkeletons() {
         BlinkAnimation {
             Column(
                 modifier = Modifier
@@ -93,7 +91,6 @@ abstract class DynamicListComposeController {
         showCaseState: ShowCaseState,
         onAction: (ScrollAction) -> Unit
     ) {
-
         val listState = rememberLazyListState()
 
         DynamicListScreen(
@@ -116,7 +113,6 @@ abstract class DynamicListComposeController {
         bodyListState: LazyListState,
         onAction: (ScrollAction) -> Unit
     ) {
-
         val showOnNextShowCase by showCaseState.currentIndex.collectAsStateWithLifecycle()
 
         val coroutineScope = rememberCoroutineScope()
