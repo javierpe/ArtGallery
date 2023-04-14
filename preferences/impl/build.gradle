@@ -34,19 +34,12 @@ dependencies {
 
     implementation project(":preferences:api")
 
-    // Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
+    implementation(libs.kotlin.coroutines.core)
+    implementation(libs.hilt)
+    implementation(libs.androidx.datastore)
+    implementation(libs.androidx.core)
 
-    // Hilt
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-
-    // Datastore
-    implementation "androidx.datastore:datastore-preferences:$data_store_version"
-
-    implementation "androidx.core:core-ktx:$android_core_version"
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    testImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.android.junit)
+    androidTestImplementation(libs.test.android.espresso)
 }

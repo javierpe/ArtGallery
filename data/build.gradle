@@ -36,6 +36,5 @@ java {
 }
 
 dependencies {
-
-    implementation "com.squareup.moshi:moshi-kotlin:1.14.0"
+    implementation(libs.moshi)
 }

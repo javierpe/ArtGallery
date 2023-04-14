@@ -37,7 +37,6 @@ dependencies {
     implementation project(":navigation:api")
     implementation project(":navigation:impl")
 
-    // Hilt
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
 }

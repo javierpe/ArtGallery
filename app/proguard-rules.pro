@@ -25,3 +25,7 @@
 -keep class com.squareup.moshi.** { *; }
 -keep class com.javi.dynamic.list.presentation.components.** { *; }
 -keep class com.javi.dynamic.list.data.models.** { *; }
+
+-dontwarn org.conscrypt.**
+-dontwarn org.bouncycastle.**
+-dontwarn org.openjsse.**

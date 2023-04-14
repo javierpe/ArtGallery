@@ -34,5 +34,5 @@ dependencies {
 
     implementation project(":navigation:api")
 
-    implementation "io.github.raamcosta.compose-destinations:core:$compose_destinations_version"
+    implementation(libs.navigation.destinations.core)
 }
