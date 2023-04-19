@@ -39,7 +39,6 @@ dependencies {
     implementation(libs.androidx.datastore)
     implementation(libs.androidx.core)
 
-    testImplementation(libs.test.junit)
     androidTestImplementation(libs.test.android.runner)
     androidTestImplementation(libs.test.android.junit)
     androidTestImplementation(libs.test.turbine)
