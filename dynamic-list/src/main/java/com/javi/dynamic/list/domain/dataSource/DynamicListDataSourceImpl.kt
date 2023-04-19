@@ -1,6 +1,7 @@
 package com.javi.dynamic.list.domain.dataSource
 
 import android.content.Context
+import com.javi.core.networking.DYNAMIC_LIST_BASE
 import com.javi.data.enums.ContextType
 import com.javi.dynamic.list.R
 import com.javi.dynamic.list.data.dataSources.DynamicListDataSourceApi
@@ -28,7 +29,7 @@ class DynamicListDataSourceImpl @Inject constructor(
     }
 
     override suspend fun getRemoteData(dynamicListRequestModel: DynamicListRequestModel): DataContentModel {
-        return dynamicListRemote.getContent("dynamic/context/content/"+getComplementaryUrl(dynamicListRequestModel))
+        return dynamicListRemote.getContent(DYNAMIC_LIST_BASE + getComplementaryUrl(dynamicListRequestModel))
     }
 
     private fun getResponseByContext(dynamicListRequestModel: DynamicListRequestModel): Int {
