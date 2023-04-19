@@ -28,7 +28,7 @@ class DynamicListDataSourceImpl @Inject constructor(
     }
 
     override suspend fun getRemoteData(dynamicListRequestModel: DynamicListRequestModel): DataContentModel {
-        return dynamicListRemote.getContent(getComplementaryUrl(dynamicListRequestModel))
+        return dynamicListRemote.getContent("dynamic/context/content/"+getComplementaryUrl(dynamicListRequestModel))
     }
 
     private fun getResponseByContext(dynamicListRequestModel: DynamicListRequestModel): Int {
@@ -53,13 +53,12 @@ class DynamicListDataSourceImpl @Inject constructor(
 
     private fun getComplementaryUrl(request: DynamicListRequestModel): String {
         return when (request.contextType) {
-            ContextType.PLACES -> "dynamic/context/content/places"
             ContextType.CARDS -> getCardsComplementaryUrl(request)
-            else -> "dynamic/context/content/home"
+            else -> request.contextType.source
         }
     }
 
     private fun getCardsComplementaryUrl(request: DynamicListRequestModel): String {
-        return  "dynamic/context/content/cards${request.state["id"] ?: 0}"
+        return  "${request.contextType.source}${request.state["id"] ?: 0}"
     }
 }
