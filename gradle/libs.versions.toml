@@ -15,6 +15,7 @@ kotlinCoroutines = "1.6.4"
 composeActivity = "1.7.0"
 hiltNavigationCompose = "1.0.0"
 accompanistSystemUiController = "0.29.1-alpha"
+retrofit = "2.9.0"
 
 turbineTest = "0.12.1"
 mockitoTest = "4.1.0"
@@ -101,6 +102,9 @@ moshi = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "mo
 moshi-adapters = { group = "com.squareup.moshi", name = "moshi-adapters", version.ref = "moshi" }
 moshi-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
 kotlin-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotilnCoroutinesCore" }
+
+retrofit = {group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit"}
+retrofit-converter-moshi = {group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit"}
 
 coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilCompose" }
 lottie = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie" }
