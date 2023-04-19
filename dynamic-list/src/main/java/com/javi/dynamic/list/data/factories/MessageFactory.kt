@@ -22,6 +22,8 @@ import com.javi.render.processor.core.RenderType
 import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
+const val MESSAGE_COMPONENT_TAG = "message_component"
+
 @AdapterFactory
 class MessageFactory @Inject constructor() : DynamicListFactory {
 
@@ -44,7 +46,7 @@ class MessageFactory @Inject constructor() : DynamicListFactory {
             }
         }
         MessageComponentView(
-            modifier = modifier.testTag("message_component"),
+            modifier = modifier.testTag(MESSAGE_COMPONENT_TAG),
             message = model.value,
             componentIndex = component.index,
             componentInfo.showCaseState

@@ -28,6 +28,8 @@ import com.javi.render.processor.core.RenderType
 
 const val CARD_COMPONENT_SCREEN_TAG = "card_component_screen"
 const val CARD_COMPONENT_TAG = "card_component"
+const val CARD_TITLE_COMPONENT_TAG = "card_title_component"
+const val CARD_ITEM_COMPONENT_TAG = "card_item_component"
 
 @Composable
 fun CardsComponentViewScreen(
@@ -39,9 +41,10 @@ fun CardsComponentViewScreen(
 ) {
     CardsComponentView(
         modifier = modifier.testTag(CARD_COMPONENT_SCREEN_TAG),
-        data = data,
         componentIndex = componentIndex,
-        showCaseState = showCaseState
+        showCaseState = showCaseState,
+        title = data.title,
+        cardElements = data.cardElements
     ) { id, title ->
         onCardPage(id, title)
     }
@@ -50,7 +53,8 @@ fun CardsComponentViewScreen(
 @Composable
 fun CardsComponentView(
     modifier: Modifier,
-    data: CardsModel,
+    title: String,
+    cardElements: List<CardElement>,
     componentIndex: Int,
     showCaseState: ShowCaseState,
     onNavigateToDetail: (Int, String) -> Unit
@@ -60,7 +64,8 @@ fun CardsComponentView(
         modifier = modifier
     ) {
         TitleDecoratedView(
-            text = data.title
+            modifier = Modifier.testTag(CARD_TITLE_COMPONENT_TAG),
+            text = title
         )
 
         LazyRow(
@@ -69,7 +74,7 @@ fun CardsComponentView(
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp),
         ) {
             itemsIndexed(
-                items = data.cardElements
+                items = cardElements
             ) { index, item ->
 
                 val modifierCard = if (index == 0) {
@@ -92,7 +97,7 @@ fun CardsComponentView(
                 }
 
                 CardItemView(
-                    modifier = modifierCard,
+                    modifier = modifierCard.testTag(CARD_ITEM_COMPONENT_TAG),
                     title = item.title,
                     images = item.images
                 ) {
@@ -111,14 +116,16 @@ fun CardsComponentView(
     uiMode = UI_MODE_NIGHT_YES,
 )
 fun PreviewNightModeCardsComponentView() {
+    val model = CardsModel(
+        cardElements = listOf(
+            CardElement(1, "Hola", images = emptyList())
+        ),
+        title = "Title",
+    )
     DynamicListComposeTheme {
         CardsComponentView(
-            data = CardsModel(
-                cardElements = listOf(
-                    CardElement(1, "Hola", images = emptyList())
-                ),
-                title = "Title",
-            ),
+            title = model.title,
+            cardElements = model.cardElements,
             componentIndex = 0,
             showCaseState = rememberShowCaseState(),
             modifier = Modifier
@@ -132,14 +139,17 @@ fun PreviewNightModeCardsComponentView() {
     showBackground = true
 )
 fun PreviewNoNightModeCardsComponentView() {
+    val model = CardsModel(
+        cardElements = listOf(
+            CardElement(1, "Hola", images = emptyList())
+        ),
+        title = "Title",
+    )
+
     DynamicListComposeTheme {
         CardsComponentView(
-            data = CardsModel(
-                cardElements = listOf(
-                    CardElement(1, "Hola", images = emptyList())
-                ),
-                title = "Title",
-            ),
+            title = model.title,
+            cardElements = model.cardElements,
             componentIndex = 0,
             showCaseState = rememberShowCaseState(),
             modifier = Modifier

@@ -25,9 +25,6 @@ import com.javi.dynamic.list.presentation.ui.base.DynamicListScreen
 import com.javi.render.processor.core.RenderType
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.util.LinkedList
 import java.util.Queue
@@ -41,9 +38,6 @@ abstract class DynamicListComposeController {
     open fun getMapComponents(): List<ComponentItemModel> = data
 
     open fun getMapSkeletons(): List<RenderType> = skeletons
-
-    private val _elements = MutableStateFlow<List<DynamicListElement>>(emptyList())
-    private val elements: StateFlow<List<DynamicListElement>> = _elements.asStateFlow()
 
     private var showCaseFinished = false
 

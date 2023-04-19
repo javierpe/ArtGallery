@@ -1,7 +1,5 @@
 package com.javi.dynamic.list.presentation.components.banner
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -37,21 +35,28 @@ fun BannerComponentViewScreen(
 ) {
     BannerComponentView(
         modifier = modifier.testTag(BANNER_IMAGE_SCREEN_TEST_TAG),
-        model = model,
         componentIndex = componentIndex,
-        showCaseState = showCaseState
+        showCaseState = showCaseState,
+        imageUrl = model.product.imageURL,
+        quantity = model.product.quantity,
+        title = model.bannerInfo?.title.orEmpty(),
+        description = model.bannerInfo?.description.orEmpty()
     ) {
-        onProductDetail(it.imageURL)
+        onProductDetail(it)
     }
 }
 
+@Suppress("LongParameterList")
 @Composable
 fun BannerComponentView(
     modifier: Modifier,
-    model: BannerModel,
     componentIndex: Int,
     showCaseState: ShowCaseState,
-    onClickAction: (ProductImageModel) -> Unit
+    imageUrl: String,
+    quantity: Int,
+    title: String,
+    description: String,
+    onClickAction: (String) -> Unit
 ) {
     BannerImageView(
         modifier = modifier
@@ -73,23 +78,27 @@ fun BannerComponentView(
                 key = RenderType.BANNER.value,
                 state = showCaseState
             ),
-        imageURL = model.product.imageURL,
+        imageURL = imageUrl,
         onClickAction = {
-            onClickAction(model.product)
+            onClickAction(imageUrl)
         },
-        quantity = model.product.quantity,
-        title = model.bannerInfo?.title.orEmpty(),
-        description = model.bannerInfo?.description.orEmpty()
+        quantity = quantity,
+        title = title,
+        description = description
     )
 }
 
 @Composable
 @Preview(showBackground = true)
 fun PreviewBannerComponentView() {
+    val model = BannerModel(ProductImageModel(0, 0, ""))
     DynamicListComposeTheme {
         BannerComponentView(
             modifier = Modifier,
-            model = BannerModel(ProductImageModel(0, 0, "")),
+            imageUrl = model.product.imageURL,
+            quantity = model.product.quantity,
+            title = model.bannerInfo?.title.orEmpty(),
+            description = model.bannerInfo?.description.orEmpty(),
             componentIndex = 0,
             showCaseState = rememberShowCaseState()
         ) { }

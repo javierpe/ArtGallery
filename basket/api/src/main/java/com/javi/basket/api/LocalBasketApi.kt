@@ -8,7 +8,7 @@ interface LocalBasketApi {
     /**
      * Collect current products in basket.
      */
-    val basketProducts : SharedFlow<List<ProductImageModel>>
+    val basketProducts: SharedFlow<List<ProductImageModel>>
 
     /**
      * Call this before consume basket products.

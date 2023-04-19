@@ -1,6 +1,5 @@
 package com.javi.dynamic.list.domain.useCases
 
-import android.util.Log
 import com.javi.dynamic.list.data.actions.DynamicListUIState
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.data.repositories.DynamicListRepository
@@ -20,7 +19,7 @@ import javax.inject.Inject
 
 class DynamicListUseCaseImpl @Inject constructor(
     @IODispatcher val ioDispatcher: CoroutineDispatcher,
-    private val controller: DynamicListRepository,
+    private val repository: DynamicListRepository,
     private val getDynamicListShowCaseUseCaseImpl: GetDynamicListShowCaseUseCase,
     private val saveSkeletonsUseCase: SaveSkeletonsUseCase,
     private val getSkeletonsByContextUseCase: GetSkeletonsByContextUseCase
@@ -31,7 +30,7 @@ class DynamicListUseCaseImpl @Inject constructor(
         requestModel: DynamicListRequestModel,
         withSkeletons: Boolean
     ): Flow<DynamicListUIState> {
-        return controller
+        return repository
             .get(page, requestModel)
             .map {
                 if (it is DynamicListUIState.SuccessAction) {
@@ -55,7 +54,6 @@ class DynamicListUseCaseImpl @Inject constructor(
                 }
             }
             .catch {
-                Log.e("DL_ERROR", it.message.toString())
                 emit(DynamicListUIState.ErrorAction(it))
             }
             .flowOn(ioDispatcher)

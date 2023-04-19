@@ -6,6 +6,7 @@ import com.javi.data.enums.ContextType
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.presentation.ui.base.ContextView
 import com.javi.dynamic.list.presentation.ui.base.rememberDynamicListRequestState
+import com.javi.dynamic.list.presentation.ui.base.update
 import com.javi.home.impl.viewModels.MainViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph

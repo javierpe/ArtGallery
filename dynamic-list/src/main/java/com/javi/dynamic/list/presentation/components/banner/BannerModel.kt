@@ -10,7 +10,7 @@ import com.squareup.moshi.Json
 data class BannerModel(
     @Json(name = "product") val product: ProductImageModel,
     @Json(name = "info") val bannerInfo: BannerInfo? = null
-): SessionAware<BannerModel> {
+) : SessionAware<BannerModel> {
     override fun updateProducts(productList: List<ProductImageModel>): BannerModel {
         val element = productList.firstOrNull { productInCart -> productInCart.id == product.id }
         return if (element != null) {

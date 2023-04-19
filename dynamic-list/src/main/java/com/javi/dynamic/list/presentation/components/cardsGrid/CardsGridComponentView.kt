@@ -15,23 +15,26 @@ import com.javi.design.system.molecules.VerticalGrid
 
 @Composable
 fun CardsGridComponentViewScreen(
+    modifier: Modifier = Modifier,
     images: List<ProductImageModel>,
     onProductDetail: (String) -> Unit
 ) {
     CardsGridComponentView(
+        modifier = modifier,
         data = images,
     ) {
-        onProductDetail(it.imageURL)
+        onProductDetail(it)
     }
 }
 
 @Composable
 fun CardsGridComponentView(
+    modifier: Modifier = Modifier,
     data: List<ProductImageModel>,
-    onClick: (ProductImageModel) -> Unit
+    onClick: (String) -> Unit
 ) {
     VerticalGrid(
-        modifier = Modifier
+        modifier = modifier
             .testTag("card-container")
     ) {
         data.forEach { item ->
@@ -41,7 +44,7 @@ fun CardsGridComponentView(
                     .padding(16.dp)
                     .clip(RoundedCornerShape(10.dp))
                     .clickable {
-                        onClick.invoke(item)
+                        onClick.invoke(item.imageURL)
                     },
                 imageURL = item.imageURL
             )

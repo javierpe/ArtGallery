@@ -32,29 +32,38 @@ val profileHeightExpanded = 180.dp
 
 @Composable
 fun ProfileComponentScreenView(
+    modifier: Modifier = Modifier,
     model: ProfileModel,
     isExpandedScreen: Boolean = false
 ) {
     ProfileComponentView(
-        modifier = Modifier
+        modifier = modifier
             .testTag(PROFILE_COMPONENT_SCREEN_TAG)
             .height(
                 if (isExpandedScreen) profileHeightExpanded else profileHeight
             ),
-        model = model
+        name = model.name,
+        shortDescription = model.shortDescription,
+        country = model.country,
+        lifeDate = model.lifeDate,
+        color = model.color
     )
 }
 
 @Composable
 fun ProfileComponentView(
     modifier: Modifier = Modifier,
-    model: ProfileModel
+    name: String,
+    shortDescription: String,
+    country: String,
+    lifeDate: String,
+    color: String
 ) {
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(
-                Color(android.graphics.Color.parseColor(model.color)).copy(
+                Color(android.graphics.Color.parseColor(color)).copy(
                     alpha = if (isSystemInDarkTheme()) 0.5f else 1f
                 )
             )
@@ -65,14 +74,14 @@ fun ProfileComponentView(
         ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = model.name,
+                text = name,
                 style = Typography.h3.copy(fontWeight = FontWeight.Black),
                 color = MaterialTheme.colors.secondary.copy(alpha = 0.8f)
             )
 
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = model.shortDescription,
+                text = shortDescription,
                 style = Typography.h5.copy(fontWeight = FontWeight.Medium),
                 color = MaterialTheme.colors.secondary.copy(alpha = 0.8f)
             )
@@ -93,7 +102,7 @@ fun ProfileComponentView(
         ) {
             Text(
                 modifier = Modifier.weight(1f),
-                text = model.country,
+                text = country,
                 style = Typography.body2,
                 textAlign = TextAlign.Start,
                 color = MaterialTheme.colors.secondary.copy(alpha = 0.8f)
@@ -101,7 +110,7 @@ fun ProfileComponentView(
 
             Text(
                 modifier = Modifier.weight(1f),
-                text = model.lifeDate,
+                text = lifeDate,
                 style = Typography.body2,
                 textAlign = TextAlign.End,
                 color = MaterialTheme.colors.secondary.copy(alpha = 0.8f)
@@ -116,16 +125,21 @@ fun ProfileComponentView(
     uiMode = Configuration.UI_MODE_NIGHT_NO
 )
 fun PreviewNightModeOffProfileComponentView() {
+    val model = ProfileModel(
+        name = "Picasso",
+        shortDescription = "Modern art",
+        lifeDate = "1881 - 1973",
+        color = "#DFB799",
+        country = "Málaga, Spain"
+    )
     DynamicListComposeTheme {
         ProfileComponentView(
             modifier = Modifier.height(profileHeight),
-            model = ProfileModel(
-                name = "Picasso",
-                shortDescription = "Modern art",
-                lifeDate = "1881 - 1973",
-                color = "#DFB799",
-                country = "Málaga, Spain"
-            )
+            name = model.name,
+            shortDescription = model.shortDescription,
+            country = model.country,
+            lifeDate = model.lifeDate,
+            color = model.color
         )
     }
 }
@@ -136,16 +150,23 @@ fun PreviewNightModeOffProfileComponentView() {
     uiMode = Configuration.UI_MODE_NIGHT_YES
 )
 fun PreviewNightModeOnProfileComponentView() {
+
+    val model = ProfileModel(
+        name = "Picasso",
+        shortDescription = "Modern art",
+        lifeDate = "1881 - 1973",
+        color = "#DFB799",
+        country = "Málaga, Spain"
+    )
+
     DynamicListComposeTheme(darkTheme = true) {
         ProfileComponentView(
             modifier = Modifier.height(profileHeight),
-            model = ProfileModel(
-                name = "Picasso",
-                shortDescription = "Modern art",
-                lifeDate = "1881 - 1973",
-                color = "#DFB799",
-                country = "Málaga, Spain"
-            )
+            name = model.name,
+            shortDescription = model.shortDescription,
+            country = model.country,
+            lifeDate = model.lifeDate,
+            color = model.color
         )
     }
 }

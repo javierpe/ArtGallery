@@ -30,6 +30,8 @@ import com.javi.render.processor.core.RenderType
 import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
+const val FACES_COMPONENT_TAG = "faces_component"
+
 @AdapterFactory
 class FacesFactory @Inject constructor() : DynamicListFactory {
 
@@ -50,7 +52,7 @@ class FacesFactory @Inject constructor() : DynamicListFactory {
             }
         }
         FacesComponentView(
-            modifier = modifier.testTag("faces_component"),
+            modifier = modifier.testTag(FACES_COMPONENT_TAG),
             faces = model.value
         ) {
             componentInfo.scrollAction?.invoke(

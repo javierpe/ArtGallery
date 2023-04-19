@@ -41,5 +41,6 @@ dependencies {
 
     testImplementation(libs.test.junit)
     androidTestImplementation(libs.test.android.junit)
-    androidTestImplementation(libs.test.android.espresso)
+    androidTestImplementation(libs.test.turbine)
+    androidTestImplementation(libs.test.kotlin.coroutines)
 }

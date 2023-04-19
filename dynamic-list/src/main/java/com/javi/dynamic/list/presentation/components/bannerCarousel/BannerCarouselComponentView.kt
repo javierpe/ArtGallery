@@ -45,7 +45,7 @@ fun BannerCarouselComponentViewScreen(
         showCaseState = showCaseState,
         isExpandedScreen = widthSizeClass == WindowWidthSizeClass.Expanded,
     ) {
-        onProductDetail(it.imageURL)
+        onProductDetail(it)
     }
 }
 
@@ -57,7 +57,7 @@ fun BannerCarouselComponentView(
     images: List<BannerModel>,
     componentIndex: Int,
     showCaseState: ShowCaseState,
-    onClickAction: (ProductImageModel) -> Unit,
+    onClickAction: (String) -> Unit,
 ) {
     val height = if (isExpandedScreen) {
         200.dp
@@ -112,7 +112,7 @@ fun BannerCarouselComponentView(
                     .width(width),
                 imageURL = item.product.imageURL,
                 onClickAction = {
-                    onClickAction(item.product)
+                    onClickAction(item.product.imageURL)
                 },
                 quantity = item.product.quantity,
                 title = item.bannerInfo?.title.orEmpty(),

@@ -24,6 +24,8 @@ import com.javi.render.processor.core.RenderType
 import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
+const val CARDS_GRID_TAG = "cards_grid"
+
 @AdapterFactory
 class CardsGridFactory @Inject constructor(
     private val getProductDetailScreenUseCase: GetProductDetailPageUseCase
@@ -49,6 +51,7 @@ class CardsGridFactory @Inject constructor(
         }
 
         CardsGridComponentViewScreen(
+            modifier = Modifier.testTag(CARDS_GRID_TAG),
             images = model.value.images,
         ) {
             componentInfo.navigator()?.navigate(

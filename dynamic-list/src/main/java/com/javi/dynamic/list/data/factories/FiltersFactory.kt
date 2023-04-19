@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -25,6 +24,8 @@ import com.javi.dynamic.list.presentation.components.filters.FiltersComponentVie
 import com.javi.render.processor.core.RenderType
 import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
+
+const val FILTERS_COMPONENT_TAG = "filters_component"
 
 @AdapterFactory
 class FiltersFactory @Inject constructor() : DynamicListFactory {
@@ -46,7 +47,7 @@ class FiltersFactory @Inject constructor() : DynamicListFactory {
             }
         }
         FiltersComponentViewScreen(
-            modifier = modifier.testTag("filters_component"),
+            modifier = modifier.testTag(FILTERS_COMPONENT_TAG),
             data = model.value,
             windowWidthSizeClass = componentInfo.dynamicListObject.widthSizeClass
         ) {

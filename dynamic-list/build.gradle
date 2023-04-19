@@ -73,7 +73,7 @@ dependencies {
     // Design System
     implementation project(":design-system")
 
-    // Gson
+    // Moshi
     implementation(libs.moshi)
     implementation(libs.moshi.adapters)
     ksp(libs.moshi.codegen)
@@ -114,4 +114,14 @@ dependencies {
     implementation(libs.androidx.room)
     implementation(libs.androidx.room.ktx)
     kapt(libs.androidx.room.compiler)
+
+    testImplementation(libs.test.junit)
+    testImplementation(libs.test.mockito)
+    testImplementation(libs.test.kotlin.coroutines)
+    testImplementation(libs.test.turbine)
+    testImplementation(libs.test.json)
+
+    androidTestImplementation(libs.test.mockito)
+    androidTestImplementation(libs.test.android.mockito)
+    androidTestImplementation(libs.test.android.compose.ui)
 }

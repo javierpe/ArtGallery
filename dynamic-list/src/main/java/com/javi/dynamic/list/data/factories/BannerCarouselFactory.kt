@@ -27,6 +27,7 @@ import com.javi.render.processor.core.RenderType
 import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
+const val BANNER_CAROUSEL_COMPONENT_TAG = "banner_carousel_component"
 @AdapterFactory
 class BannerCarouselFactory @Inject constructor(
     private val productDetailScreenLoader: GetProductDetailPageUseCase
@@ -52,7 +53,7 @@ class BannerCarouselFactory @Inject constructor(
         }
 
         BannerCarouselComponentViewScreen(
-            modifier = modifier.testTag("banner_carousel_component"),
+            modifier = modifier.testTag(BANNER_CAROUSEL_COMPONENT_TAG),
             images = model.value,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState,

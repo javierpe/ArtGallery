@@ -21,9 +21,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.javi.data.ProductImageModel
-import com.javi.design.system.atoms.ImageComponentView
 import com.javi.design.system.atoms.HorizontalPagerIndicators
+import com.javi.design.system.atoms.ImageComponentView
 import com.javi.design.system.atoms.TitleDecoratedView
 import com.javi.design.system.extensions.withBounceClick
 
@@ -31,15 +30,16 @@ const val POSTER_COMPONENT_SCREEN_TAG = "poster_component_screen_tag"
 
 @Composable
 fun PosterComponentScreenView(
+    modifier: Modifier = Modifier,
     model: PosterModel,
     onProductDetail: (String) -> Unit
 ) {
     PosterComponentViewV2(
-        modifier = Modifier.testTag(POSTER_COMPONENT_SCREEN_TAG),
+        modifier = modifier.testTag(POSTER_COMPONENT_SCREEN_TAG),
         list = model.elements,
         title = model.title,
     ) {
-        onProductDetail(it.imageURL)
+        onProductDetail(it)
     }
 }
 
@@ -49,7 +49,7 @@ fun PosterComponentViewV2(
     modifier: Modifier = Modifier,
     title: String,
     list: List<PosterModelItem>,
-    onClick: (ProductImageModel) -> Unit
+    onClick: (String) -> Unit
 ) {
     val pagerState = rememberPagerState()
 
@@ -79,7 +79,7 @@ fun PosterComponentViewV2(
                         .align(Alignment.Center)
                         .withBounceClick()
                         .clickable {
-                            onClick(list[page].productImage)
+                            onClick(list[page].productImage.imageURL)
                         },
                     imageURL = list[page].productImage.imageURL,
                     contentScale = ContentScale.Fit

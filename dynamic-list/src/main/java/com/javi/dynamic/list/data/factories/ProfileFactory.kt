@@ -21,6 +21,8 @@ import com.javi.render.processor.core.RenderType
 import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
+const val PROFILE_COMPONENT_TAG = "profile_component_tag"
+
 @AdapterFactory
 class ProfileFactory @Inject constructor() : DynamicListFactory {
 
@@ -37,6 +39,7 @@ class ProfileFactory @Inject constructor() : DynamicListFactory {
         }
 
         ProfileComponentScreenView(
+            modifier = Modifier.testTag(PROFILE_COMPONENT_TAG),
             model = model.value,
             isExpandedScreen = componentInfo.dynamicListObject.widthSizeClass == WindowWidthSizeClass.Expanded
         )

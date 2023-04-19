@@ -13,11 +13,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.javi.design.system.data.showCase.ShowCaseStrategy
 import com.javi.design.system.data.showCase.ShapeType
+import com.javi.design.system.data.showCase.ShowCaseStrategy
+import com.javi.design.system.molecules.TooltipView
 import com.javi.design.system.molecules.showCase.ShowCaseState
 import com.javi.design.system.molecules.showCase.ShowCaseStyle
-import com.javi.design.system.molecules.TooltipView
 import com.javi.design.system.molecules.showCase.asShowCaseTarget
 import com.javi.design.system.molecules.showCase.rememberShowCaseState
 import com.javi.design.system.theme.DynamicListComposeTheme

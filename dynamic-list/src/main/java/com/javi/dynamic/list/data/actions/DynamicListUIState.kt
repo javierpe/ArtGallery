@@ -8,7 +8,7 @@ import java.util.*
 
 sealed class DynamicListUIState {
 
-    object None: DynamicListUIState()
+    object None : DynamicListUIState()
 
     /**
      * Show loader view
@@ -18,7 +18,7 @@ sealed class DynamicListUIState {
     /**
      * Show error view
      */
-    class ErrorAction(val exception: Throwable): DynamicListUIState()
+    class ErrorAction(val exception: Throwable) : DynamicListUIState()
 
     /**
      * Show data from response
@@ -28,10 +28,10 @@ sealed class DynamicListUIState {
         val body: List<DynamicListElement> = emptyList(),
         val header: List<DynamicListElement> = emptyList(),
         val showCaseQueue: Queue<DynamicListShowCaseModel> = LinkedList()
-    ): DynamicListUIState()
+    ) : DynamicListUIState()
 
     /**
      * Show skeleton
      */
-    class SkeletonAction(val renderTypes: List<RenderType>): DynamicListUIState()
+    class SkeletonAction(val renderTypes: List<RenderType>) : DynamicListUIState()
 }

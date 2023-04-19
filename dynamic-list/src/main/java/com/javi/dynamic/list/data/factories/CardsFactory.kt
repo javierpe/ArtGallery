@@ -25,6 +25,8 @@ import com.javi.render.processor.core.RenderType
 import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
+const val CARDS_COMPONENT_TAG = "cards_component"
+
 @AdapterFactory
 class CardsFactory @Inject constructor(
     private val getCardsPageUseCase: GetCardsPageUseCase
@@ -48,8 +50,9 @@ class CardsFactory @Inject constructor(
                 component.resource as CardsModel
             }
         }
+
         CardsComponentViewScreen(
-            modifier = modifier.testTag("cards_component"),
+            modifier = modifier.testTag(CARDS_COMPONENT_TAG),
             data = model.value,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState

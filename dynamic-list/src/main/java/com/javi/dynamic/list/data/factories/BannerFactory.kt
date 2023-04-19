@@ -23,6 +23,8 @@ import com.javi.render.processor.core.RenderType
 import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
+const val BANNER_COMPONENT_TAG = "banner_component"
+
 @AdapterFactory
 class BannerFactory @Inject constructor(
     private val getProductDetailScreenUseCase: GetProductDetailPageUseCase
@@ -47,7 +49,7 @@ class BannerFactory @Inject constructor(
             }
         }
         BannerComponentViewScreen(
-            modifier = modifier.testTag("banner_component"),
+            modifier = modifier.testTag(BANNER_COMPONENT_TAG),
             model = model.value,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState

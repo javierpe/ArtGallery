@@ -23,6 +23,8 @@ import com.javi.render.processor.core.RenderType
 import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
+const val POSTER_COMPONENT_TAG = "poster_component_tag"
+
 @AdapterFactory
 class PosterFactory @Inject constructor(
     private val getProductDetailScreenUseCase: GetProductDetailPageUseCase
@@ -41,6 +43,7 @@ class PosterFactory @Inject constructor(
         }
 
         PosterComponentScreenView(
+            modifier = Modifier.testTag(POSTER_COMPONENT_TAG),
             model = model.value
         ) {
             componentInfo.navigator()?.navigate(
