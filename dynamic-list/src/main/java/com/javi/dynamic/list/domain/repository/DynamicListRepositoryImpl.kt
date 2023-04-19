@@ -26,7 +26,7 @@ class DynamicListRepositoryImpl @Inject constructor(
         // Emulate response delay
         delay(DEFAULT_DELAY)
 
-        val componentModel = dynamicListMockResponseApi.getDataFromAsset(requestModel)
+        val componentModel = dynamicListMockResponseApi.getRemoteData(requestModel)
 
         val header = componentModel.header.mapNotNull { component ->
 

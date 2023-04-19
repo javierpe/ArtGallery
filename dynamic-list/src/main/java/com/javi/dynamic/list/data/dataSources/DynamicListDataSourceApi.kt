@@ -8,4 +8,8 @@ interface DynamicListDataSourceApi {
     suspend fun getDataFromAsset(
         dynamicListRequestModel: DynamicListRequestModel
     ): DataContentModel
+
+    suspend fun getRemoteData(
+        dynamicListRequestModel: DynamicListRequestModel
+    ): DataContentModel
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import com.javi.data.enums.ContextType
 import com.javi.dynamic.list.R
 import com.javi.dynamic.list.data.dataSources.DynamicListDataSourceApi
+import com.javi.dynamic.list.data.dataSources.DynamicListRemote
 import com.javi.dynamic.list.data.extensions.tryFromJson
 import com.javi.dynamic.list.data.models.DataContentModel
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 class DynamicListDataSourceImpl @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val moshi: Moshi
+    private val moshi: Moshi,
+    private val dynamicListRemote: DynamicListRemote
 ) : DynamicListDataSourceApi {
 
     override suspend fun getDataFromAsset(dynamicListRequestModel: DynamicListRequestModel): DataContentModel {
@@ -23,6 +25,10 @@ class DynamicListDataSourceImpl @Inject constructor(
             .use { it.readText() }
 
         return moshi.adapter(DataContentModel::class.java).tryFromJson(data)!!
+    }
+
+    override suspend fun getRemoteData(dynamicListRequestModel: DynamicListRequestModel): DataContentModel {
+        return dynamicListRemote.getContent()
     }
 
     private fun getResponseByContext(dynamicListRequestModel: DynamicListRequestModel): Int {
