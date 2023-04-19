@@ -28,13 +28,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
-    afterEvaluate {
-        compileDebugAndroidTestJavaWithJavac {
-            targetCompatibility = 1.8
-            sourceCompatibility = 1.8
-        }
-    }
 }
 
 dependencies {
