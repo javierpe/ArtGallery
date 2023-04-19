@@ -1,3 +1,3 @@
 package com.javi.core.networking
 
-const val BASE_URL = "https://demo1120882.mockable.io/"
+const val BASE_URL = "https://demo2644233.mockable.io/ "
