@@ -47,6 +47,7 @@ androidxPalette = "1.0.0"
 moshi = "1.14.0"
 androidxAppCompat = "1.6.1"
 androidxDataStore = "1.0.0"
+testRunner = "1.5.2"
 
 [libraries]
 androidx-core = { group = "androidx.core", name = "core-ktx", version.ref = "androidCore" }
@@ -94,6 +95,7 @@ test-android-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-to
 test-android-compose-ui-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "compose" }
 test-android-automator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "androidTestUiAutomator" }
 test-android-benchmark = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "androidTestBenchmark" }
+test-android-runner = { group = "androidx.test", name = "runner", version.ref = "testRunner" }
 
 moshi = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
 moshi-adapters = { group = "com.squareup.moshi", name = "moshi-adapters", version.ref = "moshi" }
@@ -109,7 +111,6 @@ androidx-room = { group = "androidx.room", name = "room-rxjava3", version.ref = 
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 androidx-datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidxDataStore" }
-
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

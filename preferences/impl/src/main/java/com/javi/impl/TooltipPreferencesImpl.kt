@@ -20,7 +20,6 @@ class TooltipPreferencesImpl @Inject constructor(
     @ApplicationContext val context: Context
 ) : TooltipPreferencesApi {
 
-
     override suspend fun saveBooleanState(key: String, value: Boolean) {
         saveState(
             state = booleanPreferencesKey(key),
