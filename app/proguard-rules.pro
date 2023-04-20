@@ -26,6 +26,9 @@
 -keep class com.javi.dynamic.list.presentation.components.** { *; }
 -keep class com.javi.dynamic.list.data.models.** { *; }
 
+# Moshi + Retrofit in release variant
+-keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
+
 -dontwarn org.conscrypt.**
 -dontwarn org.bouncycastle.**
 -dontwarn org.openjsse.**
