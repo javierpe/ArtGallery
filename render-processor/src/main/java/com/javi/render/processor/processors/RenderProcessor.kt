@@ -30,7 +30,7 @@ internal class RenderProcessor(
     private val componentsCreator: ComponentsCreator,
     private val factoryModuleCreator: FactoryModuleCreator,
     private val renderModuleCreator: RenderModuleCreator
-): SymbolProcessor {
+) : SymbolProcessor {
 
     private val names = mutableListOf<ModelClassProcessed>()
     private val renders = mutableListOf<String>()
@@ -42,7 +42,6 @@ internal class RenderProcessor(
 
     @OptIn(ExperimentalTime::class)
     override fun process(resolver: Resolver): List<KSAnnotated> {
-
         val elapsedTime = measureTime {
             make(resolver)
         }
@@ -93,7 +92,6 @@ internal class RenderProcessor(
             val resolved = resolver
                 .getSymbolsWithAnnotation(it, inDepth = true)
                 .toList()
-
 
             logger.warn("Found ${resolved.size} renders!")
 

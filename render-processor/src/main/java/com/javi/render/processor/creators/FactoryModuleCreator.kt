@@ -26,7 +26,7 @@ class FactoryModuleCreator(
     fun make(
         validatedSymbols: List<KSClassDeclaration>
     ) {
-        logger.warn("Adapter Factories: ${validatedSymbols.toString()}")
+        logger.warn("Adapter Factories: $validatedSymbols")
         val fileSpec = FileSpec.builder(
             packageName = PACKAGE_DI,
             fileName = DI_FACTORY_MODULE_FILE_NAME

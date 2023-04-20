@@ -32,8 +32,7 @@ class MoshiModuleCreator(
     fun make(
         names: List<ModelClassProcessed>
     ) {
-
-        logger.warn("Moshi Module: ${names.toString()}")
+        logger.warn("Moshi Module: $names")
 
         var subtypes = MOSHI_SUBTYPE_FACTORY
 

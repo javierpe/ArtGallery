@@ -42,8 +42,7 @@ class ComponentsCreator(
         validatedSymbols: List<KSClassDeclaration>,
         names: MutableList<ModelClassProcessed>
     ) {
-
-        logger.warn("Component Module: ${names.toString()}")
+        logger.warn("Component Module: $names")
 
         val fileSpec = FileSpec.builder(
             packageName = PACKAGE_FACTORIES,
@@ -85,7 +84,6 @@ class ComponentsCreator(
             )
             .build()
 
-
         fileSpec.addType(
             TypeSpec.classBuilder(PARENT_MODEL_FILE_NAME)
                 .addTypeVariable(TypeVariableName.Companion.invoke("T"))
@@ -98,7 +96,6 @@ class ComponentsCreator(
 
         validatedSymbols.forEach { ksAnnotated ->
             if (ksAnnotated.isDataClass()) {
-
                 val property = PropertySpec
                     .builder(PROP_PARENT_MODEL_RESOURCE_NAME, ksAnnotated.asType(emptyList()).toTypeName())
                     .initializer(PROP_PARENT_MODEL_RESOURCE_NAME)
@@ -133,7 +130,7 @@ class ComponentsCreator(
 
                 names.add(
                     ModelClassProcessed(
-                        packageName =  ksAnnotated.packageName.asString(),
+                        packageName = ksAnnotated.packageName.asString(),
                         semanticName = ksAnnotated.semanticName(),
                         simpleName = ksAnnotated.simpleName.asString(),
                         renderType = RenderType.valueOf(argument.declaration.toString())

@@ -26,7 +26,7 @@ class RenderModuleCreator(
     fun make(
         validatedSymbols: List<KSClassDeclaration>
     ) {
-        logger.warn("Factories: ${validatedSymbols.toString()}")
+        logger.warn("Factories: $validatedSymbols")
 
         val fileSpec = FileSpec.builder(
             packageName = PACKAGE_DI,
@@ -49,7 +49,7 @@ class RenderModuleCreator(
                 val classType = ksClassDeclaration.asType(emptyList())
                 val classDeclaration = ksClassDeclaration.superTypes.toList().first().resolve().declaration
                 logger.warn("Render factory -> ${classType.declaration}")
-                addImport("", classDeclaration.packageName.asString() + ".${classDeclaration.toString()}")
+                addImport("", classDeclaration.packageName.asString() + ".$classDeclaration")
                 type.addFunction(
                     FunSpec.builder("bind${classType.declaration}")
                         .addParameter(
@@ -76,7 +76,6 @@ class RenderModuleCreator(
 
             addType(type.build())
         }.addFileComment(DI_FACTORY_MODULE_COMMENT).build()
-
 
         try {
             fileSpec.writeTo(codeGenerator = codeGenerator, aggregating = false)

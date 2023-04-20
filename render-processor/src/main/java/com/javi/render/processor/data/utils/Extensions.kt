@@ -1,6 +1,5 @@
 package com.javi.render.processor.data.utils
 
-import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.validate
@@ -15,10 +14,6 @@ fun KSClassDeclaration.isDataClass(): Boolean {
 
 fun KSAnnotated.isValid(): Boolean {
     return this is KSClassDeclaration && this.validate()
-}
-
-fun KSPLogger.log(message: String) {
-    info("KSP Processor: $message")
 }
 
 private fun makeSemanticName(name: String): String {
