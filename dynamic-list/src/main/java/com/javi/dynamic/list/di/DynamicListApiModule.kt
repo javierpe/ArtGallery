@@ -6,12 +6,15 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object DynamicListApiModule {
+
+    @Singleton
     @Provides
-    fun provideDyanamicListService(retrofit: Retrofit) : DynamicListRemote {
+    fun provideDynamicListService(retrofit: Retrofit): DynamicListRemote {
         return retrofit.create(DynamicListRemote::class.java)
     }
 }

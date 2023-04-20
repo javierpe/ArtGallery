@@ -7,12 +7,9 @@ import com.javi.dynamic.list.data.models.DynamicListContainer
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.data.repositories.DynamicListRepository
 import com.javi.dynamic.list.data.useCases.DynamicListRenderProcessorApi
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
-
-private const val DEFAULT_DELAY: Long = 3000
 
 class DynamicListRepositoryImpl @Inject constructor(
     private val dynamicListRenderProcessorApi: DynamicListRenderProcessorApi,
@@ -23,9 +20,6 @@ class DynamicListRepositoryImpl @Inject constructor(
         page: Int,
         requestModel: DynamicListRequestModel
     ): Flow<DynamicListUIState> = flow {
-        // Emulate response delay
-        delay(DEFAULT_DELAY)
-
         val componentModel = dynamicListMockResponseApi.getRemoteData(requestModel)
 
         val header = componentModel.header.mapNotNull { component ->

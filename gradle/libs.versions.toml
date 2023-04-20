@@ -3,7 +3,7 @@ compose = "1.4.1"
 composeMaterial = "1.4.1"
 composeCompiler = "1.3.2"
 composeLifecycle = "2.6.1"
-composeDestinations = "1.9.40-beta"
+composeDestinations = "1.8.39-beta"
 composeConstraintLayout = "1.0.1"
 composeMaterial3 = "1.0.1"
 

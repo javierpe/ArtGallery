@@ -25,6 +25,7 @@
 -keep class com.squareup.moshi.** { *; }
 -keep class com.javi.dynamic.list.presentation.components.** { *; }
 -keep class com.javi.dynamic.list.data.models.** { *; }
+-keep class com.javi.dynamic.list.data.dataSources.** { *; }
 
 # Moshi + Retrofit in release variant
 -keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
