@@ -60,6 +60,6 @@ class DynamicListDataSourceImpl @Inject constructor(
     }
 
     private fun getCardsComplementaryUrl(request: DynamicListRequestModel): String {
-        return  "${request.contextType.source}${request.state["id"] ?: 0}"
+        return "${request.contextType.source}${request.state["id"] ?: 0}"
     }
 }
