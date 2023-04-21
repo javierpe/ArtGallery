@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.javi.data.ProductImageModel
 import com.javi.design.system.data.showCase.ShapeType
 import com.javi.design.system.data.showCase.ShowCaseStrategy
 import com.javi.design.system.molecules.BannerImageView

@@ -105,9 +105,9 @@ internal class RenderProcessor(
     }
 
     private fun makeFactories(resolver: Resolver) {
-        AdapterFactory::class.qualifiedName?.let { module ->
+        AdapterFactory::class.qualifiedName?.let { name ->
             val resolved = resolver
-                .getSymbolsWithAnnotation(module)
+                .getSymbolsWithAnnotation(name)
                 .toList()
 
             factoryModuleCreator.make(
