@@ -75,7 +75,7 @@ fun PosterComponentViewV2(
             ) {
                 ImageComponentView(
                     modifier = Modifier
-                        .height(450.dp)
+                        .height(400.dp)
                         .align(Alignment.Center)
                         .withBounceClick()
                         .clickable {
@@ -87,7 +87,7 @@ fun PosterComponentViewV2(
             }
         }
 
-        Spacer(modifier = Modifier.padding(bottom = 25.dp))
+        Spacer(modifier = Modifier.padding(bottom = 10.dp))
 
         HorizontalPagerIndicators(
             modifier = Modifier

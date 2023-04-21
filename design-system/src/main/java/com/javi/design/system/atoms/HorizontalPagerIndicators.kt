@@ -47,7 +47,7 @@ fun HorizontalPagerIndicators(
                     MaterialTheme.colors.secondary
                 } else {
                     // Unselected
-                    MaterialTheme.colors.onPrimary
+                    MaterialTheme.colors.onSecondary
                 },
                 tween(ANIMATION_DURATION)
             )
@@ -58,7 +58,6 @@ fun HorizontalPagerIndicators(
                     .padding(3.dp)
                     .clip(CircleShape)
                     .background(animateColor.value)
-                    .size(20.dp)
             )
         }
     }

@@ -12,7 +12,6 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -52,16 +51,6 @@ fun HeaderWithImageView(
     val backButtonLayoutId = "back_button"
 
     val systemUiController = rememberSystemUiController()
-    val useDarkIcons = !isSystemInDarkTheme()
-
-    DisposableEffect(systemUiController, useDarkIcons) {
-        systemUiController.setNavigationBarColor(
-            color = Color.Transparent,
-            darkIcons = useDarkIcons
-        )
-
-        onDispose {}
-    }
 
     val firstVisibleItem by remember {
         derivedStateOf {
@@ -174,12 +163,12 @@ fun HeaderWithImageView(
 
         systemUiController.setStatusBarColor(
             color = backgroundProperties.value.color(BACKGROUND),
-            darkIcons = useDarkIcons
+            darkIcons = backgroundProperties.value.color(BACKGROUND) == MaterialTheme.colors.surface
         )
 
         systemUiController.setNavigationBarColor(
             color = if (isSystemInDarkTheme()) MaterialTheme.colors.onSecondary else Color.White,
-            darkIcons = useDarkIcons
+            darkIcons = backgroundProperties.value.color(BACKGROUND) == MaterialTheme.colors.surface
         )
 
         Text(
