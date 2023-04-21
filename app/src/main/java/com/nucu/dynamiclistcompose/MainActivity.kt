@@ -66,8 +66,4 @@ class MainActivity : ComponentActivity() {
         super.onPause()
         jankStats?.isTrackingEnabled = false
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }
