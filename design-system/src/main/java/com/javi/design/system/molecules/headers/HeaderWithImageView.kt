@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -154,11 +155,18 @@ fun HeaderWithImageView(
             modifier = Modifier
                 .fillMaxWidth()
                 .layoutId(backgroundLayoutId)
-                .background(backgroundProperties.value.color(BACKGROUND)),
+                .background(
+                    backgroundProperties.value.color(BACKGROUND)
+                ),
         )
 
         systemUiController.setStatusBarColor(
             color = backgroundProperties.value.color(BACKGROUND),
+            darkIcons = backgroundProperties.value.color(BACKGROUND).value.toLong() != Color.BLACK.toColorLong()
+        )
+
+        systemUiController.setNavigationBarColor(
+            color = if (isSystemInDarkTheme()) MaterialTheme.colors.onSecondary else MaterialTheme.colors.surface,
             darkIcons = backgroundProperties.value.color(BACKGROUND).value.toLong() != Color.BLACK.toColorLong()
         )
 

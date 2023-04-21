@@ -1,8 +1,10 @@
 package com.javi.design.system.molecules
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
@@ -34,7 +36,7 @@ fun NavigationBar(
     BottomNavigation(
         modifier = modifier,
         elevation = 10.dp,
-        backgroundColor = Color.White
+        backgroundColor = if (isSystemInDarkTheme()) MaterialTheme.colors.onSecondary else Color.White
     ) {
         navItems.forEach {
             BottomNavigationItem(
@@ -46,8 +48,12 @@ fun NavigationBar(
                 icon = { Icon(imageVector = it.icon ?: Icons.Default.Star, contentDescription = it.name) },
                 label = { Text(text = it.name) },
                 enabled = true,
-                selectedContentColor = Color.Black,
-                unselectedContentColor = Color.LightGray
+                selectedContentColor = if (isSystemInDarkTheme()) Color.White.copy(alpha = 0.7f) else Color.Black,
+                unselectedContentColor = if (isSystemInDarkTheme()) {
+                    MaterialTheme.colors.onSecondary.copy(alpha = 0.4f)
+                } else {
+                    Color.LightGray
+                }
             )
         }
     }

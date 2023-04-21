@@ -45,7 +45,7 @@ fun MessageComponentView(
                 border = BorderStroke(1.dp, MaterialTheme.colors.secondary.copy(alpha = 0.1f)),
                 shape = RoundedCornerShape(16.dp)
             )
-            .background(MaterialTheme.colors.onPrimary.copy(alpha = 0.5f))
+            .background(MaterialTheme.colors.onSecondary.copy(alpha = 0.5f))
             .asShowCaseTarget(
                 index = componentIndex,
                 style = ShowCaseStyle.Default.copy(
