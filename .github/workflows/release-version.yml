@@ -30,7 +30,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     
-    - name: Build Debug APK
+    - name: Build Release APK
       run: ./gradlew assembleRelease
       
     - name: Expose version labels
