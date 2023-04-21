@@ -48,14 +48,8 @@ internal class RenderProcessor(
 
     private fun make(resolver: Resolver) {
         logger.warn("Start processing!")
-
-        logger.warn("Make FactoryModule...")
         makeFactories(resolver)
-
-        logger.warn("Make RenderModule...")
         makeRenderModule(resolver)
-
-        logger.warn("Make Components...")
         makeComponents(resolver)
     }
 
@@ -74,9 +68,11 @@ internal class RenderProcessor(
                 }
             }
 
-            renderModuleCreator.make(
-                validatedSymbols = symbols
-            )
+            if (symbols.isNotEmpty()) {
+                renderModuleCreator.make(
+                    validatedSymbols = symbols
+                )
+            }
         }
     }
 
@@ -86,13 +82,17 @@ internal class RenderProcessor(
                 .getSymbolsWithAnnotation(it, inDepth = true)
                 .toList()
 
-            componentsCreator.make(
-                validatedSymbols = getValidSymbols(resolved),
-                names = names
-            )
+            if (resolved.isNotEmpty()) {
+                componentsCreator.make(
+                    validatedSymbols = getValidSymbols(resolved),
+                    names = names
+                )
+            }
         }
 
-        moshiModuleCreator.make(names)
+        if (names.isNotEmpty()) {
+            moshiModuleCreator.make(names)
+        }
     }
 
     private fun makeFactories(resolver: Resolver) {
@@ -101,9 +101,11 @@ internal class RenderProcessor(
                 .getSymbolsWithAnnotation(name)
                 .toList()
 
-            factoryModuleCreator.make(
-                validatedSymbols = getValidSymbols(resolved)
-            )
+            if (resolved.isNotEmpty()) {
+                factoryModuleCreator.make(
+                    validatedSymbols = getValidSymbols(resolved)
+                )
+            }
         }
     }
 
