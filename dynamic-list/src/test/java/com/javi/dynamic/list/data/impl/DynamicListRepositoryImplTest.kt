@@ -24,7 +24,7 @@ import org.mockito.kotlin.whenever
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(MockitoJUnitRunner::class)
-class dynamicListRepositoryImplTest {
+class DynamicListRepositoryImplTest {
 
     @Mock
     lateinit var dynamicListDataSourceApi: DynamicListDataSourceApi
@@ -71,7 +71,11 @@ class dynamicListRepositoryImplTest {
             defaultDataContentModel
         )
 
-        dynamicListRepositoryImpl.get(0, dynamicListRequestModel).test {
+        dynamicListRepositoryImpl.get(
+            page = 0,
+            requestModel = dynamicListRequestModel,
+            fromRemote = false
+        ).test {
             assert(awaitItem() is DynamicListUIState.SuccessAction)
             cancelAndConsumeRemainingEvents()
         }

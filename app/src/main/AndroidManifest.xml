@@ -38,10 +38,10 @@
 
         </activity>
 
-        <!-- Need for Jetpack Compose testing -->
+        <!-- Need for Jetpack Compose testing
         <activity android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity" />
         <activity android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity" />
-        <activity android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity" />
+        <activity android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity" />-->
 
     </application>
 

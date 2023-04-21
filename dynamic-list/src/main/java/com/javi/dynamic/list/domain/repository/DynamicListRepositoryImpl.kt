@@ -18,10 +18,15 @@ class DynamicListRepositoryImpl @Inject constructor(
 
     override suspend fun get(
         page: Int,
-        requestModel: DynamicListRequestModel
+        requestModel: DynamicListRequestModel,
+        fromRemote: Boolean
     ): Flow<DynamicListUIState> = flow {
 
-        val componentModel = dynamicListMockResponseApi.getRemoteData(requestModel)
+        val componentModel = if (fromRemote) {
+                dynamicListMockResponseApi.getRemoteData(requestModel)
+            } else {
+                dynamicListMockResponseApi.getDataFromAsset(requestModel)
+            }
 
         val header = componentModel.header.mapNotNull { component ->
 

@@ -9,5 +9,6 @@ interface DynamicListRepository {
     suspend fun get(
         page: Int,
         requestModel: DynamicListRequestModel,
+        fromRemote: Boolean = true
     ): Flow<DynamicListUIState>
 }

@@ -157,15 +157,9 @@ fun HeaderWithImageView(
                 .background(backgroundProperties.value.color(BACKGROUND)),
         )
 
-        val useDarkIcons by remember {
-            derivedStateOf {
-                backgroundProperties.value.color(BACKGROUND).value.toLong() == Color.BLACK.toColorLong()
-            }
-        }
-
         systemUiController.setStatusBarColor(
             color = backgroundProperties.value.color(BACKGROUND),
-            darkIcons = !useDarkIcons
+            darkIcons = backgroundProperties.value.color(BACKGROUND).value.toLong() != Color.BLACK.toColorLong()
         )
 
         Text(

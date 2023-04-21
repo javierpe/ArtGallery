@@ -24,7 +24,6 @@ private val LightColorPalette = lightColors(
     secondary = SecondaryLight,
     background = BackgroundLight,
     surface = BackgroundLight,
-    onPrimary = SkeletonLight,
     onSecondary = backgroundDynamicListContainerColorLight
 )
 
