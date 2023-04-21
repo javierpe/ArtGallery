@@ -20,9 +20,11 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.javi.design.system.R
 
 @Composable
-fun LoaderView() {
+fun LoaderView(
+    modifier: Modifier = Modifier
+) {
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier
     ) {
         val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.loader))
         LottieAnimation(

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
@@ -14,8 +15,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.javi.design.system.atoms.ErrorView
@@ -66,7 +69,11 @@ fun ContextViewContent(
             dynamicListListener.invoke(
                 DynamicListStateListener.OnStartLoading
             )
-            LoaderView()
+            Box(modifier = Modifier.fillMaxSize()) {
+                LoaderView(
+                    modifier = Modifier.align(Alignment.Center).size(120.dp)
+                )
+            }
         }
 
         is DynamicListUIState.ErrorAction -> {
