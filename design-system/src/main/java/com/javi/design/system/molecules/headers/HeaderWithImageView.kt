@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -141,6 +142,7 @@ fun HeaderWithImageView(
      * For third mode check motion_scene.json5
      */
 
+
     val colorStart = if (isSystemInDarkTheme()) {
         MaterialTheme.colors.surface
     } else {
@@ -174,12 +176,12 @@ fun HeaderWithImageView(
 
         systemUiController.setStatusBarColor(
             color = backgroundProperties.value.color(BACKGROUND),
-            darkIcons = backgroundProperties.value.color(BACKGROUND).value.toLong() != Color.Black.value.toLong()
+            darkIcons = useDarkIcons
         )
 
         systemUiController.setNavigationBarColor(
-            color = if (isSystemInDarkTheme()) MaterialTheme.colors.onSecondary else MaterialTheme.colors.surface,
-            darkIcons = backgroundProperties.value.color(BACKGROUND).value.toLong() != Color.Black.value.toLong()
+            color = if (isSystemInDarkTheme()) MaterialTheme.colors.onSecondary else Color.White,
+            darkIcons = useDarkIcons
         )
 
         Text(
