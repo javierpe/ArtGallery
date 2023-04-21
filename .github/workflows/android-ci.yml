@@ -46,24 +46,3 @@ jobs:
       
       - name: Unit Test
         run: ./gradlew testDebugUnitTest
-        
-      - name: Upload Test Reports Folder
-        uses: actions/upload-artifact@v3
-        with:
-          name: reports
-          path: app/build/test-results/report.txt # path to where the xml test results are stored
-        
-  report:
-    
-    runs-on: ubuntu-latest
-    
-    needs: test
-    if: ${{ always() }}
-    steps:
-      - name: Download Test Reports Folder
-        uses: actions/download-artifact@v3
-        with:
-          name: reports
-          path: app/build/test-results/report.txt
-      - name: Android Test Report
-        uses: asadmansr/android-test-report-action@v1.2.0
