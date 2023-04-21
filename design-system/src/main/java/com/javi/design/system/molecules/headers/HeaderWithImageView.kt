@@ -1,6 +1,5 @@
 package com.javi.design.system.molecules.headers
 
-import android.graphics.Color
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -18,6 +17,8 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.style.TextAlign
@@ -25,7 +26,6 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
-import androidx.core.graphics.toColorLong
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.javi.design.system.atoms.BackButtonComponentView
 import com.javi.design.system.data.BACKGROUND
@@ -56,7 +56,7 @@ fun HeaderWithImageView(
 
     DisposableEffect(systemUiController, useDarkIcons) {
         systemUiController.setNavigationBarColor(
-            color = androidx.compose.ui.graphics.Color.Transparent,
+            color = Color.Transparent,
             darkIcons = useDarkIcons
         )
 
@@ -141,9 +141,21 @@ fun HeaderWithImageView(
      * For third mode check motion_scene.json5
      */
 
+    val colorStart = if (isSystemInDarkTheme()) {
+        MaterialTheme.colors.surface
+    } else {
+        Color.Black
+    }
+
+    val colorEnd = if (isSystemInDarkTheme()) {
+        MaterialTheme.colors.onSecondary
+    } else {
+        Color.White
+    }
+
     MotionLayout(
-        start = constraintSetStart(),
-        end = constraintSetEnd(),
+        start = constraintSetStart(colorStart),
+        end = constraintSetEnd(colorEnd),
         progress = progress,
         modifier = modifier.height(motionHeight)
     ) {
@@ -162,12 +174,12 @@ fun HeaderWithImageView(
 
         systemUiController.setStatusBarColor(
             color = backgroundProperties.value.color(BACKGROUND),
-            darkIcons = backgroundProperties.value.color(BACKGROUND).value.toLong() != Color.BLACK.toColorLong()
+            darkIcons = backgroundProperties.value.color(BACKGROUND).value.toLong() != Color.Black.value.toLong()
         )
 
         systemUiController.setNavigationBarColor(
             color = if (isSystemInDarkTheme()) MaterialTheme.colors.onSecondary else MaterialTheme.colors.surface,
-            darkIcons = backgroundProperties.value.color(BACKGROUND).value.toLong() != Color.BLACK.toColorLong()
+            darkIcons = backgroundProperties.value.color(BACKGROUND).value.toLong() != Color.Black.value.toLong()
         )
 
         Text(
@@ -188,7 +200,10 @@ fun HeaderWithImageView(
     }
 }
 
-private fun constraintSetStart() = ConstraintSet(
+@Suppress("ImplicitDefaultLocale", "MagicNumber")
+fun Int.hexToString() = String.format("#%06X", 0xFFFFFF and this)
+
+private fun constraintSetStart(background: Color) = ConstraintSet(
     """ {
 	background: { 
 		start: ['parent', 'start'],
@@ -196,7 +211,7 @@ private fun constraintSetStart() = ConstraintSet(
 		top: ['parent', 'top'],
         height: $MAX_HEIGHT,
         custom: {
-          background: '#000000'
+          background: '${background.toArgb().hexToString()}'
         }
 	},
 	title: {
@@ -218,7 +233,7 @@ private fun constraintSetStart() = ConstraintSet(
 } """
 )
 
-private fun constraintSetEnd() = ConstraintSet(
+private fun constraintSetEnd(background: Color) = ConstraintSet(
     """ {
 	background: { 
 		start: ['parent', 'start'],
@@ -226,7 +241,7 @@ private fun constraintSetEnd() = ConstraintSet(
 		top: ['parent', 'top'],
         height: $MIN_HEIGHT,
         custom: {
-          background: '#FFFFFF'
+          background: '${background.toArgb().hexToString()}'
         }
 	},
 	title: {
