@@ -49,10 +49,9 @@ jobs:
         
       - name: Upload Test Reports Folder
         uses: actions/upload-artifact@v3
-        if: ${{ always() }} # IMPORTANT: Upload reports regardless of status
         with:
           name: reports
-          path: app/build/test-results # path to where the xml test results are stored
+          path: app/build/test-results/report.txt # path to where the xml test results are stored
         
   report:
     
@@ -65,6 +64,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: reports
-          path: app/build/test-results
+          path: app/build/test-results/report.txt
       - name: Android Test Report
         uses: asadmansr/android-test-report-action@v1.2.0
