@@ -1,4 +1,4 @@
-package com.javi.dynamic.list.data.factories
+package com.javi.dynamic.list.presentation.factories
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -13,11 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.javi.dynamic.list.data.factories.base.DynamicListFactory
 import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.presentation.components.message.MessageComponentView
 import com.javi.dynamic.list.presentation.components.message.MessageModel
+import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import com.javi.render.processor.core.RenderType
 import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject

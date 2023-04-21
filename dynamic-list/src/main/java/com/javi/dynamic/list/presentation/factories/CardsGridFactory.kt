@@ -1,4 +1,4 @@
-package com.javi.dynamic.list.data.factories
+package com.javi.dynamic.list.presentation.factories
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -14,11 +14,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.javi.design.system.molecules.VerticalGrid
-import com.javi.dynamic.list.data.factories.base.DynamicListFactory
 import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.presentation.components.cardsGrid.CardsGridComponentViewScreen
 import com.javi.dynamic.list.presentation.components.cardsGrid.CardsGridModel
+import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import com.javi.product.detail.api.GetProductDetailPageUseCase
 import com.javi.render.processor.core.RenderType
 import com.javi.render.processor.core.annotations.factory.AdapterFactory

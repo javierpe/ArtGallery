@@ -16,11 +16,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.javi.design.system.animations.BlinkAnimation
 import com.javi.design.system.molecules.showCase.ShowCaseState
 import com.javi.dynamic.list.data.actions.ScrollAction
-import com.javi.dynamic.list.data.factories.base.DynamicListFactory
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListElement
 import com.javi.dynamic.list.data.models.DynamicListObject
 import com.javi.dynamic.list.data.models.DynamicListShowCaseModel
+import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import com.javi.dynamic.list.presentation.ui.base.DynamicListScreen
 import com.javi.render.processor.core.RenderType
 import kotlinx.coroutines.CoroutineDispatcher

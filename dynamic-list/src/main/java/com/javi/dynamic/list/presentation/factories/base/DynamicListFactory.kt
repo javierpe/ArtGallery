@@ -1,4 +1,4 @@
-package com.javi.dynamic.list.data.factories.base
+package com.javi.dynamic.list.presentation.factories.base
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

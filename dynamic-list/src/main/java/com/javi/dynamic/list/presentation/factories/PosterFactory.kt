@@ -1,4 +1,4 @@
-package com.javi.dynamic.list.data.factories
+package com.javi.dynamic.list.presentation.factories
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -13,29 +13,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import com.javi.dynamic.list.data.factories.base.DynamicListFactory
 import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
-import com.javi.dynamic.list.presentation.components.banner.BannerComponentViewScreen
-import com.javi.dynamic.list.presentation.components.banner.BannerModel
+import com.javi.dynamic.list.presentation.components.poster.PosterComponentScreenView
+import com.javi.dynamic.list.presentation.components.poster.PosterModel
+import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import com.javi.product.detail.api.GetProductDetailPageUseCase
 import com.javi.render.processor.core.RenderType
 import com.javi.render.processor.core.annotations.factory.AdapterFactory
 import javax.inject.Inject
 
-const val BANNER_COMPONENT_TAG = "banner_component"
+const val POSTER_COMPONENT_TAG = "poster_component_tag"
 
 @AdapterFactory
-class BannerFactory @Inject constructor(
+class PosterFactory @Inject constructor(
     private val getProductDetailScreenUseCase: GetProductDetailPageUseCase
 ) : DynamicListFactory {
 
-    override val renders: List<RenderType>
-        get() = listOf(
-            RenderType.BANNER
-        )
-
-    override val hasShowCaseConfigured = true
+    override val renders: List<RenderType> = listOf(RenderType.POSTER)
 
     @Composable
     override fun CreateComponent(
@@ -44,17 +39,14 @@ class BannerFactory @Inject constructor(
         componentInfo: ComponentInfo
     ) {
         val model = remember {
-            derivedStateOf {
-                component.resource as BannerModel
-            }
+            derivedStateOf { component.resource as PosterModel }
         }
-        BannerComponentViewScreen(
-            modifier = modifier.testTag(BANNER_COMPONENT_TAG),
-            model = model.value,
-            componentIndex = component.index,
-            showCaseState = componentInfo.showCaseState
+
+        PosterComponentScreenView(
+            modifier = Modifier.testTag(POSTER_COMPONENT_TAG),
+            model = model.value
         ) {
-            componentInfo.dynamicListObject.destinationsNavigator?.navigate(
+            componentInfo.navigator()?.navigate(
                 getProductDetailScreenUseCase(it)
             )
         }
@@ -64,10 +56,10 @@ class BannerFactory @Inject constructor(
     override fun CreateSkeleton() {
         Box(
             modifier = Modifier
-                .testTag("skeleton")
-                .clip(RoundedCornerShape(16.dp))
+                .height(450.dp)
                 .fillMaxWidth()
-                .height(150.dp)
+                .testTag("skeleton")
+                .clip(RoundedCornerShape(10.dp))
                 .background(MaterialTheme.colors.primary)
         )
     }

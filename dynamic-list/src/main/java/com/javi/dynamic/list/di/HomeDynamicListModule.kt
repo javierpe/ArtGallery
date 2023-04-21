@@ -1,7 +1,7 @@
 package com.javi.dynamic.list.di
 
 import com.javi.dynamic.list.data.controllers.DefaultDynamicListController
-import com.javi.dynamic.list.data.factories.base.DynamicListFactory
+import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -2,11 +2,11 @@ package com.javi.dynamic.list.domain.useCases
 
 import com.javi.api.TooltipPreferencesApi
 import com.javi.dynamic.list.data.actions.DynamicListUIState
-import com.javi.dynamic.list.data.factories.base.DynamicListFactory
 import com.javi.dynamic.list.data.models.DynamicListContainer
 import com.javi.dynamic.list.data.models.DynamicListElement
 import com.javi.dynamic.list.data.models.DynamicListShowCaseModel
 import com.javi.dynamic.list.data.useCases.GetDynamicListShowCaseUseCase
+import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import kotlinx.coroutines.flow.first
 import java.util.LinkedList
 import java.util.Queue

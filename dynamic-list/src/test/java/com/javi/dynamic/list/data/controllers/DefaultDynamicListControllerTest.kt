@@ -1,6 +1,6 @@
 package com.javi.dynamic.list.data.controllers
 
-import com.javi.dynamic.list.data.factories.BannerFactory
+import com.javi.dynamic.list.presentation.factories.BannerFactory
 import com.javi.product.detail.api.GetProductDetailPageUseCase
 import com.javi.render.processor.core.RenderType
 import kotlinx.coroutines.Dispatchers

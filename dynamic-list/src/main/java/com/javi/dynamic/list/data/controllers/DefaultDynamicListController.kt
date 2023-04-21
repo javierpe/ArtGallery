@@ -1,7 +1,7 @@
 package com.javi.dynamic.list.data.controllers
 
-import com.javi.dynamic.list.data.factories.base.DynamicListFactory
 import com.javi.dynamic.list.data.models.ComponentItemModel
+import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import com.javi.render.processor.core.RenderType
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
