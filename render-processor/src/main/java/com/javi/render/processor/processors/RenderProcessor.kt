@@ -35,19 +35,14 @@ internal class RenderProcessor(
     private val names = mutableListOf<ModelClassProcessed>()
     private val renders = mutableListOf<String>()
 
-    override fun finish() {
-        names.clear()
-        super.finish()
-    }
-
     @OptIn(ExperimentalTime::class)
     override fun process(resolver: Resolver): List<KSAnnotated> {
         val elapsedTime = measureTime {
             make(resolver)
         }
 
-        logger.warn("Finished in ${elapsedTime.toJavaDuration().seconds}")
-        finish()
+        logger.warn("Finished in ${elapsedTime.toJavaDuration().toMillis()}ms")
+        logger.warn("===========================")
         return emptyList()
     }
 
@@ -70,8 +65,6 @@ internal class RenderProcessor(
                 .getSymbolsWithAnnotation(module)
                 .toList()
 
-            logger.warn("Found ${resolved.size} factories!")
-
             val symbols = getValidSymbols(resolved)
 
             // Map arguments
@@ -92,8 +85,6 @@ internal class RenderProcessor(
             val resolved = resolver
                 .getSymbolsWithAnnotation(it, inDepth = true)
                 .toList()
-
-            logger.warn("Found ${resolved.size} renders!")
 
             componentsCreator.make(
                 validatedSymbols = getValidSymbols(resolved),

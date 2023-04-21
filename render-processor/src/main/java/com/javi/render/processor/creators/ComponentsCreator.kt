@@ -42,7 +42,7 @@ class ComponentsCreator(
         validatedSymbols: List<KSClassDeclaration>,
         names: MutableList<ModelClassProcessed>
     ) {
-        logger.warn("Component Module: $names")
+        logger.warn("Components: $names")
 
         val fileSpec = FileSpec.builder(
             packageName = PACKAGE_FACTORIES,

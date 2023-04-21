@@ -26,7 +26,7 @@ class RenderModuleCreator(
     fun make(
         validatedSymbols: List<KSClassDeclaration>
     ) {
-        logger.warn("Factories: $validatedSymbols")
+        logger.warn("Render Factories: $validatedSymbols")
 
         val fileSpec = FileSpec.builder(
             packageName = PACKAGE_DI,
