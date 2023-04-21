@@ -65,5 +65,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: reports
+          path: app/build/test-results
       - name: Android Test Report
         uses: asadmansr/android-test-report-action@v1.2.0
