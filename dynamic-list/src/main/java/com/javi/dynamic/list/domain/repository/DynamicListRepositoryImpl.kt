@@ -21,12 +21,11 @@ class DynamicListRepositoryImpl @Inject constructor(
         requestModel: DynamicListRequestModel,
         fromRemote: Boolean
     ): Flow<DynamicListUIState> = flow {
-
         val componentModel = if (fromRemote) {
-                dynamicListMockResponseApi.getRemoteData(requestModel)
-            } else {
-                dynamicListMockResponseApi.getDataFromAsset(requestModel)
-            }
+            dynamicListMockResponseApi.getRemoteData(requestModel)
+        } else {
+            dynamicListMockResponseApi.getDataFromAsset(requestModel)
+        }
 
         val header = componentModel.header.mapNotNull { component ->
 

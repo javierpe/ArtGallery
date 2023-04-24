@@ -16,7 +16,7 @@ private const val SHOW_CASE_TAG = "show-case"
 
 private const val GESTURE_MARGIN = 5
 private const val TIMEOUT: Long = 30_000
-private const val REPEAT_TIMES = 3
+private const val REPEAT_TIMES = 10
 
 @RunWith(AndroidJUnit4ClassRunner::class)
 class ScrollDynamicListBenchmark {

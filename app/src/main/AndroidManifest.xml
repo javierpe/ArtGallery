@@ -15,7 +15,7 @@
 
         <profileable
             android:shell="true"
-            tools:targetApi="q" />
+            tools:targetApi="33" />
 
         <activity
             android:name=".MainActivity"
