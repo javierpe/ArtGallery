@@ -37,17 +37,19 @@ fun MutableState<DynamicListRequestModel>.update(
     )
 }
 
-sealed class DynamicListStateListener {
+sealed class DynamicListState {
 
-    object OnStartLoading : DynamicListStateListener()
+    object None : DynamicListState()
 
-    object OnContextLoaded : DynamicListStateListener()
+    object OnStartLoading : DynamicListState()
+
+    object OnContextLoaded : DynamicListState()
 
     class OnHeaderItemsLoaded(
         val components: List<ComponentItemModel>
-    ) : DynamicListStateListener()
+    ) : DynamicListState()
 
     class OnBodyItemsLoaded(
         val components: List<ComponentItemModel>
-    ) : DynamicListStateListener()
+    ) : DynamicListState()
 }

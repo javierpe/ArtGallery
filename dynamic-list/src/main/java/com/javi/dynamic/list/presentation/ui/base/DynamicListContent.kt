@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.javi.design.system.molecules.showCase.ShowCaseState
+import com.javi.dynamic.list.data.actions.ScrollAction
 import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.DynamicListElement
 import com.javi.dynamic.list.data.models.DynamicListObject
@@ -30,7 +31,7 @@ fun DynamicListScreen(
     listState: LazyListState,
     showCaseState: ShowCaseState,
     withVerticalPadding: Boolean = true,
-    onAction: ((com.javi.dynamic.list.data.actions.ScrollAction) -> Unit)? = null
+    onAction: ((ScrollAction) -> Unit)? = null
 ) {
     val metricsStateHolder = rememberMetricsStateHolder()
 

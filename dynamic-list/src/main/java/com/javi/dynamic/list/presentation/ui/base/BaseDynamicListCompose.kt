@@ -48,13 +48,12 @@ fun ContextView(
                 modifier = Modifier.padding(padding)
             ) {
                 ContextViewContent(
-                    headerAdapterController = viewModel.headerAdapterController,
-                    bodyAdapterController = viewModel.bodyAdapterController,
+                    dynamicListComposeController = viewModel.dynamicListComposeController,
                     showCaseState = showCaseState,
                     bodyListState = bodyLazyListState,
                     requestModel = requestModel,
                     destinationsNavigator = destinationsNavigator,
-                    forceReload = state == null,
+                    forceReload = state == DynamicListState.None,
                     dynamicListListener = {
                         viewModel.sendDynamicListState(it)
                     }

@@ -9,5 +9,4 @@ import javax.inject.Inject
 class PlacesPageViewModel @Inject constructor() : ContextViewModel() {
 
     override val context: ContextType = ContextType.PLACES
-
 }

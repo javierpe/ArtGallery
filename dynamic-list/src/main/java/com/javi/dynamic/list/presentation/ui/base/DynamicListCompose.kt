@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -27,7 +28,8 @@ import com.javi.design.system.molecules.showCase.ShowCaseState
 import com.javi.dynamic.list.data.actions.DynamicListUIState
 import com.javi.dynamic.list.data.actions.ScrollAction
 import com.javi.dynamic.list.data.actions.TargetAction
-import com.javi.dynamic.list.data.controllers.DynamicListComposeController
+import com.javi.dynamic.list.data.actions.sendAction
+import com.javi.dynamic.list.data.controllers.DynamicListComposeControllerImpl
 import com.javi.dynamic.list.data.models.DynamicListObject
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.presentation.viewModels.DynamicListViewModel
@@ -36,17 +38,18 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Suppress("LongParameterList")
 @Composable
 fun ContextViewContent(
-    bodyAdapterController: DynamicListComposeController? = null,
-    headerAdapterController: DynamicListComposeController? = null,
+    dynamicListComposeController: DynamicListComposeControllerImpl? = null,
     showCaseState: ShowCaseState,
     bodyListState: LazyListState,
     requestModel: DynamicListRequestModel,
     destinationsNavigator: DestinationsNavigator? = null,
-    dynamicListListener: (DynamicListStateListener) -> Unit,
+    dynamicListListener: (DynamicListState) -> Unit,
     forceReload: Boolean = false,
     dynamicListViewModel: DynamicListViewModel = hiltViewModel()
 ) {
-    val uiState by dynamicListViewModel.dynamicListAction.collectAsStateWithLifecycle()
+    val uiState by dynamicListViewModel.dynamicListAction.collectAsStateWithLifecycle(
+        lifecycleOwner = LocalLifecycleOwner.current
+    )
 
     LaunchedEffect(forceReload) {
         if (forceReload) {
@@ -57,21 +60,22 @@ fun ContextViewContent(
     when (uiState) {
         is DynamicListUIState.SkeletonAction -> {
             dynamicListListener.invoke(
-                DynamicListStateListener.OnStartLoading
+                DynamicListState.OnStartLoading
             )
-            bodyAdapterController?.dispatchSkeletons(
+            dynamicListComposeController?.ComposeSkeletons(
                 (uiState as DynamicListUIState.SkeletonAction).renderTypes
             )
-            bodyAdapterController?.ComposeSkeletons()
         }
 
         is DynamicListUIState.LoadingAction -> {
             dynamicListListener.invoke(
-                DynamicListStateListener.OnStartLoading
+                DynamicListState.OnStartLoading
             )
             Box(modifier = Modifier.fillMaxSize()) {
                 LoaderView(
-                    modifier = Modifier.align(Alignment.Center).size(120.dp)
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .size(120.dp)
                 )
             }
         }
@@ -86,33 +90,14 @@ fun ContextViewContent(
         }
 
         is DynamicListUIState.SuccessAction -> {
+            val successState = (uiState as DynamicListUIState.SuccessAction)
             DynamicListSuccess(
-                action = (uiState as DynamicListUIState.SuccessAction),
-                headerComposeController = headerAdapterController,
-                bodyComposeController = bodyAdapterController,
+                action = successState,
+                dynamicListComposeController = dynamicListComposeController,
                 showCaseState = showCaseState,
                 bodyListState = bodyListState,
-                destinationsNavigator = destinationsNavigator
-            )
-
-            if (headerAdapterController?.data?.isNotEmpty() == true) {
-                dynamicListListener.invoke(
-                    DynamicListStateListener.OnHeaderItemsLoaded(
-                        components = headerAdapterController.data
-                    )
-                )
-            }
-
-            if (bodyAdapterController?.data?.isNotEmpty() == true) {
-                dynamicListListener.invoke(
-                    DynamicListStateListener.OnBodyItemsLoaded(
-                        components = bodyAdapterController.data
-                    )
-                )
-            }
-
-            dynamicListListener.invoke(
-                DynamicListStateListener.OnContextLoaded
+                destinationsNavigator = destinationsNavigator,
+                dynamicListListener = dynamicListListener
             )
         }
 
@@ -126,13 +111,11 @@ fun ContextViewContent(
 fun DynamicListSuccess(
     action: DynamicListUIState.SuccessAction,
     destinationsNavigator: DestinationsNavigator? = null,
-    headerComposeController: DynamicListComposeController? = null,
-    bodyComposeController: DynamicListComposeController? = null,
+    dynamicListComposeController: DynamicListComposeControllerImpl? = null,
     showCaseState: ShowCaseState,
-    bodyListState: LazyListState
+    bodyListState: LazyListState,
+    dynamicListListener: (DynamicListState) -> Unit,
 ) {
-    bodyComposeController?.dispatchShowCaseSequence(action.showCaseQueue)
-
     val actionBody = remember {
         mutableStateOf<ScrollAction?>(null)
     }
@@ -142,7 +125,7 @@ fun DynamicListSuccess(
     DynamicListLayout(
         widthSizeClass = windowWidthSizeClass.widthSizeClass,
         contentHeader = {
-            headerComposeController?.ComposeHeader(
+            dynamicListComposeController?.ComposeHeader(
                 dynamicListObject = DynamicListObject(
                     widthSizeClass = windowWidthSizeClass.widthSizeClass,
                     destinationsNavigator = destinationsNavigator
@@ -156,7 +139,7 @@ fun DynamicListSuccess(
             }
         },
         contentBody = {
-            bodyComposeController?.ComposeBody(
+            dynamicListComposeController?.ComposeBody(
                 dynamicListObject = DynamicListObject(
                     widthSizeClass = windowWidthSizeClass.widthSizeClass,
                     destinationsNavigator = destinationsNavigator
@@ -172,6 +155,12 @@ fun DynamicListSuccess(
             }
         }
     )
+
+    LaunchedEffect(action) {
+        action.sendAction(dynamicListListener = dynamicListListener)
+    }
+
+    dynamicListComposeController?.dispatchShowCaseSequence(action.showCaseQueue)
 }
 
 @Composable

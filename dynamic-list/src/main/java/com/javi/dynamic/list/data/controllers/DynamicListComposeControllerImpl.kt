@@ -8,7 +8,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -16,54 +15,42 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.javi.design.system.animations.BlinkAnimation
 import com.javi.design.system.molecules.showCase.ShowCaseState
 import com.javi.dynamic.list.data.actions.ScrollAction
-import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListElement
 import com.javi.dynamic.list.data.models.DynamicListObject
 import com.javi.dynamic.list.data.models.DynamicListShowCaseModel
 import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import com.javi.dynamic.list.presentation.ui.base.DynamicListScreen
 import com.javi.render.processor.core.RenderType
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.LinkedList
 import java.util.Queue
 
-abstract class DynamicListComposeController {
+abstract class DynamicListComposeControllerImpl {
 
     abstract val delegates: MutableSet<@JvmSuppressWildcards DynamicListFactory>
-
-    abstract val defaultDispatcher: CoroutineDispatcher
-
-    open fun getMapComponents(): List<ComponentItemModel> = data
-
-    open fun getMapSkeletons(): List<RenderType> = skeletons
 
     private var showCaseFinished = false
 
     private var showCaseSequence: Queue<DynamicListShowCaseModel> = LinkedList()
 
-    var data: List<ComponentItemModel> = mutableStateListOf()
-
-    var skeletons: List<RenderType> = listOf()
-
-    open fun dispatchSkeletons(renderTypes: List<RenderType>) {
-        skeletons = renderTypes
-    }
+    private var skeletons: List<RenderType> = listOf()
 
     fun dispatchShowCaseSequence(sequence: Queue<DynamicListShowCaseModel>) {
         showCaseSequence = sequence
     }
 
     @Composable
-    fun ComposeSkeletons() {
+    fun ComposeSkeletons(
+        skeletonRenderList: List<RenderType>
+    ) {
         BlinkAnimation {
             Column(
                 modifier = Modifier
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                getMapSkeletons().forEach { render ->
+                skeletonRenderList.forEach { render ->
                     delegates.filter { adapterFactory ->
                         adapterFactory.renders.any { renderType ->
                             renderType.value == render.value
