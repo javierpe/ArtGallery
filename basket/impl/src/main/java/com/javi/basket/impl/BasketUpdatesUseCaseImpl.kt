@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.SharedFlow
 import javax.inject.Inject
 
 class BasketUpdatesUseCaseImpl @Inject constructor(
-    private val localBasket: LocalBasket
+    private val basketUpdater: BasketUpdater
 ) : BasketUpdatesUseCase {
 
     override val basketProducts: SharedFlow<List<ProductImageModel>>
-        get() = localBasket.basketProducts
+        get() = basketUpdater.basketProducts
 }

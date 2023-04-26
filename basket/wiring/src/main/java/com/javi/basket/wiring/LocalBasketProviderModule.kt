@@ -1,6 +1,6 @@
 package com.javi.basket.wiring
 
-import com.javi.basket.impl.LocalBasket
+import com.javi.basket.impl.BasketUpdater
 import com.javi.basket.impl.di.IODispatcher
 import dagger.Module
 import dagger.Provides
@@ -20,5 +20,7 @@ object LocalBasketProviderModule {
 
     @Provides
     @Singleton
-    fun provideLocalBasket() = LocalBasket()
+    fun provideLocalBasket(
+        @IODispatcher coroutineDispatcher: CoroutineDispatcher
+    ) = BasketUpdater(coroutineDispatcher)
 }
