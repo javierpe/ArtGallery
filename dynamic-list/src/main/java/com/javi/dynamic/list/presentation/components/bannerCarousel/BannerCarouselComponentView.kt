@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.javi.data.ProductImageModel
 import com.javi.design.system.data.showCase.ShapeType
 import com.javi.design.system.data.showCase.ShowCaseStrategy
 import com.javi.design.system.molecules.BannerImageView
@@ -34,6 +35,8 @@ fun BannerCarouselComponentViewScreen(
     componentIndex: Int,
     showCaseState: ShowCaseState,
     widthSizeClass: WindowWidthSizeClass? = null,
+    onAdd: (ProductImageModel) -> Unit,
+    onDecrement: (ProductImageModel) -> Unit,
     onProductDetail: (String) -> Unit
 ) {
     BannerCarouselComponentView(
@@ -43,9 +46,10 @@ fun BannerCarouselComponentViewScreen(
         componentIndex = componentIndex,
         showCaseState = showCaseState,
         isExpandedScreen = widthSizeClass == WindowWidthSizeClass.Expanded,
-    ) {
-        onProductDetail(it)
-    }
+        onAdd = onAdd,
+        onDecrement = onDecrement,
+        onProductDetail = { onProductDetail(it) }
+    )
 }
 
 @Suppress("LongParameterList")
@@ -56,7 +60,9 @@ fun BannerCarouselComponentView(
     images: List<BannerModel>,
     componentIndex: Int,
     showCaseState: ShowCaseState,
-    onClickAction: (String) -> Unit,
+    onAdd: (ProductImageModel) -> Unit,
+    onDecrement: (ProductImageModel) -> Unit,
+    onProductDetail: (String) -> Unit,
 ) {
     val height = if (isExpandedScreen) {
         200.dp
@@ -110,12 +116,12 @@ fun BannerCarouselComponentView(
                     .height(height)
                     .width(width),
                 imageURL = item.product.imageURL,
-                onClickAction = {
-                    onClickAction(item.product.imageURL)
-                },
+                onClickAction = { onProductDetail(item.product.imageURL) },
                 quantity = item.product.quantity,
                 title = item.bannerInfo?.title.orEmpty(),
-                description = item.bannerInfo?.description.orEmpty()
+                description = item.bannerInfo?.description.orEmpty(),
+                onDecrement = { onDecrement(item.product) },
+                onAdd = { onAdd(item.product) }
             )
         }
     }

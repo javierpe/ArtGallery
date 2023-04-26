@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
@@ -40,14 +38,9 @@ class MessageFactory @Inject constructor() : DynamicListFactory {
         component: ComponentItemModel,
         componentInfo: ComponentInfo
     ) {
-        val model = remember {
-            derivedStateOf {
-                (component.resource as MessageModel).message
-            }
-        }
         MessageComponentView(
             modifier = modifier.testTag(MESSAGE_COMPONENT_TAG),
-            message = model.value,
+            message = (component.resource as MessageModel).message,
             componentIndex = component.index,
             componentInfo.showCaseState
         )

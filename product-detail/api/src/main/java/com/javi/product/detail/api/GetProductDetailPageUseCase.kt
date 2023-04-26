@@ -10,6 +10,6 @@ interface GetProductDetailPageUseCase {
     val navGraph: NavGraphSpec
 
     operator fun invoke(
-        imageUrl: String
+        imageURL: String
     ): Direction
 }

@@ -7,12 +7,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.javi.basket.api.AddProductToBasketUseCase
+import com.javi.basket.api.DecrementProductOnBasketUseCase
 import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.presentation.components.banner.BannerComponentViewScreen
@@ -27,7 +27,9 @@ const val BANNER_COMPONENT_TAG = "banner_component"
 
 @AdapterFactory
 class BannerFactory @Inject constructor(
-    private val getProductDetailScreenUseCase: GetProductDetailPageUseCase
+    private val getProductDetailScreenUseCase: GetProductDetailPageUseCase,
+    private val addProductToBasketUseCase: AddProductToBasketUseCase,
+    private val decrementProductOnBasketUseCase: DecrementProductOnBasketUseCase
 ) : DynamicListFactory {
 
     override val renders: List<RenderType>
@@ -43,16 +45,13 @@ class BannerFactory @Inject constructor(
         component: ComponentItemModel,
         componentInfo: ComponentInfo
     ) {
-        val model = remember {
-            derivedStateOf {
-                component.resource as BannerModel
-            }
-        }
         BannerComponentViewScreen(
             modifier = modifier.testTag(BANNER_COMPONENT_TAG),
-            model = model.value,
+            model = component.resource as BannerModel,
             componentIndex = component.index,
-            showCaseState = componentInfo.showCaseState
+            showCaseState = componentInfo.showCaseState,
+            onAdd = { addProductToBasketUseCase(it) },
+            onDecrement = { decrementProductOnBasketUseCase(it) }
         ) {
             componentInfo.dynamicListObject.destinationsNavigator?.navigate(
                 getProductDetailScreenUseCase(it)

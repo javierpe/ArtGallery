@@ -2,19 +2,39 @@ package com.javi.dynamic.list.data.extensions
 
 import com.javi.data.ProductImageModel
 import com.javi.dynamic.list.data.actions.DynamicListUIState
-import com.javi.dynamic.list.data.models.ComponentItemModel
-import com.javi.dynamic.list.data.session.SessionAware
+import com.javi.dynamic.list.data.updater.ProductUpdater
+import com.javi.dynamic.list.data.updater.ProductVisitor
+import com.javi.dynamic.list.presentation.components.banner.BannerModel
+import com.javi.dynamic.list.presentation.components.bannerCarousel.BannerCarouselModel
+import com.javi.dynamic.list.presentation.components.card.CardsModel
 
-fun DynamicListUIState.SuccessAction.propagateBasketProducts(
+internal fun Any.accept(visitor: ProductVisitor): Any {
+    return when (this) {
+        is BannerModel -> copy(product = visitor.visitSingleProduct(this.product))
+        is CardsModel -> copy(cardElements = visitor.visitCardsModel(this.cardElements))
+        is BannerCarouselModel -> copy(banners = visitor.visitBannerCarouselModel(this.banners))
+        else -> this
+    }
+}
+
+fun DynamicListUIState.SuccessAction.updateProducts(
     basketProducts: List<ProductImageModel>
 ): DynamicListUIState.SuccessAction {
-    val updatedBody = container.body.map { componentItemModel ->
-        componentItemModel.updateSession(basketProducts)
+    val productUpdater = ProductUpdater(
+        basketProducts
+    )
+
+    val updatedBody = container.body.flatMap { element ->
+        listOf(element.copy(resource = element.resource.accept(productUpdater)))
     }
 
-    val updateDynamicListElementBody = body.map { dynamicListElement ->
-        dynamicListElement.copy(
-            componentItemModel = dynamicListElement.componentItemModel.updateSession(basketProducts)
+    val updateDynamicListElementBody = body.flatMap { element ->
+        listOf(
+            updatedBody.firstOrNull { component ->
+                component.index == element.componentItemModel.index
+            }?.let {
+                element.copy(componentItemModel = it)
+            } ?: element
         )
     }
 
@@ -24,12 +44,4 @@ fun DynamicListUIState.SuccessAction.propagateBasketProducts(
         header = header,
         showCaseQueue = showCaseQueue
     )
-}
-
-fun ComponentItemModel.updateSession(basketProducts: List<ProductImageModel>): ComponentItemModel {
-    return if (resource is SessionAware<*>) {
-        copy(resource = resource.updateProducts(basketProducts)!!)
-    } else {
-        this
-    }
 }

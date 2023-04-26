@@ -15,8 +15,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
@@ -46,14 +44,9 @@ class FacesFactory @Inject constructor() : DynamicListFactory {
         component: ComponentItemModel,
         componentInfo: ComponentInfo,
     ) {
-        val model = remember {
-            derivedStateOf {
-                (component.resource as FacesModel).items
-            }
-        }
         FacesComponentView(
             modifier = modifier.testTag(FACES_COMPONENT_TAG),
-            faces = model.value
+            faces = (component.resource as FacesModel).items
         ) {
             componentInfo.scrollAction?.invoke(
                 com.javi.dynamic.list.data.actions.ScrollAction.ScrollIndex(index = it)

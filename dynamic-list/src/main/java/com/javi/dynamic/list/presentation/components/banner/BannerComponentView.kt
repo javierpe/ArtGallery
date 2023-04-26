@@ -25,12 +25,15 @@ import com.javi.render.processor.core.RenderType
 const val BANNER_IMAGE_TEST_TAG = "banner-image"
 const val BANNER_IMAGE_SCREEN_TEST_TAG = "banner-image-screen"
 
+@Suppress("FunctionNaming", "LongParameterList")
 @Composable
 fun BannerComponentViewScreen(
     modifier: Modifier,
     model: BannerModel,
     componentIndex: Int,
     showCaseState: ShowCaseState,
+    onAdd: (ProductImageModel) -> Unit,
+    onDecrement: (ProductImageModel) -> Unit,
     onProductDetail: (String) -> Unit
 ) {
     BannerComponentView(
@@ -40,9 +43,15 @@ fun BannerComponentViewScreen(
         imageUrl = model.product.imageURL,
         quantity = model.product.quantity,
         title = model.bannerInfo?.title.orEmpty(),
-        description = model.bannerInfo?.description.orEmpty()
+        description = model.bannerInfo?.description.orEmpty(),
+        onAdd = {
+            onAdd(model.product)
+        },
+        onDecrement = {
+            onDecrement(model.product)
+        }
     ) {
-        onProductDetail(it)
+        onProductDetail(model.product.imageURL)
     }
 }
 
@@ -56,7 +65,9 @@ fun BannerComponentView(
     quantity: Int,
     title: String,
     description: String,
-    onClickAction: (String) -> Unit
+    onAdd: () -> Unit,
+    onDecrement: () -> Unit,
+    onClickAction: () -> Unit
 ) {
     BannerImageView(
         modifier = modifier
@@ -79,12 +90,12 @@ fun BannerComponentView(
                 state = showCaseState
             ),
         imageURL = imageUrl,
-        onClickAction = {
-            onClickAction(imageUrl)
-        },
+        onClickAction = onClickAction,
         quantity = quantity,
         title = title,
-        description = description
+        description = description,
+        onAdd = onAdd,
+        onDecrement = onDecrement
     )
 }
 
@@ -100,7 +111,10 @@ fun PreviewBannerComponentView() {
             title = model.bannerInfo?.title.orEmpty(),
             description = model.bannerInfo?.description.orEmpty(),
             componentIndex = 0,
-            showCaseState = rememberShowCaseState()
-        ) { }
+            showCaseState = rememberShowCaseState(),
+            onAdd = {},
+            onDecrement = {},
+            onClickAction = {}
+        )
     }
 }

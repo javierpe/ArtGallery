@@ -14,8 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DynamicListViewModel @Inject constructor(
-    private val getDynamicListUseCase: GetDynamicListUseCase,
-    // private val basketApi: LocalBasketApi
+    private val getDynamicListUseCase: GetDynamicListUseCase
 ) : ViewModel() {
 
     private var job: Job? = null
@@ -26,23 +25,11 @@ class DynamicListViewModel @Inject constructor(
 
     val dynamicListAction: StateFlow<DynamicListUIState> = _dynamicListAction
 
-    /*init {
-        viewModelScope.launch {
-            basketApi.setUp()
-        }
-    }*/
-
     fun load(dynamicListRequestModel: DynamicListRequestModel) {
         job?.cancel()
         job = viewModelScope.launch {
             getDynamicListUseCase(0, dynamicListRequestModel)
-                /*.combine(basketApi.basketProducts) { data, basket ->
-                    if (basket.isNotEmpty() && data is DynamicListUIState.SuccessAction) {
-                        data.propagateBasketProducts(basket)
-                    } else {
-                        data
-                    }
-                }*/.collect {
+                .collect {
                     _dynamicListAction.emit(it)
                 }
         }

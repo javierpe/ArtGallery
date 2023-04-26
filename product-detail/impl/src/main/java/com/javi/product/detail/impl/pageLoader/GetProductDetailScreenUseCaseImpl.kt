@@ -13,11 +13,9 @@ class GetProductDetailScreenUseCaseImpl @Inject constructor() : GetProductDetail
 
     override val navGraph: NavGraphSpec = ProductDetailNavGraph
 
-    override operator fun invoke(
-        imageUrl: String
-    ): Direction {
+    override fun invoke(imageURL: String): Direction {
         return ProductImageScreenDestination(
-            imageUrl = imageUrl
+            imageURL = imageURL
         )
     }
 }

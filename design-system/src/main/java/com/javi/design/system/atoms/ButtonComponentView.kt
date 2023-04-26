@@ -23,9 +23,9 @@ fun ButtonComponentView(
 ) {
     Box(
         modifier = modifier
+            .height(56.dp)
             .clip(RoundedCornerShape(16.dp))
             .fillMaxWidth()
-            .height(56.dp)
             .background(Color.Black)
             .clickable { onClick() }
     ) {

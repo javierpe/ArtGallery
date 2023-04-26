@@ -11,12 +11,12 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.javi.basket.api.AddProductToBasketUseCase
+import com.javi.basket.api.DecrementProductOnBasketUseCase
 import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.presentation.components.bannerCarousel.BannerCarouselComponentViewScreen
@@ -31,7 +31,9 @@ const val BANNER_CAROUSEL_COMPONENT_TAG = "banner_carousel_component"
 
 @AdapterFactory
 class BannerCarouselFactory @Inject constructor(
-    private val productDetailScreenLoader: GetProductDetailPageUseCase
+    private val productDetailScreenLoader: GetProductDetailPageUseCase,
+    private val addProductToBasketUseCase: AddProductToBasketUseCase,
+    private val decrementProductOnBasketUseCase: DecrementProductOnBasketUseCase
 ) : DynamicListFactory {
 
     override val renders: List<RenderType>
@@ -47,23 +49,20 @@ class BannerCarouselFactory @Inject constructor(
         component: ComponentItemModel,
         componentInfo: ComponentInfo,
     ) {
-        val model = remember {
-            derivedStateOf {
-                (component.resource as BannerCarouselModel).banners
-            }
-        }
-
         BannerCarouselComponentViewScreen(
             modifier = modifier.testTag(BANNER_CAROUSEL_COMPONENT_TAG),
-            images = model.value,
+            images = (component.resource as BannerCarouselModel).banners,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState,
-            widthSizeClass = componentInfo.dynamicListObject.widthSizeClass
-        ) {
-            componentInfo.dynamicListObject.destinationsNavigator?.navigate(
-                direction = productDetailScreenLoader(it)
-            )
-        }
+            widthSizeClass = componentInfo.dynamicListObject.widthSizeClass,
+            onAdd = { addProductToBasketUseCase(it) },
+            onDecrement = { decrementProductOnBasketUseCase(it) },
+            onProductDetail = {
+                componentInfo.dynamicListObject.destinationsNavigator?.navigate(
+                    direction = productDetailScreenLoader(it)
+                )
+            }
+        )
     }
 
     @Composable

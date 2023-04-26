@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import com.javi.dynamic.list.data.models.ComponentInfo
@@ -34,13 +32,9 @@ class ProfileFactory @Inject constructor() : DynamicListFactory {
         component: ComponentItemModel,
         componentInfo: ComponentInfo
     ) {
-        val model = remember {
-            derivedStateOf { component.resource as ProfileModel }
-        }
-
         ProfileComponentScreenView(
             modifier = Modifier.testTag(PROFILE_COMPONENT_TAG),
-            model = model.value,
+            model = component.resource as ProfileModel,
             isExpandedScreen = componentInfo.dynamicListObject.widthSizeClass == WindowWidthSizeClass.Expanded
         )
     }

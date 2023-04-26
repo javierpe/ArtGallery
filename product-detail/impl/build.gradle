@@ -2,8 +2,6 @@ plugins {
     id 'com.google.devtools.ksp' version '1.7.22-1.0.8'
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -80,15 +78,8 @@ dependencies {
     implementation(libs.compose.material)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.activity)
-    implementation(libs.compose.lifecycle.viewmodel)
-    implementation(libs.compose.lifecycle.runtime)
-    implementation(libs.compose.lifecycle.runtime.ktx)
     implementation(libs.androidx.core)
 
     debugImplementation(libs.test.android.compose.ui.tooling)
     debugImplementation(libs.test.android.compose.ui.manifest)
-
-    // Hilt
-    implementation(libs.hilt)
-    kapt(libs.hilt.compiler)
 }

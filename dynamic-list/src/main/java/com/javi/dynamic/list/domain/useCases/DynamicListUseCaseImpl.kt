@@ -1,6 +1,8 @@
 package com.javi.dynamic.list.domain.useCases
 
+import com.javi.basket.api.BasketUpdatesUseCase
 import com.javi.dynamic.list.data.actions.DynamicListUIState
+import com.javi.dynamic.list.data.extensions.updateProducts
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.data.repositories.DynamicListRepository
 import com.javi.dynamic.list.data.useCases.GetDynamicListShowCaseUseCase
@@ -11,6 +13,7 @@ import com.javi.dynamic.list.di.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -22,7 +25,8 @@ class DynamicListUseCaseImpl @Inject constructor(
     private val repository: DynamicListRepository,
     private val getDynamicListShowCaseUseCaseImpl: GetDynamicListShowCaseUseCase,
     private val saveSkeletonsUseCase: SaveSkeletonsUseCase,
-    private val getSkeletonsByContextUseCase: GetSkeletonsByContextUseCase
+    private val getSkeletonsByContextUseCase: GetSkeletonsByContextUseCase,
+    private val basketUpdatesUseCase: BasketUpdatesUseCase
 ) : GetDynamicListUseCase {
 
     override suspend operator fun invoke(
@@ -32,6 +36,13 @@ class DynamicListUseCaseImpl @Inject constructor(
     ): Flow<DynamicListUIState> {
         return repository
             .get(page, requestModel)
+            .combine(basketUpdatesUseCase.basketProducts) { data, basket ->
+                if (basket.isNotEmpty() && data is DynamicListUIState.SuccessAction) {
+                    data.updateProducts(basket)
+                } else {
+                    data
+                }
+            }
             .map {
                 if (it is DynamicListUIState.SuccessAction) {
                     getDynamicListShowCaseUseCaseImpl(it.container)

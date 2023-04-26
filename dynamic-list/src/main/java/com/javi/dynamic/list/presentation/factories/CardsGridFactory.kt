@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
@@ -44,15 +42,11 @@ class CardsGridFactory @Inject constructor(
         component: ComponentItemModel,
         componentInfo: ComponentInfo,
     ) {
-        val model = remember {
-            derivedStateOf {
-                component.resource as CardsGridModel
-            }
-        }
+        val model = component.resource as CardsGridModel
 
         CardsGridComponentViewScreen(
             modifier = Modifier.testTag(CARDS_GRID_TAG),
-            images = model.value.images,
+            images = model.images,
         ) {
             componentInfo.navigator()?.navigate(
                 getProductDetailScreenUseCase(it)

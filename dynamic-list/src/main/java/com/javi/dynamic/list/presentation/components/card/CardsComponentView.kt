@@ -99,7 +99,7 @@ fun CardsComponentView(
                 CardItemView(
                     modifier = modifierCard.testTag(CARD_ITEM_COMPONENT_TAG),
                     title = item.title,
-                    images = item.images
+                    images = item.products
                 ) {
                     onNavigateToDetail.invoke(
                         item.id,
@@ -118,7 +118,7 @@ fun CardsComponentView(
 fun PreviewNightModeCardsComponentView() {
     val model = CardsModel(
         cardElements = listOf(
-            CardElement(1, "Hola", images = emptyList())
+            CardElement(1, "Hola", products = emptyList())
         ),
         title = "Title",
     )
@@ -141,7 +141,7 @@ fun PreviewNightModeCardsComponentView() {
 fun PreviewNoNightModeCardsComponentView() {
     val model = CardsModel(
         cardElements = listOf(
-            CardElement(1, "Hola", images = emptyList())
+            CardElement(1, "Hola", products = emptyList())
         ),
         title = "Title",
     )

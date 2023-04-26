@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import com.javi.design.system.data.enums.ButtonState
 
-private const val TO_PRESSED_VALUE = 0.90f
+private const val TO_PRESSED_VALUE = 0.96f
 private const val FROM_PRESSED_VALUE = 1f
 
 fun Modifier.withBounceClick() = composed {

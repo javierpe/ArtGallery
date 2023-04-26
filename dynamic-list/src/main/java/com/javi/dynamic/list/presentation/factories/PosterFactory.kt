@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
@@ -38,13 +36,9 @@ class PosterFactory @Inject constructor(
         component: ComponentItemModel,
         componentInfo: ComponentInfo
     ) {
-        val model = remember {
-            derivedStateOf { component.resource as PosterModel }
-        }
-
         PosterComponentScreenView(
             modifier = Modifier.testTag(POSTER_COMPONENT_TAG),
-            model = model.value
+            model = component.resource as PosterModel
         ) {
             componentInfo.navigator()?.navigate(
                 getProductDetailScreenUseCase(it)

@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
@@ -45,15 +43,9 @@ class CardsFactory @Inject constructor(
         component: ComponentItemModel,
         componentInfo: ComponentInfo
     ) {
-        val model = remember {
-            derivedStateOf {
-                component.resource as CardsModel
-            }
-        }
-
         CardsComponentViewScreen(
             modifier = modifier.testTag(CARDS_COMPONENT_TAG),
-            data = model.value,
+            data = component.resource as CardsModel,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState
         ) { id, title ->

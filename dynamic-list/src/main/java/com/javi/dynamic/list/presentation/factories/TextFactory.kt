@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
@@ -39,16 +37,11 @@ class TextFactory @Inject constructor() : DynamicListFactory {
         component: ComponentItemModel,
         componentInfo: ComponentInfo
     ) {
-        val model = remember {
-            derivedStateOf {
-                (component.resource as TextModel).text
-            }
-        }
         TextComponentView(
             modifier = modifier.testTag(TEXT_COMPONENT_TAG),
             componentIndex = component.index,
             componentInfo.showCaseState,
-            text = model.value
+            text = (component.resource as TextModel).text
         )
     }
 
