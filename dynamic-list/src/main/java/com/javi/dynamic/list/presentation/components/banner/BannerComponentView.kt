@@ -1,6 +1,7 @@
 package com.javi.dynamic.list.presentation.components.banner
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -72,7 +73,7 @@ fun BannerComponentView(
     BannerImageView(
         modifier = modifier
             .height(150.dp)
-            .fillMaxSize()
+            .fillMaxWidth()
             .testTag(BANNER_IMAGE_TEST_TAG)
             .padding(start = 16.dp, end = 16.dp)
             .asShowCaseTarget(

@@ -15,12 +15,13 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import com.javi.design.system.data.enums.ButtonState
 
-private const val TO_PRESSED_VALUE = 0.96f
 private const val FROM_PRESSED_VALUE = 1f
 
-fun Modifier.withBounceClick() = composed {
+fun Modifier.withBounceClick(
+    pressedValue: Float = 0.96f
+) = composed {
     var buttonState by remember { mutableStateOf(ButtonState.Idle) }
-    val scale by animateFloatAsState(if (buttonState == ButtonState.Pressed) TO_PRESSED_VALUE else FROM_PRESSED_VALUE)
+    val scale by animateFloatAsState(if (buttonState == ButtonState.Pressed) pressedValue else FROM_PRESSED_VALUE)
 
     this
         .graphicsLayer {

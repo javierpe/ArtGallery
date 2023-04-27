@@ -4,6 +4,7 @@ import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
@@ -12,6 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.javi.design.system.atoms.ImageComponentView
 import com.javi.design.system.atoms.StepperButtonComponentView
 import com.javi.design.system.extensions.withBounceClick
@@ -31,31 +33,48 @@ fun BannerImageView(
     onDecrement: () -> Unit,
     onClickAction: () -> Unit
 ) {
-    Card(
-        modifier = modifier
-            .withBounceClick()
-            .testTag(BANNER_CAROUSEL_IMAGE_TEST_TAG),
-        shape = RoundedCornerShape(16.dp),
-        elevation = 15.dp
+    ConstraintLayout(
+        modifier = modifier.fillMaxWidth()
     ) {
-        ImageComponentView(
+        val (card, stepper) = createRefs()
+
+        Card(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
+                .constrainAs(card) {
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    top.linkTo(parent.top)
+                    bottom.linkTo(parent.bottom)
+                }
+                .withBounceClick()
                 .clickable {
                     onClickAction()
-                },
-            imageURL = imageURL
-        )
-
-        title.takeIf { it.isNotEmpty() }?.let {
-            BannerInfoView(
+                }
+                .testTag(BANNER_CAROUSEL_IMAGE_TEST_TAG),
+            shape = RoundedCornerShape(16.dp),
+            elevation = 15.dp
+        ) {
+            ImageComponentView(
                 modifier = Modifier.fillMaxSize(),
-                title = it,
-                description = description
+                imageURL = imageURL
             )
+
+            title.takeIf { it.isNotEmpty() }?.let {
+                BannerInfoView(
+                    modifier = Modifier.fillMaxSize(),
+                    title = it,
+                    description = description
+                )
+            }
         }
 
         StepperButtonComponentView(
+            modifier = Modifier
+                .constrainAs(stepper) {
+                    end.linkTo(parent.end, 16.dp)
+                    top.linkTo(parent.top, 16.dp)
+                },
             quantity = quantity,
             onAdd = onAdd,
             onDecrement = onDecrement
