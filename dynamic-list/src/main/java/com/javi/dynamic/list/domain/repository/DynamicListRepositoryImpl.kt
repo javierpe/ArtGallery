@@ -3,7 +3,6 @@ package com.javi.dynamic.list.domain.repository
 import com.javi.dynamic.list.data.actions.DynamicListUIState
 import com.javi.dynamic.list.data.dataSources.DynamicListDataSourceApi
 import com.javi.dynamic.list.data.models.ComponentItemModel
-import com.javi.dynamic.list.data.models.DynamicListContainer
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.data.repositories.DynamicListRepository
 import com.javi.dynamic.list.data.useCases.DynamicListRenderProcessorApi
@@ -27,7 +26,7 @@ class DynamicListRepositoryImpl @Inject constructor(
             dynamicListMockResponseApi.getDataFromAsset(requestModel)
         }
 
-        val header = componentModel.header.mapNotNull { component ->
+        val headers = componentModel.header.mapNotNull { component ->
 
             dynamicListRenderProcessorApi.processResource(
                 component.render,
@@ -55,12 +54,11 @@ class DynamicListRepositoryImpl @Inject constructor(
             }
         }
 
-        // Response...
-        val container = DynamicListContainer(
-            header = header,
-            body = body
+        emit(
+            DynamicListUIState.ResponseAction(
+                header = headers,
+                body = body
+            )
         )
-
-        emit(DynamicListUIState.SuccessAction(container))
     }
 }

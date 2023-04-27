@@ -66,6 +66,8 @@ dependencies {
     // Coil
     implementation(libs.coil)
 
+    implementation(libs.accompanist.systemuicontroller)
+
     // Destinations
     implementation(libs.navigation.destinations.core)
     implementation(libs.navigation.destinations.animations.core)

@@ -1,9 +1,6 @@
 package com.javi.navigation.impl
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.Place
@@ -17,14 +14,13 @@ import com.javi.home.api.GetHomePageUseCase
 import com.javi.navigation.api.NavigationApi
 import com.javi.places.page.api.GetPlacesPageUseCase
 import com.javi.product.detail.api.GetProductDetailPageUseCase
-import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.utils.currentDestinationAsState
 import com.ramcosta.composedestinations.utils.isRouteOnBackStack
 import javax.inject.Inject
 
-private const val ANIMATION_DURATION = 700
+private const val ANIMATION_DURATION = 200
 
 class NavigationImpl @Inject constructor(
     private val homePageLoader: GetHomePageUseCase,
@@ -37,29 +33,7 @@ class NavigationImpl @Inject constructor(
     @Composable
     override fun NavHost() {
         val navHostEngine = rememberAnimatedNavHostEngine(
-            navHostContentAlignment = Alignment.TopCenter,
-            rootDefaultAnimations = RootNavGraphDefaultAnimations(
-                enterTransition = {
-                    fadeIn(
-                        tween(ANIMATION_DURATION)
-                    )
-                },
-                exitTransition = {
-                    fadeOut(
-                        tween(ANIMATION_DURATION)
-                    )
-                },
-                popEnterTransition = {
-                    fadeIn(
-                        tween(ANIMATION_DURATION)
-                    )
-                },
-                popExitTransition = {
-                    fadeOut(
-                        tween(ANIMATION_DURATION)
-                    )
-                }
-            )
+            navHostContentAlignment = Alignment.TopCenter
         )
 
         val navHostController = navHostEngine.rememberNavController()

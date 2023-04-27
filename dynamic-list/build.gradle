@@ -73,7 +73,7 @@ dependencies {
     // Design System
     implementation project(":design-system")
 
-    // Networkin
+    // Networking
     implementation project(":core:networking")
 
     // Moshi

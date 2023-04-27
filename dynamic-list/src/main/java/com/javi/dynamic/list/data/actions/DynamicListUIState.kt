@@ -1,6 +1,6 @@
 package com.javi.dynamic.list.data.actions
 
-import com.javi.dynamic.list.data.models.DynamicListContainer
+import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListElement
 import com.javi.dynamic.list.data.models.DynamicListShowCaseModel
 import com.javi.dynamic.list.presentation.ui.base.DynamicListState
@@ -23,10 +23,9 @@ sealed class DynamicListUIState {
     class ErrorAction(val exception: Throwable) : DynamicListUIState()
 
     /**
-     * Show data from response
+     * Final state
      */
     class SuccessAction(
-        val container: DynamicListContainer,
         val body: List<DynamicListElement> = emptyList(),
         val header: List<DynamicListElement> = emptyList(),
         val showCaseQueue: Queue<DynamicListShowCaseModel> = LinkedList()
@@ -36,6 +35,14 @@ sealed class DynamicListUIState {
      * Show skeleton
      */
     class SkeletonAction(val renderTypes: List<RenderType>) : DynamicListUIState()
+
+    /**
+     * State data from response
+     */
+    class ResponseAction(
+        val body: List<ComponentItemModel> = emptyList(),
+        val header: List<ComponentItemModel> = emptyList(),
+    ) : DynamicListUIState()
 }
 
 internal fun DynamicListUIState.SuccessAction.sendAction(

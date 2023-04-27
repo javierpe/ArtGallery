@@ -17,31 +17,27 @@ internal fun Any.accept(visitor: ProductVisitor): Any {
     }
 }
 
-fun DynamicListUIState.SuccessAction.updateProducts(
+fun DynamicListUIState.ResponseAction.updateProducts(
     basketProducts: List<ProductImageModel>
-): DynamicListUIState.SuccessAction {
+): DynamicListUIState.ResponseAction {
     val productUpdater = ProductUpdater(
         basketProducts
     )
 
-    val updatedBody = container.body.flatMap { element ->
+    val updatedBody = body.flatMap { element ->
         listOf(element.copy(resource = element.resource.accept(productUpdater)))
     }
 
     val updateDynamicListElementBody = body.flatMap { element ->
         listOf(
             updatedBody.firstOrNull { component ->
-                component.index == element.componentItemModel.index
-            }?.let {
-                element.copy(componentItemModel = it)
+                component.index == element.index
             } ?: element
         )
     }
 
-    return DynamicListUIState.SuccessAction(
-        container = container.copy(body = updatedBody),
+    return DynamicListUIState.ResponseAction(
         body = updateDynamicListElementBody,
-        header = header,
-        showCaseQueue = showCaseQueue
+        header = header
     )
 }

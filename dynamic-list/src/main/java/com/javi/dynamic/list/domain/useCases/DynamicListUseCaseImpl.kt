@@ -37,25 +37,28 @@ class DynamicListUseCaseImpl @Inject constructor(
         return repository
             .get(page, requestModel)
             .combine(basketUpdatesUseCase.basketProducts) { data, basket ->
-                if (basket.isNotEmpty() && data is DynamicListUIState.SuccessAction) {
+                if (basket.isNotEmpty() && data is DynamicListUIState.ResponseAction) {
                     data.updateProducts(basket)
                 } else {
                     data
                 }
             }
             .map {
-                if (it is DynamicListUIState.SuccessAction) {
-                    getDynamicListShowCaseUseCaseImpl(it.container)
+                if (it is DynamicListUIState.ResponseAction) {
+                    getDynamicListShowCaseUseCaseImpl(
+                        header = it.header,
+                        body = it.body
+                    )
                 } else {
                     it
                 }
             }
             .onEach {
-                if (it is DynamicListUIState.SuccessAction) {
+                if (it is DynamicListUIState.ResponseAction) {
                     saveSkeletonsUseCase(
-                        it.container.body,
-                        it.container.header,
-                        requestModel.contextType.source
+                        body = it.body,
+                        header = it.header,
+                        source = requestModel.contextType.source
                     )
                 }
             }

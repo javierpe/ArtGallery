@@ -7,6 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.javi.data.enums.ContextType
 import com.javi.design.system.atoms.ImageComponentView
 import com.javi.design.system.molecules.headers.DynamicListHeaderComponentView
@@ -18,6 +19,9 @@ fun ProductImageContent(
     imageURL: String,
     destinationsNavigator: DestinationsNavigator? = null
 ) {
+    val systemUiController = rememberSystemUiController()
+    systemUiController.isSystemBarsVisible = false
+
     Box {
         ImageComponentView(
             modifier = Modifier.fillMaxSize(),

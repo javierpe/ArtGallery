@@ -2,7 +2,7 @@ package com.javi.dynamic.list.domain.useCases
 
 import com.javi.api.TooltipPreferencesApi
 import com.javi.dynamic.list.data.actions.DynamicListUIState
-import com.javi.dynamic.list.data.models.DynamicListContainer
+import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListElement
 import com.javi.dynamic.list.data.models.DynamicListShowCaseModel
 import com.javi.dynamic.list.data.useCases.GetDynamicListShowCaseUseCase
@@ -18,11 +18,12 @@ class GetDynamicListShowCaseUseCaseImpl @Inject constructor(
 ) : GetDynamicListShowCaseUseCase {
 
     override suspend operator fun invoke(
-        dynamicListContainer: DynamicListContainer
+        header: List<ComponentItemModel>,
+        body: List<ComponentItemModel>
     ): DynamicListUIState {
         val showCaseSequence: Queue<DynamicListShowCaseModel> = LinkedList()
 
-        val bodyElements = dynamicListContainer.body.map { component ->
+        val bodyElements = body.map { component ->
             val adapter = delegates.firstOrNull { adapterFactory ->
                 adapterFactory.render.value == component.render
             }
@@ -50,7 +51,7 @@ class GetDynamicListShowCaseUseCaseImpl @Inject constructor(
             )
         }
 
-        val headerElements = dynamicListContainer.header.map { component ->
+        val headerElements = header.map { component ->
             val adapter = delegates.firstOrNull { adapterFactory ->
                 adapterFactory.render.value == component.render
             }
@@ -66,7 +67,6 @@ class GetDynamicListShowCaseUseCaseImpl @Inject constructor(
         )
 
         return DynamicListUIState.SuccessAction(
-            container = dynamicListContainer,
             body = bodyElements,
             header = headerElements,
             showCaseQueue = showCaseSequence
