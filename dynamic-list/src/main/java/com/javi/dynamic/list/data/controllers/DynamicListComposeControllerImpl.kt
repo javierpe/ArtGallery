@@ -52,9 +52,7 @@ abstract class DynamicListComposeControllerImpl {
             ) {
                 skeletonRenderList.forEach { render ->
                     delegates.filter { adapterFactory ->
-                        adapterFactory.renders.any { renderType ->
-                            renderType.value == render.value
-                        }
+                        adapterFactory.render.value == render.value
                     }.forEach {
                         it.CreateSkeleton()
                     }

@@ -24,7 +24,7 @@ const val PROFILE_COMPONENT_TAG = "profile_component_tag"
 @AdapterFactory
 class ProfileFactory @Inject constructor() : DynamicListFactory {
 
-    override val renders: List<RenderType> = listOf(RenderType.PROFILE)
+    override val render = RenderType.PROFILE
 
     @Composable
     override fun CreateComponent(

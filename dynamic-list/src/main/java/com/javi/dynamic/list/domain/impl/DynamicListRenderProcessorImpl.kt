@@ -10,7 +10,7 @@ class DynamicListRenderProcessorImpl @Inject constructor(
 
     override suspend fun <T> processResource(render: String, resource: T?): Any? {
         return renders.firstOrNull {
-            it.renders.any { renderValue -> renderValue.value == render }
+            it.render.value == render
         }?.resolve(render, resource) ?: resource
     }
 }

@@ -28,10 +28,7 @@ const val FILTERS_COMPONENT_TAG = "filters_component"
 @AdapterFactory
 class FiltersFactory @Inject constructor() : DynamicListFactory {
 
-    override val renders: List<RenderType>
-        get() = listOf(
-            RenderType.FILTERS
-        )
+    override val render = RenderType.FILTERS
 
     @Composable
     override fun CreateComponent(

@@ -30,10 +30,7 @@ class CardsFactory @Inject constructor(
     private val getCardsPageUseCase: GetCardsPageUseCase
 ) : DynamicListFactory {
 
-    override val renders: List<RenderType>
-        get() = listOf(
-            RenderType.CARDS
-        )
+    override val render = RenderType.CARDS
 
     override val hasShowCaseConfigured: Boolean = true
 

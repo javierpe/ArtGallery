@@ -25,10 +25,7 @@ const val MESSAGE_COMPONENT_TAG = "message_component"
 @AdapterFactory
 class MessageFactory @Inject constructor() : DynamicListFactory {
 
-    override val renders: List<RenderType>
-        get() = listOf(
-            RenderType.MESSAGE
-        )
+    override val render = RenderType.MESSAGE
 
     override val hasShowCaseConfigured = true
 

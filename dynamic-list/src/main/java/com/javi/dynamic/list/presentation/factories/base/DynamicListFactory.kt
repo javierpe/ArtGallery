@@ -9,9 +9,9 @@ import com.javi.render.processor.core.RenderType
 interface DynamicListFactory {
 
     /**
-     * List of compatible renders.
+     * Compatible render
      */
-    val renders: List<RenderType>
+    val render: RenderType
 
     /**
      * This render should show a show case.

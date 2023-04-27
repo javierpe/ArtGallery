@@ -4,8 +4,7 @@ import com.javi.render.processor.core.RenderType
 
 interface DynamicListRender<out T> {
 
-    val renders: List<RenderType>
-        get() = listOf()
+    val render: RenderType
 
     suspend fun <T> resolve(render: String, resource: T?): Any?
 }

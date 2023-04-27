@@ -28,7 +28,7 @@ class PosterFactory @Inject constructor(
     private val getProductDetailScreenUseCase: GetProductDetailPageUseCase
 ) : DynamicListFactory {
 
-    override val renders: List<RenderType> = listOf(RenderType.POSTER)
+    override val render = RenderType.POSTER
 
     @Composable
     override fun CreateComponent(

@@ -36,10 +36,7 @@ class BannerCarouselFactory @Inject constructor(
     private val decrementProductOnBasketUseCase: DecrementProductOnBasketUseCase
 ) : DynamicListFactory {
 
-    override val renders: List<RenderType>
-        get() = listOf(
-            RenderType.BANNER_CAROUSEL
-        )
+    override val render = RenderType.BANNER_CAROUSEL
 
     override val hasShowCaseConfigured: Boolean = true
 

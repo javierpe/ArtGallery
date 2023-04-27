@@ -29,10 +29,7 @@ class CardsGridFactory @Inject constructor(
     private val getProductDetailScreenUseCase: GetProductDetailPageUseCase
 ) : DynamicListFactory {
 
-    override val renders: List<RenderType>
-        get() = listOf(
-            RenderType.CARDS_GRID
-        )
+    override val render = RenderType.CARDS_GRID
 
     override val hasShowCaseConfigured: Boolean = false
 

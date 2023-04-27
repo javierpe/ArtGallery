@@ -25,10 +25,8 @@ const val TEXT_COMPONENT_TAG = "text_component"
 @AdapterFactory
 class TextFactory @Inject constructor() : DynamicListFactory {
 
-    override val renders: List<RenderType>
-        get() = listOf(
-            RenderType.TEXT
-        )
+    override val render = RenderType.TEXT
+
     override val hasShowCaseConfigured: Boolean = true
 
     @Composable

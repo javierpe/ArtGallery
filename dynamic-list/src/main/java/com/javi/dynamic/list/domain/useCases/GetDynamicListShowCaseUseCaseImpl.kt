@@ -24,9 +24,7 @@ class GetDynamicListShowCaseUseCaseImpl @Inject constructor(
 
         val bodyElements = dynamicListContainer.body.map { component ->
             val adapter = delegates.firstOrNull { adapterFactory ->
-                adapterFactory.renders.any { renderType ->
-                    renderType.value == component.render
-                }
+                adapterFactory.render.value == component.render
             }
 
             if (
@@ -54,9 +52,7 @@ class GetDynamicListShowCaseUseCaseImpl @Inject constructor(
 
         val headerElements = dynamicListContainer.header.map { component ->
             val adapter = delegates.firstOrNull { adapterFactory ->
-                adapterFactory.renders.any { renderType ->
-                    renderType.value == component.render
-                }
+                adapterFactory.render.value == component.render
             }
 
             DynamicListElement(

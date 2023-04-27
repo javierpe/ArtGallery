@@ -33,10 +33,7 @@ const val FACES_COMPONENT_TAG = "faces_component"
 @AdapterFactory
 class FacesFactory @Inject constructor() : DynamicListFactory {
 
-    override val renders: List<RenderType>
-        get() = listOf(
-            RenderType.FACES
-        )
+    override val render = RenderType.FACES
 
     @Composable
     override fun CreateComponent(

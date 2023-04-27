@@ -9,10 +9,7 @@ import javax.inject.Inject
 @RenderFactory(model = BannerCarouselModel::class)
 class BannerCarouselRender @Inject constructor() : DynamicListRender<BannerCarouselModel> {
 
-    override val renders: List<RenderType>
-        get() = listOf(
-            RenderType.BANNER_CAROUSEL
-        )
+    override val render = RenderType.BANNER_CAROUSEL
 
     override suspend fun <T> resolve(render: String, resource: T?): BannerCarouselModel {
         val model = (resource as BannerCarouselModel)
