@@ -2,7 +2,7 @@ package com.javi.dynamic.list.presentation.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.javi.dynamic.list.data.actions.DynamicListUIState
+import com.javi.dynamic.list.data.actions.DynamicListFlowState
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.data.useCases.GetDynamicListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,11 +19,11 @@ class DynamicListViewModel @Inject constructor(
 
     private var job: Job? = null
 
-    private val _dynamicListAction = MutableStateFlow<DynamicListUIState>(
-        DynamicListUIState.None
+    private val _dynamicListAction = MutableStateFlow<DynamicListFlowState>(
+        DynamicListFlowState.None
     )
 
-    val dynamicListAction: StateFlow<DynamicListUIState> = _dynamicListAction
+    val dynamicListAction: StateFlow<DynamicListFlowState> = _dynamicListAction
 
     fun load(dynamicListRequestModel: DynamicListRequestModel) {
         job?.cancel()

@@ -3,7 +3,7 @@ package com.javi.dynamic.list.data.useCases
 import app.cash.turbine.test
 import com.javi.basket.api.BasketUpdatesUseCase
 import com.javi.data.enums.ContextType
-import com.javi.dynamic.list.data.actions.DynamicListUIState
+import com.javi.dynamic.list.data.actions.DynamicListFlowState
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.data.repositories.DynamicListRepository
 import com.javi.dynamic.list.domain.useCases.DynamicListUseCaseImpl
@@ -51,7 +51,7 @@ class DynamicListUseCaseImplTest {
     }
 
     private val successAction by lazy {
-        DynamicListUIState.SuccessAction(
+        DynamicListFlowState.SuccessAction(
             header = emptyList(),
             body = emptyList()
         )
@@ -81,7 +81,7 @@ class DynamicListUseCaseImplTest {
             emptyList()
         )
 
-        assert(dynamicListUseCaseImpl(0, dynamicListRequestModel).first() is DynamicListUIState.LoadingAction)
+        assert(dynamicListUseCaseImpl(0, dynamicListRequestModel).first() is DynamicListFlowState.LoadingAction)
     }
 
     @Test
@@ -90,7 +90,7 @@ class DynamicListUseCaseImplTest {
             repository.get(0, dynamicListRequestModel)
         ).thenReturn(flow { emit(successAction) })
 
-        dynamicListUseCaseImpl(0, dynamicListRequestModel).first() is DynamicListUIState.SkeletonAction
+        dynamicListUseCaseImpl(0, dynamicListRequestModel).first() is DynamicListFlowState.SkeletonAction
     }
 
     @Suppress("TooGenericExceptionThrown")
@@ -102,7 +102,7 @@ class DynamicListUseCaseImplTest {
 
         dynamicListUseCaseImpl.invoke(0, dynamicListRequestModel).test {
             awaitItem()
-            assert(awaitItem() is DynamicListUIState.ErrorAction)
+            assert(awaitItem() is DynamicListFlowState.ErrorAction)
             cancelAndIgnoreRemainingEvents()
         }
     }

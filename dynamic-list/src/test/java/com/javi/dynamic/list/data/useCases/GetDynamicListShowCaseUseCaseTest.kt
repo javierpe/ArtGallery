@@ -1,7 +1,7 @@
 package com.javi.dynamic.list.data.useCases
 
 import com.javi.api.TooltipPreferencesApi
-import com.javi.dynamic.list.data.actions.DynamicListUIState
+import com.javi.dynamic.list.data.actions.DynamicListFlowState
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListElement
 import com.javi.dynamic.list.domain.models.DynamicListShowCaseModel
@@ -82,7 +82,7 @@ class GetDynamicListShowCaseUseCaseTest {
             body = body
         )
 
-        val expect = DynamicListUIState.SuccessAction(
+        val expect = DynamicListFlowState.SuccessAction(
             body = arrayListOf(
                 DynamicListElement(testFactory, body.first())
             ),

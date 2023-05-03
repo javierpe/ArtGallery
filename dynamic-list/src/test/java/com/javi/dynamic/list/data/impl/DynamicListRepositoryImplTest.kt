@@ -2,7 +2,7 @@ package com.javi.dynamic.list.data.impl
 
 import app.cash.turbine.test
 import com.javi.data.enums.ContextType
-import com.javi.dynamic.list.data.actions.DynamicListUIState
+import com.javi.dynamic.list.data.actions.DynamicListFlowState
 import com.javi.dynamic.list.data.dataSources.DynamicListDataSourceApi
 import com.javi.dynamic.list.data.models.DataContentModel
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
@@ -76,7 +76,7 @@ class DynamicListRepositoryImplTest {
             requestModel = dynamicListRequestModel,
             fromRemote = false
         ).test {
-            assert(awaitItem() is DynamicListUIState.ResponseAction)
+            assert(awaitItem() is DynamicListFlowState.ResponseAction)
             cancelAndConsumeRemainingEvents()
         }
     }

@@ -1,7 +1,7 @@
 package com.javi.dynamic.list.domain.useCases
 
 import com.javi.basket.api.BasketUpdatesUseCase
-import com.javi.dynamic.list.data.actions.DynamicListUIState
+import com.javi.dynamic.list.data.actions.DynamicListFlowState
 import com.javi.dynamic.list.data.extensions.updateProducts
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.data.repositories.DynamicListRepository
@@ -33,24 +33,24 @@ class DynamicListUseCaseImpl @Inject constructor(
         page: Int,
         requestModel: DynamicListRequestModel,
         withSkeletons: Boolean
-    ): Flow<DynamicListUIState> {
+    ): Flow<DynamicListFlowState> {
         return repository
             .get(page, requestModel)
             .combine(basketUpdatesUseCase.basketProducts) { data, basket ->
-                if (basket.isNotEmpty() && data is DynamicListUIState.ResponseAction) {
+                if (basket.isNotEmpty() && data is DynamicListFlowState.ResponseAction) {
                     data.updateProducts(basket)
                 } else {
                     data
                 }
             }
             .map {
-                if (it is DynamicListUIState.ResponseAction) {
+                if (it is DynamicListFlowState.ResponseAction) {
                     val showCaseResultModel = getTooltipSequenceUseCase(
                         header = it.header,
                         body = it.body
                     )
 
-                    DynamicListUIState.SuccessAction(
+                    DynamicListFlowState.SuccessAction(
                         body = showCaseResultModel.body,
                         header = showCaseResultModel.header,
                         showCaseQueue = showCaseResultModel.showCaseQueue
@@ -60,7 +60,7 @@ class DynamicListUseCaseImpl @Inject constructor(
                 }
             }
             .onEach {
-                if (it is DynamicListUIState.SuccessAction) {
+                if (it is DynamicListFlowState.SuccessAction) {
                     saveSkeletonsUseCase(
                         body = it.body.map { component -> component.componentItemModel },
                         header = it.header.map { component -> component.componentItemModel },
@@ -73,15 +73,15 @@ class DynamicListUseCaseImpl @Inject constructor(
                     val skeletons = getSkeletonsByContextUseCase(requestModel.contextType.source)
                     emit(
                         if (skeletons.isEmpty()) {
-                            DynamicListUIState.LoadingAction
+                            DynamicListFlowState.LoadingAction
                         } else {
-                            DynamicListUIState.SkeletonAction(skeletons)
+                            DynamicListFlowState.SkeletonAction(skeletons)
                         }
                     )
                 }
             }
             .catch {
-                emit(DynamicListUIState.ErrorAction(it))
+                emit(DynamicListFlowState.ErrorAction(it))
             }
             .flowOn(ioDispatcher)
     }

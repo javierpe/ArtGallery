@@ -8,19 +8,19 @@ import com.javi.render.processor.core.RenderType
 import java.util.LinkedList
 import java.util.Queue
 
-sealed class DynamicListUIState {
+sealed class DynamicListFlowState {
 
-    object None : DynamicListUIState()
+    object None : DynamicListFlowState()
 
     /**
      * Show loader view
      */
-    object LoadingAction : DynamicListUIState()
+    object LoadingAction : DynamicListFlowState()
 
     /**
      * Show error view
      */
-    class ErrorAction(val exception: Throwable) : DynamicListUIState()
+    class ErrorAction(val exception: Throwable) : DynamicListFlowState()
 
     /**
      * Final state
@@ -29,12 +29,12 @@ sealed class DynamicListUIState {
         val body: List<DynamicListElement> = emptyList(),
         val header: List<DynamicListElement> = emptyList(),
         val showCaseQueue: Queue<DynamicListShowCaseModel> = LinkedList()
-    ) : DynamicListUIState()
+    ) : DynamicListFlowState()
 
     /**
      * Show skeleton
      */
-    class SkeletonAction(val renderTypes: List<RenderType>) : DynamicListUIState()
+    class SkeletonAction(val renderTypes: List<RenderType>) : DynamicListFlowState()
 
     /**
      * State data from response
@@ -42,10 +42,10 @@ sealed class DynamicListUIState {
     class ResponseAction(
         val body: List<ComponentItemModel> = emptyList(),
         val header: List<ComponentItemModel> = emptyList(),
-    ) : DynamicListUIState()
+    ) : DynamicListFlowState()
 }
 
-internal fun DynamicListUIState.SuccessAction.sendAction(
+internal fun DynamicListFlowState.SuccessAction.sendAction(
     dynamicListListener: (DynamicListState) -> Unit
 ) {
     if (header.isNotEmpty()) {

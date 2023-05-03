@@ -24,7 +24,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.javi.design.system.atoms.ErrorView
 import com.javi.design.system.atoms.LoaderView
 import com.javi.design.system.molecules.showCase.ShowCaseState
-import com.javi.dynamic.list.data.actions.DynamicListUIState
+import com.javi.dynamic.list.data.actions.DynamicListFlowState
 import com.javi.dynamic.list.data.actions.ScrollAction
 import com.javi.dynamic.list.data.actions.TargetAction
 import com.javi.dynamic.list.data.actions.sendAction
@@ -55,16 +55,16 @@ fun ContextViewContent(
     }
 
     when (uiState) {
-        is DynamicListUIState.SkeletonAction -> {
+        is DynamicListFlowState.SkeletonAction -> {
             dynamicListListener.invoke(
                 DynamicListState.OnStartLoading
             )
             dynamicListComposeController?.ComposeSkeletons(
-                (uiState as DynamicListUIState.SkeletonAction).renderTypes
+                (uiState as DynamicListFlowState.SkeletonAction).renderTypes
             )
         }
 
-        is DynamicListUIState.LoadingAction -> {
+        is DynamicListFlowState.LoadingAction -> {
             dynamicListListener.invoke(
                 DynamicListState.OnStartLoading
             )
@@ -77,17 +77,17 @@ fun ContextViewContent(
             }
         }
 
-        is DynamicListUIState.ErrorAction -> {
+        is DynamicListFlowState.ErrorAction -> {
             ErrorView(
                 modifier = Modifier.fillMaxSize(),
-                exception = (uiState as DynamicListUIState.ErrorAction).exception
+                exception = (uiState as DynamicListFlowState.ErrorAction).exception
             ) {
                 dynamicListViewModel.load(requestModel)
             }
         }
 
-        is DynamicListUIState.SuccessAction -> {
-            val successState = (uiState as DynamicListUIState.SuccessAction)
+        is DynamicListFlowState.SuccessAction -> {
+            val successState = (uiState as DynamicListFlowState.SuccessAction)
             DynamicListSuccess(
                 action = successState,
                 dynamicListComposeController = dynamicListComposeController,
@@ -106,7 +106,7 @@ fun ContextViewContent(
 @Suppress("LongParameterList")
 @Composable
 fun DynamicListSuccess(
-    action: DynamicListUIState.SuccessAction,
+    action: DynamicListFlowState.SuccessAction,
     destinationsNavigator: DestinationsNavigator? = null,
     dynamicListComposeController: DynamicListComposeControllerImpl? = null,
     showCaseState: ShowCaseState,

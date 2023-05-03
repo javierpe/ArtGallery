@@ -1,6 +1,6 @@
 package com.javi.dynamic.list.domain.repository
 
-import com.javi.dynamic.list.data.actions.DynamicListUIState
+import com.javi.dynamic.list.data.actions.DynamicListFlowState
 import com.javi.dynamic.list.data.dataSources.DynamicListDataSourceApi
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
@@ -19,7 +19,7 @@ class DynamicListRepositoryImpl @Inject constructor(
         page: Int,
         requestModel: DynamicListRequestModel,
         fromRemote: Boolean
-    ): Flow<DynamicListUIState> = flow {
+    ): Flow<DynamicListFlowState> = flow {
         val componentModel = if (fromRemote) {
             dynamicListMockResponseApi.getRemoteData(requestModel)
         } else {
@@ -55,7 +55,7 @@ class DynamicListRepositoryImpl @Inject constructor(
         }
 
         emit(
-            DynamicListUIState.ResponseAction(
+            DynamicListFlowState.ResponseAction(
                 header = headers,
                 body = body
             )

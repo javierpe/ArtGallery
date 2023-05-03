@@ -1,6 +1,5 @@
 package com.javi.dynamic.list.data.useCases
 
-import com.javi.dynamic.list.data.actions.DynamicListUIState
 import com.javi.dynamic.list.domain.database.AppDatabase
 import com.javi.dynamic.list.domain.database.skeletons.SkeletonsDao
 import com.javi.dynamic.list.domain.useCases.GetSkeletonsByContextUseCaseImpl
@@ -45,6 +44,6 @@ class GetSkeletonsByContextUseCaseTest {
     @Test
     fun `LoadingAction should return if there are not skeletons`() = runTest {
         whenever(skeletonsDao.provideSkeletonsByContext(String())).thenReturn(null)
-        assert(getSkeletonsByContextUseCase.invoke(String()) is DynamicListUIState.LoadingAction)
+        assert(getSkeletonsByContextUseCase.invoke(String()).isEmpty())
     }
 }

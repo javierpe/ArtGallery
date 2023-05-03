@@ -1,7 +1,7 @@
 package com.javi.dynamic.list.data.extensions
 
 import com.javi.data.ProductImageModel
-import com.javi.dynamic.list.data.actions.DynamicListUIState
+import com.javi.dynamic.list.data.actions.DynamicListFlowState
 import com.javi.dynamic.list.data.updater.ProductUpdater
 import com.javi.dynamic.list.data.updater.ProductVisitor
 import com.javi.dynamic.list.presentation.components.banner.BannerModel
@@ -17,9 +17,9 @@ internal fun Any.accept(visitor: ProductVisitor): Any {
     }
 }
 
-fun DynamicListUIState.ResponseAction.updateProducts(
+fun DynamicListFlowState.ResponseAction.updateProducts(
     basketProducts: List<ProductImageModel>
-): DynamicListUIState.ResponseAction {
+): DynamicListFlowState.ResponseAction {
     val productUpdater = ProductUpdater(
         basketProducts
     )
@@ -36,7 +36,7 @@ fun DynamicListUIState.ResponseAction.updateProducts(
         )
     }
 
-    return DynamicListUIState.ResponseAction(
+    return DynamicListFlowState.ResponseAction(
         body = updateDynamicListElementBody,
         header = header
     )

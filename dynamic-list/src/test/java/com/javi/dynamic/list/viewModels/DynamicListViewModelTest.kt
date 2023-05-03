@@ -2,7 +2,7 @@ package com.javi.dynamic.list.viewModels
 
 import app.cash.turbine.test
 import com.javi.data.enums.ContextType
-import com.javi.dynamic.list.data.actions.DynamicListUIState
+import com.javi.dynamic.list.data.actions.DynamicListFlowState
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.data.useCases.GetDynamicListUseCase
 import com.javi.dynamic.list.presentation.viewModels.DynamicListViewModel
@@ -44,7 +44,7 @@ class DynamicListViewModelTest {
     @Test
     fun `dynamicListAction should have a initial action`() = runTest {
         dynamicListViewModel.dynamicListAction.test {
-            assert(awaitItem() is DynamicListUIState.None)
+            assert(awaitItem() is DynamicListFlowState.None)
             cancelAndConsumeRemainingEvents()
         }
     }
@@ -53,13 +53,13 @@ class DynamicListViewModelTest {
     fun `dynamicListAction should have the state provides by useCase`() = runTest {
         val requestModel = DynamicListRequestModel(ContextType.HOME)
         whenever(getDynamicListUseCase(0, requestModel)).thenReturn(
-            flow { emit(DynamicListUIState.ErrorAction(Throwable("Error"))) }
+            flow { emit(DynamicListFlowState.ErrorAction(Throwable("Error"))) }
         )
 
         dynamicListViewModel.dynamicListAction.test {
             dynamicListViewModel.load(requestModel)
             awaitItem()
-            assert(awaitItem() is DynamicListUIState.ErrorAction)
+            assert(awaitItem() is DynamicListFlowState.ErrorAction)
             cancelAndConsumeRemainingEvents()
         }
     }
