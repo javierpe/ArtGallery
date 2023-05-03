@@ -1,26 +1,26 @@
 package com.javi.dynamic.list.domain.useCases
 
 import com.javi.api.TooltipPreferencesApi
-import com.javi.dynamic.list.data.actions.DynamicListUIState
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListElement
-import com.javi.dynamic.list.data.models.DynamicListShowCaseModel
-import com.javi.dynamic.list.data.useCases.GetDynamicListShowCaseUseCase
+import com.javi.dynamic.list.data.useCases.GetTooltipSequenceUseCase
+import com.javi.dynamic.list.domain.models.DynamicListShowCaseModel
+import com.javi.dynamic.list.domain.models.ShowCaseResultModel
 import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import kotlinx.coroutines.flow.first
 import java.util.LinkedList
 import java.util.Queue
 import javax.inject.Inject
 
-class GetDynamicListShowCaseUseCaseImpl @Inject constructor(
+class GetTooltipSequenceUseCaseImpl @Inject constructor(
     private val delegates: MutableSet<@JvmSuppressWildcards DynamicListFactory>,
     private val tooltipPreferencesApi: TooltipPreferencesApi
-) : GetDynamicListShowCaseUseCase {
+) : GetTooltipSequenceUseCase {
 
     override suspend operator fun invoke(
         header: List<ComponentItemModel>,
         body: List<ComponentItemModel>
-    ): DynamicListUIState {
+    ): ShowCaseResultModel {
         val showCaseSequence: Queue<DynamicListShowCaseModel> = LinkedList()
 
         val bodyElements = body.map { component ->
@@ -66,7 +66,7 @@ class GetDynamicListShowCaseUseCaseImpl @Inject constructor(
             DynamicListShowCaseModel("", 0, true)
         )
 
-        return DynamicListUIState.SuccessAction(
+        return ShowCaseResultModel(
             body = bodyElements,
             header = headerElements,
             showCaseQueue = showCaseSequence

@@ -1,12 +1,12 @@
 package com.javi.dynamic.list.data.useCases
 
-import com.javi.dynamic.list.data.actions.DynamicListUIState
 import com.javi.dynamic.list.data.models.ComponentItemModel
+import com.javi.dynamic.list.domain.models.ShowCaseResultModel
 
-interface GetDynamicListShowCaseUseCase {
+interface GetTooltipSequenceUseCase {
 
     suspend operator fun invoke(
         header: List<ComponentItemModel>,
         body: List<ComponentItemModel>
-    ): DynamicListUIState
+    ): ShowCaseResultModel
 }

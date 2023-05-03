@@ -1,4 +1,4 @@
-package com.javi.dynamic.list.data.models
+package com.javi.dynamic.list.domain.models
 
 data class DynamicListShowCaseModel(
     val render: String,

@@ -1,12 +1,12 @@
 package com.javi.dynamic.list.di
 
-import com.javi.dynamic.list.data.useCases.GetDynamicListShowCaseUseCase
 import com.javi.dynamic.list.data.useCases.GetDynamicListUseCase
 import com.javi.dynamic.list.data.useCases.GetSkeletonsByContextUseCase
+import com.javi.dynamic.list.data.useCases.GetTooltipSequenceUseCase
 import com.javi.dynamic.list.data.useCases.SaveSkeletonsUseCase
 import com.javi.dynamic.list.domain.useCases.DynamicListUseCaseImpl
-import com.javi.dynamic.list.domain.useCases.GetDynamicListShowCaseUseCaseImpl
 import com.javi.dynamic.list.domain.useCases.GetSkeletonsByContextUseCaseImpl
+import com.javi.dynamic.list.domain.useCases.GetTooltipSequenceUseCaseImpl
 import com.javi.dynamic.list.domain.useCases.SaveSkeletonsUseCaseImpl
 import dagger.Binds
 import dagger.Module
@@ -27,8 +27,8 @@ abstract class DynamicListUseCasesModule {
     @Binds
     @Singleton
     abstract fun bindGetDynamicListDataUseCase(
-        impl: GetDynamicListShowCaseUseCaseImpl
-    ): GetDynamicListShowCaseUseCase
+        impl: GetTooltipSequenceUseCaseImpl
+    ): GetTooltipSequenceUseCase
 
     @Binds
     @Singleton

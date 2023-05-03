@@ -5,9 +5,9 @@ import com.javi.dynamic.list.data.actions.DynamicListUIState
 import com.javi.dynamic.list.data.extensions.updateProducts
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.data.repositories.DynamicListRepository
-import com.javi.dynamic.list.data.useCases.GetDynamicListShowCaseUseCase
 import com.javi.dynamic.list.data.useCases.GetDynamicListUseCase
 import com.javi.dynamic.list.data.useCases.GetSkeletonsByContextUseCase
+import com.javi.dynamic.list.data.useCases.GetTooltipSequenceUseCase
 import com.javi.dynamic.list.data.useCases.SaveSkeletonsUseCase
 import com.javi.dynamic.list.di.IODispatcher
 import kotlinx.coroutines.CoroutineDispatcher
@@ -23,7 +23,7 @@ import javax.inject.Inject
 class DynamicListUseCaseImpl @Inject constructor(
     @IODispatcher val ioDispatcher: CoroutineDispatcher,
     private val repository: DynamicListRepository,
-    private val getDynamicListShowCaseUseCaseImpl: GetDynamicListShowCaseUseCase,
+    private val getTooltipSequenceUseCase: GetTooltipSequenceUseCase,
     private val saveSkeletonsUseCase: SaveSkeletonsUseCase,
     private val getSkeletonsByContextUseCase: GetSkeletonsByContextUseCase,
     private val basketUpdatesUseCase: BasketUpdatesUseCase
@@ -45,9 +45,15 @@ class DynamicListUseCaseImpl @Inject constructor(
             }
             .map {
                 if (it is DynamicListUIState.ResponseAction) {
-                    getDynamicListShowCaseUseCaseImpl(
+                    val showCaseResultModel = getTooltipSequenceUseCase(
                         header = it.header,
                         body = it.body
+                    )
+
+                    DynamicListUIState.SuccessAction(
+                        body = showCaseResultModel.body,
+                        header = showCaseResultModel.header,
+                        showCaseQueue = showCaseResultModel.showCaseQueue
                     )
                 } else {
                     it
@@ -64,7 +70,14 @@ class DynamicListUseCaseImpl @Inject constructor(
             }
             .onStart {
                 if (withSkeletons) {
-                    emit(getSkeletonsByContextUseCase(requestModel.contextType.source))
+                    val skeletons = getSkeletonsByContextUseCase(requestModel.contextType.source)
+                    emit(
+                        if (skeletons.isEmpty()) {
+                            DynamicListUIState.LoadingAction
+                        } else {
+                            DynamicListUIState.SkeletonAction(skeletons)
+                        }
+                    )
                 }
             }
             .catch {

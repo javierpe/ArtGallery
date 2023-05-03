@@ -1,10 +1,10 @@
 package com.javi.dynamic.list.data.useCases
 
-import com.javi.dynamic.list.data.actions.DynamicListUIState
+import com.javi.render.processor.core.RenderType
 
 interface GetSkeletonsByContextUseCase {
 
     suspend operator fun invoke(
         source: String
-    ): DynamicListUIState
+    ): List<RenderType>
 }

@@ -1,8 +1,8 @@
 package com.javi.dynamic.list.domain.useCases
 
-import com.javi.dynamic.list.data.actions.DynamicListUIState
 import com.javi.dynamic.list.data.useCases.GetSkeletonsByContextUseCase
 import com.javi.dynamic.list.domain.database.AppDatabase
+import com.javi.render.processor.core.RenderType
 import javax.inject.Inject
 
 class GetSkeletonsByContextUseCaseImpl @Inject constructor(
@@ -11,14 +11,10 @@ class GetSkeletonsByContextUseCaseImpl @Inject constructor(
 
     override suspend fun invoke(
         source: String
-    ): DynamicListUIState {
+    ): List<RenderType> {
         val skeletonContext = database.skeletonsDao()
             .provideSkeletonsByContext(source)
 
-        return skeletonContext?.let {
-            DynamicListUIState.SkeletonAction(it.renders)
-        } ?: kotlin.run {
-            DynamicListUIState.LoadingAction
-        }
+        return skeletonContext?.renders ?: emptyList()
     }
 }

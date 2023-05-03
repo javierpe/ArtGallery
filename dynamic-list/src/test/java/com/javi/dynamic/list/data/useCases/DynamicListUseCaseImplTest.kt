@@ -31,7 +31,7 @@ class DynamicListUseCaseImplTest {
     lateinit var repository: DynamicListRepository
 
     @Mock
-    lateinit var getDynamicListShowCaseUseCaseImpl: GetDynamicListShowCaseUseCase
+    lateinit var getDynamicListShowCaseUseCaseImpl: GetTooltipSequenceUseCase
 
     @Mock
     lateinit var saveSkeletonsUseCase: SaveSkeletonsUseCase
@@ -78,7 +78,7 @@ class DynamicListUseCaseImplTest {
     @Test
     fun `LoadingAction should return first`() = runTest {
         whenever(getSkeletonsByContextUseCase.invoke(dynamicListRequestModel.contextType.source)).thenReturn(
-            DynamicListUIState.LoadingAction
+            emptyList()
         )
 
         assert(dynamicListUseCaseImpl(0, dynamicListRequestModel).first() is DynamicListUIState.LoadingAction)

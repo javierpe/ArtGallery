@@ -2,7 +2,7 @@ package com.javi.dynamic.list.data.actions
 
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListElement
-import com.javi.dynamic.list.data.models.DynamicListShowCaseModel
+import com.javi.dynamic.list.domain.models.DynamicListShowCaseModel
 import com.javi.dynamic.list.presentation.ui.base.DynamicListState
 import com.javi.render.processor.core.RenderType
 import java.util.LinkedList

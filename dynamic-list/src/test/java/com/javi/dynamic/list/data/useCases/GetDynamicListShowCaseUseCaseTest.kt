@@ -4,8 +4,8 @@ import com.javi.api.TooltipPreferencesApi
 import com.javi.dynamic.list.data.actions.DynamicListUIState
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListElement
-import com.javi.dynamic.list.data.models.DynamicListShowCaseModel
-import com.javi.dynamic.list.domain.useCases.GetDynamicListShowCaseUseCaseImpl
+import com.javi.dynamic.list.domain.models.DynamicListShowCaseModel
+import com.javi.dynamic.list.domain.useCases.GetTooltipSequenceUseCaseImpl
 import com.javi.dynamic.list.presentation.factories.TextFactory
 import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import com.javi.render.processor.core.RenderType
@@ -28,7 +28,7 @@ class GetDynamicListShowCaseUseCaseTest {
     @Mock
     lateinit var tooltipPreferencesApi: TooltipPreferencesApi
 
-    private lateinit var getDynamicListShowCaseUseCase: GetDynamicListShowCaseUseCaseImpl
+    private lateinit var getDynamicListShowCaseUseCase: GetTooltipSequenceUseCaseImpl
 
     private val testFactory = TextFactory()
 
@@ -52,7 +52,7 @@ class GetDynamicListShowCaseUseCaseTest {
 
     @Before
     fun setUp() {
-        getDynamicListShowCaseUseCase = GetDynamicListShowCaseUseCaseImpl(
+        getDynamicListShowCaseUseCase = GetTooltipSequenceUseCaseImpl(
             delegates,
             tooltipPreferencesApi
         )
@@ -80,7 +80,7 @@ class GetDynamicListShowCaseUseCaseTest {
         val result = getDynamicListShowCaseUseCase(
             header = header,
             body = body
-        ) as DynamicListUIState.SuccessAction
+        )
 
         val expect = DynamicListUIState.SuccessAction(
             body = arrayListOf(
