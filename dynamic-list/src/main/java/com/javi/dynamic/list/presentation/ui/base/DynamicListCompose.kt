@@ -24,13 +24,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.javi.design.system.atoms.ErrorView
 import com.javi.design.system.atoms.LoaderView
 import com.javi.design.system.molecules.showCase.ShowCaseState
-import com.javi.dynamic.list.data.actions.DynamicListFlowState
 import com.javi.dynamic.list.data.actions.ScrollAction
 import com.javi.dynamic.list.data.actions.TargetAction
-import com.javi.dynamic.list.data.actions.sendAction
 import com.javi.dynamic.list.data.controllers.DynamicListComposeControllerImpl
 import com.javi.dynamic.list.data.models.DynamicListObject
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
+import com.javi.dynamic.list.presentation.ui.state.UIState
+import com.javi.dynamic.list.presentation.ui.state.sendAction
 import com.javi.dynamic.list.presentation.viewModels.DynamicListViewModel
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -55,16 +55,16 @@ fun ContextViewContent(
     }
 
     when (uiState) {
-        is DynamicListFlowState.SkeletonAction -> {
+        is UIState.SkeletonState -> {
             dynamicListListener.invoke(
                 DynamicListState.OnStartLoading
             )
             dynamicListComposeController?.ComposeSkeletons(
-                (uiState as DynamicListFlowState.SkeletonAction).renderTypes
+                (uiState as UIState.SkeletonState).renderTypes
             )
         }
 
-        is DynamicListFlowState.LoadingAction -> {
+        is UIState.LoadingState -> {
             dynamicListListener.invoke(
                 DynamicListState.OnStartLoading
             )
@@ -77,17 +77,17 @@ fun ContextViewContent(
             }
         }
 
-        is DynamicListFlowState.ErrorAction -> {
+        is UIState.ErrorState -> {
             ErrorView(
                 modifier = Modifier.fillMaxSize(),
-                exception = (uiState as DynamicListFlowState.ErrorAction).exception
+                exception = (uiState as UIState.ErrorState).message
             ) {
                 dynamicListViewModel.load(requestModel)
             }
         }
 
-        is DynamicListFlowState.SuccessAction -> {
-            val successState = (uiState as DynamicListFlowState.SuccessAction)
+        is UIState.SuccessState -> {
+            val successState = (uiState as UIState.SuccessState)
             DynamicListSuccess(
                 action = successState,
                 dynamicListComposeController = dynamicListComposeController,
@@ -106,7 +106,7 @@ fun ContextViewContent(
 @Suppress("LongParameterList")
 @Composable
 fun DynamicListSuccess(
-    action: DynamicListFlowState.SuccessAction,
+    action: UIState.SuccessState,
     destinationsNavigator: DestinationsNavigator? = null,
     dynamicListComposeController: DynamicListComposeControllerImpl? = null,
     showCaseState: ShowCaseState,

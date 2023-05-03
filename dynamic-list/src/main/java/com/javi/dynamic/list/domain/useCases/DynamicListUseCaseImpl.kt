@@ -73,9 +73,9 @@ class DynamicListUseCaseImpl @Inject constructor(
                     val skeletons = getSkeletonsByContextUseCase(requestModel.contextType.source)
                     emit(
                         if (skeletons.isEmpty()) {
-                            DynamicListFlowState.LoadingAction
+                            DynamicListFlowState.WithoutSkeletonDataAction
                         } else {
-                            DynamicListFlowState.SkeletonAction(skeletons)
+                            DynamicListFlowState.SkeletonDataAction(skeletons)
                         }
                     )
                 }

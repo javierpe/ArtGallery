@@ -15,7 +15,7 @@ sealed class DynamicListFlowState {
     /**
      * Show loader view
      */
-    object LoadingAction : DynamicListFlowState()
+    object WithoutSkeletonDataAction : DynamicListFlowState()
 
     /**
      * Show error view
@@ -34,7 +34,7 @@ sealed class DynamicListFlowState {
     /**
      * Show skeleton
      */
-    class SkeletonAction(val renderTypes: List<RenderType>) : DynamicListFlowState()
+    class SkeletonDataAction(val renderTypes: List<RenderType>) : DynamicListFlowState()
 
     /**
      * State data from response
@@ -43,28 +43,4 @@ sealed class DynamicListFlowState {
         val body: List<ComponentItemModel> = emptyList(),
         val header: List<ComponentItemModel> = emptyList(),
     ) : DynamicListFlowState()
-}
-
-internal fun DynamicListFlowState.SuccessAction.sendAction(
-    dynamicListListener: (DynamicListState) -> Unit
-) {
-    if (header.isNotEmpty()) {
-        dynamicListListener.invoke(
-            DynamicListState.OnHeaderItemsLoaded(
-                components = header.map { it.componentItemModel }
-            )
-        )
-    }
-
-    if (body.isNotEmpty()) {
-        dynamicListListener.invoke(
-            DynamicListState.OnBodyItemsLoaded(
-                components = body.map { it.componentItemModel }
-            )
-        )
-    }
-
-    dynamicListListener.invoke(
-        DynamicListState.OnContextLoaded
-    )
 }

@@ -81,7 +81,7 @@ class DynamicListUseCaseImplTest {
             emptyList()
         )
 
-        assert(dynamicListUseCaseImpl(0, dynamicListRequestModel).first() is DynamicListFlowState.LoadingAction)
+        assert(dynamicListUseCaseImpl(0, dynamicListRequestModel).first() is DynamicListFlowState.WithoutSkeletonDataAction)
     }
 
     @Test
@@ -90,7 +90,7 @@ class DynamicListUseCaseImplTest {
             repository.get(0, dynamicListRequestModel)
         ).thenReturn(flow { emit(successAction) })
 
-        dynamicListUseCaseImpl(0, dynamicListRequestModel).first() is DynamicListFlowState.SkeletonAction
+        dynamicListUseCaseImpl(0, dynamicListRequestModel).first() is DynamicListFlowState.SkeletonDataAction
     }
 
     @Suppress("TooGenericExceptionThrown")

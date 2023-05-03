@@ -38,7 +38,7 @@ fun LoaderView(
 @Composable
 fun ErrorView(
     modifier: Modifier = Modifier,
-    exception: Throwable? = null,
+    exception: String,
     onRetry: () -> Unit
 ) {
     Column(
@@ -47,7 +47,7 @@ fun ErrorView(
             .padding(16.dp)
     ) {
         Text(
-            text = exception?.toString() ?: stringResource(id = R.string.label_error),
+            text = exception,
             modifier = Modifier.align(Alignment.CenterHorizontally),
             color = Color.Black
         )
@@ -61,7 +61,7 @@ fun ErrorView(
 @Composable
 @Preview(showBackground = true)
 fun PreviewErrorView() {
-    ErrorView { }
+    ErrorView(exception = "Error") { }
 }
 
 @Composable
