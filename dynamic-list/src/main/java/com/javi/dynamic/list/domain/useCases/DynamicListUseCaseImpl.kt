@@ -54,10 +54,10 @@ class DynamicListUseCaseImpl @Inject constructor(
                 }
             }
             .onEach {
-                if (it is DynamicListUIState.ResponseAction) {
+                if (it is DynamicListUIState.SuccessAction) {
                     saveSkeletonsUseCase(
-                        body = it.body,
-                        header = it.header,
+                        body = it.body.map { component -> component.componentItemModel },
+                        header = it.header.map { component -> component.componentItemModel },
                         source = requestModel.contextType.source
                     )
                 }
