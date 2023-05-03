@@ -5,12 +5,12 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import com.javi.cards.page.api.GetCardsPageUseCase
 import com.javi.design.system.molecules.showCase.rememberShowCaseState
-import com.javi.dynamic.list.data.factories.CARDS_COMPONENT_TAG
-import com.javi.dynamic.list.data.factories.CardsFactory
 import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListObject
 import com.javi.dynamic.list.presentation.components.card.CardsModel
+import com.javi.dynamic.list.presentation.factories.CARDS_COMPONENT_TAG
+import com.javi.dynamic.list.presentation.factories.CardsFactory
 import com.javi.render.processor.core.RenderType
 import org.junit.Before
 import org.junit.Rule
@@ -77,6 +77,6 @@ class CardsFactoryTest {
 
     @Test
     fun renderNameShouldBe_CARDS() {
-        assert(factory.renders.contains(RenderType.CARDS))
+        assert(factory.render == RenderType.CARDS)
     }
 }

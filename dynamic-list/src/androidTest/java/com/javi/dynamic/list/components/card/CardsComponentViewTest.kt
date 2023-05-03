@@ -29,14 +29,13 @@ class CardsComponentViewTest {
 
     @Before
     fun setUp() {
-
         val model = CardsModel(
             title = String(),
             cardElements = listOf(
                 CardElement(
                     id = 0,
                     title = "Test",
-                    images = emptyList()
+                    products = emptyList()
                 )
             )
         )

@@ -34,7 +34,9 @@ class BannerComponentViewScreenTest {
                     ),
                     componentIndex = 0,
                     showCaseState = rememberShowCaseState(),
-                    onProductDetail = { }
+                    onProductDetail = { },
+                    onDecrement = { },
+                    onAdd = { }
                 )
             }
         }

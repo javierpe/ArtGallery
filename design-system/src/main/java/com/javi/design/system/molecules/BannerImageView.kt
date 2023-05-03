@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.javi.design.system.atoms.ImageComponentView
-import com.javi.design.system.atoms.StepperButtonComponentView
+import com.javi.design.system.atoms.StepperComponentView
 import com.javi.design.system.extensions.withBounceClick
 import com.javi.design.system.theme.DynamicListComposeTheme
 
@@ -34,7 +34,7 @@ fun BannerImageView(
     onClickAction: () -> Unit
 ) {
     ConstraintLayout(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier.fillMaxSize()
     ) {
         val (card, stepper) = createRefs()
 
@@ -69,11 +69,11 @@ fun BannerImageView(
             }
         }
 
-        StepperButtonComponentView(
+        StepperComponentView(
             modifier = Modifier
                 .constrainAs(stepper) {
-                    end.linkTo(parent.end, 16.dp)
-                    top.linkTo(parent.top, 16.dp)
+                    top.linkTo(card.top, 16.dp)
+                    end.linkTo(card.end, 16.dp)
                 },
             quantity = quantity,
             onAdd = onAdd,

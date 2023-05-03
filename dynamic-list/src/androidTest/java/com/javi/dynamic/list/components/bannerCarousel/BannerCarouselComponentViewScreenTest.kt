@@ -36,7 +36,9 @@ class BannerCarouselComponentViewScreenTest {
                     ),
                     componentIndex = 0,
                     showCaseState = rememberShowCaseState(),
-                    onProductDetail = { }
+                    onProductDetail = { },
+                    onAdd = { },
+                    onDecrement = { }
                 )
             }
         }

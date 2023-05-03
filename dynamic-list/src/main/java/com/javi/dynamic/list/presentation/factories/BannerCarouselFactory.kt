@@ -31,7 +31,7 @@ const val BANNER_CAROUSEL_COMPONENT_TAG = "banner_carousel_component"
 
 @AdapterFactory
 class BannerCarouselFactory @Inject constructor(
-    private val productDetailScreenLoader: GetProductDetailPageUseCase,
+    private val getProductDetailPageUseCase: GetProductDetailPageUseCase,
     private val addProductToBasketUseCase: AddProductToBasketUseCase,
     private val decrementProductOnBasketUseCase: DecrementProductOnBasketUseCase
 ) : DynamicListFactory {
@@ -56,7 +56,7 @@ class BannerCarouselFactory @Inject constructor(
             onDecrement = { decrementProductOnBasketUseCase(it) },
             onProductDetail = {
                 componentInfo.dynamicListObject.destinationsNavigator?.navigate(
-                    direction = productDetailScreenLoader(it)
+                    direction = getProductDetailPageUseCase(it)
                 )
             }
         )

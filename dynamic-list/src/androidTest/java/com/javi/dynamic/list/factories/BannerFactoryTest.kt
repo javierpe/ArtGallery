@@ -3,15 +3,17 @@ package com.javi.dynamic.list.factories
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import com.javi.basket.api.AddProductToBasketUseCase
+import com.javi.basket.api.DecrementProductOnBasketUseCase
 import com.javi.data.ProductImageModel
 import com.javi.design.system.molecules.showCase.rememberShowCaseState
-import com.javi.dynamic.list.data.factories.BANNER_COMPONENT_TAG
-import com.javi.dynamic.list.data.factories.BannerFactory
 import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListObject
 import com.javi.dynamic.list.presentation.components.banner.BannerInfo
 import com.javi.dynamic.list.presentation.components.banner.BannerModel
+import com.javi.dynamic.list.presentation.factories.BANNER_COMPONENT_TAG
+import com.javi.dynamic.list.presentation.factories.BannerFactory
 import com.javi.product.detail.api.GetProductDetailPageUseCase
 import com.javi.render.processor.core.RenderType
 import org.junit.Before
@@ -30,7 +32,13 @@ class BannerFactoryTest {
     private lateinit var factory: BannerFactory
 
     @Mock
-    lateinit var productDetailScreenLoader: GetProductDetailPageUseCase
+    lateinit var getProductDetailPageUseCase: GetProductDetailPageUseCase
+
+    @Mock
+    lateinit var addProductToBasketUseCase: AddProductToBasketUseCase
+
+    @Mock
+    lateinit var decrementProductOnBasketUseCase: DecrementProductOnBasketUseCase
 
     private val componentItemModel by lazy {
         ComponentItemModel(
@@ -45,7 +53,11 @@ class BannerFactoryTest {
 
     @Before
     fun setUp() {
-        factory = BannerFactory(productDetailScreenLoader)
+        factory = BannerFactory(
+            getProductDetailPageUseCase = getProductDetailPageUseCase,
+            addProductToBasketUseCase = addProductToBasketUseCase,
+            decrementProductOnBasketUseCase = decrementProductOnBasketUseCase
+        )
     }
 
     @Test
@@ -79,6 +91,6 @@ class BannerFactoryTest {
 
     @Test
     fun renderNameShouldBe_BANNER() {
-        assert(factory.renders.contains(RenderType.BANNER))
+        assert(factory.render == RenderType.BANNER)
     }
 }

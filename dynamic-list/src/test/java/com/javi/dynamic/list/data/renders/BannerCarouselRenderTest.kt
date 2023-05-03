@@ -76,6 +76,6 @@ class BannerCarouselRenderTest {
 
     @Test
     fun `Render name should be BANNER_CAROUSEL`() = runTest {
-        assert(render.renders.contains(RenderType.BANNER_CAROUSEL))
+        assert(render.render == RenderType.BANNER_CAROUSEL)
     }
 }

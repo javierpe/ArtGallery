@@ -4,12 +4,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import com.javi.design.system.molecules.showCase.rememberShowCaseState
-import com.javi.dynamic.list.data.factories.PROFILE_COMPONENT_TAG
-import com.javi.dynamic.list.data.factories.ProfileFactory
 import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListObject
 import com.javi.dynamic.list.presentation.components.profile.ProfileModel
+import com.javi.dynamic.list.presentation.factories.PROFILE_COMPONENT_TAG
+import com.javi.dynamic.list.presentation.factories.ProfileFactory
 import com.javi.render.processor.core.RenderType
 import org.junit.Before
 import org.junit.Rule
@@ -34,7 +34,7 @@ class ProfileFactoryTest {
                 shortDescription = String(),
                 lifeDate = String(),
                 country = String(),
-                color = String()
+                color = "#000000"
             )
         )
     }
@@ -75,6 +75,6 @@ class ProfileFactoryTest {
 
     @Test
     fun renderNameShouldBe_PROFILE() {
-        assert(factory.renders.contains(RenderType.PROFILE))
+        assert(factory.render == RenderType.PROFILE)
     }
 }

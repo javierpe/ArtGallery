@@ -27,7 +27,7 @@ const val BANNER_COMPONENT_TAG = "banner_component"
 
 @AdapterFactory
 class BannerFactory @Inject constructor(
-    private val getProductDetailScreenUseCase: GetProductDetailPageUseCase,
+    private val getProductDetailPageUseCase: GetProductDetailPageUseCase,
     private val addProductToBasketUseCase: AddProductToBasketUseCase,
     private val decrementProductOnBasketUseCase: DecrementProductOnBasketUseCase
 ) : DynamicListFactory {
@@ -51,7 +51,7 @@ class BannerFactory @Inject constructor(
             onDecrement = { decrementProductOnBasketUseCase(it) }
         ) {
             componentInfo.dynamicListObject.destinationsNavigator?.navigate(
-                getProductDetailScreenUseCase(it)
+                getProductDetailPageUseCase(it)
             )
         }
     }

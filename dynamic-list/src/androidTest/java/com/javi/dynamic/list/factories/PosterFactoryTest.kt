@@ -4,15 +4,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import com.javi.design.system.molecules.showCase.rememberShowCaseState
-import com.javi.dynamic.list.data.factories.BANNER_CAROUSEL_COMPONENT_TAG
-import com.javi.dynamic.list.data.factories.BannerCarouselFactory
-import com.javi.dynamic.list.data.factories.POSTER_COMPONENT_TAG
-import com.javi.dynamic.list.data.factories.PosterFactory
 import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListObject
-import com.javi.dynamic.list.presentation.components.bannerCarousel.BannerCarouselModel
 import com.javi.dynamic.list.presentation.components.poster.PosterModel
+import com.javi.dynamic.list.presentation.factories.POSTER_COMPONENT_TAG
+import com.javi.dynamic.list.presentation.factories.PosterFactory
 import com.javi.product.detail.api.GetProductDetailPageUseCase
 import com.javi.render.processor.core.RenderType
 import org.junit.Before
@@ -80,6 +77,6 @@ class PosterFactoryTest {
 
     @Test
     fun renderNameShouldBe_POSTER() {
-        assert(factory.renders.contains(RenderType.POSTER))
+        assert(factory.render == RenderType.POSTER)
     }
 }

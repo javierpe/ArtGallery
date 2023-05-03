@@ -76,7 +76,7 @@ class DynamicListRepositoryImplTest {
             requestModel = dynamicListRequestModel,
             fromRemote = false
         ).test {
-            assert(awaitItem() is DynamicListUIState.SuccessAction)
+            assert(awaitItem() is DynamicListUIState.ResponseAction)
             cancelAndConsumeRemainingEvents()
         }
     }

@@ -1,8 +1,6 @@
 package com.javi.dynamic.list.components.banner
 
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.test.assert
-import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
@@ -28,7 +26,7 @@ class BannerComponentViewTest {
     val composeTestRule = createComposeRule()
 
     @Mock
-    lateinit var onClick: (String) -> Unit
+    lateinit var onClick: () -> Unit
 
     private val productImageModel by lazy {
         ProductImageModel(id = 0, quantity = 0, imageURL = String())
@@ -36,7 +34,6 @@ class BannerComponentViewTest {
 
     @Before
     fun setUp() {
-
         val model = BannerModel(
             product = productImageModel,
             bannerInfo = BannerInfo(title = "", description = "")
@@ -52,17 +49,12 @@ class BannerComponentViewTest {
                     description = model.bannerInfo?.description.orEmpty(),
                     componentIndex = 0,
                     showCaseState = rememberShowCaseState(),
-                    onClickAction = onClick
+                    onClickAction = onClick,
+                    onDecrement = { },
+                    onAdd = { }
                 )
             }
         }
-    }
-
-    @Test
-    fun bannerShouldHaveClickAction() {
-        composeTestRule
-            .onNodeWithTag(BANNER_IMAGE_TEST_TAG)
-            .assert(hasClickAction())
     }
 
     @Test
@@ -71,6 +63,6 @@ class BannerComponentViewTest {
             .onNodeWithTag(BANNER_IMAGE_TEST_TAG)
             .performClick()
 
-        verify(onClick).invoke(productImageModel.imageURL)
+        verify(onClick).invoke()
     }
 }

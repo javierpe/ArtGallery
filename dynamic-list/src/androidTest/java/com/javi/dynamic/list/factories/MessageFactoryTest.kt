@@ -4,12 +4,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import com.javi.design.system.molecules.showCase.rememberShowCaseState
-import com.javi.dynamic.list.data.factories.MESSAGE_COMPONENT_TAG
-import com.javi.dynamic.list.data.factories.MessageFactory
 import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListObject
 import com.javi.dynamic.list.presentation.components.message.MessageModel
+import com.javi.dynamic.list.presentation.factories.MESSAGE_COMPONENT_TAG
+import com.javi.dynamic.list.presentation.factories.MessageFactory
 import com.javi.render.processor.core.RenderType
 import org.junit.Before
 import org.junit.Rule
@@ -71,6 +71,6 @@ class MessageFactoryTest {
 
     @Test
     fun renderNameShouldBe_MESSAGE() {
-        assert(factory.renders.contains(RenderType.MESSAGE))
+        assert(factory.render == RenderType.MESSAGE)
     }
 }

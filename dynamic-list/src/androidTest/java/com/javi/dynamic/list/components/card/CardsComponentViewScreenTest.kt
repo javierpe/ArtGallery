@@ -33,7 +33,7 @@ class CardsComponentViewScreenTest {
                             CardElement(
                                 id = 0,
                                 title = String(),
-                                images = emptyList()
+                                products = emptyList()
                             )
                         )
                     ),

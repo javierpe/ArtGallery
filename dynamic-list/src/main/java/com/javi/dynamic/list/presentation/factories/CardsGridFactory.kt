@@ -56,7 +56,7 @@ class CardsGridFactory @Inject constructor(
     override fun CreateSkeleton() {
         VerticalGrid(
             modifier = Modifier
-                .testTag("card-container-skeleton")
+                .testTag("skeleton")
         ) {
             for (x in 1..6) {
                 Box(

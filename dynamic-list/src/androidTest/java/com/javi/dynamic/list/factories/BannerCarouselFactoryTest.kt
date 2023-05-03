@@ -3,13 +3,15 @@ package com.javi.dynamic.list.factories
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import com.javi.basket.api.AddProductToBasketUseCase
+import com.javi.basket.api.DecrementProductOnBasketUseCase
 import com.javi.design.system.molecules.showCase.rememberShowCaseState
-import com.javi.dynamic.list.data.factories.BANNER_CAROUSEL_COMPONENT_TAG
-import com.javi.dynamic.list.data.factories.BannerCarouselFactory
 import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListObject
 import com.javi.dynamic.list.presentation.components.bannerCarousel.BannerCarouselModel
+import com.javi.dynamic.list.presentation.factories.BANNER_CAROUSEL_COMPONENT_TAG
+import com.javi.dynamic.list.presentation.factories.BannerCarouselFactory
 import com.javi.product.detail.api.GetProductDetailPageUseCase
 import com.javi.render.processor.core.RenderType
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -27,10 +29,16 @@ class BannerCarouselFactoryTest {
     val composeTestRule = createComposeRule()
 
     @Mock
-    lateinit var productDetailScreenLoader: GetProductDetailPageUseCase
+    lateinit var destinationsNavigator: DestinationsNavigator
 
     @Mock
-    lateinit var destinationsNavigator: DestinationsNavigator
+    lateinit var getProductDetailPageUseCase: GetProductDetailPageUseCase
+
+    @Mock
+    lateinit var addProductToBasketUseCase: AddProductToBasketUseCase
+
+    @Mock
+    lateinit var decrementProductOnBasketUseCase: DecrementProductOnBasketUseCase
 
     private lateinit var factory: BannerCarouselFactory
 
@@ -46,7 +54,11 @@ class BannerCarouselFactoryTest {
 
     @Before
     fun setUp() {
-        factory = BannerCarouselFactory(productDetailScreenLoader)
+        factory = BannerCarouselFactory(
+            getProductDetailPageUseCase = getProductDetailPageUseCase,
+            addProductToBasketUseCase = addProductToBasketUseCase,
+            decrementProductOnBasketUseCase = decrementProductOnBasketUseCase
+        )
     }
 
     @Test
@@ -82,6 +94,6 @@ class BannerCarouselFactoryTest {
 
     @Test
     fun renderNameShouldBe_BANNER_CAROUSEL() {
-        assert(factory.renders.contains(RenderType.BANNER_CAROUSEL))
+        assert(factory.render == RenderType.BANNER_CAROUSEL)
     }
 }

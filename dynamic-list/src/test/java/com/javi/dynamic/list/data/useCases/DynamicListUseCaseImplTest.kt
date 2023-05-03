@@ -1,9 +1,9 @@
 package com.javi.dynamic.list.data.useCases
 
 import app.cash.turbine.test
+import com.javi.basket.api.BasketUpdatesUseCase
 import com.javi.data.enums.ContextType
 import com.javi.dynamic.list.data.actions.DynamicListUIState
-import com.javi.dynamic.list.data.models.DynamicListContainer
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.data.repositories.DynamicListRepository
 import com.javi.dynamic.list.domain.useCases.DynamicListUseCaseImpl
@@ -39,6 +39,9 @@ class DynamicListUseCaseImplTest {
     @Mock
     lateinit var getSkeletonsByContextUseCase: GetSkeletonsByContextUseCase
 
+    @Mock
+    lateinit var basketUpdatesUseCase: BasketUpdatesUseCase
+
     private lateinit var dynamicListUseCaseImpl: DynamicListUseCaseImpl
 
     private val dispatcher = StandardTestDispatcher()
@@ -49,10 +52,8 @@ class DynamicListUseCaseImplTest {
 
     private val successAction by lazy {
         DynamicListUIState.SuccessAction(
-            container = DynamicListContainer(
-                header = emptyList(),
-                body = emptyList()
-            )
+            header = emptyList(),
+            body = emptyList()
         )
     }
 
@@ -64,7 +65,8 @@ class DynamicListUseCaseImplTest {
             repository,
             getDynamicListShowCaseUseCaseImpl,
             saveSkeletonsUseCase,
-            getSkeletonsByContextUseCase
+            getSkeletonsByContextUseCase,
+            basketUpdatesUseCase
         )
     }
 

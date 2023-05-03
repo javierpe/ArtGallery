@@ -150,7 +150,6 @@ fun PreviewNightModeOffProfileComponentView() {
     uiMode = Configuration.UI_MODE_NIGHT_YES
 )
 fun PreviewNightModeOnProfileComponentView() {
-
     val model = ProfileModel(
         name = "Picasso",
         shortDescription = "Modern art",

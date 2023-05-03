@@ -3,7 +3,6 @@ package com.javi.dynamic.list.data.useCases
 import com.javi.api.TooltipPreferencesApi
 import com.javi.dynamic.list.data.actions.DynamicListUIState
 import com.javi.dynamic.list.data.models.ComponentItemModel
-import com.javi.dynamic.list.data.models.DynamicListContainer
 import com.javi.dynamic.list.data.models.DynamicListElement
 import com.javi.dynamic.list.data.models.DynamicListShowCaseModel
 import com.javi.dynamic.list.domain.useCases.GetDynamicListShowCaseUseCaseImpl
@@ -51,13 +50,6 @@ class GetDynamicListShowCaseUseCaseTest {
         )
     }
 
-    private val container by lazy {
-        DynamicListContainer(
-            header = header,
-            body = body
-        )
-    }
-
     @Before
     fun setUp() {
         getDynamicListShowCaseUseCase = GetDynamicListShowCaseUseCaseImpl(
@@ -85,10 +77,12 @@ class GetDynamicListShowCaseUseCaseTest {
             DynamicListShowCaseModel("", 0, true)
         )
 
-        val result = getDynamicListShowCaseUseCase(container) as DynamicListUIState.SuccessAction
+        val result = getDynamicListShowCaseUseCase(
+            header = header,
+            body = body
+        ) as DynamicListUIState.SuccessAction
 
         val expect = DynamicListUIState.SuccessAction(
-            container = container,
             body = arrayListOf(
                 DynamicListElement(testFactory, body.first())
             ),
@@ -97,10 +91,6 @@ class GetDynamicListShowCaseUseCaseTest {
             ),
             showCaseQueue = showCaseSequence
         )
-
-        assert(result.container == expect.container) {
-            "Assertion container result!"
-        }
 
         assert(result.body == expect.body) {
             "Assertion body result!"

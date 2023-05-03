@@ -33,7 +33,7 @@ class ProfileFactory @Inject constructor() : DynamicListFactory {
         componentInfo: ComponentInfo
     ) {
         ProfileComponentScreenView(
-            modifier = Modifier.testTag(PROFILE_COMPONENT_TAG),
+            modifier = modifier.testTag(PROFILE_COMPONENT_TAG),
             model = component.resource as ProfileModel,
             isExpandedScreen = componentInfo.dynamicListObject.widthSizeClass == WindowWidthSizeClass.Expanded
         )

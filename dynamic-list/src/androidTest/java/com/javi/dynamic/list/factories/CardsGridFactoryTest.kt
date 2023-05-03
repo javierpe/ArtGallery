@@ -4,12 +4,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import com.javi.design.system.molecules.showCase.rememberShowCaseState
-import com.javi.dynamic.list.data.factories.CARDS_GRID_TAG
-import com.javi.dynamic.list.data.factories.CardsGridFactory
 import com.javi.dynamic.list.data.models.ComponentInfo
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListObject
 import com.javi.dynamic.list.presentation.components.cardsGrid.CardsGridModel
+import com.javi.dynamic.list.presentation.factories.CARDS_GRID_TAG
+import com.javi.dynamic.list.presentation.factories.CardsGridFactory
 import com.javi.product.detail.api.GetProductDetailPageUseCase
 import com.javi.render.processor.core.RenderType
 import org.junit.Before
@@ -78,6 +78,6 @@ class CardsGridFactoryTest {
 
     @Test
     fun renderNameShouldBe_CARDS_GRID() {
-        assert(factory.renders.contains(RenderType.CARDS_GRID))
+        assert(factory.render == RenderType.CARDS_GRID)
     }
 }
