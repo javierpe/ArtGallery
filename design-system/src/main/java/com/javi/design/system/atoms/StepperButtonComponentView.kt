@@ -39,15 +39,27 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.javi.design.system.extensions.withBounceClick
 import com.javi.design.system.theme.DynamicListComposeTheme
-import com.javi.design.system.theme.PositiveColor
+import com.javi.design.system.theme.HeaderDark
+import com.javi.design.system.theme.HeaderLight
 import com.javi.design.system.theme.Typography
 
 private const val ANIMATION_DURATION_TIME = 250
 private val MOVEMENT_RANGE = -250..250
 
 enum class StepperUIState {
+    /**
+     * First state.
+     */
     IDLE,
+
+    /**
+     * Show stepper view,
+     */
     ACTIVE,
+
+    /**
+     * Shows quantity or plus button only and stepper is hidden.
+     */
     STAND_BY
 }
 
@@ -88,7 +100,7 @@ fun StepperComponentView(
                     } else if (movement.toInt() > positionInRoot) {
                         StepperUIState.IDLE
                     } else {
-                        StepperUIState.STAND_BY
+                        StepperUIState.ACTIVE
                     }
                 }
             }
@@ -122,15 +134,6 @@ fun StepperView(
         tween(ANIMATION_DURATION_TIME)
     )
 
-    val animatedButtonQuantityVisibility = animateFloatAsState(
-        targetValue = if (uiState == StepperUIState.STAND_BY) 1f else 0f,
-        tween(ANIMATION_DURATION_TIME)
-    )
-
-    if (quantity > 0) {
-        println()
-    }
-
     Box(
         modifier = modifier,
         contentAlignment = Alignment.TopEnd
@@ -139,15 +142,7 @@ fun StepperView(
             modifier = Modifier
                 .size(45.dp)
                 .alpha(animatedButtonVisibility.value),
-            icon = Icons.Filled.Add
-        ) {
-            onAdd()
-        }
-
-        StepperButtonAction(
-            modifier = Modifier
-                .size(45.dp)
-                .alpha(animatedButtonQuantityVisibility.value),
+            icon = Icons.Filled.Add,
             quantity = quantity
         ) {
             onAdd()
@@ -198,7 +193,7 @@ fun StepperButtonAction(
             .clip(CircleShape)
             .background(
                 if (quantity > 0) {
-                    PositiveColor
+                    HeaderLight
                 } else {
                     Color.White
                 }
@@ -222,8 +217,8 @@ fun StepperButtonAction(
                     .align(Alignment.Center)
                     .padding(10.dp),
                 text = quantity.toString(),
-                color = Color.White,
-                style = Typography.h6.copy(fontWeight = FontWeight.Black)
+                color = HeaderDark,
+                style = Typography.h6.copy(fontWeight = FontWeight.Black),
             )
         }
     }
