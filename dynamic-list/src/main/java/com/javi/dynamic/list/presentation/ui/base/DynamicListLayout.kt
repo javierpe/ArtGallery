@@ -31,7 +31,8 @@ fun DynamicListLayout(
 
     val constraints = when (screenClass.value) {
         WindowWidthSizeClass.Compact -> compactConstraints()
-        WindowWidthSizeClass.Medium -> mediumConstraints(
+        WindowWidthSizeClass.Medium,
+        WindowWidthSizeClass.Expanded -> mediumConstraints(
             haveHeader = contentHeader != null,
             haveBody = contentBody != null
         )
