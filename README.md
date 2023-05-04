@@ -32,14 +32,15 @@ To create a new UI component you must follow the following steps:
 
 1. In the RenderType class you must register the name of the new component
 2. Create a model specific to the `resource` you need to convert
-3. Add the `@RenderClass` annotation to the model and pass the new render type you created as a parameter
-![RenderClass](https://user-images.githubusercontent.com/7097754/229964442-857246bc-6cd4-4dbf-b369-5a552d0c4f6f.png)
+3. Add the `@RenderModel` annotation to the model and pass the new render type you created as a parameter
+![RenderClass](https://user-images.githubusercontent.com/7097754/236341023-619813d2-4b09-43de-9ed2-3c469de2c66d.png)
 
 4. Create a render factory class that extends `DynamicListFactory` and that will take care of managing the component
    1. The class asks for a list of compatible renders, add the one you created.
    2. If that component has an onboarding tooltip then add `hasShowCaseConfigured = true`
    3. In the `CreateComponent` function add your composable element
    4. In the `CreateSkeleton` function create a plain copy of your composable element, this is a skeleton!
+   5. Do not forget annotate it with `@ComponentFactory`
 
 5. On the main screen add the `ContextView` component as follows
    1. `title` is the title of the screen
