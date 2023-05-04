@@ -1,4 +1,4 @@
-package com.javi.dynamic.list.data.useCases
+package com.javi.dynamic.list.domain.useCases
 
 import app.cash.turbine.test
 import com.javi.basket.api.BasketUpdatesUseCase
@@ -6,7 +6,9 @@ import com.javi.data.enums.ContextType
 import com.javi.dynamic.list.data.actions.DynamicListFlowState
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.data.repositories.DynamicListRepository
-import com.javi.dynamic.list.domain.useCases.DynamicListUseCaseImpl
+import com.javi.dynamic.list.data.useCases.GetSkeletonsByContextUseCase
+import com.javi.dynamic.list.data.useCases.GetTooltipSequenceUseCase
+import com.javi.dynamic.list.data.useCases.SaveSkeletonsUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -81,7 +83,9 @@ class DynamicListUseCaseImplTest {
             emptyList()
         )
 
-        assert(dynamicListUseCaseImpl(0, dynamicListRequestModel).first() is DynamicListFlowState.WithoutSkeletonDataAction)
+        assert(
+            dynamicListUseCaseImpl(0, dynamicListRequestModel).first() is DynamicListFlowState.WithoutSkeletonDataAction
+        )
     }
 
     @Test

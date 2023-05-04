@@ -1,11 +1,10 @@
-package com.javi.dynamic.list.data.useCases
+package com.javi.dynamic.list.domain.useCases
 
 import com.javi.api.TooltipPreferencesApi
 import com.javi.dynamic.list.data.actions.DynamicListFlowState
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListElement
 import com.javi.dynamic.list.domain.models.DynamicListShowCaseModel
-import com.javi.dynamic.list.domain.useCases.GetTooltipSequenceUseCaseImpl
 import com.javi.dynamic.list.presentation.factories.TextFactory
 import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import com.javi.render.processor.core.RenderType

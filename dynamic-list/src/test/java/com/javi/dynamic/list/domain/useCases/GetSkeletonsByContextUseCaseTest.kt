@@ -1,8 +1,7 @@
-package com.javi.dynamic.list.data.useCases
+package com.javi.dynamic.list.domain.useCases
 
 import com.javi.dynamic.list.domain.database.AppDatabase
 import com.javi.dynamic.list.domain.database.skeletons.SkeletonsDao
-import com.javi.dynamic.list.domain.useCases.GetSkeletonsByContextUseCaseImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.resetMain

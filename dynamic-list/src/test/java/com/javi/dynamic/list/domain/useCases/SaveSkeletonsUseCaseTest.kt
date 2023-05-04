@@ -1,9 +1,8 @@
-package com.javi.dynamic.list.data.useCases
+package com.javi.dynamic.list.domain.useCases
 
 import com.javi.dynamic.list.domain.database.AppDatabase
 import com.javi.dynamic.list.domain.database.skeletons.SkeletonsDao
 import com.javi.dynamic.list.domain.database.skeletons.SkeletonsEntity
-import com.javi.dynamic.list.domain.useCases.SaveSkeletonsUseCaseImpl
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,7 +34,7 @@ class SaveSkeletonsUseCaseTest {
         saveSkeletonUseCaseImpl.invoke(
             body = emptyList(),
             header = emptyList(),
-            source = String()
+            context = String()
         )
 
         verify(database.skeletonsDao()).saveSkeletonsByContext(
