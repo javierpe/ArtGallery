@@ -85,15 +85,15 @@ fun FilterListComponentView(
         modifier = modifier
             .fillMaxHeight()
             .wrapContentWidth()
-            .padding(start = 16.dp, end = 16.dp, top = 16.dp),
+            .padding(start = 10.dp, end = 10.dp, top = 10.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         data.forEachIndexed { index, item ->
             FilterItemComponent(
-                modifier = Modifier.width(100.dp),
+                modifier = Modifier.width(120.dp),
                 text = item.text,
                 isSelected = state == index,
-                cornerRadius = 20.dp,
+                cornerRadius = 12.dp,
                 textAlign = TextAlign.Start,
                 color = Color(android.graphics.Color.parseColor(item.color))
             ) {
@@ -198,7 +198,7 @@ fun FilterItemComponent(
             text = text,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp),
+                .padding(12.dp),
             color = colorTextAnimation,
             textAlign = textAlign,
             style = Typography.subtitle2

@@ -4,7 +4,6 @@ import android.app.Activity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -21,7 +20,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -39,9 +37,7 @@ import com.javi.dynamic.list.presentation.viewModels.DynamicListViewModel
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 const val HEADER_ID = "header"
-const val BG_HEADER_ID = "bg-header"
 const val BODY_ID = "body"
-const val BG_BODY_ID = "bg-body"
 
 @Suppress("LongParameterList")
 @Composable
@@ -131,21 +127,12 @@ fun DynamicListSuccess(
 
     val windowWidthSizeClass = calculateWindowSizeClass(activity = LocalContext.current as Activity)
 
-    val modifierHeaderUpdated = remember {
+    val modifierUpdated = remember {
         derivedStateOf {
             when (windowWidthSizeClass.widthSizeClass) {
                 WindowWidthSizeClass.Compact -> Modifier.wrapContentSize()
-                WindowWidthSizeClass.Medium -> Modifier.wrapContentWidth().fillMaxHeight().padding(16.dp)
-                else -> Modifier.wrapContentWidth().fillMaxHeight()
-            }
-        }
-    }
-
-    val modifierBodyUpdated = remember {
-        derivedStateOf {
-            when (windowWidthSizeClass.widthSizeClass) {
-                WindowWidthSizeClass.Compact -> Modifier.wrapContentSize()
-                WindowWidthSizeClass.Medium -> Modifier.wrapContentWidth().fillMaxHeight().padding(16.dp)
+                WindowWidthSizeClass.Medium,
+                WindowWidthSizeClass.Expanded -> Modifier.wrapContentWidth().fillMaxHeight()
                 else -> Modifier.wrapContentWidth().fillMaxHeight()
             }
         }
@@ -155,34 +142,38 @@ fun DynamicListSuccess(
         modifier = modifier,
         widthSizeClass = windowWidthSizeClass.widthSizeClass,
         contentHeader = {
-            dynamicListComposeController?.ComposeHeader(
-                modifier = modifierHeaderUpdated.value.layoutId(HEADER_ID),
-                dynamicListObject = DynamicListObject(
-                    widthSizeClass = windowWidthSizeClass.widthSizeClass,
-                    destinationsNavigator = destinationsNavigator
-                ),
-                showCaseState = showCaseState,
-                elements = action.header
-            ) {
-                if (it.target == TargetAction.BODY) {
-                    actionBody.value = it
+            if (action.header.isNotEmpty()) {
+                dynamicListComposeController?.ComposeHeader(
+                    modifier = modifierUpdated.value,
+                    dynamicListObject = DynamicListObject(
+                        widthSizeClass = windowWidthSizeClass.widthSizeClass,
+                        destinationsNavigator = destinationsNavigator
+                    ),
+                    showCaseState = showCaseState,
+                    elements = action.header
+                ) {
+                    if (it.target == TargetAction.BODY) {
+                        actionBody.value = it
+                    }
                 }
             }
         },
         contentBody = {
-            dynamicListComposeController?.ComposeBody(
-                modifier = modifierBodyUpdated.value.layoutId(BODY_ID),
-                dynamicListObject = DynamicListObject(
-                    widthSizeClass = windowWidthSizeClass.widthSizeClass,
-                    destinationsNavigator = destinationsNavigator
-                ),
-                sharedAction = actionBody.value,
-                showCaseState = showCaseState,
-                bodyListState = bodyListState,
-                elements = action.body
-            ) {
-                if (it.target == TargetAction.BODY) {
-                    actionBody.value = it
+            if (action.body.isNotEmpty()) {
+                dynamicListComposeController?.ComposeBody(
+                    modifier = modifierUpdated.value,
+                    dynamicListObject = DynamicListObject(
+                        widthSizeClass = windowWidthSizeClass.widthSizeClass,
+                        destinationsNavigator = destinationsNavigator
+                    ),
+                    sharedAction = actionBody.value,
+                    showCaseState = showCaseState,
+                    bodyListState = bodyListState,
+                    elements = action.body
+                ) {
+                    if (it.target == TargetAction.BODY) {
+                        actionBody.value = it
+                    }
                 }
             }
         }

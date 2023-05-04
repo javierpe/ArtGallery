@@ -70,83 +70,33 @@ fun HeaderWithImageView(
         tween(DURATION)
     )
 
-    /**
-     * First mode
-     *
-     *  val (backgroundRef, titleRef, backButtonRef) = createRefs()
+    val colorBackgroundStart = if (isSystemInDarkTheme()) {
+        HeaderDark
+    } else {
+        HeaderLight
+    }
 
-     val constraintSetStart = ConstraintSet {
-     constrain(backgroundRef) {
-     start.linkTo(parent.start)
-     end.linkTo(parent.end)
-     top.linkTo(parent.top)
-
-     height = Dimension.value(120.dp)
-     }
-
-     constrain(titleRef) {
-     bottom.linkTo(parent.bottom)
-     start.linkTo(parent.start, 16.dp)
-     top.linkTo(backButtonRef.bottom)
-     }
-
-     constrain(backButtonRef) {
-     start.linkTo(parent.start, 16.dp)
-     top.linkTo(parent.top, 16.dp)
-     }
-     }
-
-     val constraintSetEnd = ConstraintSet {
-     constrain(backgroundRef) {
-     start.linkTo(parent.start)
-     end.linkTo(parent.end)
-     top.linkTo(parent.top)
-
-     height = Dimension.value(65.dp)
-     }
-
-     constrain(titleRef) {
-     bottom.linkTo(backButtonRef.bottom)
-     start.linkTo(backButtonRef.end, 10.dp)
-     top.linkTo(backButtonRef.top)
-     }
-
-     constrain(backButtonRef) {
-     start.linkTo(parent.start, 16.dp)
-     top.linkTo(parent.top, 16.dp)
-     }
-     }
-     */
-
-    /**
-     * Second mode
-     *     val motionSceneContent = remember {
-     context.resources
-     .openRawResource(R.raw.motion_scene)
-     .readBytes()
-     .decodeToString()
-     }
-     */
-
-    /**
-     * For third mode check motion_scene.json5
-     */
-
-    val colorStart = if (isSystemInDarkTheme()) {
-        MaterialTheme.colors.surface
+    val colorTextStart = if (isSystemInDarkTheme()) {
+        HeaderLight
     } else {
         HeaderDark
     }
 
-    val colorEnd = if (isSystemInDarkTheme()) {
-        MaterialTheme.colors.onSecondary
+    val colorBackgroundEnd = if (isSystemInDarkTheme()) {
+        HeaderLight
+    } else {
+        HeaderDark
+    }
+
+    val colorTextEnd = if (isSystemInDarkTheme()) {
+        HeaderDark
     } else {
         HeaderLight
     }
 
     MotionLayout(
-        start = constraintSetStart(colorStart),
-        end = constraintSetEnd(colorEnd),
+        start = constraintSetStart(colorBackgroundStart, colorTextStart),
+        end = constraintSetEnd(colorBackgroundEnd, colorTextEnd),
         progress = progress,
         modifier = modifier.height(motionHeight)
     ) {
@@ -194,7 +144,10 @@ fun HeaderWithImageView(
 @Suppress("ImplicitDefaultLocale", "MagicNumber")
 fun Int.hexToString() = String.format("#%06X", 0xFFFFFF and this)
 
-private fun constraintSetStart(background: Color) = ConstraintSet(
+private fun constraintSetStart(
+    background: Color,
+    textColor: Color
+) = ConstraintSet(
     """ {
 	background: { 
 		start: ['parent', 'start'],
@@ -210,7 +163,7 @@ private fun constraintSetStart(background: Color) = ConstraintSet(
 		start: ['parent', 'start', 16],
         top: ['back_button', 'bottom'],
         custom: {
-          textColor: '#FFFFFF'
+          textColor: '${textColor.toArgb().hexToString()}'
         }
 	},
 	back_button: {
@@ -224,7 +177,10 @@ private fun constraintSetStart(background: Color) = ConstraintSet(
 } """
 )
 
-private fun constraintSetEnd(background: Color) = ConstraintSet(
+private fun constraintSetEnd(
+    background: Color,
+    textColor: Color
+) = ConstraintSet(
     """ {
 	background: { 
 		start: ['parent', 'start'],
@@ -240,7 +196,7 @@ private fun constraintSetEnd(background: Color) = ConstraintSet(
 		start: ['back_button', 'end', 10],
         top: ['back_button', 'top'],
         custom: {
-          textColor: '#000000'
+          textColor: '${textColor.toArgb().hexToString()}'
         }
 	},
 	back_button: {
