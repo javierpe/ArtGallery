@@ -33,7 +33,10 @@ fun ProductImageContent(
             modifier = Modifier.align(Alignment.TopCenter),
             title = "Buy",
             contextType = ContextType.BANNER_DETAIL,
-            destinationsNavigator = destinationsNavigator
+            destinationsNavigator = destinationsNavigator,
+            onCustomBack = {
+                systemUiController.isSystemBarsVisible = true
+            }
         )
     }
 }

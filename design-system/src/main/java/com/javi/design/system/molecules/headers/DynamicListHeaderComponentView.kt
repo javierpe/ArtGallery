@@ -37,7 +37,8 @@ fun DynamicListHeaderComponentView(
     title: String,
     contextType: ContextType,
     bodyLazyListState: LazyListState? = null,
-    destinationsNavigator: DestinationsNavigator? = null
+    destinationsNavigator: DestinationsNavigator? = null,
+    onCustomBack: (() -> Unit)? = null
 ) {
     val icon = if (contextType == ContextType.HOME) Icons.Default.Star else Icons.Default.ArrowBack
 
@@ -48,6 +49,7 @@ fun DynamicListHeaderComponentView(
                 title = title,
                 icon = icon,
                 onIconClick = {
+                    onCustomBack?.invoke()
                     destinationsNavigator?.popBackStack()
                 }
             )
@@ -61,6 +63,7 @@ fun DynamicListHeaderComponentView(
                 icon = icon,
                 onIconClick = {
                     if (contextType != ContextType.HOME) {
+                        onCustomBack?.invoke()
                         destinationsNavigator?.popBackStack()
                     }
                 }
