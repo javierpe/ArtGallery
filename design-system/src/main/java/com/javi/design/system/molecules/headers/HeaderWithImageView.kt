@@ -31,6 +31,8 @@ import com.javi.design.system.data.BACKGROUND
 import com.javi.design.system.data.BACK_BUTTON_BACKGROUND
 import com.javi.design.system.data.BACK_BUTTON_ICON_COLOR
 import com.javi.design.system.data.TEXT_COLOR
+import com.javi.design.system.theme.HeaderDark
+import com.javi.design.system.theme.HeaderLight
 import com.javi.design.system.theme.Typography
 
 const val DURATION = 500
@@ -133,13 +135,13 @@ fun HeaderWithImageView(
     val colorStart = if (isSystemInDarkTheme()) {
         MaterialTheme.colors.surface
     } else {
-        Color.Black
+        HeaderDark
     }
 
     val colorEnd = if (isSystemInDarkTheme()) {
         MaterialTheme.colors.onSecondary
     } else {
-        Color.White
+        HeaderLight
     }
 
     MotionLayout(
