@@ -31,6 +31,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 /**
  * Define header design by context
  */
+@Suppress("LongParameterList", "FunctionNaming")
 @Composable
 fun DynamicListHeaderComponentView(
     modifier: Modifier = Modifier,
