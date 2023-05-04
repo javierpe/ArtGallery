@@ -14,11 +14,11 @@ class SaveSkeletonsUseCaseImpl @Inject constructor(
     override operator fun invoke(
         body: List<ComponentItemModel>,
         header: List<ComponentItemModel>,
-        source: String
+        context: String
     ) {
         database.skeletonsDao().saveSkeletonsByContext(
             SkeletonsEntity(
-                context = source,
+                context = context,
                 renders = (header + body).map { component ->
                     RenderType.valueOf(component.render.uppercase())
                 }

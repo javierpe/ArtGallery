@@ -32,7 +32,7 @@ import com.javi.render.processor.core.RenderType
 @Composable
 fun MessageComponentView(
     modifier: Modifier,
-    message: String,
+    message: MessageModel,
     componentIndex: Int,
     showCaseState: ShowCaseState
 ) {
@@ -65,7 +65,7 @@ fun MessageComponentView(
                 .padding(10.dp)
                 .fillMaxWidth(),
             textAlign = TextAlign.Justify,
-            text = message,
+            text = message.message,
             color = MaterialTheme.colors.secondary.copy(alpha = 0.5f)
         )
     }
@@ -82,7 +82,7 @@ fun PreviewNightModeMessageComponentView() {
     DynamicListComposeTheme {
         MessageComponentView(
             modifier = Modifier,
-            message = "Hola a todos",
+            message = MessageModel("Hola a todos"),
             0,
             rememberShowCaseState()
         )
@@ -99,7 +99,7 @@ fun PreviewNoNightModeMessageComponentView() {
     DynamicListComposeTheme {
         MessageComponentView(
             modifier = Modifier,
-            message = "Hola a todos",
+            message = MessageModel("Hola a todos"),
             0,
             rememberShowCaseState()
         )

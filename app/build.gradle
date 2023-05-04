@@ -143,4 +143,6 @@ dependencies {
     // Performance
     debugImplementation(libs.debug.leak.canary)
     implementation(libs.androidx.metrics.performance)
+
+    implementation("androidx.compose.runtime:runtime-tracing:1.0.0-alpha03")
 }

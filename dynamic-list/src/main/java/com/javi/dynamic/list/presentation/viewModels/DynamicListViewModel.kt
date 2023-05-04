@@ -31,7 +31,7 @@ class DynamicListViewModel @Inject constructor(
         job = viewModelScope.launch {
             getDynamicListUseCase(0, dynamicListRequestModel)
                 .collect { flowState ->
-                    when(flowState) {
+                    when (flowState) {
                         is DynamicListFlowState.WithoutSkeletonDataAction -> _dynamicListAction.emit(
                             UIState.LoadingState
                         )

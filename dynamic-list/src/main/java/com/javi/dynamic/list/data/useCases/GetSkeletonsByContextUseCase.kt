@@ -5,6 +5,6 @@ import com.javi.render.processor.core.RenderType
 interface GetSkeletonsByContextUseCase {
 
     suspend operator fun invoke(
-        source: String
+        context: String
     ): List<RenderType>
 }

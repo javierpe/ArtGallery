@@ -10,10 +10,10 @@ class GetSkeletonsByContextUseCaseImpl @Inject constructor(
 ) : GetSkeletonsByContextUseCase {
 
     override suspend fun invoke(
-        source: String
+        context: String
     ): List<RenderType> {
         val skeletonContext = database.skeletonsDao()
-            .provideSkeletonsByContext(source)
+            .provideSkeletonsByContext(context)
 
         return skeletonContext?.renders ?: emptyList()
     }

@@ -37,7 +37,7 @@ class MessageFactory @Inject constructor() : DynamicListFactory {
     ) {
         MessageComponentView(
             modifier = modifier.testTag(MESSAGE_COMPONENT_TAG),
-            message = (component.resource as MessageModel).message,
+            message = component.resource as MessageModel,
             componentIndex = component.index,
             componentInfo.showCaseState
         )

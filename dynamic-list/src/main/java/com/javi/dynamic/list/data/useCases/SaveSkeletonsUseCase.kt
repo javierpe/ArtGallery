@@ -7,6 +7,6 @@ interface SaveSkeletonsUseCase {
     operator fun invoke(
         body: List<ComponentItemModel>,
         header: List<ComponentItemModel>,
-        source: String
+        context: String
     )
 }

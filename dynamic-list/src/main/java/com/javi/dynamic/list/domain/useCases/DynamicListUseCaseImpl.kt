@@ -32,7 +32,6 @@ class DynamicListUseCaseImpl @Inject constructor(
     override suspend operator fun invoke(
         page: Int,
         requestModel: DynamicListRequestModel,
-        withSkeletons: Boolean
     ): Flow<DynamicListFlowState> {
         return repository
             .get(page, requestModel)
@@ -64,21 +63,19 @@ class DynamicListUseCaseImpl @Inject constructor(
                     saveSkeletonsUseCase(
                         body = it.body.map { component -> component.componentItemModel },
                         header = it.header.map { component -> component.componentItemModel },
-                        source = requestModel.contextType.source
+                        context = requestModel.contextType.source
                     )
                 }
             }
             .onStart {
-                if (withSkeletons) {
-                    val skeletons = getSkeletonsByContextUseCase(requestModel.contextType.source)
-                    emit(
-                        if (skeletons.isEmpty()) {
-                            DynamicListFlowState.WithoutSkeletonDataAction
-                        } else {
-                            DynamicListFlowState.SkeletonDataAction(skeletons)
-                        }
-                    )
-                }
+                val skeletons = getSkeletonsByContextUseCase(requestModel.contextType.source)
+                emit(
+                    if (skeletons.isEmpty()) {
+                        DynamicListFlowState.WithoutSkeletonDataAction
+                    } else {
+                        DynamicListFlowState.SkeletonDataAction(skeletons)
+                    }
+                )
             }
             .catch {
                 emit(DynamicListFlowState.ErrorAction(it))
