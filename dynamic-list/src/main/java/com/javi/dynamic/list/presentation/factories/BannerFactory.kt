@@ -20,12 +20,12 @@ import com.javi.dynamic.list.presentation.components.banner.BannerModel
 import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import com.javi.product.detail.api.GetProductDetailPageUseCase
 import com.javi.render.processor.core.RenderType
-import com.javi.render.processor.core.annotations.factory.AdapterFactory
+import com.javi.render.processor.core.annotations.factory.ComponentFactory
 import javax.inject.Inject
 
 const val BANNER_COMPONENT_TAG = "banner_component"
 
-@AdapterFactory
+@ComponentFactory
 class BannerFactory @Inject constructor(
     private val getProductDetailPageUseCase: GetProductDetailPageUseCase,
     private val addProductToBasketUseCase: AddProductToBasketUseCase,

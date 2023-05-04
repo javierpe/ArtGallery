@@ -1,10 +1,10 @@
 package com.javi.dynamic.list.presentation.components.profile
 
 import com.javi.render.processor.core.RenderType
-import com.javi.render.processor.core.annotations.render.RenderClass
+import com.javi.render.processor.core.annotations.render.RenderModel
 import com.squareup.moshi.Json
 
-@RenderClass(type = RenderType.PROFILE)
+@RenderModel(type = RenderType.PROFILE)
 data class ProfileModel(
     @Json(name = "name") val name: String,
     @Json(name = "short_description") val shortDescription: String,

@@ -25,12 +25,12 @@ import com.javi.dynamic.list.presentation.components.faces.FacesComponentView
 import com.javi.dynamic.list.presentation.components.faces.FacesModel
 import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import com.javi.render.processor.core.RenderType
-import com.javi.render.processor.core.annotations.factory.AdapterFactory
+import com.javi.render.processor.core.annotations.factory.ComponentFactory
 import javax.inject.Inject
 
 const val FACES_COMPONENT_TAG = "faces_component"
 
-@AdapterFactory
+@ComponentFactory
 class FacesFactory @Inject constructor() : DynamicListFactory {
 
     override val render = RenderType.FACES

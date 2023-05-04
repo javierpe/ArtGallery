@@ -17,12 +17,12 @@ import com.javi.dynamic.list.presentation.components.message.MessageComponentVie
 import com.javi.dynamic.list.presentation.components.message.MessageModel
 import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import com.javi.render.processor.core.RenderType
-import com.javi.render.processor.core.annotations.factory.AdapterFactory
+import com.javi.render.processor.core.annotations.factory.ComponentFactory
 import javax.inject.Inject
 
 const val MESSAGE_COMPONENT_TAG = "message_component"
 
-@AdapterFactory
+@ComponentFactory
 class MessageFactory @Inject constructor() : DynamicListFactory {
 
     override val render = RenderType.MESSAGE

@@ -6,4 +6,4 @@ package com.javi.render.processor.core.annotations.factory
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.SOURCE)
-annotation class AdapterFactory
+annotation class ComponentFactory

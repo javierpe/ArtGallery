@@ -17,12 +17,12 @@ import com.javi.dynamic.list.presentation.components.text.TextComponentView
 import com.javi.dynamic.list.presentation.components.text.TextModel
 import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import com.javi.render.processor.core.RenderType
-import com.javi.render.processor.core.annotations.factory.AdapterFactory
+import com.javi.render.processor.core.annotations.factory.ComponentFactory
 import javax.inject.Inject
 
 const val TEXT_COMPONENT_TAG = "text_component"
 
-@AdapterFactory
+@ComponentFactory
 class TextFactory @Inject constructor() : DynamicListFactory {
 
     override val render = RenderType.TEXT

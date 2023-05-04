@@ -20,12 +20,12 @@ import com.javi.dynamic.list.presentation.components.card.CardsComponentViewScre
 import com.javi.dynamic.list.presentation.components.card.CardsModel
 import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import com.javi.render.processor.core.RenderType
-import com.javi.render.processor.core.annotations.factory.AdapterFactory
+import com.javi.render.processor.core.annotations.factory.ComponentFactory
 import javax.inject.Inject
 
 const val CARDS_COMPONENT_TAG = "cards_component"
 
-@AdapterFactory
+@ComponentFactory
 class CardsFactory @Inject constructor(
     private val getCardsPageUseCase: GetCardsPageUseCase
 ) : DynamicListFactory {

@@ -16,12 +16,12 @@ import com.javi.dynamic.list.presentation.components.profile.ProfileModel
 import com.javi.dynamic.list.presentation.components.profile.profileHeight
 import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import com.javi.render.processor.core.RenderType
-import com.javi.render.processor.core.annotations.factory.AdapterFactory
+import com.javi.render.processor.core.annotations.factory.ComponentFactory
 import javax.inject.Inject
 
 const val PROFILE_COMPONENT_TAG = "profile_component_tag"
 
-@AdapterFactory
+@ComponentFactory
 class ProfileFactory @Inject constructor() : DynamicListFactory {
 
     override val render = RenderType.PROFILE

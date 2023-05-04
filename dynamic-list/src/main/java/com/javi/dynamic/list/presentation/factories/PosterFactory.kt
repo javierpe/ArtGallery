@@ -18,12 +18,12 @@ import com.javi.dynamic.list.presentation.components.poster.PosterModel
 import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import com.javi.product.detail.api.GetProductDetailPageUseCase
 import com.javi.render.processor.core.RenderType
-import com.javi.render.processor.core.annotations.factory.AdapterFactory
+import com.javi.render.processor.core.annotations.factory.ComponentFactory
 import javax.inject.Inject
 
 const val POSTER_COMPONENT_TAG = "poster_component_tag"
 
-@AdapterFactory
+@ComponentFactory
 class PosterFactory @Inject constructor(
     private val getProductDetailScreenUseCase: GetProductDetailPageUseCase
 ) : DynamicListFactory {

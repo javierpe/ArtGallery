@@ -19,12 +19,12 @@ import com.javi.dynamic.list.presentation.components.cardsGrid.CardsGridModel
 import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import com.javi.product.detail.api.GetProductDetailPageUseCase
 import com.javi.render.processor.core.RenderType
-import com.javi.render.processor.core.annotations.factory.AdapterFactory
+import com.javi.render.processor.core.annotations.factory.ComponentFactory
 import javax.inject.Inject
 
 const val CARDS_GRID_TAG = "cards_grid"
 
-@AdapterFactory
+@ComponentFactory
 class CardsGridFactory @Inject constructor(
     private val getProductDetailScreenUseCase: GetProductDetailPageUseCase
 ) : DynamicListFactory {

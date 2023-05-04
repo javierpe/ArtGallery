@@ -2,10 +2,10 @@ package com.javi.dynamic.list.presentation.components.card
 
 import com.javi.data.ProductImageModel
 import com.javi.render.processor.core.RenderType
-import com.javi.render.processor.core.annotations.render.RenderClass
+import com.javi.render.processor.core.annotations.render.RenderModel
 import com.squareup.moshi.Json
 
-@RenderClass(type = RenderType.CARDS)
+@RenderModel(type = RenderType.CARDS)
 data class CardsModel(
     @Json(name = "title") val title: String,
     @Json(name = "items") val cardElements: List<CardElement>

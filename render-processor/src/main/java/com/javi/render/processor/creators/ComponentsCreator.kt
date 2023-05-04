@@ -5,7 +5,7 @@ import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSType
 import com.javi.render.processor.core.RenderType
-import com.javi.render.processor.core.annotations.render.RenderClass
+import com.javi.render.processor.core.annotations.render.RenderModel
 import com.javi.render.processor.data.models.ModelClassProcessed
 import com.javi.render.processor.data.utils.PACKAGE_FACTORIES
 import com.javi.render.processor.data.utils.PACKAGE_MOSHI
@@ -103,7 +103,7 @@ class ComponentsCreator(
                     .build()
 
                 val argument = ksAnnotated.annotations.firstOrNull { annotation ->
-                    annotation.shortName.asString() == RenderClass::class.simpleName
+                    annotation.shortName.asString() == RenderModel::class.simpleName
                 }?.arguments?.first()!!.value as KSType
 
                 fileSpec.addType(

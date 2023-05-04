@@ -4,4 +4,4 @@ import com.javi.render.processor.core.RenderType
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.SOURCE)
-annotation class RenderClass(val type: RenderType)
+annotation class RenderModel(val type: RenderType)

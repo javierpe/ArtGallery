@@ -1,10 +1,10 @@
 package com.javi.dynamic.list.presentation.components.faces
 
 import com.javi.render.processor.core.RenderType
-import com.javi.render.processor.core.annotations.render.RenderClass
+import com.javi.render.processor.core.annotations.render.RenderModel
 import com.squareup.moshi.Json
 
-@RenderClass(type = RenderType.FACES)
+@RenderModel(type = RenderType.FACES)
 data class FacesModel(
     @Json(name = "items") val items: List<FacesItemModel>
 )

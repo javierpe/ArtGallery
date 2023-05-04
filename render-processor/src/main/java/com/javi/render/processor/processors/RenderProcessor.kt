@@ -7,9 +7,9 @@ import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSNode
 import com.google.devtools.ksp.validate
-import com.javi.render.processor.core.annotations.factory.AdapterFactory
-import com.javi.render.processor.core.annotations.render.RenderClass
+import com.javi.render.processor.core.annotations.factory.ComponentFactory
 import com.javi.render.processor.core.annotations.render.RenderFactory
+import com.javi.render.processor.core.annotations.render.RenderModel
 import com.javi.render.processor.creators.ComponentsCreator
 import com.javi.render.processor.creators.FactoryModuleCreator
 import com.javi.render.processor.creators.MoshiModuleCreator
@@ -21,7 +21,7 @@ import kotlin.time.measureTime
 import kotlin.time.toJavaDuration
 
 /**
- * This class detect all @RenderClass annotations and process it to new component and
+ * This class detect all @RenderModel annotations and process it to new component and
  * hilt module.
  */
 internal class RenderProcessor(
@@ -77,7 +77,7 @@ internal class RenderProcessor(
     }
 
     private fun makeComponents(resolver: Resolver) {
-        RenderClass::class.qualifiedName?.let {
+        RenderModel::class.qualifiedName?.let {
             val resolved = resolver
                 .getSymbolsWithAnnotation(it, inDepth = true)
                 .toList()
@@ -96,7 +96,7 @@ internal class RenderProcessor(
     }
 
     private fun makeFactories(resolver: Resolver) {
-        AdapterFactory::class.qualifiedName?.let { name ->
+        ComponentFactory::class.qualifiedName?.let { name ->
             val resolved = resolver
                 .getSymbolsWithAnnotation(name)
                 .toList()
