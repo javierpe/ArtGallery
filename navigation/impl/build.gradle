@@ -1,11 +1,11 @@
 plugins {
+    id 'com.google.devtools.ksp' version '1.7.22-1.0.8'
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
 }
 
 android {
+    namespace 'com.javi.navigation.impl'
     compileSdk 33
 
     defaultConfig {
@@ -33,22 +33,43 @@ android {
     buildFeatures {
         compose true
     }
-
     composeOptions {
         kotlinCompilerExtensionVersion compose_compiler_version
     }
-    namespace 'com.javier.impl'
+}
+
+kotlin {
+    sourceSets {
+        debug {
+            kotlin.srcDir("build/generated/ksp/debug/kotlin")
+        }
+        release {
+            kotlin.srcDir("build/generated/ksp/release/kotlin")
+        }
+    }
 }
 
 dependencies {
 
-    implementation(project(":navigation:api"))
+    implementation project(":navigation:api")
 
-    // Navigation compose
-    implementation "io.github.raamcosta.compose-destinations:core:$compose_destinations_version"
-    implementation "io.github.raamcosta.compose-destinations:animations-core:$compose_destinations_version"
+    implementation project(":home:api")
+    implementation project(":product-detail:api")
+    implementation project(":places-page:api")
+    implementation project(":cards-page:api")
+
+    implementation project(":design-system")
 
     // Hilt
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
+    implementation(libs.hilt)
+
+    // Compose
+    implementation(libs.compose.ui)
+    implementation(libs.compose.material)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.androidx.core)
+
+    implementation(libs.navigation.destinations.core)
+    implementation(libs.navigation.destinations.animations.core)
+    ksp(libs.navigation.destinations.compiler)
 }

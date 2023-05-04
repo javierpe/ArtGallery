@@ -8,7 +8,6 @@ import com.javi.render.processor.data.utils.DI_RENDER_FACTORY_MODULE_FILE_NAME
 import com.javi.render.processor.data.utils.HILT_SINGLE_COMPONENT_CLASS_NAME
 import com.javi.render.processor.data.utils.PACKAGE_DI
 import com.javi.render.processor.data.utils.PACKAGE_HILT_SINGLETON_COMPONENT
-import com.javi.render.processor.data.utils.log
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
@@ -24,11 +23,10 @@ class RenderModuleCreator(
     private val codeGenerator: CodeGenerator,
     private val logger: KSPLogger
 ) {
-
     fun make(
         validatedSymbols: List<KSClassDeclaration>
     ) {
-        logger.log("Factories: ${validatedSymbols.toString()}")
+        logger.warn("Render Factories: $validatedSymbols")
 
         val fileSpec = FileSpec.builder(
             packageName = PACKAGE_DI,
@@ -50,8 +48,8 @@ class RenderModuleCreator(
             validatedSymbols.forEach { ksClassDeclaration ->
                 val classType = ksClassDeclaration.asType(emptyList())
                 val classDeclaration = ksClassDeclaration.superTypes.toList().first().resolve().declaration
-                logger.log("Render factory -> ${classType.declaration}")
-                addImport("", classDeclaration.packageName.asString() + ".${classDeclaration.toString()}")
+                logger.warn("Render factory -> ${classType.declaration}")
+                addImport("", classDeclaration.packageName.asString() + ".$classDeclaration")
                 type.addFunction(
                     FunSpec.builder("bind${classType.declaration}")
                         .addParameter(
@@ -78,7 +76,6 @@ class RenderModuleCreator(
 
             addType(type.build())
         }.addFileComment(DI_FACTORY_MODULE_COMMENT).build()
-
 
         try {
             fileSpec.writeTo(codeGenerator = codeGenerator, aggregating = false)

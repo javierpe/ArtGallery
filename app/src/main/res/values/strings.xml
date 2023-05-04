@@ -1,12 +1,3 @@
 <resources>
     <string name="app_name">Art Gallery</string>
-    <string name="label_loading" translatable="false">Cargando</string>
-    <string name="label_error" translatable="false">Error</string>
-    <string name="label_retry" translatable="false">Reintentar</string>
-    <string name="tooltip_baner_carousel" translatable="false">This is a banner inside a carousel!</string>
-    <string name="tooltip_banner" translatable="false">This is a banner component!</string>
-    <string name="tooltip_text" translatable="false">This is a header!</string>
-    <string name="tooltip_text_subtitle" translatable="false">Click to continue to the next tooltip!</string>
-    <string name="tooltip_message" translatable="false">This is a message component with animation!</string>
-    <string name="tooltip_cards" translatable="false">This is a card inside a carousel!</string>
 </resources>

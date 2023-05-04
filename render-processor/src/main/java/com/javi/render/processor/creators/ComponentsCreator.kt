@@ -4,8 +4,8 @@ import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSType
-import com.javi.render.processor.annotations.render.RenderClass
-import com.javi.render.processor.data.enums.RenderType
+import com.javi.render.processor.core.RenderType
+import com.javi.render.processor.core.annotations.render.RenderModel
 import com.javi.render.processor.data.models.ModelClassProcessed
 import com.javi.render.processor.data.utils.PACKAGE_FACTORIES
 import com.javi.render.processor.data.utils.PACKAGE_MOSHI
@@ -15,7 +15,6 @@ import com.javi.render.processor.data.utils.PROP_PARENT_MODEL_INDEX_NAME
 import com.javi.render.processor.data.utils.PROP_PARENT_MODEL_RENDER_NAME
 import com.javi.render.processor.data.utils.PROP_PARENT_MODEL_RESOURCE_NAME
 import com.javi.render.processor.data.utils.isDataClass
-import com.javi.render.processor.data.utils.log
 import com.javi.render.processor.data.utils.semanticName
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
@@ -43,8 +42,7 @@ class ComponentsCreator(
         validatedSymbols: List<KSClassDeclaration>,
         names: MutableList<ModelClassProcessed>
     ) {
-
-        logger.log("Component Module: ${names.toString()}")
+        logger.warn("Components: $names")
 
         val fileSpec = FileSpec.builder(
             packageName = PACKAGE_FACTORIES,
@@ -53,7 +51,7 @@ class ComponentsCreator(
 
         val render = PropertySpec
             .builder(PROP_PARENT_MODEL_RENDER_NAME, String::class)
-            .initializer(" \"\"")
+            .initializer("\"\"")
             .addAnnotation(
                 AnnotationSpec
                     .builder(ClassName(PACKAGE_MOSHI, listOf("Json")))
@@ -86,7 +84,6 @@ class ComponentsCreator(
             )
             .build()
 
-
         fileSpec.addType(
             TypeSpec.classBuilder(PARENT_MODEL_FILE_NAME)
                 .addTypeVariable(TypeVariableName.Companion.invoke("T"))
@@ -99,7 +96,6 @@ class ComponentsCreator(
 
         validatedSymbols.forEach { ksAnnotated ->
             if (ksAnnotated.isDataClass()) {
-
                 val property = PropertySpec
                     .builder(PROP_PARENT_MODEL_RESOURCE_NAME, ksAnnotated.asType(emptyList()).toTypeName())
                     .initializer(PROP_PARENT_MODEL_RESOURCE_NAME)
@@ -107,7 +103,7 @@ class ComponentsCreator(
                     .build()
 
                 val argument = ksAnnotated.annotations.firstOrNull { annotation ->
-                    annotation.shortName.asString() == RenderClass::class.simpleName
+                    annotation.shortName.asString() == RenderModel::class.simpleName
                 }?.arguments?.first()!!.value as KSType
 
                 fileSpec.addType(
@@ -134,7 +130,7 @@ class ComponentsCreator(
 
                 names.add(
                     ModelClassProcessed(
-                        packageName =  ksAnnotated.packageName.asString(),
+                        packageName = ksAnnotated.packageName.asString(),
                         semanticName = ksAnnotated.semanticName(),
                         simpleName = ksAnnotated.simpleName.asString(),
                         renderType = RenderType.valueOf(argument.declaration.toString())

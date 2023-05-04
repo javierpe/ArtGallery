@@ -15,7 +15,7 @@
 
         <profileable
             android:shell="true"
-            tools:targetApi="q" />
+            tools:targetApi="33" />
 
         <activity
             android:name=".MainActivity"
@@ -26,12 +26,22 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="javi"
+                    android:host="artgallery.com" />
+            </intent-filter>
+
         </activity>
 
-        <!-- Need for Jetpack Compose testing -->
+        <!-- Need for Jetpack Compose testing
         <activity android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity" />
         <activity android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity" />
-        <activity android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity" />
+        <activity android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity" />-->
 
     </application>
 

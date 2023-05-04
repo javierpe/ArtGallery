@@ -2,7 +2,7 @@ package com.javi.render.processor.creators
 
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.KSPLogger
-import com.javi.render.processor.data.enums.RenderType
+import com.javi.render.processor.core.RenderType
 import com.javi.render.processor.data.models.ModelClassProcessed
 import com.javi.render.processor.data.utils.DI_RENDER_MODULE_COMMENT
 import com.javi.render.processor.data.utils.DI_RENDER_MODULE_FILE_NAME
@@ -13,7 +13,6 @@ import com.javi.render.processor.data.utils.PACKAGE_FACTORIES
 import com.javi.render.processor.data.utils.PACKAGE_HILT_SINGLETON_COMPONENT
 import com.javi.render.processor.data.utils.PACKAGE_MOSHI
 import com.javi.render.processor.data.utils.PACKAGE_PARENT_MODEL
-import com.javi.render.processor.data.utils.log
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
@@ -33,8 +32,7 @@ class MoshiModuleCreator(
     fun make(
         names: List<ModelClassProcessed>
     ) {
-
-        logger.log("Moshi Module: ${names.toString()}")
+        logger.warn("Moshi Module: $names")
 
         var subtypes = MOSHI_SUBTYPE_FACTORY
 

@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+    namespace 'com.javi.navigation.wiring'
     compileSdk 33
 
     defaultConfig {
@@ -29,19 +30,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion compose_compiler_version
-    }
-    namespace 'com.javier.wiring'
 }
 
 dependencies {
 
-    implementation(project(":navigation:api"))
-    implementation(project(":navigation:impl"))
+    implementation project(":navigation:api")
+    implementation project(":navigation:impl")
 
-    // Hilt
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
 }

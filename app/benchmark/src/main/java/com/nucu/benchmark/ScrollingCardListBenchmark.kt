@@ -36,7 +36,6 @@ class ScrollingCardListBenchmark {
             startActivityAndWait() // Time To Initial Display (TTID)
         }
     ) {
-
         // Wait to until show case is hidden
         device.wait(Until.gone(By.res(SHOW_CASE_TAG)), TIMEOUT)
 

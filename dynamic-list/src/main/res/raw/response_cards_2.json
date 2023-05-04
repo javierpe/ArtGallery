@@ -1,0 +1,50 @@
+{
+  "header": [ ],
+  "body": [
+    {
+      "render": "cards_grid",
+      "index": 0,
+      "resource": {
+        "id": 2,
+        "title": "Fruits",
+        "images": [
+          {
+            "id": 17,
+            "quantity": 0,
+            "image_url": "https://i.pinimg.com/474x/19/1d/2e/191d2e479f4dc7df19a0bacce769074c.jpg"
+          },
+          {
+            "id": 18,
+            "quantity": 0,
+            "image_url": "https://i.pinimg.com/474x/3d/f0/db/3df0dbdf6a3bd5b3d459d659b6d45d6f.jpg"
+          },
+          {
+            "id": 19,
+            "quantity": 0,
+            "image_url": "https://i.pinimg.com/474x/48/3e/21/483e21786c35fb432560e5e9621b44f0.jpg"
+          },
+          {
+            "id": 20,
+            "quantity": 0,
+            "image_url": "https://i.pinimg.com/474x/1a/3b/ab/1a3bab42e0a2f8b752f086602c8b70a4.jpg"
+          },
+          {
+            "id": 21,
+            "quantity": 0,
+            "image_url": "https://i.pinimg.com/474x/35/98/83/35988345230b51ef9211beadb1e76ab7.jpg"
+          },
+          {
+            "id": 22,
+            "quantity": 0,
+            "image_url": "https://i.pinimg.com/474x/80/9b/5d/809b5d22575607d8c840b2ca743c4317.jpg"
+          },
+          {
+            "id": 23,
+            "quantity": 0,
+            "image_url": "https://i.pinimg.com/474x/24/88/c2/2488c2ed4b45dc6d0a8b9345ce9b2069.jpg"
+          }
+        ]
+      }
+    }
+  ]
+}

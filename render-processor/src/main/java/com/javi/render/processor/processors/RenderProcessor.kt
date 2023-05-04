@@ -7,22 +7,21 @@ import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSNode
 import com.google.devtools.ksp.validate
-import com.javi.render.processor.annotations.factory.AdapterFactory
-import com.javi.render.processor.annotations.render.RenderClass
-import com.javi.render.processor.annotations.render.RenderFactory
+import com.javi.render.processor.core.annotations.factory.ComponentFactory
+import com.javi.render.processor.core.annotations.render.RenderFactory
+import com.javi.render.processor.core.annotations.render.RenderModel
 import com.javi.render.processor.creators.ComponentsCreator
 import com.javi.render.processor.creators.FactoryModuleCreator
 import com.javi.render.processor.creators.MoshiModuleCreator
 import com.javi.render.processor.creators.RenderModuleCreator
 import com.javi.render.processor.data.models.ModelClassProcessed
 import com.javi.render.processor.data.utils.isValid
-import com.javi.render.processor.data.utils.log
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime
 import kotlin.time.toJavaDuration
 
 /**
- * This class detect all @RenderClass annotations and process it to new component and
+ * This class detect all @RenderModel annotations and process it to new component and
  * hilt module.
  */
 internal class RenderProcessor(
@@ -31,38 +30,26 @@ internal class RenderProcessor(
     private val componentsCreator: ComponentsCreator,
     private val factoryModuleCreator: FactoryModuleCreator,
     private val renderModuleCreator: RenderModuleCreator
-): SymbolProcessor {
+) : SymbolProcessor {
 
     private val names = mutableListOf<ModelClassProcessed>()
     private val renders = mutableListOf<String>()
 
-    override fun finish() {
-        names.clear()
-        super.finish()
-    }
-
     @OptIn(ExperimentalTime::class)
     override fun process(resolver: Resolver): List<KSAnnotated> {
-
         val elapsedTime = measureTime {
             make(resolver)
         }
 
-        logger.log("Finished in ${elapsedTime.toJavaDuration().seconds}")
-        finish()
+        logger.warn("Finished in ${elapsedTime.toJavaDuration().toMillis()}ms")
+        logger.warn("===========================")
         return emptyList()
     }
 
     private fun make(resolver: Resolver) {
-        logger.log("Start processing!")
-
-        logger.log("Make FactoryModule...")
+        logger.warn("Start processing!")
         makeFactories(resolver)
-
-        logger.log("Make RenderModule...")
         makeRenderModule(resolver)
-
-        logger.log("Make Components...")
         makeComponents(resolver)
     }
 
@@ -81,36 +68,44 @@ internal class RenderProcessor(
                 }
             }
 
-            renderModuleCreator.make(
-                validatedSymbols = symbols
-            )
+            if (symbols.isNotEmpty()) {
+                renderModuleCreator.make(
+                    validatedSymbols = symbols
+                )
+            }
         }
     }
 
     private fun makeComponents(resolver: Resolver) {
-        RenderClass::class.qualifiedName?.let {
+        RenderModel::class.qualifiedName?.let {
             val resolved = resolver
-                .getSymbolsWithAnnotation(it)
+                .getSymbolsWithAnnotation(it, inDepth = true)
                 .toList()
 
-            componentsCreator.make(
-                validatedSymbols = getValidSymbols(resolved),
-                names = names
-            )
+            if (resolved.isNotEmpty()) {
+                componentsCreator.make(
+                    validatedSymbols = getValidSymbols(resolved),
+                    names = names
+                )
+            }
         }
 
-        moshiModuleCreator.make(names)
+        if (names.isNotEmpty()) {
+            moshiModuleCreator.make(names)
+        }
     }
 
     private fun makeFactories(resolver: Resolver) {
-        AdapterFactory::class.qualifiedName?.let { module ->
+        ComponentFactory::class.qualifiedName?.let { name ->
             val resolved = resolver
-                .getSymbolsWithAnnotation(module)
+                .getSymbolsWithAnnotation(name)
                 .toList()
 
-            factoryModuleCreator.make(
-                validatedSymbols = getValidSymbols(resolved)
-            )
+            if (resolved.isNotEmpty()) {
+                factoryModuleCreator.make(
+                    validatedSymbols = getValidSymbols(resolved)
+                )
+            }
         }
     }
 
