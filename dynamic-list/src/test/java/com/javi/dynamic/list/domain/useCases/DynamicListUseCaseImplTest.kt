@@ -105,7 +105,6 @@ class DynamicListUseCaseImplTest {
         )
 
         dynamicListUseCaseImpl.invoke(0, dynamicListRequestModel).test {
-            awaitItem()
             assert(awaitItem() is DynamicListFlowState.ErrorAction)
             cancelAndIgnoreRemainingEvents()
         }
