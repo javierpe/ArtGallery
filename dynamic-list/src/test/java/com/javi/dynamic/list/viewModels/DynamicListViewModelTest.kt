@@ -5,6 +5,7 @@ import com.javi.data.enums.ContextType
 import com.javi.dynamic.list.data.actions.DynamicListFlowState
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.data.useCases.GetDynamicListUseCase
+import com.javi.dynamic.list.presentation.ui.state.UIState
 import com.javi.dynamic.list.presentation.viewModels.DynamicListViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -44,7 +45,7 @@ class DynamicListViewModelTest {
     @Test
     fun `dynamicListAction should have a initial action`() = runTest {
         dynamicListViewModel.dynamicListAction.test {
-            assert(awaitItem() is DynamicListFlowState.None)
+            assert(awaitItem() is UIState.None)
             cancelAndConsumeRemainingEvents()
         }
     }
@@ -59,7 +60,7 @@ class DynamicListViewModelTest {
         dynamicListViewModel.dynamicListAction.test {
             dynamicListViewModel.load(requestModel)
             awaitItem()
-            assert(awaitItem() is DynamicListFlowState.ErrorAction)
+            assert(awaitItem() is UIState.ErrorState)
             cancelAndConsumeRemainingEvents()
         }
     }
