@@ -10,14 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.javi.design.system.theme.HeaderLight
 import com.javi.design.system.theme.Typography
-import com.javi.design.system.theme.gradientColor1
-import com.javi.design.system.theme.gradientColor2
 
 @Composable
 fun TooltipView(
@@ -27,21 +25,15 @@ fun TooltipView(
     Box(modifier = Modifier.fillMaxWidth()) {
         Box(
             modifier = Modifier
-                .clip(RoundedCornerShape(16.dp))
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(20.dp))
                 .align(alignment)
-                .background(
-                    Brush.verticalGradient(
-                        listOf(
-                            gradientColor1,
-                            gradientColor2
-                        )
-                    )
-                )
+                .background(HeaderLight)
                 .padding(16.dp)
         ) {
             Text(
                 text = text,
-                modifier = Modifier.padding(5.dp),
+                modifier = Modifier.padding(5.dp).fillMaxWidth(),
                 textAlign = TextAlign.Center,
                 style = Typography.h6,
                 color = Color.White
