@@ -5,7 +5,6 @@ package com.javi.dynamic.list.presentation.ui.base
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
@@ -26,6 +25,7 @@ import com.javi.dynamic.list.presentation.ui.utils.rememberMetricsStateHolder
 @Suppress("LongParameterList", "FunctionNaming")
 @Composable
 fun DynamicListScreen(
+    modifier: Modifier,
     content: List<DynamicListElement>,
     dynamicListObject: DynamicListObject,
     listState: LazyListState,
@@ -50,9 +50,7 @@ fun DynamicListScreen(
 
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier
-            .wrapContentHeight()
-            .testTag("dynamic-list-container"),
+        modifier = modifier.testTag("dynamic-list-container"),
         state = listState,
         contentPadding = PaddingValues(
             bottom = if (content.isNotEmpty() && withVerticalPadding) 16.dp else 0.dp,

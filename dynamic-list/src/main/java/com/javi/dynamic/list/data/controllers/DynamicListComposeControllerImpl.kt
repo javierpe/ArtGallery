@@ -65,6 +65,7 @@ abstract class DynamicListComposeControllerImpl {
 
     @Composable
     fun ComposeHeader(
+        modifier: Modifier,
         elements: List<DynamicListElement>,
         dynamicListObject: DynamicListObject,
         showCaseState: ShowCaseState,
@@ -73,6 +74,7 @@ abstract class DynamicListComposeControllerImpl {
         val listState = rememberLazyListState()
 
         DynamicListScreen(
+            modifier = modifier,
             content = elements,
             listState = listState,
             dynamicListObject = dynamicListObject,
@@ -85,6 +87,7 @@ abstract class DynamicListComposeControllerImpl {
     @Suppress("LongParameterList")
     @Composable
     fun ComposeBody(
+        modifier: Modifier,
         elements: List<DynamicListElement>,
         dynamicListObject: DynamicListObject,
         sharedAction: ScrollAction? = null,
@@ -117,6 +120,7 @@ abstract class DynamicListComposeControllerImpl {
         }
 
         DynamicListScreen(
+            modifier = modifier,
             content = elements,
             listState = bodyListState,
             dynamicListObject = dynamicListObject,

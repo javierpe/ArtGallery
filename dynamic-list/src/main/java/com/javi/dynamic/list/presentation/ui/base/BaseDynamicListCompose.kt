@@ -1,6 +1,5 @@
 package com.javi.dynamic.list.presentation.ui.base
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Scaffold
@@ -44,21 +43,18 @@ fun ContextView(
                 }
             }
         ) { padding ->
-            Box(
-                modifier = Modifier.padding(padding)
-            ) {
-                ContextViewContent(
-                    dynamicListComposeController = viewModel.dynamicListComposeController,
-                    showCaseState = showCaseState,
-                    bodyListState = bodyLazyListState,
-                    requestModel = requestModel,
-                    destinationsNavigator = destinationsNavigator,
-                    forceReload = state == DynamicListState.None,
-                    dynamicListListener = {
-                        viewModel.sendDynamicListState(it)
-                    }
-                )
-            }
+            ContextViewContent(
+                modifier = Modifier.padding(padding),
+                dynamicListComposeController = viewModel.dynamicListComposeController,
+                showCaseState = showCaseState,
+                bodyListState = bodyLazyListState,
+                requestModel = requestModel,
+                destinationsNavigator = destinationsNavigator,
+                forceReload = state == DynamicListState.None,
+                dynamicListListener = {
+                    viewModel.sendDynamicListState(it)
+                }
+            )
         }
     }
 }
