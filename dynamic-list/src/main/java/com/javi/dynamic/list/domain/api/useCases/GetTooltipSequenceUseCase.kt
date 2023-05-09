@@ -1,4 +1,4 @@
-package com.javi.dynamic.list.data.useCases
+package com.javi.dynamic.list.domain.api.useCases
 
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.domain.models.ShowCaseResultModel

@@ -1,6 +1,6 @@
-package com.javi.dynamic.list.data.renders
+package com.javi.dynamic.list.domain.renders
 
-import com.javi.dynamic.list.data.renders.base.DynamicListRender
+import com.javi.dynamic.list.domain.renders.base.DynamicListMapperUseCase
 import com.javi.dynamic.list.presentation.components.bannerCarousel.BannerCarouselModel
 import com.javi.render.processor.core.RenderType
 import com.javi.render.processor.core.annotations.render.RenderFactory
@@ -9,7 +9,8 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @RenderFactory(model = BannerCarouselModel::class)
-class BannerCarouselRender @Inject constructor() : DynamicListRender<BannerCarouselModel> {
+class BannerCarouselMapperUseCase @Inject constructor() :
+    DynamicListMapperUseCase<BannerCarouselModel> {
 
     override val render = RenderType.BANNER_CAROUSEL
 

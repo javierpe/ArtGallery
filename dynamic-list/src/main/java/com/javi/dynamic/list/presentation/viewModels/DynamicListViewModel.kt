@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.javi.dynamic.list.data.actions.DynamicListFlowState
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
-import com.javi.dynamic.list.data.useCases.GetDynamicListUseCase
+import com.javi.dynamic.list.domain.api.useCases.GetDynamicListUseCase
 import com.javi.dynamic.list.presentation.ui.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job

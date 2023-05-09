@@ -4,7 +4,7 @@ import app.cash.turbine.test
 import com.javi.data.enums.ContextType
 import com.javi.dynamic.list.data.actions.DynamicListFlowState
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
-import com.javi.dynamic.list.data.useCases.GetDynamicListUseCase
+import com.javi.dynamic.list.domain.api.useCases.GetDynamicListUseCase
 import com.javi.dynamic.list.presentation.ui.state.UIState
 import com.javi.dynamic.list.presentation.viewModels.DynamicListViewModel
 import kotlinx.coroutines.Dispatchers

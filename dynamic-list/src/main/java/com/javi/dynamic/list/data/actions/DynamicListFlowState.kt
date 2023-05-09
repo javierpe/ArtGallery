@@ -1,6 +1,7 @@
 package com.javi.dynamic.list.data.actions
 
 import com.javi.dynamic.list.data.models.ComponentItemModel
+import com.javi.dynamic.list.data.models.ContainerModel
 import com.javi.dynamic.list.data.models.DynamicListElement
 import com.javi.dynamic.list.domain.models.DynamicListShowCaseModel
 import com.javi.render.processor.core.RenderType
@@ -35,11 +36,15 @@ sealed class DynamicListFlowState {
      */
     class SkeletonDataAction(val renderTypes: List<RenderType>) : DynamicListFlowState()
 
+    class MapperResultAction(
+        val body: List<ComponentItemModel> = emptyList(),
+        val header: List<ComponentItemModel> = emptyList(),
+    ) : DynamicListFlowState()
+
     /**
      * State data from response
      */
     class ResponseAction(
-        val body: List<ComponentItemModel> = emptyList(),
-        val header: List<ComponentItemModel> = emptyList(),
+        val dataContentModel: ContainerModel
     ) : DynamicListFlowState()
 }

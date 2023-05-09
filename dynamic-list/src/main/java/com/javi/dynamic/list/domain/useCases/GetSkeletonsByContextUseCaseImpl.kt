@@ -1,6 +1,6 @@
 package com.javi.dynamic.list.domain.useCases
 
-import com.javi.dynamic.list.data.useCases.GetSkeletonsByContextUseCase
+import com.javi.dynamic.list.domain.api.useCases.GetSkeletonsByContextUseCase
 import com.javi.dynamic.list.domain.database.AppDatabase
 import com.javi.render.processor.core.RenderType
 import javax.inject.Inject

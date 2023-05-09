@@ -6,7 +6,6 @@ import com.javi.dynamic.list.data.actions.DynamicListFlowState
 import com.javi.dynamic.list.data.dataSources.DynamicListDataSourceApi
 import com.javi.dynamic.list.data.models.DataContentModel
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
-import com.javi.dynamic.list.data.useCases.DynamicListRenderProcessorApi
 import com.javi.dynamic.list.domain.repository.DynamicListRepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -29,9 +28,6 @@ class DynamicListRepositoryImplTest {
     @Mock
     lateinit var dynamicListDataSourceApi: DynamicListDataSourceApi
 
-    @Mock
-    lateinit var dynamicListRenderProcessorApi: DynamicListRenderProcessorApi
-
     private lateinit var dynamicListRepositoryImpl: DynamicListRepositoryImpl
 
     private val dynamicListRequestModel by lazy {
@@ -49,7 +45,6 @@ class DynamicListRepositoryImplTest {
     fun setUp() {
         Dispatchers.setMain(StandardTestDispatcher())
         dynamicListRepositoryImpl = DynamicListRepositoryImpl(
-            dynamicListRenderProcessorApi = dynamicListRenderProcessorApi,
             dynamicListMockResponseApi = dynamicListDataSourceApi
         )
     }

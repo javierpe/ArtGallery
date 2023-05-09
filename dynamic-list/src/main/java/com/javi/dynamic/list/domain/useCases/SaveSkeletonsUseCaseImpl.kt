@@ -1,7 +1,7 @@
 package com.javi.dynamic.list.domain.useCases
 
 import com.javi.dynamic.list.data.models.ComponentItemModel
-import com.javi.dynamic.list.data.useCases.SaveSkeletonsUseCase
+import com.javi.dynamic.list.domain.api.useCases.SaveSkeletonsUseCase
 import com.javi.dynamic.list.domain.database.AppDatabase
 import com.javi.dynamic.list.domain.database.skeletons.SkeletonsEntity
 import com.javi.render.processor.core.RenderType

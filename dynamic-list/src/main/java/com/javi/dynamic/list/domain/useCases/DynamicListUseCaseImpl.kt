@@ -1,32 +1,33 @@
 package com.javi.dynamic.list.domain.useCases
 
-import com.javi.basket.api.BasketUpdatesUseCase
 import com.javi.dynamic.list.data.actions.DynamicListFlowState
-import com.javi.dynamic.list.data.extensions.updateProducts
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.data.repositories.DynamicListRepository
-import com.javi.dynamic.list.data.useCases.GetDynamicListUseCase
-import com.javi.dynamic.list.data.useCases.GetSkeletonsByContextUseCase
-import com.javi.dynamic.list.data.useCases.GetTooltipSequenceUseCase
-import com.javi.dynamic.list.data.useCases.SaveSkeletonsUseCase
 import com.javi.dynamic.list.di.IODispatcher
+import com.javi.dynamic.list.domain.api.useCases.GetBasketTransformUseCase
+import com.javi.dynamic.list.domain.api.useCases.GetDynamicListUseCase
+import com.javi.dynamic.list.domain.api.useCases.GetSkeletonsByContextUseCase
+import com.javi.dynamic.list.domain.api.useCases.GetTooltipSequenceUseCase
+import com.javi.dynamic.list.domain.api.useCases.RenderMapperProcessorUseCase
+import com.javi.dynamic.list.domain.api.useCases.SaveSkeletonsUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
+@Suppress("LongParameterList")
 class DynamicListUseCaseImpl @Inject constructor(
     @IODispatcher val ioDispatcher: CoroutineDispatcher,
     private val repository: DynamicListRepository,
     private val getTooltipSequenceUseCase: GetTooltipSequenceUseCase,
     private val saveSkeletonsUseCase: SaveSkeletonsUseCase,
     private val getSkeletonsByContextUseCase: GetSkeletonsByContextUseCase,
-    private val basketUpdatesUseCase: BasketUpdatesUseCase
+    private val renderMapperProcessorUseCase: RenderMapperProcessorUseCase,
+    private val getBasketTransformUseCase: GetBasketTransformUseCase
 ) : GetDynamicListUseCase {
 
     override suspend operator fun invoke(
@@ -35,15 +36,16 @@ class DynamicListUseCaseImpl @Inject constructor(
     ): Flow<DynamicListFlowState> {
         return repository
             .get(page, requestModel)
-            .combine(basketUpdatesUseCase.basketProducts) { data, basket ->
-                if (basket.isNotEmpty() && data is DynamicListFlowState.ResponseAction) {
-                    data.updateProducts(basket)
+            .let { getBasketTransformUseCase.combineWithBasket(it) }
+            .map {
+                if (it is DynamicListFlowState.ResponseAction) {
+                    renderMapperProcessorUseCase(it.dataContentModel)
                 } else {
-                    data
+                    it
                 }
             }
             .map {
-                if (it is DynamicListFlowState.ResponseAction) {
+                if (it is DynamicListFlowState.MapperResultAction) {
                     val showCaseResultModel = getTooltipSequenceUseCase(
                         header = it.header,
                         body = it.body

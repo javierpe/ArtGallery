@@ -1,43 +1,12 @@
 package com.javi.dynamic.list.data.extensions
 
-import com.javi.data.ProductImageModel
-import com.javi.dynamic.list.data.actions.DynamicListFlowState
-import com.javi.dynamic.list.data.updater.ProductUpdater
-import com.javi.dynamic.list.data.updater.ProductVisitor
-import com.javi.dynamic.list.presentation.components.banner.BannerModel
-import com.javi.dynamic.list.presentation.components.bannerCarousel.BannerCarouselModel
-import com.javi.dynamic.list.presentation.components.card.CardsModel
+import com.dynamic.factory.ComponentModel
+import com.javi.dynamic.list.data.models.ComponentItemModel
 
-internal fun Any.accept(visitor: ProductVisitor): Any {
-    return when (this) {
-        is BannerModel -> copy(product = visitor.visitSingleProduct(this.product))
-        is CardsModel -> copy(cardElements = visitor.visitCardsModel(this.cardElements))
-        is BannerCarouselModel -> copy(banners = visitor.visitBannerCarouselModel(this.banners))
-        else -> this
-    }
-}
-
-fun DynamicListFlowState.ResponseAction.updateProducts(
-    basketProducts: List<ProductImageModel>
-): DynamicListFlowState.ResponseAction {
-    val productUpdater = ProductUpdater(
-        basketProducts
-    )
-
-    val updatedBody = body.flatMap { element ->
-        listOf(element.copy(resource = element.resource.accept(productUpdater)))
-    }
-
-    val updateDynamicListElementBody = body.flatMap { element ->
-        listOf(
-            updatedBody.firstOrNull { component ->
-                component.index == element.index
-            } ?: element
-        )
-    }
-
-    return DynamicListFlowState.ResponseAction(
-        body = updateDynamicListElementBody,
-        header = header
+fun ComponentModel<Any>.toComponentItemModel(): ComponentItemModel {
+    return ComponentItemModel(
+        index = index,
+        render = render,
+        resource = resource
     )
 }

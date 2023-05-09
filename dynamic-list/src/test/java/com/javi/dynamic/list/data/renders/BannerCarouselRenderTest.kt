@@ -1,6 +1,7 @@
 package com.javi.dynamic.list.data.renders
 
 import com.javi.data.ProductImageModel
+import com.javi.dynamic.list.domain.renders.BannerCarouselMapperUseCase
 import com.javi.dynamic.list.presentation.components.banner.BannerInfo
 import com.javi.dynamic.list.presentation.components.banner.BannerModel
 import com.javi.dynamic.list.presentation.components.bannerCarousel.BannerCarouselModel
@@ -18,7 +19,7 @@ import org.junit.Test
 @OptIn(ExperimentalCoroutinesApi::class)
 class BannerCarouselRenderTest {
 
-    private lateinit var render: BannerCarouselRender
+    private lateinit var render: BannerCarouselMapperUseCase
 
     private val sourceOfTrueModel by lazy {
         BannerCarouselModel(
@@ -60,7 +61,7 @@ class BannerCarouselRenderTest {
     @Before
     fun setUp() {
         Dispatchers.setMain(StandardTestDispatcher())
-        render = BannerCarouselRender()
+        render = BannerCarouselMapperUseCase()
     }
 
     @After

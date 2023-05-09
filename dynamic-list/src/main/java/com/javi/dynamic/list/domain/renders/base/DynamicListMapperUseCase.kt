@@ -1,8 +1,8 @@
-package com.javi.dynamic.list.data.renders.base
+package com.javi.dynamic.list.domain.renders.base
 
 import com.javi.render.processor.core.RenderType
 
-interface DynamicListRender<out T> {
+interface DynamicListMapperUseCase<out T> {
 
     val render: RenderType
 

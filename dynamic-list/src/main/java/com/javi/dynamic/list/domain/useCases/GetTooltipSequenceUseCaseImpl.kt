@@ -3,7 +3,7 @@ package com.javi.dynamic.list.domain.useCases
 import com.javi.api.TooltipPreferencesApi
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListElement
-import com.javi.dynamic.list.data.useCases.GetTooltipSequenceUseCase
+import com.javi.dynamic.list.domain.api.useCases.GetTooltipSequenceUseCase
 import com.javi.dynamic.list.domain.models.DynamicListShowCaseModel
 import com.javi.dynamic.list.domain.models.ShowCaseResultModel
 import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory

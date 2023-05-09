@@ -1,14 +1,15 @@
 package com.javi.dynamic.list.domain.useCases
 
 import app.cash.turbine.test
-import com.javi.basket.api.BasketUpdatesUseCase
 import com.javi.data.enums.ContextType
 import com.javi.dynamic.list.data.actions.DynamicListFlowState
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.data.repositories.DynamicListRepository
-import com.javi.dynamic.list.data.useCases.GetSkeletonsByContextUseCase
-import com.javi.dynamic.list.data.useCases.GetTooltipSequenceUseCase
-import com.javi.dynamic.list.data.useCases.SaveSkeletonsUseCase
+import com.javi.dynamic.list.domain.api.useCases.GetBasketTransformUseCase
+import com.javi.dynamic.list.domain.api.useCases.GetSkeletonsByContextUseCase
+import com.javi.dynamic.list.domain.api.useCases.GetTooltipSequenceUseCase
+import com.javi.dynamic.list.domain.api.useCases.RenderMapperProcessorUseCase
+import com.javi.dynamic.list.domain.api.useCases.SaveSkeletonsUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -42,7 +43,10 @@ class DynamicListUseCaseImplTest {
     lateinit var getSkeletonsByContextUseCase: GetSkeletonsByContextUseCase
 
     @Mock
-    lateinit var basketUpdatesUseCase: BasketUpdatesUseCase
+    lateinit var getBasketTransformUseCase: GetBasketTransformUseCase
+
+    @Mock
+    lateinit var renderMapperProcessorUseCase: RenderMapperProcessorUseCase
 
     private lateinit var dynamicListUseCaseImpl: DynamicListUseCaseImpl
 
@@ -68,7 +72,8 @@ class DynamicListUseCaseImplTest {
             getDynamicListShowCaseUseCaseImpl,
             saveSkeletonsUseCase,
             getSkeletonsByContextUseCase,
-            basketUpdatesUseCase
+            renderMapperProcessorUseCase,
+            getBasketTransformUseCase
         )
     }
 
