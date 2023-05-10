@@ -42,7 +42,7 @@ class DynamicListMapperUseCaseProcessorImplTest {
                     index = 0,
                     render = RenderType.TEXT.value,
                     resource = TextModel("Test"),
-                    isChanged = true
+                    isChanged = false
                 )
             ),
             header = emptyList()
@@ -66,10 +66,16 @@ class DynamicListMapperUseCaseProcessorImplTest {
 
     @Test
     fun `Render resource should match with some item in renders`() = runTest {
-        assert(
-            dynamicListRenderProcessorUseCaseImpl.invoke(
-                containerModel
-            ) is DynamicListFlowState.MapperResultAction
+        val result = dynamicListRenderProcessorUseCaseImpl.invoke(
+            containerModel
         )
+
+        val mapper = (result as? DynamicListFlowState.MapperResultAction)?.body
+
+        assert(
+            !mapper.isNullOrEmpty()
+        ) {
+            "Result should be MapperResultAction and must have body"
+        }
     }
 }
