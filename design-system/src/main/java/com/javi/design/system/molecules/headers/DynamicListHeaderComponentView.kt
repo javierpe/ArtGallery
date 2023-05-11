@@ -57,7 +57,7 @@ fun DynamicListHeaderComponentView(
         }
 
         ContextType.HOME, ContextType.CARDS -> {
-            HeaderWithImageView(
+            CollapsibleHeaderView(
                 modifier = modifier,
                 title = title,
                 bodyLazyListState = bodyLazyListState,

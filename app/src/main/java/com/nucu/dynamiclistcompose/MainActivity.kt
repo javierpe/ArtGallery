@@ -37,6 +37,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        System.setProperty("is.macrobenchmark", BuildConfig.isMacrobenchmark.toString())
+
         setContent {
             DynamicListComposeTheme {
                 Surface(

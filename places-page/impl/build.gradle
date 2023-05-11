@@ -78,9 +78,11 @@ dependencies {
     implementation(libs.navigation.destinations.core)
     ksp(libs.navigation.destinations.compiler)
 
-    // Alpha
-    implementation "androidx.compose.material3:material3-window-size-class:1.0.1"
-    implementation "androidx.compose.material3:material3:1.0.1"
+    // Window Size Class
+    implementation(libs.compose.material.windowsizeclass)
+
+    // Material V3
+    implementation(libs.compose.material.v3)
 
     // Compose
     implementation(libs.compose.ui)

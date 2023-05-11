@@ -20,6 +20,8 @@ import org.junit.runner.RunWith
  *
  * Run this benchmark from Studio to see startup measurements, and captured system traces
  * for investigating your app's performance.
+ * * Metrics: https://developer.android.com/topic/performance/benchmarking/macrobenchmark-metrics?hl=es-419
+ * * Janky frames: https://developer.android.com/studio/profile/jank-detection?hl=es-419
  */
 @RunWith(AndroidJUnit4::class)
 class StartupBenchmark {

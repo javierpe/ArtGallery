@@ -13,6 +13,8 @@ import com.javi.data.ProductImageModel
 import com.javi.design.system.atoms.ImageComponentView
 import com.javi.design.system.molecules.VerticalGrid
 
+const val CARD_CONTAINER_TAG = "card-container"
+
 @Composable
 fun CardsGridComponentViewScreen(
     modifier: Modifier = Modifier,
@@ -35,7 +37,7 @@ fun CardsGridComponentView(
 ) {
     VerticalGrid(
         modifier = modifier
-            .testTag("card-container")
+            .testTag(CARD_CONTAINER_TAG)
     ) {
         data.forEach { item ->
             ImageComponentView(

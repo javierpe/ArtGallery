@@ -13,7 +13,6 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.javi.design.system.atoms.ErrorView
 import com.javi.design.system.atoms.LoaderView
 import com.javi.design.system.molecules.showCase.ShowCaseState
@@ -52,7 +52,7 @@ fun ContextViewContent(
     forceReload: Boolean = false,
     dynamicListViewModel: DynamicListViewModel = hiltViewModel()
 ) {
-    val uiState by dynamicListViewModel.dynamicListAction.collectAsState()
+    val uiState by dynamicListViewModel.dynamicListAction.collectAsStateWithLifecycle()
 
     LaunchedEffect(forceReload) {
         if (forceReload) {

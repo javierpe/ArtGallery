@@ -1,5 +1,6 @@
 package com.javi.design.system.atoms
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -188,16 +189,15 @@ fun StepperButtonAction(
     quantity: Int = 0,
     onClick: () -> Unit
 ) {
+
+    val animateBackgroundColor = animateColorAsState(
+        targetValue = if (quantity > 0) HeaderLight else Color.White
+    )
+
     Box(
         modifier = modifier
             .clip(CircleShape)
-            .background(
-                if (quantity > 0) {
-                    HeaderLight
-                } else {
-                    Color.White
-                }
-            )
+            .background(animateBackgroundColor.value)
             .clickable {
                 onClick()
             }

@@ -11,10 +11,10 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-private const val CARD_CONTAINER_TAG = "card-container"
-private const val CAROUSEL_CARDS = "carousel-cards"
-private const val CARD_TAG = "card-item"
-private const val SHOW_CASE_TAG = "show-case"
+private const val CARD_COMPONENT_TAG = "card_component"
+private const val CARD_ITEM_COMPONENT_TAG = "card_item_component"
+private const val CARDS_GRID_TAG = "cards_grid"
+private const val DYNAMIC_LIST_CONTAINER = "dynamic-list-container"
 
 private const val GESTURE_MARGIN = 5
 private const val TIMEOUT: Long = 30_000
@@ -36,20 +36,17 @@ class ScrollingCardListBenchmark {
             startActivityAndWait() // Time To Initial Display (TTID)
         }
     ) {
-        // Wait to until show case is hidden
-        device.wait(Until.gone(By.res(SHOW_CASE_TAG)), TIMEOUT)
-
         // Wait to carousel cards is showed
-        device.wait(Until.hasObject(By.res(CAROUSEL_CARDS)), TIMEOUT)
+        device.wait(Until.hasObject(By.res(CARD_COMPONENT_TAG)), TIMEOUT)
 
         // Get card item component and click it
-        device.findObject(By.res(CARD_TAG)).click()
+        device.findObject(By.res(CARD_ITEM_COMPONENT_TAG)).click()
 
         // Wait to card list is showed
-        device.wait(Until.hasObject(By.res(CARD_CONTAINER_TAG)), TIMEOUT)
+        device.wait(Until.hasObject(By.res(CARDS_GRID_TAG)), TIMEOUT)
 
         // Get card list
-        val container = device.findObject(By.res(CARD_CONTAINER_TAG))
+        val container = device.findObject(By.res(DYNAMIC_LIST_CONTAINER))
 
         // Set gesture margin to avoid triggering gesture navigation
         // with input events from automation.
@@ -70,14 +67,11 @@ class ScrollingCardListBenchmark {
             startActivityAndWait() // Time To Initial Display (TTID)
         }
     ) {
-        // Wait to until show case is hidden
-        device.wait(Until.gone(By.res(SHOW_CASE_TAG)), TIMEOUT)
-
         // Wait to carousel cards is showed
-        device.wait(Until.hasObject(By.res(CAROUSEL_CARDS)), TIMEOUT)
+        device.wait(Until.hasObject(By.res(CARD_COMPONENT_TAG)), TIMEOUT)
 
         // Get card list
-        val container = device.findObject(By.res(CAROUSEL_CARDS))
+        val container = device.findObject(By.res(CARD_COMPONENT_TAG))
 
         // Set gesture margin to avoid triggering gesture navigation
         // with input events from automation.

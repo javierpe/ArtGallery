@@ -35,13 +35,13 @@ import com.javi.design.system.theme.HeaderDark
 import com.javi.design.system.theme.HeaderLight
 import com.javi.design.system.theme.Typography
 
-const val DURATION = 500
+const val DURATION = 300
 const val MAX_HEIGHT = 120
 const val MIN_HEIGHT = 65
 
 @OptIn(ExperimentalMotionApi::class)
 @Composable
-fun HeaderWithImageView(
+fun CollapsibleHeaderView(
     modifier: Modifier = Modifier,
     title: String,
     icon: ImageVector,

@@ -73,7 +73,7 @@ dependencies {
     implementation(libs.compose.lifecycle.runtime.ktx)
     implementation(libs.androidx.core)
 
-    implementation "androidx.compose.material3:material3:1.0.1"
+    implementation(libs.compose.material.v3)
     implementation "androidx.compose.material:material:$material_compose_version"
     implementation 'com.google.android.material:material:1.8.0'
 

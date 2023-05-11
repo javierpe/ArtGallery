@@ -90,9 +90,11 @@ dependencies {
     // Navigation
     implementation(libs.hilt.navigation.compose)
 
-    // Alpha
-    implementation "androidx.compose.material3:material3-window-size-class:1.0.1"
-    implementation "androidx.compose.material3:material3:1.0.1"
+    // Window Size Class
+    implementation(libs.compose.material.windowsizeclass)
+
+    // Material 3
+    implementation(libs.compose.material.v3)
 
     // Hilt
     implementation(libs.hilt)

@@ -16,12 +16,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.size.Size
 import com.javi.design.system.atoms.ImageComponentView
-import com.javi.design.system.molecules.toPx
 import com.javi.design.system.theme.Typography
 
 @Composable
@@ -49,8 +47,6 @@ fun FaceView(
     imageUrl: String,
     onClick: () -> Unit
 ) {
-    val size = 70.dp
-    val context = LocalContext.current
 
     Column(
         verticalArrangement = Arrangement.spacedBy(5.dp),
@@ -58,7 +54,7 @@ fun FaceView(
     ) {
         ImageComponentView(
             modifier = Modifier
-                .size(size)
+                .size(70.dp)
                 .clip(CircleShape)
                 .align(Alignment.CenterHorizontally)
                 .clickable {
@@ -66,8 +62,8 @@ fun FaceView(
                 },
             imageURL = imageUrl,
             overrideSize = Size(
-                size.toPx(context).toInt(),
-                size.toPx(context).toInt()
+                100,
+                100
             )
         )
 

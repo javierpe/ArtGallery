@@ -66,8 +66,8 @@ dependencies {
     // Data
     implementation project(":data")
 
-    // Alpha
-    implementation "androidx.compose.material3:material3:1.0.1"
+    // Material V3
+    implementation(libs.compose.material.v3)
 
     // Hilt
     implementation(libs.hilt)

@@ -1,6 +1,8 @@
 package com.javi.design.system.atoms
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
@@ -11,7 +13,7 @@ import coil.request.ImageRequest
 import coil.size.Size
 import kotlinx.coroutines.Dispatchers
 
-const val FADE_DURATION = 800
+const val FADE_DURATION = 300
 
 @Suppress("LongParameterList")
 @Composable
@@ -23,27 +25,33 @@ fun ImageComponentView(
     contentScale: ContentScale = ContentScale.Crop,
     onState: ((AsyncImagePainter.State) -> Unit)? = null,
 ) {
-    var requestBuilder = ImageRequest.Builder(LocalContext.current)
-        .data(imageURL)
-        .diskCacheKey(imageURL)
-        .crossfade(FADE_DURATION)
-        .allowHardware(false)
-        .dispatcher(Dispatchers.IO)
-        .transformationDispatcher(Dispatchers.Default)
-        .fetcherDispatcher(Dispatchers.IO)
 
-    overrideSize?.let {
-        requestBuilder = requestBuilder.size(
-            Size(
-                it.width,
-                it.height
-            )
-        )
+    val context = LocalContext.current
+    val request = remember {
+        derivedStateOf {
+            ImageRequest.Builder(context)
+                .data(imageURL)
+                .diskCacheKey(imageURL)
+                .crossfade(FADE_DURATION)
+                .allowHardware(false)
+                .dispatcher(Dispatchers.IO)
+                .transformationDispatcher(Dispatchers.Default)
+                .fetcherDispatcher(Dispatchers.IO).apply {
+                    overrideSize?.let {
+                        size(
+                            Size(
+                                it.width,
+                                it.height
+                            )
+                        )
+                    }
+                }.build()
+        }
     }
 
     ImageComponent(
         modifier = modifier,
-        imageRequest = requestBuilder.build(),
+        imageRequest = request.value,
         contentScale = contentScale,
         colorFilter = colorFilter,
         onState = onState

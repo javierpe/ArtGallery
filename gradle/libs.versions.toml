@@ -1,6 +1,6 @@
 [versions]
-compose = "1.4.1"
-composeMaterial = "1.4.1"
+compose = "1.4.3"
+composeMaterial = "1.4.3"
 composeCompiler = "1.3.2"
 composeLifecycle = "2.6.1"
 composeDestinations = "1.9.42-beta"
@@ -8,15 +8,15 @@ composeConstraintLayout = "1.0.1"
 composeMaterial3 = "1.0.1"
 
 hilt = "2.44"
-androidCore = "1.10.0"
+androidCore = "1.10.1"
 room = "2.5.1"
 kotlinCoroutines = "1.6.4"
-composeActivity = "1.7.0"
+composeActivity = "1.7.1"
 hiltNavigationCompose = "1.0.0"
 accompanistSystemUiController = "0.29.1-alpha"
 retrofit = "2.9.0"
 
-turbineTest = "0.12.1"
+turbineTest = "0.12.3"
 mockitoTest = "4.1.0"
 mockitoInlineTest = "4.11.0"
 kotlinCoroutinesTest = "1.6.4"
@@ -32,7 +32,7 @@ androidTestBenchmark = "1.1.1"
 leakCanary = "2.10"
 
 androidxMetricsPerformance = "1.0.0-alpha04"
-androidxProfileInstaller = "1.3.0"
+androidxProfileInstaller = "1.3.1"
 
 androidGradlePlugin = "7.4.2"
 androidJetBrainsKotlin = "1.7.20"
@@ -40,7 +40,7 @@ androidTest = "7.4.2"
 androidJetBrainsKotlinJVM = "1.7.10"
 androidKSPPlugin = "1.7.22-1.0.8"
 kotilnCoroutinesCore = "1.6.4"
-coilCompose = "2.2.2"
+coilCompose = "2.3.0"
 lottie = "5.2.0"
 androidxConstraintLayout = "1.0.4"
 androidxPalette = "1.0.0"
@@ -48,6 +48,8 @@ moshi = "1.14.0"
 androidxAppCompat = "1.6.1"
 androidxDataStore = "1.0.0"
 testRunner = "1.5.2"
+material3 = "1.1.0"
+windowSizeClass = "1.1.0"
 
 [libraries]
 androidx-core = { group = "androidx.core", name = "core-ktx", version.ref = "androidCore" }
@@ -60,8 +62,8 @@ compose-constraintlayout = { group = "androidx.constraintlayout", name = "constr
 compose-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "composeLifecycle" }
 compose-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "composeLifecycle" }
 compose-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "composeLifecycle" }
-#compose-material-window-size-class = { group = "androidx.compose.material3", name = "material3-window-size-class", version.ref = "composeMaterial3" }
-#compose-material-3 = { group = "androidx.compose.material3", name = "material3", version.ref = "composeMaterial3" }
+compose-material-windowsizeclass = { group = "androidx.compose.material3", name = "material3-window-size-class", version.ref = "windowSizeClass" }
+compose-material-v3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 
 hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }

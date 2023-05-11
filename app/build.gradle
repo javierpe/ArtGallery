@@ -5,6 +5,8 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+def isMacrobenchmark = "isMacrobenchmark"
+
 android {
     signingConfigs {
         release {
@@ -39,12 +41,17 @@ android {
             debuggable false
             minifyEnabled true
             shrinkResources true
+            buildConfigField "Boolean"  , isMacrobenchmark, "false"
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         benchmark {
             signingConfig signingConfigs.debug
             matchingFallbacks = ['release']
             debuggable false
+            buildConfigField "Boolean"  , isMacrobenchmark, "true"
+        }
+        debug {
+            buildConfigField "Boolean"  , isMacrobenchmark, "false"
         }
     }
     compileOptions {

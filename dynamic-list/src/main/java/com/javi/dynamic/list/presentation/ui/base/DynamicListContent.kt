@@ -21,6 +21,8 @@ import com.javi.dynamic.list.data.models.DynamicListElement
 import com.javi.dynamic.list.data.models.DynamicListObject
 import com.javi.dynamic.list.presentation.ui.utils.rememberMetricsStateHolder
 
+const val DYNAMIC_LIST_CONTAINER = "dynamic-list-container"
+
 @OptIn(ExperimentalFoundationApi::class)
 @Suppress("LongParameterList", "FunctionNaming")
 @Composable
@@ -50,7 +52,7 @@ fun DynamicListScreen(
 
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = modifier.testTag("dynamic-list-container"),
+        modifier = modifier.testTag(DYNAMIC_LIST_CONTAINER),
         state = listState,
         contentPadding = PaddingValues(
             bottom = if (content.isNotEmpty() && withVerticalPadding) 16.dp else 0.dp,

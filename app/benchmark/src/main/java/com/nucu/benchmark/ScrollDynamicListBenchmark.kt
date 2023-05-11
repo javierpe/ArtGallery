@@ -14,9 +14,8 @@ import org.junit.runner.RunWith
 private const val MAIN_CONTAINER_TAG = "dynamic-list-container"
 private const val SHOW_CASE_TAG = "show-case"
 
-private const val GESTURE_MARGIN = 5
+private const val GESTURE_MARGIN = 2
 private const val TIMEOUT: Long = 30_000
-private const val REPEAT_TIMES = 5
 
 @RunWith(AndroidJUnit4ClassRunner::class)
 class ScrollDynamicListBenchmark {
@@ -28,8 +27,8 @@ class ScrollDynamicListBenchmark {
     fun scrollingDynamicListContainer() = benchmarkRule.measureRepeated(
         packageName = PACKAGE_NAME,
         metrics = listOf(FrameTimingMetric()),
-        iterations = 5,
-        startupMode = StartupMode.WARM, // Restarts activity each iteration
+        iterations = 50,
+        startupMode = StartupMode.COLD, // Restarts activity each iteration
         setupBlock = {
             pressHome()
             startActivityAndWait() // Time To Initial Display (TTID)
@@ -43,13 +42,9 @@ class ScrollDynamicListBenchmark {
         // Dynamic list container reference
         val dynamicListContainer = device.findObject(By.res(MAIN_CONTAINER_TAG))
 
-        // Set gesture margin to avoid triggering gesture navigation
-        // with input events from automation.
         dynamicListContainer.setGestureMargin(device.displayWidth / GESTURE_MARGIN)
 
         // Scroll down several times
-        repeat(REPEAT_TIMES) {
-            dynamicListContainer.fling(Direction.DOWN)
-        }
+        dynamicListContainer.swipe(Direction.DOWN, 1f, 8000)
     }
 }
