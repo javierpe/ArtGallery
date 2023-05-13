@@ -33,19 +33,12 @@ fun ImageComponentView(
                 .data(imageURL)
                 .diskCacheKey(imageURL)
                 .crossfade(FADE_DURATION)
-                .allowHardware(false)
+                .allowHardware(true)
                 .dispatcher(Dispatchers.IO)
                 .transformationDispatcher(Dispatchers.Default)
-                .fetcherDispatcher(Dispatchers.IO).apply {
-                    overrideSize?.let {
-                        size(
-                            Size(
-                                it.width,
-                                it.height
-                            )
-                        )
-                    }
-                }.build()
+                .size(overrideSize ?: Size.ORIGINAL)
+                .fetcherDispatcher(Dispatchers.IO)
+                .build()
         }
     }
 

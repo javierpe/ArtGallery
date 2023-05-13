@@ -1,6 +1,7 @@
 package com.javi.dynamic.list.domain.useCases
 
 import com.javi.api.TooltipPreferencesApi
+import com.javi.dynamic.list.data.extensions.isMacroBenchmarkEnabled
 import com.javi.dynamic.list.data.models.ComponentItemModel
 import com.javi.dynamic.list.data.models.DynamicListElement
 import com.javi.dynamic.list.domain.api.useCases.GetTooltipSequenceUseCase
@@ -30,7 +31,8 @@ class GetTooltipSequenceUseCaseImpl @Inject constructor(
 
             if (
                 adapter?.hasShowCaseConfigured == true &&
-                showCaseSequence.none { it.render == component.render }
+                showCaseSequence.none { it.render == component.render } &&
+                !isMacroBenchmarkEnabled()
             ) {
                 val alreadyShowed = tooltipPreferencesApi.getBooleanState(
                     component.render,
