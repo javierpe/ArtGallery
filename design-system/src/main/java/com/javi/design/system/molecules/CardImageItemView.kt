@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import coil.size.Size
 import com.javi.design.system.atoms.ImageComponentView
 
 @Composable
@@ -17,10 +16,6 @@ fun CardImageItem(
         modifier = Modifier
             .size(46.dp)
             .clip(RoundedCornerShape(5.dp)),
-        imageURL = imageURL,
-        overrideSize = Size(
-            width = 80,
-            height = 80
-        )
+        imageURL = imageURL
     )
 }

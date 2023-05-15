@@ -1,77 +1,41 @@
 package com.javi.design.system.atoms
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import coil.compose.AsyncImage
-import coil.compose.AsyncImagePainter
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import coil.compose.SubcomposeAsyncImage
+import coil.request.CachePolicy
 import coil.request.ImageRequest
-import coil.size.Size
 import kotlinx.coroutines.Dispatchers
 
-const val FADE_DURATION = 300
 
 @Suppress("LongParameterList")
 @Composable
 fun ImageComponentView(
     modifier: Modifier = Modifier,
     imageURL: String,
-    overrideSize: Size? = null,
     colorFilter: ColorFilter? = null,
-    contentScale: ContentScale = ContentScale.Crop,
-    onState: ((AsyncImagePainter.State) -> Unit)? = null,
+    contentScale: ContentScale = ContentScale.Crop
 ) {
-
-    val context = LocalContext.current
-    val request = remember {
-        derivedStateOf {
-            ImageRequest.Builder(context)
-                .data(imageURL)
-                .diskCacheKey(imageURL)
-                .crossfade(FADE_DURATION)
-                .allowHardware(false)
-                .dispatcher(Dispatchers.IO)
-                .transformationDispatcher(Dispatchers.Default)
-                .fetcherDispatcher(Dispatchers.IO).apply {
-                    overrideSize?.let {
-                        size(
-                            Size(
-                                it.width,
-                                it.height
-                            )
-                        )
-                    }
-                }.build()
-        }
-    }
-
-    ImageComponent(
+    SubcomposeAsyncImage(
         modifier = modifier,
-        imageRequest = request.value,
-        contentScale = contentScale,
-        colorFilter = colorFilter,
-        onState = onState
-    )
-}
-
-@Composable
-fun ImageComponent(
-    modifier: Modifier = Modifier,
-    colorFilter: ColorFilter? = null,
-    onState: ((AsyncImagePainter.State) -> Unit)? = null,
-    contentScale: ContentScale = ContentScale.Crop,
-    imageRequest: ImageRequest
-) {
-    AsyncImage(
-        modifier = modifier,
-        model = imageRequest,
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(imageURL)
+            .diskCacheKey(imageURL)
+            .diskCachePolicy(CachePolicy.ENABLED)
+            .dispatcher(Dispatchers.IO)
+            .allowHardware(true)
+            .allowConversionToBitmap(true)
+            .lifecycle(LocalLifecycleOwner.current)
+            .crossfade(true)
+            .build(),
         contentDescription = null,
         contentScale = contentScale,
         colorFilter = colorFilter,
-        onState = onState
+        filterQuality = FilterQuality.None
     )
 }

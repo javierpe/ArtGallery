@@ -75,7 +75,7 @@ fun PosterComponentViewV2(
             ) {
                 ImageComponentView(
                     modifier = Modifier
-                        .height(400.dp)
+                        .height(250.dp)
                         .align(Alignment.Center)
                         .withBounceClick()
                         .clickable {

@@ -70,35 +70,21 @@ fun CollapsibleHeaderView(
         tween(DURATION)
     )
 
-    val colorBackgroundStart = if (isSystemInDarkTheme()) {
-        HeaderDark
-    } else {
-        HeaderLight
+    val start = remember {
+        derivedStateOf {
+            constraintSetStart(HeaderDark, HeaderLight)
+        }
     }
 
-    val colorTextStart = if (isSystemInDarkTheme()) {
-        HeaderLight
-    } else {
-        HeaderDark
-    }
-
-    val colorBackgroundEnd = if (isSystemInDarkTheme()) {
-        HeaderLight
-    } else {
-        HeaderDark
-    }
-
-    val colorTextEnd = if (isSystemInDarkTheme()) {
-        HeaderDark
-    } else {
-        HeaderLight
+    val end = remember {
+        derivedStateOf { constraintSetEnd(HeaderLight, HeaderDark) }
     }
 
     MotionLayout(
-        start = constraintSetStart(colorBackgroundStart, colorTextStart),
-        end = constraintSetEnd(colorBackgroundEnd, colorTextEnd),
+        start = start.value,
+        end = end.value,
         progress = progress,
-        modifier = modifier.height(motionHeight)
+        modifier = modifier.height(motionHeight),
     ) {
         val backgroundProperties = motionProperties(backgroundLayoutId)
         val titleProperties = motionProperties(titleLayoutId)

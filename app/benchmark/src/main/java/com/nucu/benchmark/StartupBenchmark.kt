@@ -34,7 +34,7 @@ class StartupBenchmark {
         packageName = PACKAGE_NAME,
         metrics = listOf(StartupTimingMetric()),
         iterations = 5,
-        startupMode = StartupMode.WARM
+        startupMode = StartupMode.HOT
     ) {
         pressHome()
         startActivityAndWait()

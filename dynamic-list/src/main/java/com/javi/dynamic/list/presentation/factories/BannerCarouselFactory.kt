@@ -51,7 +51,6 @@ class BannerCarouselFactory @Inject constructor(
             images = (component.resource as BannerCarouselModel).banners,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState,
-            widthSizeClass = componentInfo.dynamicListObject.widthSizeClass,
             onAdd = { addProductToBasketUseCase(it) },
             onDecrement = { decrementProductOnBasketUseCase(it) },
             onProductDetail = {

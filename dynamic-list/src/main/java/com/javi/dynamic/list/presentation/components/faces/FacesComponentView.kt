@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
@@ -18,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import coil.size.Size
 import com.javi.design.system.atoms.ImageComponentView
 import com.javi.design.system.theme.Typography
 
@@ -50,7 +48,7 @@ fun FaceView(
 
     Column(
         verticalArrangement = Arrangement.spacedBy(5.dp),
-        modifier = Modifier.width(70.dp)
+        modifier = Modifier.size(70.dp)
     ) {
         ImageComponentView(
             modifier = Modifier
@@ -60,11 +58,7 @@ fun FaceView(
                 .clickable {
                     onClick()
                 },
-            imageURL = imageUrl,
-            overrideSize = Size(
-                100,
-                100
-            )
+            imageURL = imageUrl
         )
 
         Text(

@@ -3,11 +3,9 @@ package com.javi.dynamic.list.presentation.components.bannerCarousel
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -34,7 +32,6 @@ fun BannerCarouselComponentViewScreen(
     images: List<BannerModel>,
     componentIndex: Int,
     showCaseState: ShowCaseState,
-    widthSizeClass: WindowWidthSizeClass? = null,
     onAdd: (ProductImageModel) -> Unit,
     onDecrement: (ProductImageModel) -> Unit,
     onProductDetail: (String) -> Unit
@@ -45,7 +42,6 @@ fun BannerCarouselComponentViewScreen(
         images = images,
         componentIndex = componentIndex,
         showCaseState = showCaseState,
-        isExpandedScreen = widthSizeClass == WindowWidthSizeClass.Expanded,
         onAdd = onAdd,
         onDecrement = onDecrement,
         onProductDetail = { onProductDetail(it) }
@@ -56,7 +52,6 @@ fun BannerCarouselComponentViewScreen(
 @Composable
 fun BannerCarouselComponentView(
     modifier: Modifier,
-    isExpandedScreen: Boolean = false,
     images: List<BannerModel>,
     componentIndex: Int,
     showCaseState: ShowCaseState,
@@ -64,18 +59,6 @@ fun BannerCarouselComponentView(
     onDecrement: (ProductImageModel) -> Unit,
     onProductDetail: (String) -> Unit,
 ) {
-    val height = if (isExpandedScreen) {
-        200.dp
-    } else {
-        300.dp
-    }
-
-    val width = if (isExpandedScreen) {
-        250.dp
-    } else {
-        350.dp
-    }
-
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(20.dp),
         modifier = modifier
@@ -112,9 +95,7 @@ fun BannerCarouselComponentView(
             }
 
             BannerImageView(
-                modifier = modifierBanner
-                    .height(height)
-                    .width(width),
+                modifier = modifierBanner.size(200.dp),
                 imageURL = item.product.imageURL,
                 onClickAction = { onProductDetail(item.product.imageURL) },
                 quantity = item.product.quantity,
