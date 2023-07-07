@@ -100,6 +100,58 @@
       "resource": {
         "message": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
       }
+    },
+    {
+      "render": "banner_carousel",
+      "index": 7,
+      "resource": {
+        "banners": [
+          {
+            "product": {
+              "id": 70,
+              "quantity": 0,
+              "image_url": "https://i.pinimg.com/564x/ac/68/a8/ac68a8a0ea96ec8d4b1589380c3f9a0d.jpg"
+            },
+            "info": {
+              "title": "Colosseo",
+              "description": "Italy"
+            }
+          },
+          {
+            "product": {
+              "id": 71,
+              "quantity": 0,
+              "image_url": "https://i.pinimg.com/564x/2e/d7/8c/2ed78c3eb52b1ee4a47c885bbd35e143.jpg"
+            },
+            "info": {
+              "title": "Colosseo",
+              "description": "Italy"
+            }
+          },
+          {
+            "product": {
+              "id": 72,
+              "quantity": 0,
+              "image_url": "https://i.pinimg.com/564x/b2/60/88/b260880517b7a36e3accac2a50703aff.jpg"
+            },
+            "info": {
+              "title": "Torre pendente di Pisa",
+              "description": "Italy"
+            }
+          },
+          {
+            "product": {
+              "id": 73,
+              "quantity": 0,
+              "image_url": "https://i.pinimg.com/564x/22/93/9a/22939a22ca34b1b6dc4a34c1cc74928f.jpg"
+            },
+            "info": {
+              "title": "Fontana di Trevi",
+              "description": "Italy"
+            }
+          }
+        ]
+      }
     }
   ]
 }

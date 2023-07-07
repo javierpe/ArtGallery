@@ -17,8 +17,8 @@ class BasketUpdater @Inject constructor(
     val currentBasket: MutableList<ProductImageModel> = mutableListOf()
 
     private val _basketProducts = MutableSharedFlow<List<ProductImageModel>>(
-        replay = 1,
-        onBufferOverflow = BufferOverflow.DROP_LATEST
+        replay = 5,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
 
     val basketProducts: SharedFlow<List<ProductImageModel>> = _basketProducts

@@ -5,11 +5,14 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PageSize
+import androidx.compose.foundation.pager.PagerDefaults
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -51,7 +54,12 @@ fun PosterComponentViewV2(
     list: List<PosterModelItem>,
     onClick: (String) -> Unit
 ) {
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState(
+        initialPage = 0,
+        initialPageOffsetFraction = 0f
+    ) {
+        list.size
+    }
 
     Column(
         modifier = modifier,
@@ -64,28 +72,36 @@ fun PosterComponentViewV2(
         )
 
         HorizontalPager(
-            pageCount = list.size,
-            state = pagerState
-        ) { page ->
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(16.dp))
-            ) {
-                ImageComponentView(
+            modifier = Modifier,
+            state = pagerState,
+            pageSpacing = 0.dp,
+            userScrollEnabled = true,
+            reverseLayout = false,
+            contentPadding = PaddingValues(0.dp),
+            beyondBoundsPageCount = 0,
+            pageSize = PageSize.Fill,
+            flingBehavior = PagerDefaults.flingBehavior(state = pagerState),
+            key = null,
+            pageContent = {
+                Box(
                     modifier = Modifier
-                        .height(250.dp)
-                        .align(Alignment.Center)
-                        .withBounceClick()
-                        .clickable {
-                            onClick(list[page].productImage.imageURL)
-                        },
-                    imageURL = list[page].productImage.imageURL,
-                    contentScale = ContentScale.Fit
-                )
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(16.dp))
+                ) {
+                    ImageComponentView(
+                        modifier = Modifier
+                            .height(250.dp)
+                            .align(Alignment.Center)
+                            .withBounceClick()
+                            .clickable {
+                                onClick(list[it].productImage.imageURL)
+                            },
+                        imageURL = list[it].productImage.imageURL,
+                        contentScale = ContentScale.Fit
+                    )
+                }
             }
-        }
+        )
 
         Spacer(modifier = Modifier.padding(bottom = 10.dp))
 

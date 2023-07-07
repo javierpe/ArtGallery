@@ -4,5 +4,5 @@ import com.javi.data.ProductImageModel
 
 interface AddProductToBasketUseCase {
 
-    operator fun invoke(productImageModel: ProductImageModel)
+    suspend operator fun invoke(productImageModel: ProductImageModel)
 }

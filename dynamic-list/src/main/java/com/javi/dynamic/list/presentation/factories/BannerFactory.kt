@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
@@ -21,6 +22,7 @@ import com.javi.dynamic.list.presentation.factories.base.DynamicListFactory
 import com.javi.product.detail.api.GetProductDetailPageUseCase
 import com.javi.render.processor.core.RenderType
 import com.javi.render.processor.core.annotations.factory.ComponentFactory
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 const val BANNER_COMPONENT_TAG = "banner_component"
@@ -42,12 +44,19 @@ class BannerFactory @Inject constructor(
         component: ComponentItemModel,
         componentInfo: ComponentInfo
     ) {
+
+        val coroutine = rememberCoroutineScope()
+
         BannerComponentViewScreen(
             modifier = modifier.testTag(BANNER_COMPONENT_TAG),
             model = component.resource as BannerModel,
             componentIndex = component.index,
             showCaseState = componentInfo.showCaseState,
-            onAdd = { addProductToBasketUseCase(it) },
+            onAdd = {
+                coroutine.launch {
+                    addProductToBasketUseCase(it)
+                }
+            },
             onDecrement = { decrementProductOnBasketUseCase(it) }
         ) {
             componentInfo.dynamicListObject.destinationsNavigator?.navigate(

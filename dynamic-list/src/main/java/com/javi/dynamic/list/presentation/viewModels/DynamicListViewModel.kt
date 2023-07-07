@@ -3,6 +3,7 @@ package com.javi.dynamic.list.presentation.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.javi.dynamic.list.data.actions.DynamicListFlowState
+import com.javi.dynamic.list.data.actions.ScrollAction
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.domain.api.useCases.GetDynamicListUseCase
 import com.javi.dynamic.list.presentation.ui.state.UIState
@@ -57,6 +58,26 @@ class DynamicListViewModel @Inject constructor(
                         else -> UIState.None
                     }
                 }
+        }
+    }
+
+    suspend fun scrollTo(scrollAction: ScrollAction): Int? {
+        return when (scrollAction) {
+            is ScrollAction.ScrollRender -> {
+                val action = dynamicListAction.value
+                if (action is UIState.SuccessState) {
+                    return action.body.firstOrNull {
+                        it.componentItemModel.render == scrollAction.renderType.value
+                    }?.let {
+                        action.body.indexOf(it)
+                    }
+                } else {
+                    null
+                }
+            }
+
+            is ScrollAction.ScrollIndex -> scrollAction.index
+            else -> null
         }
     }
 }

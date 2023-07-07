@@ -3,8 +3,6 @@ package com.javi.design.system.molecules.headers
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -16,6 +14,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.MotionLayoutScope
 import com.javi.data.enums.ContextType
 import com.javi.design.system.atoms.BackButtonComponentView
 import com.javi.design.system.data.showCase.ShapeType
@@ -31,19 +30,21 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 /**
  * Define header design by context
  */
-@Suppress("LongParameterList", "FunctionNaming")
 @Composable
 fun DynamicListHeaderComponentView(
     modifier: Modifier = Modifier,
     title: String,
     contextType: ContextType,
-    bodyLazyListState: LazyListState? = null,
+    motionLayoutScope: MotionLayoutScope? = null,
     destinationsNavigator: DestinationsNavigator? = null,
     onCustomBack: (() -> Unit)? = null
 ) {
     val icon = if (contextType == ContextType.HOME) Icons.Default.Star else Icons.Default.ArrowBack
 
     when (contextType) {
+
+        ContextType.HOME -> HomeHeaderComponentView(scope = motionLayoutScope!!)
+
         ContextType.BANNER_DETAIL -> {
             SimpleHeaderView(
                 modifier = modifier,
@@ -56,20 +57,6 @@ fun DynamicListHeaderComponentView(
             )
         }
 
-        ContextType.HOME, ContextType.CARDS -> {
-            CollapsibleHeaderView(
-                modifier = modifier,
-                title = title,
-                bodyLazyListState = bodyLazyListState,
-                icon = icon,
-                onIconClick = {
-                    if (contextType != ContextType.HOME) {
-                        onCustomBack?.invoke()
-                        destinationsNavigator?.popBackStack()
-                    }
-                }
-            )
-        }
         else -> {
             SimpleHeaderView(
                 modifier = modifier,
@@ -139,7 +126,6 @@ fun PreviewHeaderComponentView() {
         DynamicListHeaderComponentView(
             title = "Hello from the header view of DynamicList",
             contextType = ContextType.HOME,
-            bodyLazyListState = rememberLazyListState()
         )
     }
 }
@@ -151,7 +137,6 @@ fun PreviewSimpleHeaderComponentView() {
         DynamicListHeaderComponentView(
             title = "Hello from the header view of DynamicList",
             contextType = ContextType.HOME,
-            bodyLazyListState = rememberLazyListState()
         )
     }
 }

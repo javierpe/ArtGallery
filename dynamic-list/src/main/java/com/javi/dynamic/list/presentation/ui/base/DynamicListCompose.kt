@@ -15,8 +15,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -26,15 +26,15 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.javi.design.system.atoms.ErrorView
 import com.javi.design.system.atoms.LoaderView
 import com.javi.design.system.molecules.showCase.ShowCaseState
-import com.javi.dynamic.list.data.actions.ScrollAction
 import com.javi.dynamic.list.data.actions.TargetAction
-import com.javi.dynamic.list.data.controllers.DynamicListComposeControllerImpl
+import com.javi.dynamic.list.data.controllers.DynamicListComposeController
 import com.javi.dynamic.list.data.models.DynamicListObject
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.presentation.ui.state.UIState
 import com.javi.dynamic.list.presentation.ui.state.sendAction
 import com.javi.dynamic.list.presentation.viewModels.DynamicListViewModel
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import kotlinx.coroutines.launch
 
 const val HEADER_ID = "header"
 const val BODY_ID = "body"
@@ -43,9 +43,9 @@ const val BODY_ID = "body"
 @Composable
 fun ContextViewContent(
     modifier: Modifier = Modifier,
-    dynamicListComposeController: DynamicListComposeControllerImpl? = null,
+    dynamicListComposeController: DynamicListComposeController? = null,
     showCaseState: ShowCaseState,
-    bodyListState: LazyListState,
+    bodyListState: LazyListState? = null,
     requestModel: DynamicListRequestModel,
     destinationsNavigator: DestinationsNavigator? = null,
     dynamicListListener: (DynamicListState) -> Unit,
@@ -101,7 +101,8 @@ fun ContextViewContent(
                 showCaseState = showCaseState,
                 bodyListState = bodyListState,
                 destinationsNavigator = destinationsNavigator,
-                dynamicListListener = dynamicListListener
+                dynamicListListener = dynamicListListener,
+                dynamicListViewModel = dynamicListViewModel
             )
         }
 
@@ -116,24 +117,29 @@ fun DynamicListSuccess(
     modifier: Modifier = Modifier,
     action: UIState.SuccessState,
     destinationsNavigator: DestinationsNavigator? = null,
-    dynamicListComposeController: DynamicListComposeControllerImpl? = null,
+    dynamicListComposeController: DynamicListComposeController? = null,
     showCaseState: ShowCaseState,
-    bodyListState: LazyListState,
+    bodyListState: LazyListState? = null,
     dynamicListListener: (DynamicListState) -> Unit,
+    dynamicListViewModel: DynamicListViewModel
 ) {
-    val actionBody = remember {
-        mutableStateOf<ScrollAction?>(null)
-    }
 
     val windowWidthSizeClass = calculateWindowSizeClass(activity = LocalContext.current as Activity)
+    val coroutineScope = rememberCoroutineScope()
 
     val modifierUpdated = remember {
         derivedStateOf {
             when (windowWidthSizeClass.widthSizeClass) {
                 WindowWidthSizeClass.Compact -> Modifier.wrapContentSize()
                 WindowWidthSizeClass.Medium,
-                WindowWidthSizeClass.Expanded -> Modifier.wrapContentWidth().fillMaxHeight()
-                else -> Modifier.wrapContentWidth().fillMaxHeight()
+                WindowWidthSizeClass.Expanded ->
+                    Modifier
+                        .wrapContentWidth()
+                        .fillMaxHeight()
+                else ->
+                    Modifier
+                        .wrapContentWidth()
+                        .fillMaxHeight()
             }
         }
     }
@@ -150,12 +156,17 @@ fun DynamicListSuccess(
                         destinationsNavigator = destinationsNavigator
                     ),
                     showCaseState = showCaseState,
-                    elements = action.header
-                ) {
-                    if (it.target == TargetAction.BODY) {
-                        actionBody.value = it
+                    elements = action.header,
+                    onAction = {
+                        if (it.target == TargetAction.BODY) {
+                            coroutineScope.launch {
+                                dynamicListViewModel.scrollTo(it)?.let { index ->
+                                    bodyListState?.animateScrollToItem(index)
+                                }
+                            }
+                        }
                     }
-                }
+                )
             }
         },
         contentBody = {
@@ -166,15 +177,19 @@ fun DynamicListSuccess(
                         widthSizeClass = windowWidthSizeClass.widthSizeClass,
                         destinationsNavigator = destinationsNavigator
                     ),
-                    sharedAction = actionBody.value,
                     showCaseState = showCaseState,
                     bodyListState = bodyListState,
-                    elements = action.body
-                ) {
-                    if (it.target == TargetAction.BODY) {
-                        actionBody.value = it
+                    elements = action.body,
+                    onAction = {
+                        if (it.target == TargetAction.BODY) {
+                            coroutineScope.launch {
+                                dynamicListViewModel.scrollTo(it)?.let { index ->
+                                    bodyListState?.animateScrollToItem(index)
+                                }
+                            }
+                        }
                     }
-                }
+                )
             }
         }
     )

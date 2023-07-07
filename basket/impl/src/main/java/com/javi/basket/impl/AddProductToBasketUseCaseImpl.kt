@@ -8,7 +8,7 @@ class AddProductToBasketUseCaseImpl @Inject constructor(
     private val basketUpdater: BasketUpdater
 ) : AddProductToBasketUseCase {
 
-    override operator fun invoke(productImageModel: ProductImageModel) {
+    override suspend operator fun invoke(productImageModel: ProductImageModel) {
         val alreadyOnBasket = basketUpdater.currentBasket.firstOrNull {
             it.id == productImageModel.id
         }

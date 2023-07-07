@@ -10,8 +10,8 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import coil.compose.SubcomposeAsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
+import coil.size.Size
 import kotlinx.coroutines.Dispatchers
-
 
 @Suppress("LongParameterList")
 @Composable
@@ -19,6 +19,7 @@ fun ImageComponentView(
     modifier: Modifier = Modifier,
     imageURL: String,
     colorFilter: ColorFilter? = null,
+    customSize: Size? = null,
     contentScale: ContentScale = ContentScale.Crop
 ) {
     SubcomposeAsyncImage(
@@ -31,6 +32,16 @@ fun ImageComponentView(
             .allowHardware(true)
             .allowConversionToBitmap(true)
             .lifecycle(LocalLifecycleOwner.current)
+            .apply {
+                customSize?.let {
+                    size(
+                        Size(
+                            width = customSize.width,
+                            height = customSize.height
+                        )
+                    )
+                } ?: Size.ORIGINAL
+            }
             .crossfade(true)
             .build(),
         contentDescription = null,

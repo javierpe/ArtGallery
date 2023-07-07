@@ -75,7 +75,12 @@ fun PreviewNightModeHorizontalPagerIndicators() {
     DynamicListComposeTheme {
         HorizontalPagerIndicators(
             pageCount = 5,
-            state = rememberPagerState()
+            state = rememberPagerState(
+                initialPage = 0,
+                initialPageOffsetFraction = 1f
+            ) {
+                5
+            }
         )
     }
 }
@@ -91,7 +96,12 @@ fun PreviewNoNightModeHorizontalPagerIndicators() {
     DynamicListComposeTheme {
         HorizontalPagerIndicators(
             pageCount = 5,
-            state = rememberPagerState()
+            state = rememberPagerState(
+                initialPage = 0,
+                initialPageOffsetFraction = 1f
+            ) {
+                5
+            }
         )
     }
 }

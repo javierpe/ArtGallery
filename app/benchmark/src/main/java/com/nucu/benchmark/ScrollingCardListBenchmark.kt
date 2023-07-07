@@ -40,7 +40,7 @@ class ScrollingCardListBenchmark {
         device.wait(Until.hasObject(By.res(CARD_COMPONENT_TAG)), TIMEOUT)
 
         // Get card item component and click it
-        device.findObject(By.res(CARD_ITEM_COMPONENT_TAG)).click()
+        device.findObject(By.res(CARD_ITEM_COMPONENT_TAG)).clickAndWait(Until.newWindow(), 1_000)
 
         // Wait to card list is showed
         device.wait(Until.hasObject(By.res(CARDS_GRID_TAG)), TIMEOUT)

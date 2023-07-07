@@ -2,9 +2,7 @@ package com.javi.dynamic.list.presentation.components.message
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -41,10 +39,6 @@ fun MessageComponentView(
             .fillMaxWidth()
             .padding(start = 16.dp, end = 16.dp)
             .clip(RoundedCornerShape(16.dp))
-            .border(
-                border = BorderStroke(1.dp, MaterialTheme.colors.secondary.copy(alpha = 0.1f)),
-                shape = RoundedCornerShape(16.dp)
-            )
             .background(MaterialTheme.colors.onSecondary.copy(alpha = 0.5f))
             .asShowCaseTarget(
                 index = componentIndex,

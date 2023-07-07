@@ -10,12 +10,15 @@ import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import coil.size.Size
 import com.javi.design.system.atoms.ImageComponentView
 import com.javi.design.system.atoms.StepperComponentView
+import com.javi.design.system.extensions.toPx
 import com.javi.design.system.extensions.withBounceClick
 import com.javi.design.system.theme.DynamicListComposeTheme
 
@@ -33,6 +36,8 @@ fun BannerImageView(
     onDecrement: () -> Unit,
     onClickAction: () -> Unit
 ) {
+    val context = LocalContext.current
+
     ConstraintLayout(
         modifier = modifier.fillMaxSize()
     ) {
@@ -52,12 +57,15 @@ fun BannerImageView(
                     onClickAction()
                 }
                 .testTag(BANNER_CAROUSEL_IMAGE_TEST_TAG),
-            shape = RoundedCornerShape(16.dp),
-            elevation = 15.dp
+            shape = RoundedCornerShape(16.dp)
         ) {
             ImageComponentView(
                 modifier = Modifier.fillMaxSize(),
-                imageURL = imageURL
+                imageURL = imageURL,
+                customSize = Size(
+                    130.dp.toPx(context).toInt(),
+                    70.dp.toPx(context).toInt()
+                )
             )
 
             title.takeIf { it.isNotEmpty() }?.let {

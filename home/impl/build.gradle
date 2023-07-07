@@ -63,11 +63,15 @@ dependencies {
     // Dynamic List
     implementation project(":dynamic-list")
 
+    implementation project(":design-system")
+
     // Data
     implementation project(":data")
 
     // Material V3
     implementation(libs.compose.material.v3)
+
+    implementation(libs.compose.constraintlayout)
 
     // Hilt
     implementation(libs.hilt)

@@ -5,4 +5,4 @@ import javax.inject.Inject
 
 class DefaultDynamicListComposeController @Inject constructor(
     override val delegates: MutableSet<@JvmSuppressWildcards DynamicListFactory>
-) : DynamicListComposeControllerImpl()
+) : DynamicListComposeController()

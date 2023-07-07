@@ -20,8 +20,6 @@ import com.ramcosta.composedestinations.utils.currentDestinationAsState
 import com.ramcosta.composedestinations.utils.isRouteOnBackStack
 import javax.inject.Inject
 
-private const val ANIMATION_DURATION = 200
-
 class NavigationImpl @Inject constructor(
     private val homePageLoader: GetHomePageUseCase,
     private val getProductDetailScreenUseCase: GetProductDetailPageUseCase,
