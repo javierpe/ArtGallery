@@ -6,6 +6,7 @@ import com.javi.dynamic.list.data.extensions.toComponentItemModel
 import com.javi.dynamic.list.data.models.ContainerModel
 import com.javi.dynamic.list.data.models.DynamicListRequestModel
 import com.javi.dynamic.list.data.repositories.DynamicListRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -19,9 +20,11 @@ class DynamicListRepositoryImpl @Inject constructor(
         requestModel: DynamicListRequestModel,
         fromRemote: Boolean
     ): Flow<DynamicListFlowState> = flow {
+
         val componentModel = if (fromRemote) {
             dynamicListMockResponseApi.getRemoteData(requestModel)
         } else {
+            delay(300)
             dynamicListMockResponseApi.getDataFromAsset(requestModel)
         }
 

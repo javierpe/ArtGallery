@@ -1,15 +1,17 @@
 plugins {
-    id 'com.google.devtools.ksp' version '1.7.22-1.0.8'
+    id 'com.google.devtools.ksp' version '1.8.10-1.0.9'
     id 'com.android.library'
     id 'kotlin-parcelize'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    //id 'org.jetbrains.kotlin.plugin.serialization'
+    //id 'kotlinx-serialization'
 }
 
 android {
     namespace 'com.javi.dynamic.list'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         minSdk 26
@@ -26,11 +28,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
+        sourceCompatibility JavaVersion.VERSION_18
+        targetCompatibility JavaVersion.VERSION_18
     }
 
     buildFeatures {
@@ -39,6 +38,10 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion compose_compiler_version
     }
+}
+
+ksp {
+    arg("render.processor.engine", "moshi") // moshi, gson or kotlin
 }
 
 kotlin {
@@ -80,6 +83,10 @@ dependencies {
     implementation(libs.moshi)
     implementation(libs.moshi.adapters)
     ksp(libs.moshi.codegen)
+
+    // Kotlin Serialization
+    //implementation libs.kotlin.serialization
+
 
     implementation(libs.coil)
     implementation(libs.navigation.destinations.core)

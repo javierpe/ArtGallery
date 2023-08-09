@@ -15,3 +15,4 @@ data class BannerInfo(
     @Json(name = "title") val title: String,
     @Json(name = "description") val description: String
 )
+

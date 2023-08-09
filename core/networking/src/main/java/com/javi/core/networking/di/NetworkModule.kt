@@ -17,11 +17,10 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(
-        moshi: Moshi
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().build()))
             .build()
     }
 }

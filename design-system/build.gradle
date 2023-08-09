@@ -1,14 +1,16 @@
 plugins {
-    id 'com.google.devtools.ksp' version '1.7.22-1.0.8'
+    id 'com.google.devtools.ksp' version '1.8.10-1.0.9'
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    //id 'org.jetbrains.kotlin.plugin.serialization'
+    //id 'kotlinx-serialization'
 }
 
 android {
     namespace 'com.javi.design.system'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         minSdk 26
@@ -25,12 +27,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = '1.8'
+        sourceCompatibility JavaVersion.VERSION_18
+        targetCompatibility JavaVersion.VERSION_18
     }
 
     buildFeatures {
@@ -43,6 +41,7 @@ android {
 }
 
 dependencies {
+    //implementation libs.kotlin.serialization
 
     implementation project(":data")
     implementation project(":preferences:api")

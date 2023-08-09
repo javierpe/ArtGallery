@@ -1,17 +1,19 @@
 plugins {
-    id 'com.google.devtools.ksp' version '1.7.22-1.0.8'
+    id 'com.google.devtools.ksp' version '1.8.10-1.0.9'
     id 'java-library'
     id 'org.jetbrains.kotlin.jvm'
+    //id 'kotlinx-serialization'
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_18
+    targetCompatibility = JavaVersion.VERSION_18
 }
 
 dependencies {
     implementation project(":render-processor-core")
-    implementation "com.google.devtools.ksp:symbol-processing-api:1.7.22-1.0.8"
-    implementation("com.squareup:kotlinpoet:1.12.0")
-    implementation("com.squareup:kotlinpoet-ksp:1.12.0")
+    implementation "com.google.devtools.ksp:symbol-processing-api:1.8.10-1.0.9"
+    implementation(libs.kotlinpoet)
+    implementation(libs.kotlinpoet.ksp)
+    implementation libs.kotlin.serialization
 }

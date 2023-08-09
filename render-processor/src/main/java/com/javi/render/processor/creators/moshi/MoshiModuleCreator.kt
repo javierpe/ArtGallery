@@ -1,8 +1,10 @@
-package com.javi.render.processor.creators
+package com.javi.render.processor.creators.moshi
 
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.KSPLogger
+import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.javi.render.processor.core.RenderType
+import com.javi.render.processor.data.ModuleCreator
 import com.javi.render.processor.data.models.ModelClassProcessed
 import com.javi.render.processor.data.utils.DI_RENDER_MODULE_COMMENT
 import com.javi.render.processor.data.utils.DI_RENDER_MODULE_FILE_NAME
@@ -25,11 +27,22 @@ import com.squareup.kotlinpoet.ksp.writeTo
  * This class create a Hilt module that provides Moshi instance.
  */
 class MoshiModuleCreator(
+    private val moshiComponentCreator: MoshiComponentCreator,
     private val codeGenerator: CodeGenerator,
     private val logger: KSPLogger
-) {
+) : ModuleCreator {
 
-    fun make(
+    override fun makeComponent(
+        validatedSymbols: List<KSClassDeclaration>,
+        names: MutableList<ModelClassProcessed>
+    ) {
+        moshiComponentCreator.make(
+            validatedSymbols,
+            names
+        )
+    }
+
+    override fun makeModule(
         names: List<ModelClassProcessed>
     ) {
         logger.warn("Moshi Module: $names")

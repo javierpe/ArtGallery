@@ -1,15 +1,14 @@
 plugins {
-    id 'com.google.devtools.ksp' version '1.7.22-1.0.8'
+    id 'com.google.devtools.ksp' version '1.8.10-1.0.9'
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
 }
 
-
 android {
     namespace 'com.javi.places.page.impl'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         minSdk 26
@@ -26,12 +25,10 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_18
+        targetCompatibility JavaVersion.VERSION_18
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
+    
 
     buildFeatures {
         compose true

@@ -43,7 +43,14 @@ fun DynamicListHeaderComponentView(
 
     when (contextType) {
 
-        ContextType.HOME -> HomeHeaderComponentView(scope = motionLayoutScope!!)
+        ContextType.HOME -> {
+            motionLayoutScope?.let { HomeHeaderComponentView(scope = motionLayoutScope) } ?: run {
+                SimpleHeaderView(
+                    modifier = modifier,
+                    title = title
+                )
+            }
+        }
 
         ContextType.BANNER_DETAIL -> {
             SimpleHeaderView(

@@ -1,4 +1,4 @@
-package com.javi.render.processor.creators
+package com.javi.render.processor.creators.moshi
 
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.KSPLogger
@@ -32,7 +32,7 @@ import com.squareup.kotlinpoet.ksp.writeTo
  * This class create a parent class of all components annotated with @RenderClass
  * for Moshi reader.
  */
-class ComponentsCreator(
+class MoshiComponentCreator(
     private val codeGenerator: CodeGenerator,
     private val logger: KSPLogger
 ) {

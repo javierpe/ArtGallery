@@ -10,15 +10,21 @@ import com.google.devtools.ksp.validate
 import com.javi.render.processor.core.annotations.factory.ComponentFactory
 import com.javi.render.processor.core.annotations.render.RenderFactory
 import com.javi.render.processor.core.annotations.render.RenderModel
-import com.javi.render.processor.creators.ComponentsCreator
 import com.javi.render.processor.creators.FactoryModuleCreator
-import com.javi.render.processor.creators.MoshiModuleCreator
 import com.javi.render.processor.creators.RenderModuleCreator
+import com.javi.render.processor.creators.kotlin.KotlinModuleCreator
+import com.javi.render.processor.creators.moshi.MoshiModuleCreator
+import com.javi.render.processor.data.enums.Engine
 import com.javi.render.processor.data.models.ModelClassProcessed
 import com.javi.render.processor.data.utils.isValid
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime
 import kotlin.time.toJavaDuration
+
+/**
+ * This key allows to alternate between moshi, gson or kt
+ */
+private const val ENGINE_KEY = "render.processor.engine"
 
 /**
  * This class detect all @RenderModel annotations and process it to new component and
@@ -27,9 +33,10 @@ import kotlin.time.toJavaDuration
 internal class RenderProcessor(
     private val logger: KSPLogger,
     private val moshiModuleCreator: MoshiModuleCreator,
-    private val componentsCreator: ComponentsCreator,
+    private val kotlinModuleCreator: KotlinModuleCreator,
     private val factoryModuleCreator: FactoryModuleCreator,
-    private val renderModuleCreator: RenderModuleCreator
+    private val renderModuleCreator: RenderModuleCreator,
+    private val options: Map<String, String>
 ) : SymbolProcessor {
 
     private val names = mutableListOf<ModelClassProcessed>()
@@ -37,8 +44,13 @@ internal class RenderProcessor(
 
     @OptIn(ExperimentalTime::class)
     override fun process(resolver: Resolver): List<KSAnnotated> {
+
+        val engine = Engine.valueOf(options.getOrDefault(ENGINE_KEY, Engine.MOSHI.value).uppercase())
+
+        logger.warn("====== Working for $engine ======")
+
         val elapsedTime = measureTime {
-            make(resolver)
+            make(resolver, engine)
         }
 
         logger.warn("Finished in ${elapsedTime.toJavaDuration().toMillis()}ms")
@@ -46,11 +58,54 @@ internal class RenderProcessor(
         return emptyList()
     }
 
-    private fun make(resolver: Resolver) {
+    private fun make(resolver: Resolver, engine: Engine) {
         logger.warn("Start processing!")
         makeFactories(resolver)
         makeRenderModule(resolver)
-        makeComponents(resolver)
+
+        RenderModel::class.qualifiedName?.let {
+            val resolvedSymbols = resolver
+                .getSymbolsWithAnnotation(it, inDepth = true)
+                .toList()
+
+            val validSymbols = getValidSymbols(resolvedSymbols)
+
+            when (engine) {
+                Engine.MOSHI -> makeWithMoshi(validSymbols)
+                Engine.GSON -> makeWithGson(validSymbols)
+                Engine.KOTLIN -> makeWithKotlin(validSymbols)
+            }
+        }
+    }
+
+    private fun makeWithMoshi(symbols: List<KSClassDeclaration>) {
+        if (symbols.isNotEmpty()) {
+            moshiModuleCreator.makeComponent(
+                validatedSymbols = symbols,
+                names = names
+            )
+        }
+
+        if (names.isNotEmpty()) {
+            moshiModuleCreator.makeModule(names)
+        }
+    }
+
+    private fun makeWithGson(symbols: List<KSClassDeclaration>) {
+        // ToDo
+    }
+
+    private fun makeWithKotlin(symbols: List<KSClassDeclaration>) {
+        if (symbols.isNotEmpty()) {
+            kotlinModuleCreator.makeComponent(
+                validatedSymbols = symbols,
+                names = names
+            )
+        }
+
+        if (names.isNotEmpty()) {
+            kotlinModuleCreator.makeModule(names)
+        }
     }
 
     private fun makeRenderModule(resolver: Resolver) {
@@ -73,25 +128,6 @@ internal class RenderProcessor(
                     validatedSymbols = symbols
                 )
             }
-        }
-    }
-
-    private fun makeComponents(resolver: Resolver) {
-        RenderModel::class.qualifiedName?.let {
-            val resolved = resolver
-                .getSymbolsWithAnnotation(it, inDepth = true)
-                .toList()
-
-            if (resolved.isNotEmpty()) {
-                componentsCreator.make(
-                    validatedSymbols = getValidSymbols(resolved),
-                    names = names
-                )
-            }
-        }
-
-        if (names.isNotEmpty()) {
-            moshiModuleCreator.make(names)
         }
     }
 

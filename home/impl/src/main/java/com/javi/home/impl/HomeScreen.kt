@@ -36,8 +36,8 @@ fun HomeScreen(
         destinationsNavigator = destinationsNavigator,
         requestModel = requestModel.value,
         motionLayoutProperties = MotionLayoutProperties(
-            constraintSetStart = constraintSetStart(HeaderLight),
-            constraintSetEnd = constraintSetEnd(HeaderDark)
+            constraintSetStart = constraintSetStart(HeaderDark),
+            constraintSetEnd = constraintSetEnd(HeaderLight)
         )
     )
 }

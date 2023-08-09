@@ -7,6 +7,8 @@ const val PACKAGE_DI = "$PACKAGE_ROOT.di"
 const val PACKAGE_HILT_SINGLETON_COMPONENT = "dagger.hilt.components.SingletonComponent"
 const val HILT_SINGLE_COMPONENT_CLASS_NAME = "SingletonComponent::class"
 
+const val COMPONENT_SERIALIZER_FILE_NAME = "ComponentSerializer"
+const val PARENT_MODELS_CATALOG_FILE_NAME = "ParentModelsCatalog"
 const val PARENT_MODEL_FILE_NAME = "ComponentModel"
 const val DI_RENDER_MODULE_FILE_NAME = "RenderComponentsModule"
 const val DI_FACTORY_MODULE_FILE_NAME = "FactoryModule"
